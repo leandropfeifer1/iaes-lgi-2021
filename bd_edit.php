@@ -17,12 +17,12 @@
 	$name = $_GET["name"];
 	$mail =$_GET["mail"];
 	
-	$consulta = "INSERT INTO ejphp.clientes (email, nombre) VALUES ('".$mail."', '".$name."')";
+	$consulta = 'UPDATE ejphp.clientes SET email = "'.$mail.'", nombre = "'.$name.'" WHERE id ='.$identificador;
 	if (mysqli_query($conexion, $consulta)) {
 	  echo "Se ha Editado el registro";
 	  echo "<div><a href='datos.php'>Volver</a></div>";
 	} else {
-	  echo "Error: " . $query_sql . "<br>" . mysqli_error($conexion);
+	  echo "Error: " . $consulta . "<br>" . mysqli_error($conexion);
 	}
 
 	mysqli_close($conexion); 

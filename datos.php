@@ -3,9 +3,16 @@
 <head>
 	<title>Ver datos</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 	<style>
+		h1{
+			margin: auto;
+		}
 		table{
-			width: 550px;
+			width: 600px;
+			margin: auto;
 			border: 1px solid black;
 			border-collapse: collapse;
 		}
@@ -19,8 +26,18 @@
 		tr{
 			text-align: center;
 		}
+		tr:hover{
+			background-color: #aaa;
+		}
 		#back{
 			font-size: 50px;
+			margin: auto;
+			text-align: center;
+			width: 100%;
+		}
+		th{
+			background-color: #835959;
+			font-size: 1.5em;
 		}
 	</style>
 </head>
@@ -28,7 +45,7 @@
 	<h1>DATOS DE LA TABLA CLIENTES</h1>
 	
 	<?php
-		echo "<a id='back' href='index2.html'>Volver</a>";
+		echo "<div><a id='back' href='index2.html'>Volver</a></div>";
 		$servername = "localhost";
 		$username = "pineyro";
 		$password = "1234";
@@ -58,6 +75,7 @@
 			echo "<td>".$fila['nombre']."</td>";
 			echo "<td>".$fila['email']."</td>";
 			echo "<td><a href='http://localhost/php-pineyro/iaes-lgi-2021/editar.php?idcol=".$fila['id']."'>Editar</a></td>"; // Poner un link con el ID de la fila, para editarlo
+			echo "<td><a href='http://localhost/php-pineyro/iaes-lgi-2021/delete.php?id=".$fila['id']."'>Elimnar</a></td>";
 			echo "</tr>";
 		  }
 		} else {

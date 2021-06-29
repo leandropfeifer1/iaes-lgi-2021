@@ -1,7 +1,4 @@
 <?php
-
-	$usuario = $_GET["nombre"];
-	$correo = 	$_GET["correo"];
 	$servername = "localhost";
 	$username = "pineyro";
 	$password = "1234";
@@ -13,15 +10,21 @@
 	if (!$conexion) {
 	  die("Conexion fallida: " . mysqli_connect_error());
 	}
-	// Consulta a la DB
-	$query_sql = "INSERT INTO ejphp.clientes (email, nombre) VALUES ('".$correo."', '".$usuario."')";
-	// Check la query
-	if (mysqli_query($conexion, $query_sql)) {
-	  echo "Se ha ingresado un nuevo registro";
-	  echo "<div><a href='index2.html'>Volver</a></div>";
+
+	// Consulta Editar Datos
+	
+	$identificador = $_GET["identificador"];
+	$name = $_GET["name"];
+	$mail =$_GET["mail"];
+	
+	$consulta = "INSERT INTO ejphp.clientes (email, nombre) VALUES ('".$mail."', '".$name."')";
+	if (mysqli_query($conexion, $consulta)) {
+	  echo "Se ha Editado el registro";
+	  echo "<div><a href='datos.php'>Volver</a></div>";
 	} else {
 	  echo "Error: " . $query_sql . "<br>" . mysqli_error($conexion);
 	}
 
 	mysqli_close($conexion); 
+
 ?>

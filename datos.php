@@ -19,13 +19,16 @@
 		tr{
 			text-align: center;
 		}
+		#back{
+			font-size: 50px;
+		}
 	</style>
 </head>
 <body>
 	<h1>DATOS DE LA TABLA CLIENTES</h1>
 	
 	<?php
-		
+		echo "<a id='back' href='index2.html'>Volver</a>";
 		$servername = "localhost";
 		$username = "pineyro";
 		$password = "1234";
@@ -46,6 +49,7 @@
 			echo "<th>ID</th>";
 			echo "<th>Nombre</th>";
 			echo "<th>Email</th>";
+			echo "<th>    </th>";
 			echo "</tr>";
 			
 		  while($fila = mysqli_fetch_assoc($consulta)) {
@@ -53,6 +57,7 @@
 			echo "<td>".$fila['id']."</td>";
 			echo "<td>".$fila['nombre']."</td>";
 			echo "<td>".$fila['email']."</td>";
+			echo "<td><a href='http://localhost/php-pineyro/iaes-lgi-2021/editar.php?idcol=".$fila['id']."'>Editar</a></td>"; // Poner un link con el ID de la fila, para editarlo
 			echo "</tr>";
 		  }
 		} else {

@@ -44,19 +44,11 @@
 	
 	<?php
 		echo "<div><a id='back' href='index2.html'>Volver</a></div>";
-		$servername = "localhost";
-		$username = "pineyro";
-		$password = "1234";
-		$db = "ejphp";
 		
-		$conexion = mysqli_connect($servername, $username, $password, $db);
-		if (!$conexion) {
-		  die("Conexion fallida: " . mysqli_connect_error());
-		}
+		require_once("config.php"); // Agregago de la conexion
 		
 		$sql = "SELECT id, nombre, email FROM clientes";
 		$consulta = mysqli_query($conexion, $sql);
-			
 		
 		if (mysqli_num_rows($consulta) > 0) {
 			echo "<table>";

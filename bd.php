@@ -2,17 +2,8 @@
 
 	$usuario = $_GET["nombre"];
 	$correo = 	$_GET["correo"];
-	$servername = "localhost";
-	$username = "pineyro";
-	$password = "1234";
-	$db = "ejphp";
-
-	// Create connection
-	$conexion = mysqli_connect($servername, $username, $password, $db);
-	// Check connection
-	if (!$conexion) {
-	  die("Conexion fallida: " . mysqli_connect_error());
-	}
+	require_once("config.php");
+	
 	// Consulta a la DB
 	$query_sql = "INSERT INTO ejphp.clientes (email, nombre) VALUES ('".$correo."', '".$usuario."')";
 	// Check la query

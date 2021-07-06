@@ -1,18 +1,8 @@
 <?php
-	$servername = "localhost";
-	$username = "pineyro";
-	$password = "1234";
-	$db = "ejphp";
-
-	// Create connection
-	$conexion = mysqli_connect($servername, $username, $password, $db);
-	// Check connection
-	if (!$conexion) {
-	  die("Conexion fallida: " . mysqli_connect_error());
-	}
-
-	// Consulta Editar Datos
+	// conexion db
+	require_once("config.php");
 	
+	// Consulta Editar Datos
 	$identificador = $_GET["identificador"];
 	$name = $_GET["name"];
 	$mail =$_GET["mail"];
@@ -26,5 +16,4 @@
 	}
 
 	mysqli_close($conexion); 
-
 ?>

@@ -1,15 +1,7 @@
 <?php 
-
-	$servername = "localhost";
-	$username = "pineyro";
-	$password = "1234";
-	$db = "ejphp";
+	require_once("config.php");	
 	$id = $_GET["id"];
 	
-	$conexion = mysqli_connect($servername, $username, $password, $db);
-	if (!$conexion) {
-	  die("Conexion fallida: " . mysqli_connect_error());
-	}
 	$sql = 'DELETE FROM ejphp.clientes WHERE id ="'.$id.'"';
 	if (mysqli_query($conexion, $sql)) {
 	  echo "Se ha Eliminado el registro";
@@ -19,8 +11,5 @@
 	}
 
 	mysqli_close($conexion); 
-
-
-
 
 ?>

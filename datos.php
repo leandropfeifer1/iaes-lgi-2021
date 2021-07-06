@@ -3,9 +3,6 @@
 <head>
 	<title>Ver datos</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
 	<style>
 		h1{
 			margin: auto;

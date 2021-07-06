@@ -3,41 +3,25 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Conexion a base de datos</title>
-		<style>
-			form{
-				background-color: #FFC0CB;
-				height: 220px;
-				width: 400px;
-				display: flex;
-				flex-direcion: column;
-				justify-content: start;
-				align-items: start;
-				flex-wrap: wrap;
-			}
-			.form-email{
-				margin-top: 15px;
-			}
-			div a{
-				margin: 20px;
-				font-size: 50px;
-			}
-			
-		</style>
+		<link rel="stylesheet" href="style_main.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	</head>
 	<body>
 		<form method="get" action="bd.php">
-			<div class="form-email">
-				<label>Email: </label>
-				<input placeholder="Ingrese su Email..." type="text" name="correo"><br>
+			<div class="form-div">
+				<label class="label-form">Email: </label>
+				<input class="input-form" placeholder="Ingrese su Email..." type="text" name="correo"><br>
 			</div>
-			<div>
-				<label>Nombre: </label>
-				<input placeholder="Ingrese su Nombre..." type="text" name="nombre"><br>
+			<div class="form-div">
+				<label class="label-form">Nombre: </label>
+				<input class="input-form" placeholder="Ingrese su Nombre..." type="text" name="nombre"><br>
 			</div>
-			<div>
-				<input type="submit" value="Enviar">
+			<div id="div-boton" class="form-div">
+				<input id="btn-datos" type="submit" value="Enviar">
 			</div>
 		</form>
-	<div><a href="datos.php"> Ver Los Datos</a></div>
+	<div id="div-ver"><a href="datos.php"> Ver Los Datos</a></div>
 	</body>
 </html>
+
+<!--<i class="fas fa-edit"></i>-->

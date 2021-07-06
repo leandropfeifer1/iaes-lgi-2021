@@ -3,47 +3,13 @@
 <head>
 	<title>Ver datos</title>
 	<meta charset="utf-8">
-	<style>
-		h1{
-			margin: auto;
-		}
-		table{
-			width: 600px;
-			margin: auto;
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
-		td, tr{
-			min-width: 100px;
-			padding: 5px;
-		}
-		td{
-			text-align: center;
-		}
-		tr{
-			text-align: center;
-		}
-		tr:hover{
-			background-color: #aaa;
-		}
-		#back{
-			font-size: 50px;
-			margin: auto;
-			text-align: center;
-			width: 100%;
-		}
-		th{
-			background-color: #835959;
-			font-size: 1.5em;
-		}
-		
-	</style>
+	<link rel="stylesheet" href="style_datos.css">
 </head>
 <body>
 	<h1>DATOS DE LA TABLA CLIENTES</h1>
 	
 	<?php
-		echo "<div><a id='back' href='index2.html'>Volver</a></div>";
+		echo "<div id='back-div'><a id='back' href='index2.html'>Volver</a></div>";
 		
 		require_once("config.php"); // Agregago de la conexion
 		

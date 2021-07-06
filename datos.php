@@ -39,6 +39,7 @@
 			background-color: #835959;
 			font-size: 1.5em;
 		}
+		
 	</style>
 </head>
 <body>

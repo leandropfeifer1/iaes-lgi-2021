@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-10-2021 a las 18:54:02
+-- Tiempo de generación: 19-10-2021 a las 19:49:13
 -- Versión del servidor: 5.7.23
 -- Versión de PHP: 7.2.10
 
@@ -91,17 +91,11 @@ CREATE TABLE IF NOT EXISTS `Empresas` (
   `idempresa` int(8) NOT NULL AUTO_INCREMENT,
   `empresa` int(100) NOT NULL,
   `cuit` int(12) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
-  `localidad` int(3) NOT NULL,
-  `municipio` int(3) NOT NULL,
-  `pronvicia` int(2) NOT NULL,
+  `presidente` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `buscando` int(1) NOT NULL,
-  PRIMARY KEY (`idempresa`),
-  KEY `localidad` (`localidad`),
-  KEY `municipio` (`municipio`),
-  KEY `pronvicia` (`pronvicia`)
+  PRIMARY KEY (`idempresa`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,6 +168,26 @@ CREATE TABLE IF NOT EXISTS `provincia` (
   `idpro` int(2) NOT NULL AUTO_INCREMENT,
   `provincia` varchar(50) NOT NULL,
   PRIMARY KEY (`idpro`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursales`
+--
+
+DROP TABLE IF EXISTS `sucursales`;
+CREATE TABLE IF NOT EXISTS `sucursales` (
+  `idempresa` int(8) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `departamento` int(3) NOT NULL,
+  `provincia` int(3) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `gerente` varchar(50) NOT NULL,
+  `central` int(1) NOT NULL,
+  KEY `idempresa` (`idempresa`),
+  KEY `provincia` (`provincia`),
+  KEY `departamento` (`departamento`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

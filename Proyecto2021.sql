@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-10-2021 a las 18:24:51
+-- Tiempo de generación: 19-10-2021 a las 18:54:02
 -- Versión del servidor: 5.7.23
 -- Versión de PHP: 7.2.10
 
@@ -186,28 +186,28 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `iduser` int(8) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `fechanacimiento` date NOT NULL,
-  `dni` int(8) NOT NULL,
-  `genero` varchar(20) NOT NULL,
-  `discapacidades` varchar(200) NOT NULL,
+  `apellido` varchar(50) DEFAULT NULL,
+  `fechanacimiento` date DEFAULT NULL,
+  `dni` int(8) DEFAULT NULL,
+  `genero` varchar(20) DEFAULT NULL,
+  `discapacidades` varchar(200) DEFAULT NULL,
   `correo` varchar(100) NOT NULL,
-  `contactio` varchar(30) NOT NULL,
-  `domicilio` varchar(100) NOT NULL,
-  `localidad` int(3) NOT NULL,
-  `departamento` int(3) NOT NULL,
-  `provincia` int(2) NOT NULL,
+  `contactio` varchar(30) DEFAULT NULL,
+  `domicilio` varchar(100) DEFAULT NULL,
+  `localidad` int(3) DEFAULT NULL,
+  `departamento` int(3) DEFAULT NULL,
+  `provincia` int(2) DEFAULT NULL,
   `contraseña` varchar(100) NOT NULL,
-  `lastlogin` datetime NOT NULL,
-  `cursos` varchar(200) NOT NULL,
-  `pdf` varchar(100) NOT NULL,
-  `licencia` int(1) NOT NULL,
-  `auto` int(1) NOT NULL,
-  `situacionlab` int(1) NOT NULL,
-  `area` varchar(200) NOT NULL,
-  `salariomin` decimal(8,0) NOT NULL,
-  `dispoviajar` int(1) NOT NULL,
-  `dispomuda` int(1) NOT NULL,
+  `lastlogin` datetime DEFAULT NULL,
+  `cursos` varchar(200) DEFAULT NULL,
+  `pdf` varchar(100) DEFAULT NULL,
+  `licencia` int(1) DEFAULT NULL,
+  `auto` int(1) DEFAULT NULL,
+  `situacionlab` int(1) DEFAULT NULL,
+  `area` varchar(200) DEFAULT NULL,
+  `salariomin` decimal(8,0) DEFAULT NULL,
+  `dispoviajar` int(1) DEFAULT NULL,
+  `dispomuda` int(1) DEFAULT NULL,
   PRIMARY KEY (`iduser`),
   KEY `localidad` (`localidad`),
   KEY `departamento` (`departamento`),

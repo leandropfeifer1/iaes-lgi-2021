@@ -1,0 +1,145 @@
+:root {
+  --bg-color: #f78c40;
+  --main-color: #292929;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Oswalt, Verdana;
+  text-align: center;
+}
+
+input[type='text'],
+input[type='password'] {
+  display: block;
+  outline: none;
+  padding: 10px;
+  width: 350px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin: 20px auto;
+  font-size: 14px;
+}
+select {
+  margin-left: 0;
+}
+
+input[type='submit'] {
+  width: 355px;
+  padding: 10px;
+  color: var(--main-color);
+  background-color: var(--bg-color);
+  margin: 20px auto;
+  border-radius: 3px;
+  border: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+input[type='submit']:hover {
+  background-color: #ffa361;
+}
+
+/* HEADER */
+.nav__link {
+  display: inline-block;
+  color: var(--main-color);
+  text-decoration: none;
+  padding: 7px 0;
+  background-color: var(--bg-color);
+  border-radius: 3px;
+  width: 110px;
+  text-align: center;
+  margin: auto 50px auto 5px;
+}
+
+.nav__link:hover {
+  background-color: #ffa361;
+  color: var(--main-color);
+}
+
+#head {
+  height: 14vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
+  margin: 0 0 60px 0;
+}
+
+.logo {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 40px 0 0;
+}
+
+/* --------- */
+
+#title {
+  margin: 55px auto;
+}
+
+#login_form {
+  padding: 20px 0 0 0;
+  margin: 50px auto;
+  background-color: #eee;
+  width: 400px;
+  height: 300px;
+  border-radius: 3px;
+}
+
+#loginMessage {
+  color: rgb(228, 12, 12);
+  font-size: 20px;
+  text-align: center;
+  padding: auto;
+}
+
+.caja {
+  margin: 20px auto 20px auto;
+  border: 1px solid #d9d9d9;
+  height: 30px;
+  overflow: hidden;
+  width: 320px;
+  position: relative;
+}
+#select {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  height: 30px;
+  padding: 5px;
+  width: 300px;
+}
+#select:focus {
+  outline: none;
+}
+
+.caja::after {
+  content: '\025be';
+  display: table-cell;
+  padding-top: 7px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: #d9d9d9;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  pointer-events: none;
+}

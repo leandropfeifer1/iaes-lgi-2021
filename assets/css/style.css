@@ -36,7 +36,7 @@ input[type='submit'] {
   padding: 10px;
   color: var(--main-color);
   background-color: var(--bg-color);
-  margin: 20px auto;
+  margin: 10px 0px 10px 20px;
   border-radius: 3px;
   border: 0;
   font-size: 14px;
@@ -92,9 +92,10 @@ input[type='submit']:hover {
 
 #title {
   margin: 55px auto;
+  text-align: center;
 }
 
-#login_form {
+#formLogin {
   padding: 20px 0 0 0;
   margin: 50px auto;
   background-color: #eee;
@@ -103,11 +104,8 @@ input[type='submit']:hover {
   border-radius: 3px;
 }
 
-#loginMessage {
-  color: rgb(228, 12, 12);
-  font-size: 20px;
+#formLogin h3 {
   text-align: center;
-  padding: auto;
 }
 
 .caja {

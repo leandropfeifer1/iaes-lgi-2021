@@ -10,11 +10,11 @@
             $row = mysqli_fetch_assoc($resultado);
         }
         if(isset($row['idrol']) && $row['idrol']!=$_SESSION['id_rol']){
-            header('location: ../logout.php');
+            header('location: ../db/logout.php');
         }
         mysqli_close($conexion);
     }else{
-        header('location: ../logout.php');
+        header('location: ../db/logout.php');
     }
 ?>
 
@@ -24,7 +24,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../asserts/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
                 if(isset($row['nombre'])){echo($row['nombre']);}
             ?>
         </a>
-        <a class="header_link" href="../logout.php">Salir</a>
+        <a class="header_link" href="../db/logout.php">Salir</a>
     </header>
     <nav class="div_nav">
             <a target="_blank" class="main_link" href="#">Nuevo Usuario</a>

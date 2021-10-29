@@ -13,17 +13,17 @@ if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
     // Compruebo de que exista
     if(isset($row['idrol'])){
         if($row['idrol'] == $_SESSION['id_rol']){
-            header('location: /login-php/views/dashboardAdmin.php');
+            header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/dashboardAdmin.php');
         } else if($row['idrol'] == $_SESSION['id_rol']){
-            header('location: /login-php/views/dashboardSecretaria.php');
+            header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/dashboardSecretaria.php');
         } else if($row['idrol'] == $_SESSION['id_rol']){
-            header('location: /login-php/views/dashboardUser.php');
+            header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/dashboardUser.php');
         }
     }
     mysqli_close($conexion);
 
 }else{
-    header('location: /login-php/index.php');
+    header('location: /bolsa-empleo-php/iaes-lgi-2021/index.php');
 }
 
 

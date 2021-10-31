@@ -9,6 +9,8 @@ $('#formSignUp').submit((event) => {
     Swal.fire({
       icon: 'warning',
       title: 'OOPS! Las contraseñas no coinciden',
+      confirmButtonColor: '#ffa361',
+      confirmButtonText: 'Ok',
     });
   } else {
     if (
@@ -23,7 +25,9 @@ $('#formSignUp').submit((event) => {
     ) {
       Swal.fire({
         icon: 'warning',
-        title: 'Debe Completar Todos los Campos para crear un Usuario',
+        title: 'Debe completar todos los campos para crear un Usuario',
+        confirmButtonColor: '#ffa361',
+        confirmButtonText: 'Ok',
       });
       return false;
     } else {
@@ -41,6 +45,8 @@ $('#formSignUp').submit((event) => {
             Swal.fire({
               icon: 'error',
               title: 'OOPS! Ha Ocurrido un Error Creando el Usuario',
+              confirmButtonColor: '#ffa361',
+              confirmButtonText: 'Ok',
             });
           } else {
             Swal.fire({

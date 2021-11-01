@@ -30,7 +30,6 @@ $('#formLogin').submit((event) => {
             title: 'Usuario y/o Contraseña incorrecta',
           });
         } else {
-          console.log(data);
           Swal.fire({
             icon: 'success',
             title: '¡Usuario Logeado Correctamente!',

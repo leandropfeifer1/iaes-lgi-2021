@@ -1,21 +1,5 @@
 <?php 
-    session_start();
-    require('../db/conexionDb.php');
-    
-    // Si no tiene las credenciales no accede
-    if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-        $sql = 'SELECT idrol from roles where descripcion = "admin"';
-        $resultado = mysqli_query($conexion, $sql);
-        if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
-            $row = mysqli_fetch_assoc($resultado);
-        }
-        if(isset($row['idrol']) && $row['idrol']!=$_SESSION['id_rol']){
-            header('location: ../db/logout.php');
-        }
-        mysqli_close($conexion);
-    }else{
-        header('location: ../db/logout.php');
-    }
+    require('../db/verificarCredenciales.php');
 ?>
 
 <!DOCTYPE html>
@@ -28,20 +12,30 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <header class="header_dasboard">
-        <a class="header_link" href="#">
-            Admin: 
-            <?php  
-                echo $_SESSION['usuario'];
-                if(isset($row['nombre'])){echo($row['nombre']);}
-            ?>
-        </a>
-        <a class="header_link" href="../db/logout.php">Salir</a>
-    </header>
+    <div class="content">
+        <div id="log_img" class="logo">
+            <a href="#" class="logo__link">
+            <img
+                src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
+                alt="Logo del IAES"
+            />
+            </a>
+        </div>
+        <header id="header" class="header_dasboard">
+            <a class="header_link" href="#">
+                <?php  
+                 echo $_SESSION['usuario'];
+                //  if(isset($row['nombre'])){echo($row['nombre']);}
+                ?>
+            </a>
+            <a class="header_link" href="../db/logout.php">Salir</a>
+        </header>
+    </div>
+    
     <nav class="div_nav">
-            <a target="_blank" class="main_link" href="#">Nuevo Usuario</a>
-            <a target="_blank" class="main_link" href="#">Editar Usuario</a>
-            <a target="_blank" class="main_link" href="#">Borrar Usuario</a>
+            <a class="main_link" href="./registro.php">Nuevo Usuario</a>
+            <a class="main_link" href="#">Editar Usuario</a>
+            <a class="main_link" href="#">Borrar Usuario</a>
     </nav>
     <main>
         <form action="" method="post">

@@ -17,8 +17,8 @@
 
 <label for="identi">Tipo de identificacion:</label>
 <select id="identi" name="identi">
-  <option value="Cedula">Documento</option>
-  <option value="Documento">cedula de identificacion</option>
+  <option value="Documento">Documento</option>
+  <option value="Cedula">cedula de identificacion</option>
 </select>
 
 <label for="numidenti">Numero:</label>

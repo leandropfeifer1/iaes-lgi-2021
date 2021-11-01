@@ -1,0 +1,136 @@
+:root {
+  --bg-color: #f78c40;
+  --main-color: #292929;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  font-family: Oswalt, Verdana;
+  text-align: center;
+}
+
+.contenido {
+  width: 100%;
+  background-color: #d9d9d9;
+  height: 100px;
+  display: flex;
+}
+
+.header_dasboard {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.logo {
+  width: 30%;
+  height: 100%;
+  padding-left: 35px;
+}
+
+.header_dasboard a {
+  text-decoration: none;
+  margin: 0 25px;
+  background-color: #f78c40;
+  color: #292929;
+  padding: 6px;
+  border-radius: 3px;
+  transition: background-color ease-in 0.15s;
+  width: 150px;
+  font-weight: 600;
+}
+
+.header_dasboard a:hover {
+  background-color: #f69b59;
+}
+
+input[type='text'],
+input[type='password'] {
+  display: block;
+  outline: none;
+  padding: 10px;
+  width: 350px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  margin: 20px auto;
+  font-size: 14px;
+}
+select {
+  margin-left: 0;
+}
+
+input[type='submit'] {
+  width: 350px;
+  padding: 10px;
+  color: var(--main-color);
+  background-color: var(--bg-color);
+  margin: 10px 0px 10px 5px;
+  border-radius: 3px;
+  border: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+input[type='submit']:hover {
+  background-color: #ffa361;
+}
+
+#title {
+  margin: 20px auto;
+  text-align: center;
+}
+
+#formSignUp {
+  padding: 20px 0 0 0;
+  margin: 50px auto;
+  background-color: #eee;
+  width: 400px;
+  height: 380px;
+  border-radius: 3px;
+}
+
+#formSignUp h3 {
+  text-align: center;
+}
+
+.caja {
+  margin: 20px auto 20px auto;
+  border: 1px solid #d9d9d9;
+  height: 40px;
+  overflow: hidden;
+  width: 345px;
+  position: relative;
+}
+#select {
+  background: #fff;
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  padding: 5px;
+  width: 340px;
+}
+#select:focus {
+  outline: none;
+}
+
+.caja::after {
+  content: '\025be';
+  display: table-cell;
+  padding-top: 7px;
+  text-align: center;
+  width: 30px;
+  height: 40px;
+  background-color: #d9d9d9;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  pointer-events: none;
+}

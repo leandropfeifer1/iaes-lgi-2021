@@ -1,12 +1,5 @@
 <?php 
-    require('../db/conexionDb.php');
-<<<<<<< HEAD
-    if(!isset($_SESSION['id_user']) || !isset($_SESSION['usuario']){
-        
-    }
-=======
-    if(!isset($_SESSION['id_user']) || !isset($_SESSION['usuario'])
->>>>>>> dev
+    require('../db/verificarCredenciales.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +11,7 @@
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="../assets/css/register.css">
     
-    <title>Editar</title>
+    <title>Registrar Nuevo Usuario</title>
 </head>
 <body>
     <div class="contenido">
@@ -31,6 +24,12 @@
             </a>
         </div>
         <header class="header_dasboard">
+            <a class="header_link" href="#">
+                <?php  
+                 echo $_SESSION['usuario'];
+                 if(isset($row['nombre'])){echo($row['nombre']);}
+                ?>
+            </a>
             <a class="header_link" href="./dashboardAdmin.php">Volver</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>

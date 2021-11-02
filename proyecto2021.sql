@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2021 a las 21:37:39
+-- Tiempo de generación: 02-11-2021 a las 18:26:10
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -31,6 +31,16 @@ CREATE TABLE `carrera` (
   `carrera` varchar(50) NOT NULL,
   `duracion` int(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `carrera`
+--
+
+INSERT INTO `carrera` (`idcar`, `carrera`, `duracion`) VALUES
+(1, 'Analista de Sistemas', 3),
+(2, 'Analista de Sistemas', 3),
+(3, 'Administración de Empresas', 3),
+(4, 'Régimen Aduanero  ', 3);
 
 -- --------------------------------------------------------
 
@@ -64,7 +74,7 @@ CREATE TABLE `departamento` (
 
 CREATE TABLE `empresas` (
   `idempresa` int(8) NOT NULL,
-  `empresa` int(100) NOT NULL,
+  `empresa` varchar(100) NOT NULL,
   `cuit` int(12) NOT NULL,
   `presidente` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
@@ -98,6 +108,18 @@ CREATE TABLE `idiomas` (
   `idi` int(2) NOT NULL,
   `idioma` varchar(40) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `idiomas`
+--
+
+INSERT INTO `idiomas` (`idi`, `idioma`) VALUES
+(1, 'Ingles'),
+(2, 'Español'),
+(3, 'Portugués '),
+(4, 'Frances'),
+(5, 'Aleman'),
+(6, 'Guaraní ');
 
 -- --------------------------------------------------------
 
@@ -138,12 +160,24 @@ CREATE TABLE `login` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pais`
+--
+
+CREATE TABLE `pais` (
+  `idpais` int(11) NOT NULL,
+  `pais` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `provincia`
 --
 
 CREATE TABLE `provincia` (
   `idpro` int(2) NOT NULL,
-  `provincia` varchar(50) NOT NULL
+  `provincia` varchar(50) NOT NULL,
+  `idpais` int(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -193,7 +227,8 @@ CREATE TABLE `usuario` (
   `localidad` int(3) DEFAULT NULL,
   `departamento` int(3) DEFAULT NULL,
   `provincia` int(2) DEFAULT NULL,
-  `idlog` int(8) NOT NULL,
+  `idpais` int(4) NOT NULL,
+  `idloc` int(8) NOT NULL,
   `lastlogin` datetime DEFAULT NULL,
   `cursos` varchar(200) DEFAULT NULL,
   `pdf` varchar(100) DEFAULT NULL,
@@ -263,6 +298,12 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`idlog`);
 
 --
+-- Indices de la tabla `pais`
+--
+ALTER TABLE `pais`
+  ADD PRIMARY KEY (`idpais`);
+
+--
 -- Indices de la tabla `provincia`
 --
 ALTER TABLE `provincia`
@@ -299,7 +340,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
@@ -314,7 +355,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
 ALTER TABLE `idiomas`
-  MODIFY `idi` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `idi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
@@ -325,6 +366,11 @@ ALTER TABLE `localidad`
 --
 ALTER TABLE `login`
   MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pais`
+--
+ALTER TABLE `pais`
+  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --

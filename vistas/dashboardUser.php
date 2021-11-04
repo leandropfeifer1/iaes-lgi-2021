@@ -41,14 +41,14 @@
 </head>
 <body>
 	<?php include 'funciones.js' ?>
-	<?php include 'mostrar.php' ?>
+	<?php include '../db/mostrar.php' ?>
 	<?php include 'nav.php' ?>
 	<?php include 'redimg.php' ?>
 	<!-- ----------------------------------------------------------------------- -->
 
 	<div class="container">
 		<div class="abs-center">
-			<form method="post" action="create.php" enctype="multipart/form-data">
+			<form method="post" action="../db/create.php" enctype="multipart/form-data">
 
 				<?php $result = mostrarPersonales(); ?>
 
@@ -100,15 +100,91 @@
 					<input type="text" name="telefono" value="<?php echo $result['telefono'] ?>">
 					<span class="error">* </span><br>
 
-					<?php include 'paises.php' ?>
+                                        <table>
+                                            <tr>
+                                                <th>Paises</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select name="Pais">
+                                                    <?php
+                                                    include '../db/conexionDb.php';
+                                                    $sql = "SELECT * FROM pais";
+                                                    $lista = mysqli_query($conexion, $sql);
+                                                    while($fila = $lista->fetch_assoc()){
+                                                            $id=$fila['idpais'];
+                                                            $nombre=$fila['pais'];
+                                                            echo "<option value=$id>$nombre</option>";
+                                                    }
+                                                    ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-					<label for="prov">Provincia:</label>
-					<input type="text" name="region" value="<?php echo $result['prov'] ?>">
-					<span class="error">* </span><br>
-
-					<label for="ciudad">Ciudad:</label>
-					<input type="text" name="ciudad" value="<?php echo $result['ciudad'] ?>">
-					<span class="error">* </span><br>
+					<table>
+                                            <tr>
+                                                <th>Provincia</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select name="Provincia">
+                                                    <?php
+                                                    include '../db/conexionDb.php';
+                                                    $sql = "SELECT * FROM provincia";
+                                                    $lista = mysqli_query($conexion, $sql);
+                                                    while($fila = $lista->fetch_assoc()){
+                                                            $id=$fila['idpro'];
+                                                            $nombre=$fila['provincia'];
+                                                            echo "<option value=$id>$nombre</option>";
+                                                    }
+                                                    ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <th>Departamento</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select name="Departamento">
+                                                    <?php
+                                                    include '../db/conexionDb.php';
+                                                    $sql = "SELECT * FROM departamento";
+                                                    $lista = mysqli_query($conexion, $sql);
+                                                    while($fila = $lista->fetch_assoc()){
+                                                            $id=$fila['idep'];
+                                                            $nombre=$fila['departamento'];
+                                                            echo "<option value=$id>$nombre</option>";
+                                                    }
+                                                    ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        	<table>
+                                            <tr>
+                                                <th>Localidad</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select name="Localidad">
+                                                    <?php
+                                                    include '../db/conexionDb.php';
+                                                    $sql = "SELECT * FROM localidad";
+                                                    $lista = mysqli_query($conexion, $sql);
+                                                    while($fila = $lista->fetch_assoc()){
+                                                            $id=$fila['idloc'];
+                                                            $nombre=$fila['localidad'];
+                                                            echo "<option value=$id>$nombre</option>";
+                                                    }
+                                                    ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
 
 					<label for="codpostal"> Codigo postal:</label>
 					<input type="text" name="codpostal" value="<?php echo $result['codpostal'] ?>">
@@ -116,10 +192,6 @@
 
 					<label for="direccion">Direccion:</label>
 					<input type="text" name="direccion" value="<?php echo $result['direccion'] ?>">
-					<span class="error">* </span><br>
-
-					<label for="nacionalidad">Nacionalidad:</label>
-					<input type="text" name="nacionalidad" value="<?php echo $result['nacionalidad'] ?>">
 					<span class="error">* </span><br>
 
 					<label for="lic">Licencia de conducir:</label>

@@ -24,10 +24,9 @@
             </a>
         </div>
         <header class="header_dasboard">
-            <a class="header_link" href="#">
+            <a class="header_link" href="./editarCredenciales.php">
                 <?php  
                  echo $_SESSION['usuario'];
-                 if(isset($row['nombre'])){echo($row['nombre']);}
                 ?>
             </a>
             <a class="header_link" href="./dashboardAdmin.php">Volver</a>

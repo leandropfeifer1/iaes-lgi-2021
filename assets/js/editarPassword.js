@@ -1,3 +1,5 @@
+// Este script no solo edita el password, sino tambien el nombre de usuario
+
 $('#formUser').submit((event) => {
   event.preventDefault();
   const newUsername = $.trim($('#newUsername').val());
@@ -24,14 +26,14 @@ $('#formUser').submit((event) => {
         if (dataToJson.verificar === false || dataToJson.error === 'vacio') {
           Swal.fire({
             icon: 'warning',
-            title: 'OOPS! La Contraseña ingresada es incorrecta',
+            title: 'La Contraseña ingresada es incorrecta',
             confirmButtonColor: '#ffa361',
             confirmButtonText: 'Ok',
           });
-          // 'OOPS! Ha Ocurrido un Error, Verifica que tu contraseña sea correcta',
         } else if (
-          dataToJson.usuario === null &&
-          dataToJson.error === 'vacio'
+          dataToJson.usuario === 'no se concretó la conexion' ||
+          dataToJson.error === 'vacio' ||
+          dataToJson.error === 'error al inicio'
         ) {
           Swal.fire({
             icon: 'error',
@@ -71,6 +73,75 @@ $('#formUser').submit((event) => {
   }
 });
 
+// Evento Submit de Editar Contraseña
 $('#formPass').submit((event) => {
   event.preventDefault();
+  const actualPass = $.trim($('#actualPass').val());
+  const newPass = $.trim($('#newPass').val());
+  const confirmPass = $.trim($('#confirmPass').val());
+
+  if (actualPass === '' || newPass === '' || confirmPass === '') {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Debes completar los 3 campos para continuar',
+      confirmButtonColor: '#ffa361',
+      confirmButtonText: 'Ok',
+    });
+    return false;
+  } else if (newPass !== confirmPass) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Las Contraseñas no coinciden',
+      confirmButtonColor: '#ffa361',
+      confirmButtonText: 'Ok',
+    });
+    $('#confirmPass').val('');
+  } else {
+    $.ajax({
+      url: '../db/editarUserPassword.php',
+      type: 'POST',
+      datatype: 'json',
+      data: {
+        actualPass: actualPass,
+        newPass: newPass,
+        confirmPass: confirmPass,
+      },
+      success: (data) => {
+        let response = JSON.parse(data);
+        if (response.verificar === false || response.error === 'vacio') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'La Contraseña ingresada es incorrecta',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
+          $('#actualPass').val('');
+        } else if (
+          response.usuario === 'no se concretó la conexion' ||
+          response.error === 'vacio' ||
+          response.error === 'error al inicio'
+        ) {
+          Swal.fire({
+            icon: 'error',
+            title: 'OOPS! Ha ocurrido un error',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
+          $('#actualPass').val('');
+          $('#newPass').val('');
+          $('#confirmPass').val('');
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'Tu Contraseña fue modificada correctamente!',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
+          $('#actualPass').val('');
+          $('#newPass').val('');
+          $('#confirmPass').val('');
+        }
+      },
+    });
+  }
 });

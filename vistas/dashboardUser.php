@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require('conexionDb.php');
+    require('../db/conexionDb.php');
     
     if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
          $sql = 'SELECT * FROM `roles` WHERE descripcion = "usuario"';
@@ -38,15 +38,15 @@
 </head>
 <body>
 	<?php include 'funciones.js' ?>
-	<?php include 'mostrar.php' ?>
+	<?php include '../db/mostrar.php' ?>
 	<?php include 'nav.php' ?>
 	<?php include 'redimg.php' ?>
-    <?php include 'conexionDb.php' ?>
+    <?php include '../db/conexionDb.php' ?>
 	<!-- ----------------------------------------------------------------------- -->
 
 	<div class="container">
 		<div class="abs-center">
-			<form method="post" action="create.php" enctype="multipart/form-data">
+			<form method="post" action="../db/create.php" enctype="multipart/form-data">
 
 				<?php $result = mostrarPersonales(); ?>
 
@@ -72,8 +72,8 @@
 					<input type="email" name="correo" value="<?php echo $result['correo'] ?>">
 					<span class="error">* </span><br>
 
-					<label for="numdoc">Numero documento:</label>
-					<input type="text" name="numdoc" value="<?php echo $result['dni'] ?>">
+					<label for="dni">Numero documento:</label>
+					<input type="number" name="dni" value="<?php echo $result['dni'] ?>">
 					<span class="error">* </span><br>
 
 					<label for="fechanacimiento">Fecha de nacimiento:</label>
@@ -104,15 +104,15 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select name="Pais">
+                                                    <select name="pais">
                                                     <?php
                                                     include '../db/conexionDb.php';
                                                     $sql = "SELECT * FROM pais";
                                                     $lista = mysqli_query($conexion, $sql);
                                                     while($fila = $lista->fetch_assoc()){
-                                                            $id=$fila['idpais'];
+                                                            $idpais=$fila['idpais'];
                                                             $nombre=$fila['pais'];
-                                                            echo "<option value=$id>$nombre</option>";
+                                                            echo "<option value=$idpais>$nombre</option>";
                                                     }
                                                     ?>
                                                     </select>
@@ -147,7 +147,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select name="Departamento">
+                                                    <select name="departamento">
                                                     <?php
                                                     include '../db/conexionDb.php';
                                                     $sql = "SELECT * FROM departamento";
@@ -168,15 +168,15 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select name="Localidad">
+                                                    <select name="localidad">
                                                     <?php
                                                     include '../db/conexionDb.php';
                                                     $sql = "SELECT * FROM localidad";
                                                     $lista = mysqli_query($conexion, $sql);
                                                     while($fila = $lista->fetch_assoc()){
-                                                            $id=$fila['idloc'];
+                                                            $localidad=$fila['idloc'];
                                                             $nombre=$fila['localidad'];
-                                                            echo "<option value=$id>$nombre</option>";
+                                                            echo "<option value=$localidad>$nombre</option>";
                                                     }
                                                     ?>
                                                     </select>
@@ -193,14 +193,14 @@
 					<span class="error">* </span><br>
 
 					<label for="licencia">Licencia de conducir:</label>
-					<input type="radio" name="licencia" value="si" id="licsi" <?php if ($result['licencia'] == "si") { ?>checked="checked" <?php } ?> onclick="vehiculo()">Si
-					<input type="radio" name="licencia" value="no" <?php if ($result['licencia'] == "no") { ?>checked="checked" <?php } ?> onclick="vehiculo()">No
+					<input type="radio" name="licencia" value="1" id="licsi" <?php if ($result['licencia'] == "1") { ?>checked="checked" <?php } ?> onclick="vehiculo()">Si
+					<input type="radio" name="licencia" value="0" <?php if ($result['licencia'] == "0") { ?>checked="checked" <?php } ?> onclick="vehiculo()">No
 					<span class="error">* </span><br>
                     
                     <div id="auto" style="display:none">
                         <label for="auto">Dispone de vehiculo propio:</label>
-                        <input id="vsi" type="radio" name="auto" value="si" <?php if ($result['auto'] == "si") { ?>checked="checked" <?php } ?> >Si
-                        <input id="vno" type="radio" name="auto" value="no" <?php if ($result['auto'] == "no") { ?>checked="checked" <?php } ?> >No
+                        <input id="vsi" type="radio" name="auto" value="si" <?php if ($result['auto'] == "1") { ?>checked="checked" <?php } ?> >Si
+                        <input id="vno" type="radio" name="auto" value="no" <?php if ($result['auto'] == "0") { ?>checked="checked" <?php } ?> >No
                         <span class="error">* </span><br>
                     </div>
 

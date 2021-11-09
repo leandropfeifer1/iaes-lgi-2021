@@ -15,7 +15,7 @@
         } 
 
     }     
-    
+   
     function vehiculo() {
         var v = document.getElementById('auto');
         if (document.getElementById('licsi').checked) {
@@ -24,8 +24,10 @@
             v.style.display = 'none';
             document.getElementById("vsi").checked = false;
             document.getElementById("vno").checked = false;
+            var auto = document.getElementsByName("auto");
+            auto.value = 0;
         }        
-    }   
+    }  
 
     </script>
  

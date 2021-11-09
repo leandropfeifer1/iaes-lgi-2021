@@ -13,7 +13,7 @@
 	$contacto = "";
 	$iduser = "";
 	$idempresa = "";
-	$nombre = $apellido = $email = $numdoc = $fnacimiento = $gen = $ecivil = $tel = $skype = $pais = $region = $ciudad = $codpostal = $direccion = $nacionalidad = $lic = $vehic = $disc = $discesp = "";
+	$nombre = $apellido = $email = $numdoc = $fnacimiento = $gen = $ecivil = $tel = $skype = $idpais = $region = $ciudad = $codpostal = $direccion = $nacionalidad = $lic = $vehic = $disc = $discesp = "";
 	$foto = $cuit= $presidente=$empemail=$emptelefono=$empnombre= $neducativo=$cursos = $buscando= $nomempresa= $puesto= $fdesde = $fhasta= $idiomas = $habs = $progs = $slaboral= $pdeseado=$area= $sma = $prov= $dv = $dcr = "";
 	
 	
@@ -36,7 +36,7 @@
 		}else{			
 			$x = mysqli_query($conexion, "UPDATE `experiencia` SET `iduser`='$iduser',`idempresa`='$idempresa',`empresa`='$empresa',`puesto`='$puesto',`desde`='$desde',`hasta`='$hasta',`contacto`='$contacto' WHERE iduser='$iduser'");
 			}		
-		header('location: form_exp.php');
+		header('location: ../vistas/form_exp.php');
 	}	
 	
 	//------------------------------------------------------------------------------------------------------------------------------->EMPRESA
@@ -102,51 +102,58 @@
 	 }
 	  //------------------------------------------------------------------------------------------------------------------------------->DATOS PERSONALES
 	 if(isset($_POST["save4"])){
-		//falta numero de usuario
-		$iduser = $_POST["iduser"];	 
+	        
 		$usuario = test_input($_POST["usuario"]);	 
 		$apellido = test_input($_POST["apellido"]);		
 		$email = test_input($_POST["correo"]);		
 		$dni = test_input($_POST["dni"]);		
 		$fechanacimiento = test_input($_POST["fechanacimiento"]);
 		$gen = test_input($_POST["genero"]);
-		//$ecivil = test_input($_POST["ecivil"]);
 		$contacto = test_input($_POST["contacto"]);   
-		$pais = test_input($_POST["pais"]);
-		//$region = test_input($_POST["region"]);
+		$idpais = test_input($_POST["pais"]);
 		$localidad = test_input($_POST["localidad"]);
 		$departamento = test_input($_POST["departamento"]);
-		//$codpostal = test_input($_POST["codpostal"]);
 		$domicilio = test_input($_POST["domicilio"]);
-	  	//$nacionalidad = test_input($_POST["nacionalidad"]);
-		$licencia = test_input($_POST["licencia"]);
-		$auto = test_input($_POST["auto"]);
-		//$disc = test_input($_POST["disc"]);
+	  	$licencia = test_input($_POST["licencia"]);
+                
+                if(isset($auto)){
+                    $auto = test_input($_POST["auto"]);
+                    }else{
+                        $auto=0;
+                    }
 		$discapacidades = test_input($_POST["discapacidades"]);
 		$provincia = $_POST["provincia"];		
+		////  file_exists($foto);{
+                 //   $fot = "img/".$fot["name"];
+                //    move_uploaded_file($fot,["tmp_name"], "img/".$fot["name"]);
+               //}
+                
 		
-		$fot = $_FILES["foto"];
-		$foto = "img/".$foto["name"];
-		
-		eliminarcv();
+		//eliminarcv();
 		// Cargando el fichero en la carpeta "img"
-		move_uploaded_file($fot["tmp_name"], "img/".$fot["name"]);			
+             //   $pdf = $_FILES["pdf"]["name"];
+		//if(isset($pdf)){
+              //      $tipo= $_FILES['pdf']['type'];
+            //        $tamaño= $_FILES['pdf']['size'];
+            //        $temp= $_FILES['pdf']['tmp_size'];
+            //    }
 		
-		$cv = $_FILES["cv"];
-		$pdf = "cv/".$cv["name"];
 		
-		eliminarfoto();
+		
+	//	eliminarfoto();
 		// Cargando el fichero en la carpeta "cv"
-		move_uploaded_file($cv["tmp_name"], "cv/".$cv["name"]);	
+	//	move_uploaded_file($pdf["tmp_name"], "pdf/".$pdf["name"]);	
 		
 		$id = 1;
 		$y = mysqli_query($conexion,"SELECT * FROM usuario WHERE iduser='$id'");
 		if(mysqli_num_rows($y) == 0){
-			$x = mysqli_query($conexion,"INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idloc`, `lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`) VALUES ('$usuario','$apellido','$fechanacimiento','$dni','$genero','$discapacidades','$correo','$contacto','$domicilio','$localidad',$departamento,'$provincia','$idpais','$idloc','$lastlogin','$cursos','$pdf','$licencia','$auto','$situacionlab','$area','$salariomin','$dispoviajar','$dispomuda')");
-		}else{			
+                        mysqli_query($conexion,"INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`,`licencia`, `auto`) VALUES ('$usuario','$apellido','$fechanacimiento','$dni','$gen','$email','$contacto','$domicilio','$localidad',$departamento,'$provincia','$idpais','$licencia','$auto'");      
+                
+                }else{			
 			$x = mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario',`apellido`='$apellido',`fechanacimiento`='$fechanacimiento',`dni`='$dni',`genero`='$genero',`discapacidades`='$discapacidades',`correo`='$correo',`contacto`='$contacto',`domicilio`='$domicilio',`localidad`='$localidad',`departamento`='$departamento',`provincia`='$provincia',`idpais`='$idpais',`idloc`='$idloc',`lastlogin`='$lastlogin',`cursos`='$cursos',`pdf`='$pdf',`licencia`='$licencia',`auto`='$auto',`situacionlab`='$situacionlab',`area`='$area',`salariomin`='$salariomin',`dispoviajar`='$dispoviajar',`dispomuda`='$dispomuda' WHERE iduser=$iduser");
-			}	
-		header('location: ../vistas/dashboardUser.php');		
+                }	
+         echo $usuario ," ",$apellido," ",$fechanacimiento," ",$dni," ",$gen," ",$discapacidades," ",$email," ",$contacto," ",$domicilio," 1",$localidad," 2",$departamento," 3",$provincia," 4",$idpais,"/ ",$licencia," ",$auto;
+		//header('location: ../vistas/dashboardUser.php');		
 	}
 	//------------------------------------------------------------------------------------------------------------------------------->HABS
 	 	

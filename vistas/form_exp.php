@@ -1,7 +1,7 @@
-<?php include 'conexionDb.php' ?>
-<?php include('create.php'); ?>
-<?php include('edit.php'); ?>
-<?php include('update.php'); ?>
+<?php include '../db/conexionDb.php' ?>
+<?php include('../db/create.php'); ?>
+<?php include('../db/edit.php'); ?>
+<?php include('../db/update.php'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
     <div class="container">
         <div class="abs-center">
 
-            <form method="post" action="create.php">
+            <form method="post" action="../db/create.php">
                 <fieldset>
                     <p><span class="error">* Campo obligatorio</span></p>
                     <legend>Experiencias:</legend>

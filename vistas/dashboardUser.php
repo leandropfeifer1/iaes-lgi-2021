@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require('../db/conexionDb.php');
+    require('conexionDb.php');
     
     if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
          $sql = 'SELECT * FROM `roles` WHERE descripcion = "usuario"';
@@ -14,9 +14,6 @@
             }
         }
         mysqli_close($conexion);
-    }else{
-        
-        header('location: ../logout.php');
     }
 
 ?>
@@ -41,14 +38,15 @@
 </head>
 <body>
 	<?php include 'funciones.js' ?>
-	<?php include '../db/mostrar.php' ?>
+	<?php include 'mostrar.php' ?>
 	<?php include 'nav.php' ?>
 	<?php include 'redimg.php' ?>
+    <?php include 'conexionDb.php' ?>
 	<!-- ----------------------------------------------------------------------- -->
 
 	<div class="container">
 		<div class="abs-center">
-			<form method="post" action="../db/create.php" enctype="multipart/form-data">
+			<form method="post" action="create.php" enctype="multipart/form-data">
 
 				<?php $result = mostrarPersonales(); ?>
 
@@ -62,30 +60,30 @@
 					echo '<img src="' . $imagen . '" width="' . $array_medidas_img[0] . '" height="' . $array_medidas_img[1] . '" align="right"/>';
 					?>
 
-					<label for="nombre">Nombre:</label>
-					<input type="text" name="nombre" value="<?php echo $result['usuario'] ?>">
+					<label for="usuario">Nombre:</label>
+					<input type="text" name="usuario" value="<?php echo $result['usuario'] ?>">
 					<span class="error">* </span><br>
 
 					<label for="apellido">Apellido:</label>
 					<input type="text" name="apellido" value="<?php echo $result['apellido'] ?>">
 					<span class="error">* </span><br>
 
-					<label for="email">Email:</label>
-					<input type="text" name="email" value="<?php echo $result['email'] ?>">
+					<label for="correo">Email:</label>
+					<input type="email" name="correo" value="<?php echo $result['correo'] ?>">
 					<span class="error">* </span><br>
 
 					<label for="numdoc">Numero documento:</label>
-					<input type="text" name="numdoc" value="<?php echo $result['numdoc'] ?>">
+					<input type="text" name="numdoc" value="<?php echo $result['dni'] ?>">
 					<span class="error">* </span><br>
 
-					<label for="fnacimiento">Fecha de nacimiento:</label>
-					<input type="date" name="fnacimiento" value="<?php echo $result['fnacimiento'] ?>">
+					<label for="fechanacimiento">Fecha de nacimiento:</label>
+					<input type="date" name="fechanacimiento" value="<?php echo $result['fechanacimiento'] ?>" min="1900/01/01" max="<?php echo date ('Y-m-d') ?>" >
 					<span class="error">* </span><br>
 
-					<label for="gen">Genero:</label>
-					<input type="radio" name="gen" value="mujer" <?php if ($result['gen'] == "mujer") { ?>checked="checked" <?php } ?>>Mujer
-					<input type="radio" name="gen" value="hombre" <?php if ($result['gen'] == "hombre") { ?>checked="checked" <?php } ?>>Hombre
-					<input type="radio" name="gen" value="otro" <?php if ($result['gen'] == "otro") { ?>checked="checked" <?php } ?>>Otro
+					<label for="genero">Genero:</label>
+					<input type="radio" name="genero" value="mujer" <?php if ($result['gen'] == "mujer") { ?>checked="checked" <?php } ?>>Mujer
+					<input type="radio" name="genero" value="hombre" <?php if ($result['gen'] == "hombre") { ?>checked="checked" <?php } ?>>Hombre
+					<input type="radio" name="genero" value="otro" <?php if ($result['gen'] == "otro") { ?>checked="checked" <?php } ?>>Otro
 					<span class="error">* </span><br>
 
 					<label for="ecivil">Estado civil:</label>
@@ -96,8 +94,8 @@
 					</select>
 					<span class="error">* </span><br>
 
-					<label for="telefono">Telefono:</label>
-					<input type="text" name="telefono" value="<?php echo $result['telefono'] ?>">
+					<label for="contacto">Telefono:</label>
+					<input type="tel" name="contacto" value="<?php echo $result['contacto'] ?>">
 					<span class="error">* </span><br>
 
                                         <table>
@@ -128,7 +126,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select name="Provincia">
+                                                    <select name="provincia">
                                                     <?php
                                                     include '../db/conexionDb.php';
                                                     $sql = "SELECT * FROM provincia";
@@ -190,37 +188,39 @@
 					<input type="text" name="codpostal" value="<?php echo $result['codpostal'] ?>">
 					<span class="error">* </span><br>
 
-					<label for="direccion">Direccion:</label>
-					<input type="text" name="direccion" value="<?php echo $result['direccion'] ?>">
+					<label for="domicilio">Direccion:</label>
+					<input type="text" name="domicilio" value="<?php echo $result['domicilio'] ?>">
 					<span class="error">* </span><br>
 
-					<label for="lic">Licencia de conducir:</label>
-					<input type="radio" name="lic" value="si" <?php if ($result['lic'] == "si") { ?>checked="checked" <?php } ?>>Si
-					<input type="radio" name="lic" value="no" <?php if ($result['lic'] == "no") { ?>checked="checked" <?php } ?>>No
+					<label for="licencia">Licencia de conducir:</label>
+					<input type="radio" name="licencia" value="si" id="licsi" <?php if ($result['licencia'] == "si") { ?>checked="checked" <?php } ?> onclick="vehiculo()">Si
+					<input type="radio" name="licencia" value="no" <?php if ($result['licencia'] == "no") { ?>checked="checked" <?php } ?> onclick="vehiculo()">No
 					<span class="error">* </span><br>
-
-					<label for="vehic">Dispone de vehiculo propio:</label>
-					<input type="radio" name="vehic" value="si" <?php if ($result['vehic'] == "si") { ?>checked="checked" <?php } ?>>Si
-					<input type="radio" name="vehic" value="no" <?php if ($result['vehic'] == "no") { ?>checked="checked" <?php } ?>>No
-					<span class="error">* </span><br>
+                    
+                    <div id="auto" style="display:none">
+                        <label for="auto">Dispone de vehiculo propio:</label>
+                        <input id="vsi" type="radio" name="auto" value="si" <?php if ($result['auto'] == "si") { ?>checked="checked" <?php } ?> >Si
+                        <input id="vno" type="radio" name="auto" value="no" <?php if ($result['auto'] == "no") { ?>checked="checked" <?php } ?> >No
+                        <span class="error">* </span><br>
+                    </div>
 
 					<label for="disc">Discapacidad:</label>
-					<input type="radio" name="disc" value="si" <?php if ($result['disc'] == "si") { ?> checked="checked" <?php } ?> onclick="mostrar()">Si
-					<input type="radio" name="disc" value="no" <?php if ($result['disc'] == "no") { ?> checked="checked" <?php } ?> onClick="ocultar()">No
+					<input id="discsi" type="radio" name="disc" value="si" <?php if ($result['disc'] == "si") { ?> checked="checked" <?php } ?> onclick="mostrar()">Si
+					<input type="radio" name="disc" value="no" <?php if ($result['disc'] == "no") { ?> checked="checked" <?php } ?> onClick="mostrar()">No
 					<span class="error">* </span><br>
 					
-					<div id="discesp">
-						<label for="discesp">Especifique su discapacidad:</label>
-						<textarea name="discesp" rows="5" cols="40" value="<?php echo $result['discesp'] ?>"></textarea>
+					<div id="discapacidad" style="display:none">
+						<label for="discapacidades">Especifique su discapacidad:</label>
+						<textarea id="discapacidades" name="discapacidades" rows="5" cols="40" value="<?php echo $result['discapacidades'] ?>"></textarea>
 						<span class="error">* </span><br>
 					</div>
 
 					<label for="foto">Sube tu foto:</label>
 					<input accept="image/*" type="file" name="foto" id="foto"><br>
 
-					<label for="cv">CV: </label>
+					<label for="pdf">CV: </label>
 					<input type="hidden" name="MAX_FILE_SIZE" value="512000000" />
-					<input type="file" id="cv" name="cv" accept="aplicaction/pdf">
+					<input type="file" id="pdf" name="pdf" accept="aplicaction/pdf">
 
 				</fieldset>
 				<input type="submit" value="Guardar" name="save4">

@@ -1,6 +1,7 @@
-<?php include('../db/conexionDb.php'); ?>
-<?php include('../db/create.php'); ?>
-<?php include('../db/edit.php'); ?>
+<?php include 'conexionDb.php' ?>
+<?php include('create.php'); ?>
+<?php include('edit.php'); ?>
+<?php include('update.php'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -37,11 +38,11 @@
                     </div>
                     <div class="input-group">
                         <label for="desde">Desde:</label>
-                        <input type="date" name="desde" value="<?php echo $desde; ?>">
+                        <input type="date" name="desde" value="<?php echo $desde; ?>" min="1900/01/01" max="<?php echo date ('Y-m-d') ?>">
                     </div>
                     <div class="input-group">
                         <label for="hasta">Hasta:</label>
-                        <input type="date" name="hasta" value="<?php echo $hasta; ?>">
+                        <input type="date" name="hasta" value="<?php echo $hasta; ?>" min="1900/01/01" max="<?php echo date ('Y-m-d') ?>">
                     </div>
                     <div class="input-group">
                         <label for="contacto">Numero de contacto:</label>
@@ -57,7 +58,7 @@
                         <input type="submit" name="save1" value="Guardar">
                     <?php endif ?>
                 </div>
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <input type="hidden" name="idexp" value="<?php echo $idexp; ?>">
 
             </form>
             <!-- -->
@@ -85,10 +86,10 @@
                         <td><?php echo $row['contacto']; ?></td>
                         <td>
                             <!-- EDITAR-->
-                            <a href="form_exp.php?edit1=<?php echo $row['id']; ?>" class="edit_btn"><input type="button" value="Editar"></a>
+                            <a href="form_exp.php?edit1=<?php echo $row['idexp']; ?>" class="edit_btn"><input type="button" value="Editar"></a>
                         </td>
                         <td>
-                            <a href="delete.php?del= <?php echo $row['id']; ?>" class="del_btn"><input type="button" value="Borrar"></a>
+                            <a href="delete.php?del= <?php echo $row['idexp']; ?>" class="del_btn"><input type="button" value="Borrar"></a>
                         </td>
                     </tr>
                 <?php } ?>

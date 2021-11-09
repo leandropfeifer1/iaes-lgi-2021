@@ -2,17 +2,16 @@
 <?php 
 include'conexionDb.php';
 
+//------------------------------------------------------------------------------------------Experiencia
 if (isset($_GET['del'])) {
-    $id = $_GET['del'];
-    mysqli_query($conexion, "DELETE FROM experiencia WHERE id=$id");
-    $_SESSION['message'] = "Registro eliminado"; 
+    $idexp = $_GET['del'];
+    mysqli_query($conexion, "DELETE FROM experiencia WHERE idexp=$idexp");
     header('location: form_exp.php');
 }
-
+//------------------------------------------------------------------------------------------Empresas
 if (isset($_GET['del2'])) {
-    $id = $_GET['del2'];
-    mysqli_query($conexion, "DELETE FROM Empresas WHERE idempresa=$id");
-    $_SESSION['message'] = "Registro eliminado"; 
+    $idempresa = $_GET['del2'];
+    mysqli_query($conexion, "DELETE FROM empresas WHERE idempresa=$idempresa");
     header('location: form_empresa.php');
 }
 

@@ -47,7 +47,7 @@
         </div>
         <input id="password" type="password" placeholder="Ingresa tu contraseña" name="password">
         <input id="passwordConfirm" type="password" placeholder="Confirma tu contraseña" name="passwordConfirm">
-        <input value="Crear Usuario" id="submit" name="submit" type="submit">
+        <input id="submit" name="submit" type="submit">
     </form>
     </div>
     

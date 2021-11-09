@@ -20,33 +20,30 @@
 </head>
 
 <body>
-  <?php include '../db/create.php' ?>
-  <?php include '../db/mostrar.php' ?>
+  <?php include 'create.php' ?>
+  <?php include 'mostrar.php' ?>
   <?php include 'funciones.js' ?>
   <?php include 'nav.php' ?>
 
   <div class="container">
     <div class="abs-center">
       <form method="post" action="create.php">
-        <?php $result = mostrarHabilidades(); ?>
+        <?php $result = mostrarProgs();?>
 
         <fieldset>
           <p><span class="error">* Campo obligatorio</span></p>
-          <legend>Conocimientos y habilidades:</legend>
-
-          <label for="habs">Escribe tus conocimientos:</label>
-          <textarea name="habs" rows="4" cols="40" value="<?php echo $result['habs'] ?>"></textarea><br>
+          <legend>Conocimientos y habilidades:</legend>          
           <!-- ----------------------------------------------------------------------- -->
           <label for=""> Idiomas:</label>
-          <input type="checkbox" name="idiomas[]" value="1">Español</input>
-          <input type="checkbox" name="idiomas[]" value="2">Inglés</input>
-          <input type="checkbox" name="idiomas[]" value="3">Francés</input>
-          <input type="checkbox" name="idiomas[]" value="4">Alemán</input>
-          <input type="checkbox" name="idiomas[]" value="4">Alemán</input>
-          <input type="checkbox" name="idiomas[]" value="5">Otro</input>
+          <input type="checkbox" name="idiomas[]" value="1" <?php if (idiomasdb(1, $iduser)) { ?>checked="checked" <?php } ?>>Español</input>
+          <input type="checkbox" name="idiomas[]" value="2" <?php if (idiomasdb(2, $iduser)) { ?>checked="checked" <?php } ?>>Inglés</input>
+          <input type="checkbox" name="idiomas[]" value="3" <?php if (idiomasdb(3, $iduser)) { ?>checked="checked" <?php } ?>>Francés</input>
+          <input type="checkbox" name="idiomas[]" value="4" <?php if (idiomasdb(4, $iduser)) { ?>checked="checked" <?php } ?>>Alemán</input>
+          <input type="checkbox" name="idiomas[]" value="5" <?php if (idiomasdb(5, $iduser)) { ?>checked="checked" <?php } ?>>Alemán</input>
+          <input type="checkbox" name="idiomas[]" value="6" <?php if (idiomasdb(6, $iduser)) { ?>checked="checked" <?php } ?>>Otro</input>
           <span class="error">* </span><br>
 
-          <label for="progs">Que programas domina:</label>
+          <label for="progs">Que programas domina/conoce:</label>
           <textarea name="progs" rows="4" cols="40" value="<?php echo $result['progs'] ?>"></textarea><br>
 
         </fieldset>

@@ -20,9 +20,9 @@
 </head>
 
 <body>
-	<?php include '../db/create.php' ?>
-	<?php include 'funciones.js' ?>
-	<?php include '../db/mostrar.php' ?>
+	<?php include 'create.php' ?>
+	
+	<?php include 'mostrar.php' ?>
 	<?php include 'nav.php' ?>
 
 	<div class="container">

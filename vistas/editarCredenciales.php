@@ -48,9 +48,9 @@
             <div class="editDiv">
                 <h2 class="titleChange">Cambiar Contraseña</h2>
                 <form id="formPass" action="" method="post">
-                    <input id="actualPass" class="newInput" placeholder="Ingresa tu Contraseña Actual" type="password">
-                    <input id="newPass" class="newInput" placeholder="Ingresa la Nueva Contraseña" type="password">
-                    <input id="confirmPass" class="newInput" placeholder="Repite la Contraseña" type="password">
+                    <input class="newInput" placeholder="Ingresa tu Contraseña Actual" type="password">
+                    <input class="newInput" placeholder="Ingresa la Nueva Contraseña" type="password">
+                    <input class="newInput" placeholder="Repite la Contraseña" type="password">
                     <input type="submit" value="Guardar">
                 </form>
             </div>

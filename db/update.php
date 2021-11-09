@@ -1,34 +1,36 @@
 
 <?php
-include('../db/conexionDb.php');
+include('conexionDb.php');
+
 //-------------------------------------------------------------------------------------------- EXPERIENCIA
 if (isset($_POST['update1'])) {
-	$id = $_POST['id'];
+	$idexp = $_POST['idexp'];
 	$empresa = $_POST['empresa'];
 	$puesto = $_POST['puesto'];
 	$desde = $_POST['desde'];
 	$hasta = $_POST['hasta'];
 	$contacto = $_POST['contacto'];
-	$iduser = 9;
+
+	//Obtener id de empresa
 	$idempresa = 10;
 
-	mysqli_query($db, "UPDATE experiencia SET iduser= '$iduser', idempresa='$idempresa', empresa='$empresa', puesto='$puesto', desde='$desde', hasta='$hasta', contacto='$contacto' WHERE id=$id");
-
+	$var = mysqli_query($conexion, "UPDATE `experiencia` SET `empresa`='$empresa',`puesto`='$puesto',`desde`='$desde',`hasta`='$hasta',`contacto`='$contacto' WHERE idexp=$idexp");
+	
 	header('location: form_exp.php');
 }
 //-------------------------------------------------------------------------------------------- EMPRESA
 if (isset($_POST['update2'])) {
-	$id = $_POST['id'];
-	$empnombre = test_input($_POST["empnombre"]);
-	$rubro = test_input($_POST["rubro"]);
-	$empdireccion = test_input($_POST["empdireccion"]);
-	$empnumero = test_input($_POST["empnumero"]);
-	$empemail = test_input($_POST["empemail"]);
-	$encargado = test_input($_POST["encargado"]);
-	$empciudad = test_input($_POST["empciudad"]);
+	//id usuario faltante
+	$idempresa = $_POST['idempresa'];
+	$empnombre = $_POST["empnombre"];
+	$emptelefono = $_POST["emptelefono"];
+	$empemail = $_POST["empemail"];
+	$presidente = $_POST["presidente"];
+	$cuit = $_POST["cuit"];
+	$buscando = $_POST["buscando"];
 
-	mysqli_query($db, "UPDATE experiencia SET nombre= '$empnombre', rubro='$rubro', direccion='$empdireccion', telefono='$empnumero', email='$empemail', encargado='$encargado', ciudad='$empciudad' WHERE id=$id");
-
+	mysqli_query($conexion, "UPDATE `empresas` SET `empresa`='$empnombre',`cuit`='$cuit',`presidente`='$presidente',`correo`='$empemail',`telefono`='$emptelefono',`buscando`='$buscando' WHERE idempresa='$idempresa'");
+		
 	header('location: form_empresa.php');
 }
 ?>

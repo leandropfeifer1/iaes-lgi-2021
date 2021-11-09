@@ -1,6 +1,6 @@
-<?php include '../db/create.php' ?>
+<?php include 'create.php' ?>
 <?php include 'funciones.js' ?>
-<?php include '../db/mostrar.php' ?>
+<?php include 'mostrar.php' ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -27,10 +27,10 @@
           <p><span class="error">* Campo obligatorio</span></p>
           <legend>Datos Academicos:</legend>
           <label for="neducativo">Indicá tu nivel educativo alcanzado:</label><span class="error">* </span><br>
-          <input type="radio" name="neducativo" value="Terciario incompleto" <?php if ($result['neducativo'] == "Terciario incompleto") { ?>checked="checked" <?php } ?> required>Terciario incompleto<br>
-          <input type="radio" name="neducativo" value="Terciario completo" <?php if ($result['neducativo'] == "Terciario completo") { ?>checked="checked" <?php } ?> required>Terciario completo<br>
-          <input type="radio" name="neducativo" value="Universitario incompleto" <?php if ($result['neducativo'] == "Universitario incompleto") { ?>checked="checked" <?php } ?> required>Universitario incompleto<br>
-          <input type="radio" name="neducativo" value="Universitario completo" <?php if ($result['neducativo'] == "Universitario completo") { ?>checked="checked" <?php } ?> required>Universitario completo<br><br>
+          <input type="radio" name="neducativo" value="Terciario incompleto" <?php if ($result['neducativo'] == "Terciario incompleto") { ?>checked="checked" <?php } ?> >Terciario incompleto<br>
+          <input type="radio" name="neducativo" value="Terciario completo" <?php if ($result['neducativo'] == "Terciario completo") { ?>checked="checked" <?php } ?> >Terciario completo<br>
+          <input type="radio" name="neducativo" value="Universitario incompleto" <?php if ($result['neducativo'] == "Universitario incompleto") { ?>checked="checked" <?php } ?> >Universitario incompleto<br>
+          <input type="radio" name="neducativo" value="Universitario completo" <?php if ($result['neducativo'] == "Universitario completo") { ?>checked="checked" <?php } ?> >Universitario completo<br><br>
 
           <label for="cursos">Cursos realizados:</label>
           <textarea name="cursos" rows="5" cols="40" value="<?php echo $result['$cursos'] ?>"></textarea>

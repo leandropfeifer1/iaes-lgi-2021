@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/admin.css">
-    <title>Dashboard</title>
+    <title>Dashboard Administración</title>
 </head>
 <body>
     <div class="content">
@@ -33,17 +33,10 @@
     </div>
     
     <nav class="div_nav">
-            <a class="main_link" href="./registro.php">Nuevo Usuario</a>
-            <a class="main_link" href="#">Editar Usuario</a>
+            <a class="main_link" href="./registro.php"> Crear Usuario</a>
+            <a class="main_link" href="./filtro.php">Buscar Usuario</a>
+            <a class="main_link" href="#"> Editar Usuario</a>
             <a class="main_link" href="#">Borrar Usuario</a>
     </nav>
-    <main>
-        <form action="" method="post">
-            <!-- aca van los inputs para filtrar -->
-        </form>
-        <div class="content">
-            <!-- aca van los resultados de la db -->
-        </div>
-    </main>
 </body>
 </html>

@@ -12,8 +12,11 @@ body {
 .content {
   width: 100%;
   background-color: #d9d9d9;
-  height: 100px;
+  /* height: 100px; */
+  height: 15vh;
   display: flex;
+  position: fixed;
+  top: 0;
 }
 
 #header {
@@ -50,27 +53,85 @@ body {
 
 .div_nav {
   width: 100%;
-  height: 80%;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
 .main_link {
-  margin: 170px 0 0 0;
-  background-color: #f78c40;
+  background-color: #fff;
   border: 3px solid #f78c40;
-  border-radius: 3px;
   color: #292929;
-  padding: 25px 0 0 0;
+  padding: 5px;
+  border-radius: 3px;
   text-decoration: none;
   transition: background-color ease-in 0.15s;
-  width: 120px;
-  height: 107px;
+  width: 150px;
   text-align: center;
   font-weight: 600;
 }
+
 .main_link:hover {
-  background-color: #f69b59;
+  background-color: #f78c40;
   outline: 3px solid #fff;
+}
+
+.separatorFilter {
+  /* height: 150px; */
+  height: 20vh;
+  width: 100%;
+  margin: 117px 0 13px 0;
+}
+
+.firstRow,
+.secondRow,
+.thirdRow {
+  margin: 15px 0;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='search'],
+select {
+  width: 206px;
+  padding: 5px;
+}
+
+.firstRow select {
+  margin: 0 10px 0 0;
+}
+
+.secondRow select,
+.secondRow input[type='number'] {
+  margin: 0 10px 0 0;
+}
+
+.thirdRow {
+  width: 100%;
+}
+.thirdRow input[type='search'] {
+  margin: 8px 0 0 0;
+  width: 400px;
+  padding: 5px;
+}
+
+#lupa {
+  height: 18px;
+  width: 18px;
+  position: relative;
+  right: 0;
+  left: -28px;
+  top: 4px;
+  bottom: 0;
+}
+
+.label-input {
+  font-size: 14px;
+}
+
+.div-datos {
+  height: 65vh;
+  width: 100%;
+  background-color: #d68787;
 }

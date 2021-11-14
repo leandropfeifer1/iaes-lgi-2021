@@ -68,7 +68,7 @@ require('../db/conexionDb.php');
                     </select>
                     <label class="label-input" for="localidad">Localidad</label>
                     <select name="localidad" id="localidad">
-                        <option value="">---</option>
+                        <option value="0"> ---</option>
                         <option value="1">Puerto Rico</option>
                         <option value="2">Capioví</option>
                         <option value="3">Garuhapé</option>
@@ -147,5 +147,7 @@ require('../db/conexionDb.php');
             <!-- aca van los resultados de la db -->
         </div>
     </main>
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/filter.js"></script>
 </body>
 </html>

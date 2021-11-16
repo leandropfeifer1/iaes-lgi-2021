@@ -36,7 +36,8 @@
 	<title>phpzag.com : Demo Multi Step Form using jQuery, Bootstrap and PHP</title>
 	<script type="text/javascript" src="script/form.js"></script>
 	<script type="text/javascript" src="input.js"></script>
-
+        <script type="text/javascript" src="funciones.js"></script>
+      
 	<style type="text/css">
 		#register_form fieldset:not(:first-of-type) {
 			display: none;
@@ -254,12 +255,21 @@
 					<input type="radio" name="neducativo" value="Universitario incompleto">Universitario incompleto<br>
 					<input type="radio" name="neducativo" value="Universitario completo">Universitario completo<br><br>
 				</div>
-
+                                <div class="form-group">
+					<label for="ecivil">Carreras hechas:</label>
+					<select id="ecivil" name="carh" value="">
+						<option id="c1" value=""></option>
+						<option id="c2" value="1">Analistas de Sistemas</option>
+						<option id="c3" value="2">Turismo y Gestion Hotelera</option>
+                                                <option id="c4" value="3">Administración de Empresas</option>
+                                                <option id="c5" value="4">Régimen Aduanero</option>
+					</select>
+				</div>
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
-					<textarea name="cursos" rows="5" cols="40" value="<?php echo $result['$cursos'] ?>"></textarea>
+					<textarea name="cursos" rows="5" cols="40" value=""></textarea>
 				</div>
-
+                                  
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
 				<input type="button" name="next" class="next-form btn btn-info" value="Next" />
 			</fieldset>

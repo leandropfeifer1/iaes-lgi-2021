@@ -1,11 +1,14 @@
 <?php 
     include ('conexionDb.php');
-    //Selecciona todas las experiencias de un usuario determinado
+
+    //Selecciona todas las experiencias de un usuario 
     $query = "SELECT * FROM experiencia WHERE iduser='1'";
     $result = mysqli_query($conexion, $query);		
 	if (!$result) {
-		die('Query failed!');
+		die('Query failed!'. mysqli_error($conexion));
 	}
+
+    $json = array();
     while($row = mysqli_fetch_array($result)){
         $json[] = array(
             'idexp' => $row['idexp'],

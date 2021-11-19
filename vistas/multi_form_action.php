@@ -1,24 +1,24 @@
 <?php
 include('header.php');
 require('../db/conexionDb.php');
-    session_start();
-    
-    
-    if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-         $sql = 'SELECT idrol from roles where descripcion = "usuario"';
-        $resultado = mysqli_query($conexion, $sql);
-        if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
-            $row = mysqli_fetch_assoc($resultado);
-        }
-        if(isset($row['idrol'])){
-            if($_SESSION['id_rol'] != $row['idrol']){
-                header('location: ../db/logout.php');
-            }
-        }
-        //mysqli_close($conexion);
-    }else{
-        header('location: ../logout.php');
-    }
+session_start();
+
+
+if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
+	$sql = 'SELECT idrol from roles where descripcion = "usuario"';
+	$resultado = mysqli_query($conexion, $sql);
+	if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
+		$row = mysqli_fetch_assoc($resultado);
+	}
+	if (isset($row['idrol'])) {
+		if ($_SESSION['id_rol'] != $row['idrol']) {
+			header('location: ../db/logout.php');
+		}
+	}
+	//mysqli_close($conexion);
+} else {
+	header('location: ../logout.php');
+}
 ?>
 
 
@@ -52,7 +52,7 @@ require('../db/conexionDb.php');
 
 			$update = false;
 			$iduser = null;
-                        $idloc= $_SESSION['id_user'];
+			$idloc = $_SESSION['id_user'];
 			$usuario = validarString($_POST["usuario"]);
 			$apellido = validarString($_POST["apellido"]);
 			$fechanacimiento = validarString($_POST["fechanacimiento"]);
@@ -116,7 +116,7 @@ require('../db/conexionDb.php');
 
 			if (isset($_POST["idiomas"])) {
 				$idiomas = $_POST["idiomas"];
-                                echo $iduser;
+				echo $iduser;
 				//Trae los idiomas guardados del usuario segun id usuario
 				$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$iduser'");
 				//$rowcount=mysqli_num_rows($datos);	
@@ -204,19 +204,18 @@ require('../db/conexionDb.php');
 
 
 			// Variable id del usuario
-			
-                        if(empty($y = mysqli_query($conexion, "SELECT iduser FROM usuario WHERE idlog='$idloc'"))){
-                            
-				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`,`idlog`) 
-				VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero', '$discapacidades','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado','$idloc')")) {
+
+			if (empty($y = mysqli_query($conexion, "SELECT iduser FROM usuario WHERE idlog='$idloc'"))) {
+
+				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`,`idlog`) 
+				VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado','$idloc')")) {
 					echo "You're Registered Successfully!";
 				} else {
 					echo "Error in registering...Please try again later!";
 				}
-                            
-                        } else {
-				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario', `apellido`='$apellido', `fechanacimiento`='$fechanacimiento', `dni`='$dni', `genero`='$genero', `discapacidades`='$discapacidades', `ecivil`='$ecivil', `correo`='$correo', `contacto`='$contacto', `codpostal`='$codpostal', `domicilio`='$domicilio', `localidad`='$localidad', `departamento`='$departamento', `provincia`='$provincia', `idpais`='$idpais', `cursos`='$cursos', `pdf`='$pdf', `licencia`='$licencia', `auto`='$auto', `situacionlab`='$situacionlab', `area`='$area', `salariomin`='$salariomin', `dispoviajar`='$dispoviajar', `dispomuda`='$dispomuda', `progs`='$progs', `foto`='$foto', `niveledu`='$niveledu', `puestodeseado`='$puestodeseado' WHERE idlog='$idloc'")) {
-					
+			} else {
+				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario', `apellido`='$apellido', `fechanacimiento`='$fechanacimiento', `dni`='$dni', `genero`='$genero', `ecivil`='$ecivil', `correo`='$correo', `contacto`='$contacto', `codpostal`='$codpostal', `domicilio`='$domicilio', `localidad`='$localidad', `departamento`='$departamento', `provincia`='$provincia', `idpais`='$idpais', `cursos`='$cursos', `pdf`='$pdf', `licencia`='$licencia', `auto`='$auto', `situacionlab`='$situacionlab', `area`='$area', `salariomin`='$salariomin', `dispoviajar`='$dispoviajar', `dispomuda`='$dispomuda', `progs`='$progs', `foto`='$foto', `niveledu`='$niveledu', `puestodeseado`='$puestodeseado' WHERE idlog='$idloc'")) {
+
 					echo "registro actualizado!";
 				} else {
 					echo "error en actualizar";

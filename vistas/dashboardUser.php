@@ -1,22 +1,22 @@
-<?php 
-    session_start();
-    require('../db/conexionDb.php');
-    
-    if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-         $sql = 'SELECT idrol from roles where descripcion = "usuario"';
-        $resultado = mysqli_query($conexion, $sql);
-        if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
-            $row = mysqli_fetch_assoc($resultado);
-        }
-        if(isset($row['idrol'])){
-            if($_SESSION['id_rol'] != $row['idrol']){
-                header('location: ../db/logout.php');
-            }
-        }
-        mysqli_close($conexion);
-    }else{
-        header('location: ../logout.php');
-    }
+<?php
+session_start();
+require('../db/conexionDb.php');
+
+if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
+	$sql = 'SELECT idrol from roles where descripcion = "usuario"';
+	$resultado = mysqli_query($conexion, $sql);
+	if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
+		$row = mysqli_fetch_assoc($resultado);
+	}
+	if (isset($row['idrol'])) {
+		if ($_SESSION['id_rol'] != $row['idrol']) {
+			header('location: ../db/logout.php');
+		}
+	}
+	mysqli_close($conexion);
+} else {
+	header('location: ../logout.php');
+}
 ?>
 
 <html lang="en">
@@ -36,8 +36,8 @@
 	<title>phpzag.com : Demo Multi Step Form using jQuery, Bootstrap and PHP</title>
 	<script type="text/javascript" src="script/form.js"></script>
 	<script type="text/javascript" src="input.js"></script>
-        <script type="text/javascript" src="funciones.js"></script>
-      
+	<script type="text/javascript" src="funciones.js"></script>
+
 	<style type="text/css">
 		#register_form fieldset:not(:first-of-type) {
 			display: none;
@@ -204,10 +204,13 @@
 					<label for="domicilio">Direccion:</label>
 					<input type="text" class="form-control" name="domicilio" value="">
 				</div>
+
+
+
 				<div class="form-group">
 					<label for="licencia">Licencia de conducir:</label>
-					<input type="radio" name="licencia" value="2" id="licsi" onclick="vehiculo()">Si
-					<input type="radio" name="licencia" value="1" onclick="vehiculo()">No
+					<input type="radio" name="licencia" value="2" id="licsi" >Si
+					<input type="radio" name="licencia" value="1" id="licno">No
 				</div>
 
 				<div id="auto" class="form-group" style="display:none">
@@ -216,16 +219,18 @@
 					<input id="vno" type="radio" name="auto" value="1">No
 				</div>
 
+
 				<div class="form-group">
 					<label for="disc">Discapacidad:</label>
-					<input id="discsi" type="radio" name="disc" value="si" onclick="mostrar()">Si
-					<input type="radio" name="disc" value="no" onclick="mostrar()">No
+					<input id="discsi" type="radio" name="disc" value="si" >Si
+					<input id="discno" type="radio" name="disc" value="no">No
 				</div>
 
 				<div id="disc" class="form-group" style="display:none">
 					<label for="discapacidades">Especifique su discapacidad:</label>
 					<textarea id="discapacidades" name="discapacidades" rows="5" cols="40" value=""></textarea>
 				</div>
+
 
 
 				<div class="form-group">
@@ -255,21 +260,21 @@
 					<input type="radio" name="neducativo" value="Universitario incompleto">Universitario incompleto<br>
 					<input type="radio" name="neducativo" value="Universitario completo">Universitario completo<br><br>
 				</div>
-                                <div class="form-group">
+				<div class="form-group">
 					<label for="ecivil">Carreras hechas:</label>
 					<select id="ecivil" name="carh" value="">
 						<option id="c1" value=""></option>
 						<option id="c2" value="1">Analistas de Sistemas</option>
 						<option id="c3" value="2">Turismo y Gestion Hotelera</option>
-                                                <option id="c4" value="3">Administración de Empresas</option>
-                                                <option id="c5" value="4">Régimen Aduanero</option>
+						<option id="c4" value="3">Administración de Empresas</option>
+						<option id="c5" value="4">Régimen Aduanero</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
 					<textarea name="cursos" rows="5" cols="40" value=""></textarea>
 				</div>
-                                  
+
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
 				<input type="button" name="next" class="next-form btn btn-info" value="Next" />
 			</fieldset>
@@ -281,7 +286,7 @@
 					<a href="formulario_experiencia/index.php" target="_blank">Cargar experiencias</a>
 				</div>
 
-				
+
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
 				<input type="button" name="next" class="next-form btn btn-info" value="Next" />
@@ -351,10 +356,6 @@
 			</fieldset>
 
 		</form>
-
-
-
-
 	</div>
 </body>
 

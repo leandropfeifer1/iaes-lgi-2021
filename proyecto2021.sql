@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2021 a las 18:13:13
--- Versión del servidor: 5.7.11
--- Versión de PHP: 5.6.19
+-- Servidor: localhost
+-- Tiempo de generación: 19-11-2021 a las 20:28:32
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -115,23 +116,9 @@ CREATE TABLE `experiencia` (
   `empresa` varchar(100) NOT NULL,
   `puesto` varchar(50) NOT NULL,
   `desde` date DEFAULT NULL,
-  `hasta` date NOT NULL,
+  `hasta` date DEFAULT NULL,
   `contacto` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `experiencia`
---
-
-INSERT INTO `experiencia` (`idexp`, `iduser`, `idempresa`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
-(9, 8, 97, '', '', '2222-02-22', '2222-02-22', '2'),
-(3, 8, 97, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222'),
-(20, 8, 97, '', 'asdasd', '1111-02-23', '1111-02-22', '222'),
-(21, 8, 97, '', '', '2222-02-22', '2222-02-22', ''),
-(22, 8, 97, '', '', '2222-02-22', '2222-02-22', ''),
-(23, 8, 97, '', '', '1111-02-22', '1111-02-22', ''),
-(24, 8, 97, '', 'asdas', '2021-11-03', '2021-11-05', '3454554'),
-(25, 8, 97, '', '432', '2021-10-31', '2021-11-06', '3454554');
 
 -- --------------------------------------------------------
 
@@ -172,17 +159,12 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(8, 1),
-(8, 2),
-(8, 6),
-(8, 3),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6);
+(207, 1),
+(207, 2),
+(207, 3),
+(207, 4),
+(207, 5),
+(207, 6);
 
 -- --------------------------------------------------------
 
@@ -224,7 +206,8 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`idlog`, `username`, `password`, `rol`) VALUES
 (1, 'martin', '$2y$10$r7dyAxL3qa1ScLOcEsjPEOxn0Ss9xMb7DomAwBV3iOTtPylMWOsya', 3),
 (3, 'test', '$2y$10$F45nV5H8Pg0mwtyptMyefeSxU4TYqzgm/pfgH/Yvinhv9/AJdhCCu', 3),
-(4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1);
+(4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1),
+(5, 'martin', '$2y$10$ej55I.NwNNbLTnVEeovDl.Us5mp3HiMrX7Rl2eO69D77OSC8zD0R6', 3);
 
 -- --------------------------------------------------------
 
@@ -314,15 +297,18 @@ CREATE TABLE `usuario` (
   `fechanacimiento` date DEFAULT NULL,
   `dni` int(8) DEFAULT NULL,
   `genero` varchar(20) DEFAULT NULL,
-  `discapacidades` varchar(200) DEFAULT NULL,
+  `discapacidad` int(10) NOT NULL,
+  `detdiscapacidad` varchar(200) DEFAULT NULL,
+  `ecivil` varchar(15) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
   `contacto` varchar(30) DEFAULT NULL,
+  `codpostal` int(10) DEFAULT NULL,
   `domicilio` varchar(100) DEFAULT NULL,
   `localidad` int(3) DEFAULT NULL,
   `departamento` int(3) DEFAULT NULL,
   `provincia` int(2) DEFAULT NULL,
   `idpais` int(4) DEFAULT NULL,
-  `idloc` int(8) DEFAULT NULL,
+  `idlog` int(8) DEFAULT NULL,
   `lastlogin` datetime DEFAULT NULL,
   `cursos` varchar(200) DEFAULT NULL,
   `pdf` varchar(100) DEFAULT NULL,
@@ -330,11 +316,13 @@ CREATE TABLE `usuario` (
   `auto` int(1) DEFAULT NULL,
   `situacionlab` int(1) DEFAULT NULL,
   `area` varchar(200) DEFAULT NULL,
-  `salariomin` decimal(8,0) DEFAULT NULL,
+  `salariomin` int(10) DEFAULT NULL,
   `dispoviajar` int(1) DEFAULT NULL,
   `dispomuda` int(1) DEFAULT NULL,
   `progs` varchar(200) DEFAULT NULL,
-  `foto` varchar(200) DEFAULT NULL
+  `foto` varchar(200) DEFAULT NULL,
+  `niveledu` varchar(100) DEFAULT NULL,
+  `puestodeseado` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -438,56 +426,68 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `carrera`
   MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
   MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
 ALTER TABLE `idiomas`
   MODIFY `idi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
   MODIFY `idloc` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
   MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --
 ALTER TABLE `provincia`
   MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `idrol` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

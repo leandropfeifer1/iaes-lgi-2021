@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-11-2021 a las 20:28:32
+-- Tiempo de generación: 21-11-2021 a las 22:11:26
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -120,6 +120,13 @@ CREATE TABLE `experiencia` (
   `contacto` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `experiencia`
+--
+
+INSERT INTO `experiencia` (`idexp`, `iduser`, `idempresa`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
+(110, 1, 1, 'sdfsd', 'asdasd', '1111-11-11', '0001-11-11', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -136,8 +143,8 @@ CREATE TABLE `idiomas` (
 --
 
 INSERT INTO `idiomas` (`idi`, `idioma`) VALUES
-(1, 'Ingles'),
-(2, 'Español'),
+(1, 'Español'),
+(2, 'Ingles'),
 (3, 'Portugués '),
 (4, 'Frances'),
 (5, 'Aleman'),
@@ -159,12 +166,7 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(207, 1),
-(207, 2),
-(207, 3),
-(207, 4),
-(207, 5),
-(207, 6);
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +206,6 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`idlog`, `username`, `password`, `rol`) VALUES
-(1, 'martin', '$2y$10$r7dyAxL3qa1ScLOcEsjPEOxn0Ss9xMb7DomAwBV3iOTtPylMWOsya', 3),
 (3, 'test', '$2y$10$F45nV5H8Pg0mwtyptMyefeSxU4TYqzgm/pfgH/Yvinhv9/AJdhCCu', 3),
 (4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1),
 (5, 'martin', '$2y$10$ej55I.NwNNbLTnVEeovDl.Us5mp3HiMrX7Rl2eO69D77OSC8zD0R6', 3);
@@ -297,7 +298,7 @@ CREATE TABLE `usuario` (
   `fechanacimiento` date DEFAULT NULL,
   `dni` int(8) DEFAULT NULL,
   `genero` varchar(20) DEFAULT NULL,
-  `discapacidad` int(10) NOT NULL,
+  `discapacidad` int(10) DEFAULT NULL,
   `detdiscapacidad` varchar(200) DEFAULT NULL,
   `ecivil` varchar(15) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
@@ -324,6 +325,13 @@ CREATE TABLE `usuario` (
   `niveledu` varchar(100) DEFAULT NULL,
   `puestodeseado` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidad`, `detdiscapacidad`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idlog`, `lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`) VALUES
+(217, 'martin', 'sdsd', '0111-11-11', 2323, 'hombre', 1, 'vbnvbn', 'Soltero', 'martinchoo_13@hotmail.com', '222', 33, 'dsfsdf', 1, 1, 1, 1, 5, NULL, 'asd', '', 1, 1, 1, 'asdasd', 2323, 1, 1, 'asdasd', '', 'Universitario completo', 'asdasdas');
 
 --
 -- Índices para tablas volcadas
@@ -443,7 +451,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
@@ -485,7 +493,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

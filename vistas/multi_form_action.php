@@ -51,7 +51,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		if (isset($_POST['submit'])) {
 
 			$update = false;
-			$iduser = null;
 			$idloc = $_SESSION['id_user'];
 			$usuario = validarString($_POST["usuario"]);
 			$apellido = validarString($_POST["apellido"]);
@@ -72,8 +71,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$genero = "";
 			}
 
-
-			$discapacidades = validarString($_POST["discapacidades"]);
+			$detdiscapacidad = validarString($_POST["detdiscapacidad"]);
+			echo $_POST["discapacidad"];
+			$discapacidad = $_POST["discapacidad"];
 			$ecivil = validarString($_POST["ecivil"]);
 			$correo =  validarString($_POST["email"]);
 			$contacto = validarString($_POST["contacto"]);
@@ -116,42 +116,53 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 			if (isset($_POST["idiomas"])) {
 				$idiomas = $_POST["idiomas"];
-				echo $iduser;
 				//Trae los idiomas guardados del usuario segun id usuario
-				$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$iduser'");
-				//$rowcount=mysqli_num_rows($datos);	
+				$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$idloc'");
 
 				//comprueba si no hay idiomas guardados
 				if (mysqli_num_rows($datos) == 0) {
 					//se guardan los idiomas ingresados
 					for ($y = 0; $y < count($idiomas); $y++) {
 						$aux = $idiomas[$y];
-						$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$iduser','$aux')");
+						$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$idloc','$aux')");
 					}
 				} else {
 					$b = 0;
 					// For de los idiomas ingresados  
 					for ($y = 0; $y < count($idiomas); $y++) {
-						//For de los idiomas guardados
 						while ($fila = mysqli_fetch_row($datos)) {
+							if ($idiomas[$y] == $fila[0]) {
+								$b = 1;
+							}
+						}
+						if ($b == 0) {
+							$aux = $idiomas[$y];
+							$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$idloc','$aux')");
+						} else {
+							$b = 0;
+						}						
+					}
+					$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$idloc'");
+					
+					while ($fila = mysqli_fetch_row($datos)) {
+						$b = 0;
+						//For de los idiomas guardados
+						for ($y = 0; $y < count($idiomas); $y++) {
+
 							//Busca en los registro si ya existe el idioma a cargar	
 							if ($idiomas[$y] == $fila[0]) {
 								//variable que indica que si existe el idioma en bd
 								$b = 1;
 							}
 						}
-						$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$iduser'");
-						if ($b == 0) {
-							//el idioma no esta cargado y procede a insertarse 
-							$aux = $idiomas[$y];
-							$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$iduser','$aux')");
-						} else {
-							//el idioma si existe y restable el valor de b 
-							$b = 0;
+						if ($b != 1) {
+							//el idioma no esta en marcado de los check y sera eliminado
+							mysqli_query($conexion, "DELETE FROM `idioxuser` WHERE iduser='$idloc' AND idi='$fila[0]'");
 						}
 					}
 				}
 			}
+
 			//$dispoviajar = validarNum($_POST["dv"]);
 
 
@@ -205,16 +216,16 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 			// Variable id del usuario
 
-			if (empty($y = mysqli_query($conexion, "SELECT iduser FROM usuario WHERE idlog='$idloc'"))) {
-
-				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`,`idlog`) 
-				VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado','$idloc')")) {
+			$y = mysqli_query($conexion, "SELECT * FROM usuario WHERE idlog='$idloc'");
+			if (mysqli_num_rows($y) == 0) {
+				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidad`, `detdiscapacidad`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`,`idlog`) 
+				VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$discapacidad','$detdiscapacidad','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado','$idloc')")) {
 					echo "You're Registered Successfully!";
 				} else {
 					echo "Error in registering...Please try again later!";
 				}
 			} else {
-				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario', `apellido`='$apellido', `fechanacimiento`='$fechanacimiento', `dni`='$dni', `genero`='$genero', `ecivil`='$ecivil', `correo`='$correo', `contacto`='$contacto', `codpostal`='$codpostal', `domicilio`='$domicilio', `localidad`='$localidad', `departamento`='$departamento', `provincia`='$provincia', `idpais`='$idpais', `cursos`='$cursos', `pdf`='$pdf', `licencia`='$licencia', `auto`='$auto', `situacionlab`='$situacionlab', `area`='$area', `salariomin`='$salariomin', `dispoviajar`='$dispoviajar', `dispomuda`='$dispomuda', `progs`='$progs', `foto`='$foto', `niveledu`='$niveledu', `puestodeseado`='$puestodeseado' WHERE idlog='$idloc'")) {
+				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario', `apellido`='$apellido', `fechanacimiento`='$fechanacimiento', `dni`='$dni', `genero`='$genero', `discapacidad`='$discapacidad', `detdiscapacidad`='$detdiscapacidad',`ecivil`='$ecivil', `correo`='$correo', `contacto`='$contacto', `codpostal`='$codpostal', `domicilio`='$domicilio', `localidad`='$localidad', `departamento`='$departamento', `provincia`='$provincia', `idpais`='$idpais', `cursos`='$cursos', `pdf`='$pdf', `licencia`='$licencia', `auto`='$auto', `situacionlab`='$situacionlab', `area`='$area', `salariomin`='$salariomin', `dispoviajar`='$dispoviajar', `dispomuda`='$dispomuda', `progs`='$progs', `foto`='$foto', `niveledu`='$niveledu', `puestodeseado`='$puestodeseado' WHERE idlog='$idloc'")) {
 
 					echo "registro actualizado!";
 				} else {

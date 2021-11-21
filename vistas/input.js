@@ -1,30 +1,15 @@
 $(document).ready(function () {
-  let id = 206;
+  //let id = 213;
+  var iduser = document.getElementById("iduser");
+  let id = iduser.value;
   $.post("mostrar_reg.php", { id }, function (response) {
     const datos = JSON.parse(response);
+    console.log(response);
     $("#usuario").val(datos.usuario);
     $("#apellido").val(datos.apellido);
     $("#email").val(datos.correo);
     $("#dni").val(datos.dni);
     $("#fechanacimiento").val(datos.fechanacimiento);
-
-    $("#genero").val(datos.genero);
-    if(datos.genero == $("#g1").val()){
-        $("input[name=radiobutton][value='hombre']").prop("checked",true);
-    }else if(datos.genero == $("#g2").val()){
-        $("input[name=radiobutton][value='mujer']").prop("checked",true);
-    }else if(datos.genero == $("#g3").val()){
-        $("input[name=radiobutton][value='otros']").prop("checked",true);
-    }
-   
-    if(datos.ecivil == $("#e1").val()){
-        $("#ecivil option[value='']").attr("selected",true);
-    }else if(datos.genero == $("#e2").val()){
-        $("#ecivil option[value='Soltero']").attr("selected",true);
-    }else if(datos.genero == $("#e3").val()){
-        $("#ecivil option[value='Casado']").attr("selected",true);
-    }
-
     $("#contacto").val(datos.contacto);
     $("#localidad").val(datos.localidad);
     $("#departamento").val(datos.departamento);
@@ -32,23 +17,130 @@ $(document).ready(function () {
     $("#idpais").val(datos.idpais);
     $("#codpostal").val(datos.codpostal);
     $("#domicilio").val(datos.domicilio);
-    $("#licencia").val(datos.licencia);
-    $("#auto").val(datos.auto);
-    $("#discapacidades").val(datos.discapacidades);
+    $("#detdiscapacidad").val(datos.detdiscapacidad);
     $("#foto").val(datos.foto);
     $("#pdf").val(datos.pdf);
     $("#cursos").val(datos.cursos);
-    $("#niveledu").val(datos.niveledu);
     $("#progs").val(datos.progs);
-    $("#situacionlab").val(datos.situacionlab);
     $("#puestodeseado").val(datos.puestodeseado);
     $("#area").val(datos.area);
     $("#salariomin").val(datos.salariomin);
-    $("#dispoviajar").val(datos.dispoviajar);
-    $("#dispomuda").val(datos.dispomuda);
+
+    //$("#genero").val(datos.genero);
+    console.log(datos.genero);
+    if (datos.genero == $("#g1").val()) {
+      console.log("asdasd");
+      $("#g1").prop("checked", true);
+    } else if (datos.genero == $("#g2").val()) {
+      $("#g2").prop("checked", true);
+    } else if (datos.genero == $("#g3").val()) {
+      $("#g3").prop("checked", true);
+    }
+
+    console.log($("#e2").val());
+    if (datos.ecivil == $("#e1").val()) {
+      $("#e1").prop("selected", true);
+    } else if (datos.ecivil == $("#e2").val()) {
+      $("#e2").prop("selected", true);
+    } else if (datos.ecivil == $("#e3").val()) {
+      $("#e3").prop("selected", true);
+    }
+
+    //$("#licencia").val(datos.licencia);
+    switch (datos.licencia) {
+      case "1":
+        $("#licsi").prop("checked", true);
+        var d = document.getElementById("auto");
+        d.style.display = "block";
+        break;
+      case "0":
+        $("#licno").prop("checked", true);
+        var d = document.getElementById("auto");
+        d.style.display = "none";
+        break;
+    }
+
+    //$("#auto").val(datos.auto);
+    switch (datos.auto) {
+      case "1":
+        $("#vsi").prop("checked", true);
+        break;
+      case "0":
+        $("#vno").prop("checked", true);
+        break;
+    }
+
+    //$("#discapacidades").val(datos.discapacidades);
+    switch (datos.discapacidad) {
+      case "1":
+        var d = document.getElementById("disc");
+        d.style.display = "block";
+        $("#discsi").prop("checked", true);
+        console.log(datos.discapacidad);
+        $("#discapacidades").val(datos.detdiscapacidad);
+        break;
+      case "0":
+        $("#discno").prop("checked", true);
+        break;
+    }
+
+    //$("#niveledu").val(datos.niveledu);
+    console.log(datos.niveledu);
+    switch (datos.niveledu) {
+      case "Terciario incompleto":
+        $("#n1").prop("checked", true);
+        break;
+      case "Terciario completo":
+        $("#n2").prop("checked", true);
+        break;
+      case "Universitario incompleto":
+        $("#n3").prop("checked", true);
+        break;
+      case "Universitario completo":
+        $("#n4").prop("checked", true);
+        break;
+    }
+
+    //$("#situacionlab").val(datos.situacionlab);
+    console.log(datos.situacionlab);
+    switch (datos.situacionlab) {
+      case "":
+        $("#s1").prop("selected", true);
+        break;
+      case "0":
+        $("#s2").prop("selected", true);
+        break;
+      case "1":
+        $("#s3").prop("selected", true);
+        break;
+    }
+
+    //$("#dispoviajar").val(datos.dispoviajar);
+    switch (datos.dispoviajar) {
+      case "1":
+        $("#dvsi").prop("checked", true);
+        break;
+      case "0":
+        $("#dvno").prop("checked", true);
+        break;
+    }
+
+    //$("#dispomuda").val(datos.dispomuda);
+    switch (datos.dispomuda) {
+      case "1":
+        $("#dcsi").prop("checked", true);
+        break;
+      case "0":
+        $("#dcno").prop("checked", true);
+        break;
+    }
 
     //$('#puesto').val(exp.puesto);
 
     edit = true;
   });
+  
+
+
+
 });

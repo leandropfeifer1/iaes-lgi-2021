@@ -2,8 +2,9 @@
 
 include('conexionDb.php');
 $id = $_POST['id'];
+//$query = "SELECT idlog FROM usuario WHERE iduser = '$id'";
 
-$query = "SELECT * FROM usuario WHERE iduser = $id";
+$query = "SELECT * FROM usuario WHERE idlog = '$id'";
 $result = mysqli_query($conexion, $query);
 if (!$result) {
     die('Query failed!');
@@ -17,7 +18,8 @@ while ($row = mysqli_fetch_array($result)) {
         'fechanacimiento' => $row['fechanacimiento'],
         'dni' => $row['dni'],
         'genero' => $row['genero'],
-        'discapacidades' => $row['discapacidades'],
+        'discapacidad' => $row['discapacidad'],
+        'detdiscapacidad' => $row['detdiscapacidad'],
         'ecivil' => $row['ecivil'],
         'correo' => $row['correo'],
         'contacto' => $row['contacto'],

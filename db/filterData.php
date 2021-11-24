@@ -2,7 +2,6 @@
     session_start();
     require('../db/conexionDb.php');
     $data;
-    unset($data);
     // // Si no tiene las credenciales no accede
     // if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
     //     $sql = 'SELECT descripcion from roles where idrol in (SELECT rol from login where idlog ='.$_SESSION['id_user'].')';
@@ -19,7 +18,7 @@
     // }
 
 if(isset($_SESSION['id_user'])){
-    $consulta = "SELECT iduser, usuario, cursos FROM usuario WHERE iduser!=0";
+    $consulta = "SELECT iduser, usuario, apellido, genero, situacionlab, cursos FROM usuario WHERE iduser!=0";
 
     if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
         $consulta .= " AND iduser in(select  iduser from carxuser 
@@ -41,16 +40,18 @@ if(isset($_SESSION['id_user'])){
     if(isset($_POST['modalidad'])&& $_POST['modalidad'] != 0){
         $consulta .= " AND modalidad=".$_POST['modalidad'];
     }
+    if(isset($_POST['buscador']) && $_POST['buscador'] != ""){
+        $busc = $_POST['buscador'];
+        $consulta .= '  AND (cursos LIKE "%'.$busc.'%"';
+        $consulta .= ' OR area LIKE "%'.$busc.'%")';
+    }
     if(isset($_POST['genero'])&& $_POST['genero'] != 0){
         $consulta .= " AND genero='".$_POST['genero']."'";
     }
     if(isset($_POST['disponible'])&& $_POST['disponible'] != 0){
-        $consulta .= " AND situacionlab=".$_POST['disponible'];
+        $consulta .= " AND (situacionlab=".$_POST['disponible'].")";
     }
-    if(isset($_POST['buscador'])&& $_POST['buscador'] != 0 && $_POST['buscador'] != ""){
-        $busc = $_POST['buscador'];
-        $consulta .= " AND cursos LIKE '%".$busc."%'";
-    }
+    
     // $consulta .= " ORDER BY iduser DESC";
 
     $res =  mysqli_query($conexion, $consulta);
@@ -61,7 +62,7 @@ if(isset($_SESSION['id_user'])){
        header('Content-Type: application/json; charset=utf-8');
        print_r(json_encode($data));
     }else{
-        echo "error";
+        echo $data["data"][] = "undefined";
     }
 } 
 mysqli_close($conexion);

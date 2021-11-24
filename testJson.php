@@ -7,7 +7,9 @@
     $res =  mysqli_query($conexion, $consulta);
     if(!empty($res) && mysqli_num_rows($res) != 0) {  
         while($fila = mysqli_fetch_assoc($res)) {  
-            $data["data"][] = $fila;
+            // $data["data"][] = $fila;
+            $data[] = $fila;
+
         } 
        print_r(json_encode($data));
     }else{

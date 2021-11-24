@@ -1,13 +1,3 @@
-// const carrera;
-// const localidad;
-// const licencia;
-// const vehiculo;
-// let edad;
-// const modalidad;
-// const genero;
-// const disponible;
-// let buscador;
-
 $('#carrera').change(() => sendRequest());
 $('#localidad').change(() => sendRequest());
 $('#licencia').change(() => sendRequest());
@@ -20,6 +10,7 @@ $('#buscador').keyup(() => sendRequest());
 
 // Funcion para enviar Datos
 const sendRequest = () => {
+  $('.div-datos').empty();
   const carrera = parseInt($('#carrera').val());
   const localidad = parseInt($('#localidad').val());
   const licencia = parseInt($('#licencia').val());
@@ -29,18 +20,6 @@ const sendRequest = () => {
   const genero = $('#genero').val(); // es tipo string
   const disponible = parseInt($('#disponible').val());
   let buscador = $('#buscador').val(); // Es "" si no se pone nada
-  let divDatos;
-
-  // console.log('car', carrera);
-  // console.log('loc', localidad);
-  // console.log('lic', licencia);
-  // console.log('veh', vehiculo);
-  // console.log('eda', edad);
-  // console.log('mod', modalidad);
-  // console.log('gen', genero);
-  // console.log('dis', disponible);
-  console.log('buscador', buscador);
-  // console.log('----------------------');
 
   $.ajax({
     url: '../db/filterData.php',
@@ -58,7 +37,55 @@ const sendRequest = () => {
       buscador: buscador,
     },
     success: (data) => {
-      console.log(data);
+      $('.div-datos').empty();
+      let contadorUsuario = 0;
+      let disponibilidad = '';
+
+      if (data['data']) {
+        data['data'].forEach((user) => {
+          contadorUsuario++;
+
+          if (user.situacionlab == 1) {
+            disponibilidad = 'Disponible';
+          } else {
+            disponibilidad = 'No Disponible';
+          }
+          $('.div-datos').append(
+            `<a href="#" class="card">
+            <div class="card-header">
+              <img src="../assets/logo.jpg" alt="logo" />
+            </div>
+            <div class="card-body">
+              <span class="tag tag-purple">${disponibilidad}</span>
+              <h4>
+                ${user.usuario} ${user.apellido}
+              </h4>
+              <p>
+                ${capitalizarPrimeraLetra(user.genero)}
+              </p>
+              <div class="user">
+                <div class="user-info">
+                  <h5>Id Usuario: ${user.iduser}</h5>
+                </div>
+              </div>
+            </div>
+          </a>`
+          );
+        });
+      } else {
+        $('.div-datos').empty();
+        $('.div-datos').append(`
+          <div>No se encontraron Resultados</div>
+        `);
+      }
+    },
+    error: (err) => {
+      console.log('err');
     },
   });
+};
+
+const capitalizarPrimeraLetra = (str) => {
+  // Retorna el genero con la primera letra en Mayuscula
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };

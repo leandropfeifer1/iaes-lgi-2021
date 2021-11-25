@@ -247,7 +247,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
 				</div>
 
-				<input type="button" class="next-form btn btn-info" value="Next" />
+				<input type="button" class="next-form btn btn-info" value="Siguiente" />
 			</fieldset>
 
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
@@ -276,8 +276,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<textarea name="cursos" id="cursos" rows="5" cols="40" value=""></textarea>
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
-				<input type="button" name="next" class="next-form btn btn-info" value="Next" />
+				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" name="next" class="next-form btn btn-info" value="Siguiente" />
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
@@ -309,8 +309,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<textarea name="progs" id="progs" rows="4" cols="40" value=""></textarea><br>
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
-				<input type="button" name="next" class="next-form btn btn-info" value="Next" />
+				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" name="next" class="next-form btn btn-info" value="Siguiente" />
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
@@ -349,7 +349,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<input type="radio" id="dcno" name="dcr" value=0>No
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Previous" />
+				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
 				<input type="submit" name="submit" class="submit btn btn-success" value="Submit" />
 			</fieldset>
 

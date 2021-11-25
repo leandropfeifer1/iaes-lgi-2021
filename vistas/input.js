@@ -3,8 +3,9 @@ $(document).ready(function () {
   var iduser = document.getElementById("iduser");
   let id = iduser.value;
   $.post("mostrar_reg.php", { id }, function (response) {
-    const datos = JSON.parse(response);
-    console.log(response);
+    if(response){
+      const datos = JSON.parse(response);
+    //console.log(response);
     $("#usuario").val(datos.usuario);
     $("#apellido").val(datos.apellido);
     $("#email").val(datos.correo);
@@ -18,8 +19,14 @@ $(document).ready(function () {
     $("#codpostal").val(datos.codpostal);
     $("#domicilio").val(datos.domicilio);
     $("#detdiscapacidad").val(datos.detdiscapacidad);
-    $("#foto").val(datos.foto);
-    $("#pdf").val(datos.pdf);
+
+
+    //$("#foto").val(datos.foto);
+    //console.log(datos.foto);
+    //$("#pdf").val(datos.pdf);
+    //console.log(datos.pdf);
+
+
     $("#cursos").val(datos.cursos);
     $("#progs").val(datos.progs);
     $("#puestodeseado").val(datos.puestodeseado);
@@ -27,7 +34,7 @@ $(document).ready(function () {
     $("#salariomin").val(datos.salariomin);
 
     //$("#genero").val(datos.genero);
-    console.log(datos.genero);
+    //console.log(datos.genero);
     if (datos.genero == $("#g1").val()) {
       console.log("asdasd");
       $("#g1").prop("checked", true);
@@ -37,7 +44,7 @@ $(document).ready(function () {
       $("#g3").prop("checked", true);
     }
 
-    console.log($("#e2").val());
+    //console.log($("#e2").val());
     if (datos.ecivil == $("#e1").val()) {
       $("#e1").prop("selected", true);
     } else if (datos.ecivil == $("#e2").val()) {
@@ -76,7 +83,7 @@ $(document).ready(function () {
         var d = document.getElementById("disc");
         d.style.display = "block";
         $("#discsi").prop("checked", true);
-        console.log(datos.discapacidad);
+        //console.log(datos.discapacidad);
         $("#discapacidades").val(datos.detdiscapacidad);
         break;
       case "0":
@@ -85,7 +92,7 @@ $(document).ready(function () {
     }
 
     //$("#niveledu").val(datos.niveledu);
-    console.log(datos.niveledu);
+    //console.log(datos.niveledu);
     switch (datos.niveledu) {
       case "Terciario incompleto":
         $("#n1").prop("checked", true);
@@ -102,7 +109,7 @@ $(document).ready(function () {
     }
 
     //$("#situacionlab").val(datos.situacionlab);
-    console.log(datos.situacionlab);
+    //console.log(datos.situacionlab);
     switch (datos.situacionlab) {
       case "":
         $("#s1").prop("selected", true);
@@ -135,12 +142,50 @@ $(document).ready(function () {
         break;
     }
 
+    switch (datos.carrera) {
+      case "":
+        $("#c1").prop("selected", true);
+        break;
+      case "1":
+        $("#c2").prop("selected", true);
+        break;
+      case "2":
+        $("#c3").prop("selected", true);
+        break;
+    }
+
     //$('#puesto').val(exp.puesto);
 
     edit = true;
+    }
+    
   });
-  
 
+  
+  $.post("mostrar_carrera.php", { id }, function (response) {
+    if(response){
+      //console.log(response);
+      const datos = JSON.parse(response);
+      switch (datos.idcar) {
+        case "":
+          $("#c1").prop("selected", true);
+          break;
+        case "1":
+          $("#c2").prop("selected", true);
+          break;
+        case "2":
+          $("#c3").prop("selected", true);
+          break;
+        case "3":
+          $("#c4").prop("selected", true);
+          break;
+        case "4":
+          $("#c5").prop("selected", true);
+          break;
+      }
+    }
+    edit = true;
+  });
 
 
 });

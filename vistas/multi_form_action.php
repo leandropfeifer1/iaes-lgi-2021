@@ -72,7 +72,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			}
 
 			$detdiscapacidad = validarString($_POST["detdiscapacidad"]);
-			echo $_POST["discapacidad"];
+			//echo $_POST["discapacidad"];
 			$discapacidad = $_POST["discapacidad"];
 			$ecivil = validarString($_POST["ecivil"]);
 			$correo =  validarString($_POST["email"]);
@@ -113,6 +113,13 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$auto = 0;
 			}
 
+			if (isset($_POST["carh"])) {
+				$carrera = $_POST["carh"];
+			} else {
+				$carrera = 0;
+			}
+			
+
 
 			if (isset($_POST["idiomas"])) {
 				$idiomas = $_POST["idiomas"];
@@ -140,10 +147,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 							$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$idloc','$aux')");
 						} else {
 							$b = 0;
-						}						
+						}
 					}
 					$datos = mysqli_query($conexion, "SELECT idi FROM idioxuser WHERE iduser='$idloc'");
-					
+
 					while ($fila = mysqli_fetch_row($datos)) {
 						$b = 0;
 						//For de los idiomas guardados
@@ -190,18 +197,43 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			}
 
 			//no recibe foto con metodo $_FILES
-			if (isset($_POST["foto"])) {
-				/*
-				echo "entroo" ;
-				$b = 1;*/
-				$foto = $_POST['foto'];/*
-				echo $foto;
-				echo $foto['name'];
-				$temp = $_POST['foto']['tmp_name'];
-				move_uploaded_file($temp, 'images/' . $foto);
-				*/
+			if (isset($_FILES["foto"])) {
+				$foto = $_FILES['foto']['name'];
+				//Si el archivo contiene algo y es diferente de vacio
+
+				//Obtenemos algunos datos necesarios sobre el archivo
+				//$tipo = $_FILES['foto']['type'];
+				//$tamano = $_FILES['foto']['size'];
+				$temp = $_FILES['foto']['tmp_name'];
+				if (move_uploaded_file($temp, 'images/' . $foto)) {
+					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
+					chmod('images/' . $foto, 0777);
+					//Mostramos el mensaje de que se ha subido co éxito
+					echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
+					//Mostramos la imagen subida
+					//echo '<p><img src="images/' . $foto . '"></p>';
+				}
 			} else {
 				$foto = NULL;
+			}
+			if (isset($_FILES["pdf"])) {
+				$pdf = $_FILES['pdf']['name'];
+				//Si el archivo contiene algo y es diferente de vacio
+
+				//Obtenemos algunos datos necesarios sobre el archivo
+				//$tipo = $_FILES['pdf']['type'];
+				//$tamano = $_FILES['pdf']['size'];
+				$temp = $_FILES['pdf']['tmp_name'];
+				if (move_uploaded_file($temp, 'cv/' . $pdf)) {
+					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
+					chmod('images/' . $pdf, 0777);
+					//Mostramos el mensaje de que se ha subido co éxito
+					echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
+					//Mostramos la imagen subida
+					//echo '<p><img src="images/' . $foto . '"></p>';
+				}
+			} else {
+				$pdf = NULL;
 			}
 
 			/*INSERT INTO `usuario`(`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, ***`idlog`, ***`lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`)*/
@@ -229,9 +261,29 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 					echo "registro actualizado!";
 				} else {
-					echo "error en actualizar";
+					echo "Error en actualizar";
 				}
 			}
+
+			$x = mysqli_query($conexion, "SELECT * FROM carxuser WHERE iduser='$idloc'");
+			if($carrera != 0){
+				if (mysqli_num_rows($x) == 0) {					
+					if (mysqli_query($conexion, "INSERT INTO carxuser (iduser, idcar) VALUES ('$idloc','$carrera')")) {
+						echo "Carrera actualizada";
+					} else {
+						echo "Error en guardar carrera!";
+					}
+				} else {
+					if (mysqli_query($conexion, "UPDATE `carxuser` SET `idcar`='$carrera' WHERE iduser='$idloc'")) {
+					} else {
+						echo "error en actualizar carrera";
+					}
+				}
+			}else{
+				mysqli_query($conexion, "DELETE FROM `carxuser` WHERE iduser='$idloc'");
+			}
+			
+
 		}
 
 		?>

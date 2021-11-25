@@ -4,6 +4,7 @@ include('conexionDb.php');
 $id = $_POST['id'];
 //$query = "SELECT idlog FROM usuario WHERE iduser = '$id'";
 
+
 $query = "SELECT * FROM usuario WHERE idlog = '$id'";
 $result = mysqli_query($conexion, $query);
 if (!$result) {
@@ -47,4 +48,6 @@ while ($row = mysqli_fetch_array($result)) {
 
 $jsonstring = json_encode($json[0]);
 echo $jsonstring;
+
+
 ?>

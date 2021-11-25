@@ -61,10 +61,10 @@ require('../db/conexionDb.php');
                     <select name="carrera" id="carrera">
                         <option value="0">---</option>
                         <option value="1">Analista de Sistemas</option>
-                        <option value="2">Administración de Empresas</option>
-                        <option value="3">Recursos Humanos</option>
-                        <option value="4">Turismo y Gestión Hotelera</option>
-                        <option value="5">Régimen Aduanero</option>
+                        <option value="2">Turismo y Gestión Hotelera</option>
+                        <option value="3">Administración de Empresas</option>
+                        <option value="4">Régimen Aduanero</option>
+                        <option value="5">Recursos Humanos</option>
                     </select>
                     <label class="label-input" for="localidad">Localidad</label>
                     <select name="localidad" id="localidad">

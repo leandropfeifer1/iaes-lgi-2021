@@ -71,23 +71,26 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$genero = "";
 			}
 
-			$detdiscapacidad = validarString($_POST["detdiscapacidad"]);
+			$discapacidades = validarString($_POST["detdiscapacidad"]);
 			//echo $_POST["discapacidad"];
-			$discapacidad = $_POST["discapacidad"];
-			$ecivil = validarString($_POST["ecivil"]);
+			//$discapacidad = $_POST["discapacidad"];
+			//$ecivil = validarString($_POST["ecivil"]);
 			$correo =  validarString($_POST["email"]);
 			$contacto = validarString($_POST["contacto"]);
-			$codpostal = validarNum($_POST["codpostal"]);
+			//$codpostal = validarNum($_POST["codpostal"]);
 			$domicilio = validarString($_POST["domicilio"]);
 			$localidad = validarNum($_POST["localidad"]);
 			$departamento = validarNum($_POST["departamento"]);
 			$provincia = validarNum($_POST["provincia"]);
 			$idpais = validarNum($_POST["pais"]);
 			$cursos = validarString($_POST["cursos"]);
-			$puestodeseado = validarString($_POST["pdeseado"]);
+			//$puestodeseado = validarString($_POST["pdeseado"]);
 			$situacionlab = validarNum($_POST["slaboral"]);
-			$area = validarString($_POST["area"]);
+			$area = $_POST["area"];
 			$salariomin	= validarNum($_POST["sma"]);
+			$modalidad	= $_POST["modalidad"];
+			$habilidades = validarString($_POST["habilidades"]);
+			//$lastlogin = "2021-11-21 01:30:11";
 
 			if (isset($_FILES["pdf"])) {
 				$pdf = $_FILES['pdf']['name'];
@@ -118,7 +121,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			} else {
 				$carrera = 0;
 			}
-			
+
 
 
 			if (isset($_POST["idiomas"])) {
@@ -196,26 +199,31 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$niveledu = "";
 			}
 
-			//no recibe foto con metodo $_FILES
 			if (isset($_FILES["foto"])) {
-				$foto = $_FILES['foto']['name'];
-				//Si el archivo contiene algo y es diferente de vacio
 
-				//Obtenemos algunos datos necesarios sobre el archivo
-				//$tipo = $_FILES['foto']['type'];
-				//$tamano = $_FILES['foto']['size'];
+
+				$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
+				$row = mysqli_fetch_array($fotobd);
+				if (mysqli_num_rows($fotobd) != 0) {
+					if(unlink('images/'.$row[0])) {
+						echo "bien";
+						// file was successfully deleted
+					  } else {
+						// there was a problem deleting the file
+					  }
+				}
+				$foto = $_FILES['foto']['name'];
 				$temp = $_FILES['foto']['tmp_name'];
-				if (move_uploaded_file($temp, 'images/' . $foto)) {
+				if (move_uploaded_file($temp, "images/" . $foto)) {
 					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
 					chmod('images/' . $foto, 0777);
-					//Mostramos el mensaje de que se ha subido co éxito
-					echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
-					//Mostramos la imagen subida
-					//echo '<p><img src="images/' . $foto . '"></p>';
+				} else {
+					$foto = NULL;
 				}
-			} else {
-				$foto = NULL;
 			}
+
+
+
 			if (isset($_FILES["pdf"])) {
 				$pdf = $_FILES['pdf']['name'];
 				//Si el archivo contiene algo y es diferente de vacio
@@ -228,46 +236,35 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
 					chmod('images/' . $pdf, 0777);
 					//Mostramos el mensaje de que se ha subido co éxito
-					echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
-					//Mostramos la imagen subida
-					//echo '<p><img src="images/' . $foto . '"></p>';
+
 				}
 			} else {
 				$pdf = NULL;
 			}
 
-			/*INSERT INTO `usuario`(`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, ***`idlog`, ***`lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`)*/
-			/* 
-			if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`) 
-													VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero', '$discapacidades','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado')")) {
-				echo "You're Registered Successfully!";
-			} else {
-				echo "Error in registering...Please try again later!";
-			}*/
-
-
 			// Variable id del usuario
 
-			$y = mysqli_query($conexion, "SELECT * FROM usuario WHERE idlog='$idloc'");
+			$y = mysqli_query($conexion, "SELECT * FROM usuario WHERE idloc='$idloc'");
 			if (mysqli_num_rows($y) == 0) {
-				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidad`, `detdiscapacidad`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`,`idlog`) 
-				VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$discapacidad','$detdiscapacidad','$ecivil','$correo', '$contacto','$codpostal','$domicilio', '$localidad', '$departamento','$provincia','$idpais', '$cursos', '$pdf','$licencia','$auto', '$situacionlab', '$area','$salariomin','$dispoviajar','$dispomuda', '$progs', '$foto','$niveledu','$puestodeseado','$idloc')")) {
-					echo "You're Registered Successfully!";
+				//`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idloc`, `lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `modalidad`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `habilidades`, `foto`
+				if (mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idloc`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `modalidad`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `habilidades`, `foto`,`progs`) 
+														VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$discapacidades','$correo','$contacto','$domicilio','$localidad','$departamento','$provincia','$idpais','$idloc','$cursos','$pdf','$licencia','$auto','$situacionlab','$modalidad','$area','$salariomin','$dispoviajar','$dispomuda','$habilidades','$foto','$progs')")) {
+					echo "Se registro correctamente!";
 				} else {
-					echo "Error in registering...Please try again later!";
+					echo "Error en registrar... Por favor intentelo de nuevo!";
 				}
 			} else {
-				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario', `apellido`='$apellido', `fechanacimiento`='$fechanacimiento', `dni`='$dni', `genero`='$genero', `discapacidad`='$discapacidad', `detdiscapacidad`='$detdiscapacidad',`ecivil`='$ecivil', `correo`='$correo', `contacto`='$contacto', `codpostal`='$codpostal', `domicilio`='$domicilio', `localidad`='$localidad', `departamento`='$departamento', `provincia`='$provincia', `idpais`='$idpais', `cursos`='$cursos', `pdf`='$pdf', `licencia`='$licencia', `auto`='$auto', `situacionlab`='$situacionlab', `area`='$area', `salariomin`='$salariomin', `dispoviajar`='$dispoviajar', `dispomuda`='$dispomuda', `progs`='$progs', `foto`='$foto', `niveledu`='$niveledu', `puestodeseado`='$puestodeseado' WHERE idlog='$idloc'")) {
+				if (mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario',`apellido`='$apellido',`fechanacimiento`='$fechanacimiento',`dni`='$dni',`genero`='$genero',`discapacidades`='$discapacidades',`correo`='$correo',`contacto`='$contacto',`domicilio`='$domicilio',`localidad`='$localidad',`departamento`='$departamento',`provincia`='$provincia',`idpais`='$idpais',`idloc`='$idloc',`cursos`='$cursos',`pdf`='$pdf',`licencia`='$licencia',`auto`='$auto',`situacionlab`='$situacionlab',`modalidad`='$modalidad',`area`='$area',`salariomin`='$salariomin',`dispoviajar`='$dispoviajar',`dispomuda`='$dispomuda',`habilidades`='$habilidades',`foto`='$foto',`progs`='$progs' WHERE idloc = $idloc")) {
 
-					echo "registro actualizado!";
+					echo "Registro actualizado!";
 				} else {
-					echo "Error en actualizar";
+					echo "No se pudo actualizar";
 				}
 			}
 
 			$x = mysqli_query($conexion, "SELECT * FROM carxuser WHERE iduser='$idloc'");
-			if($carrera != 0){
-				if (mysqli_num_rows($x) == 0) {					
+			if ($carrera != 0) {
+				if (mysqli_num_rows($x) == 0) {
 					if (mysqli_query($conexion, "INSERT INTO carxuser (iduser, idcar) VALUES ('$idloc','$carrera')")) {
 						echo "Carrera actualizada";
 					} else {
@@ -279,11 +276,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						echo "error en actualizar carrera";
 					}
 				}
-			}else{
+			} else {
 				mysqli_query($conexion, "DELETE FROM `carxuser` WHERE iduser='$idloc'");
 			}
-			
-
 		}
 
 		?>

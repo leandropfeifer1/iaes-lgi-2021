@@ -5,7 +5,7 @@ $id = $_POST['id'];
 //$query = "SELECT idlog FROM usuario WHERE iduser = '$id'";
 
 
-$query = "SELECT * FROM usuario WHERE idlog = '$id'";
+$query = "SELECT * FROM usuario WHERE idloc = '$id'";
 $result = mysqli_query($conexion, $query);
 if (!$result) {
     die('Query failed!');
@@ -19,12 +19,10 @@ while ($row = mysqli_fetch_array($result)) {
         'fechanacimiento' => $row['fechanacimiento'],
         'dni' => $row['dni'],
         'genero' => $row['genero'],
-        'discapacidad' => $row['discapacidad'],
-        'detdiscapacidad' => $row['detdiscapacidad'],
-        'ecivil' => $row['ecivil'],
+        'discapacidades' => $row['discapacidades'],
         'correo' => $row['correo'],
         'contacto' => $row['contacto'],
-        'codpostal' => $row['codpostal'],
+        //'codpostal' => $row['codpostal'],
         'domicilio' => $row['domicilio'],
         'localidad' => $row['localidad'],
         'departamento' => $row['departamento'],
@@ -35,19 +33,21 @@ while ($row = mysqli_fetch_array($result)) {
         'licencia' => $row['licencia'],
         'auto' => $row['auto'],
         'situacionlab' => $row['situacionlab'],
+        'modalidad' => $row['modalidad'],
         'area' => $row['area'],
         'salariomin' => $row['salariomin'],
         'dispoviajar' => $row['dispoviajar'],
         'dispomuda' => $row['dispomuda'],
         'progs' => $row['progs'],
-        'foto' => $row['foto'],
-        'niveledu' => $row['niveledu'],
-        'puestodeseado' => $row['puestodeseado']
+        'habilidades' => $row['habilidades'],
+        'foto' => $row['foto']
     );
 }
+if($json){
+    $jsonstring = json_encode($json[0]);
+    echo $jsonstring;
+}
 
-$jsonstring = json_encode($json[0]);
-echo $jsonstring;
 
 
 ?>

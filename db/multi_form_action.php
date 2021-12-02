@@ -203,23 +203,20 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			}
 
 			if (isset($_FILES["foto"]) && $_FILES["foto"]['name'] != '') {
-				echo "entra en ISSET";
 				$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
 				$row = mysqli_fetch_array($fotobd);
-				echo "aca" . $row[0] . "<----<br>";
 
 				if ($row[0]) {
-					if (unlink('images/' . $row[0])) {
-						echo "bien";
+					if (unlink('../db/images/' . $row[0])) {
+						//echo "bien";
 						// file was successfully deleted
 					} else {
-						echo "mal";
+						//echo "mal";
 						// there was a problem deleting the file
 					}
 				}
 
 				$foto = $_FILES['foto']['name'];
-				echo "foto<br>" . $foto;
 				$temp = $_FILES['foto']['tmp_name'];
 				if (move_uploaded_file($temp, "../db/images/" . $foto)) {
 					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
@@ -244,7 +241,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$rowcv = mysqli_fetch_array($cvbd);
 
 				if ($rowcv[0]) {
-					if (unlink('cv/' . $rowcv[0])) {
+					if (unlink('../db/cv/' . $rowcv[0])) {
 						// file was successfully deleted
 					} else {
 						// there was a problem deleting the file

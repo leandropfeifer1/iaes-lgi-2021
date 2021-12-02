@@ -434,7 +434,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="submit" name="submit" class="submit btn btn-success" value="Submit" />
+				<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" />
 			</fieldset>
 
 		</form>

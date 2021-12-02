@@ -86,7 +86,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="fechanacimiento">Fecha de nacimiento:</label>
-					<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="" required min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
+					<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
 				</div>
 
 
@@ -98,14 +98,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<input type="radio" id="g4" name="genero" value="4">Otro
 				</div>
 
-				<!--<div class="form-group">
+				<div class="form-group">
 					<label for="ecivil">Estado civil:</label>
 					<select id="ecivil" name="ecivil" value="">
-						<option id="e1" value=""></option>
-						<option id="e2" value="Soltero">Soltero</option>
-						<option id="e3" value="Casado">Casado</option>
+						<option id="e1" value="1"></option>
+						<option id="e2" value="2">Soltero</option>
+						<option id="e3" value="3">Casado</option>
 					</select>
-				</div>-->
+				</div>
 
 				<div class="form-group">
 					<label for="contacto">Telefono:</label>

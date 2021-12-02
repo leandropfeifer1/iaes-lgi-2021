@@ -47,14 +47,14 @@ $(document).ready(function () {
       }
 
       //console.log($("#e2").val());
-      /*
+      
     if (datos.ecivil == $("#e1").val()) {
       $("#e1").prop("selected", true);
     } else if (datos.ecivil == $("#e2").val()) {
       $("#e2").prop("selected", true);
     } else if (datos.ecivil == $("#e3").val()) {
       $("#e3").prop("selected", true);
-    }*/
+    }
 
       //$("#licencia").val(datos.licencia);
       //console.log(datos.licencia);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-12-2021 a las 00:48:01
+-- Tiempo de generación: 02-12-2021 a las 11:48:41
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -147,7 +147,9 @@ CREATE TABLE `experiencia` (
 --
 
 INSERT INTO `experiencia` (`idexp`, `iduser`, `idempresa`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
-(3, 8, 97, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222');
+(3, 8, 97, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222'),
+(31, 6, 1, 'yghjgh', 'ghjghj', '0111-11-11', '0111-11-11', '1'),
+(30, 6, 1, 'sdfsd', 'asdasd', '0001-11-11', '0001-11-11', '1');
 
 -- --------------------------------------------------------
 
@@ -186,12 +188,12 @@ CREATE TABLE `idiomas` (
 --
 
 INSERT INTO `idiomas` (`idi`, `idioma`) VALUES
-(1, 'Ingles'),
-(2, 'Español'),
-(3, 'Portugués '),
-(4, 'Frances'),
-(5, 'Aleman'),
-(6, 'Guaraní ');
+(1, 'ingles'),
+(2, 'español'),
+(3, 'portugues'),
+(4, 'frances'),
+(5, 'aleman'),
+(6, 'guarani');
 
 -- --------------------------------------------------------
 
@@ -209,111 +211,12 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(8, 1),
-(8, 2),
-(8, 6),
-(8, 3),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
 (6, 1),
 (6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 2),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 2),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 1),
-(6, 1);
+(6, 3),
+(6, 4),
+(6, 5),
+(6, 6);
 
 -- --------------------------------------------------------
 
@@ -517,7 +420,7 @@ INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`
 (1, 'Javier', 'Pineyro', '1999-05-22', 41872061, 1, 'no', 'javi@gmail.com', '3743-121293', 'Eldorado 521', 2, 1, 1, 1, 1, 'Front end', NULL, 1, 1, 1, 1, 'informatica', '50000', 1, 1, NULL, NULL, ''),
 (2, 'Lore', 'Lopez', '1998-11-02', 40768326, 2, 'no', 'lore@gail', '3784-322454', 'Calle 12', 1, 1, 1, 1, 1, 'No', NULL, 2, 2, 1, 1, 'administracion', '45000', 1, 2, NULL, NULL, ''),
 (3, 'Pedro', 'Henrriquez', '2000-09-13', 3123233, 1, 'no', 'pedro@gmail', '3754-944382', 'Av roques', 1, 1, 1, 1, 1, 'react js', NULL, 1, 2, 2, 2, 'informatica', '45000', 1, 1, NULL, NULL, ''),
-(7, 'martin', 'sdsd', '0011-11-11', 2323, 1, 'asdasd', 'martinchoo_13@hotmail.com', '1', 'dfdfdfdfd', 2, 14, 5, 2, 6, 'asdasd', '', 2, 2, 2, 1, '1', '2222', 2, 2, 'asdasd', 'foto2.png', 'dfgdfg');
+(7, 'martin', 'sdsd', '0011-11-11', 2323, 1, 'asdasd', 'martinchoo_13@hotmail.com', '1', 'dfdfdfdfd', 2, 14, 5, 2, 6, 'asdaaaaaa', 'otro.pdf', 2, 2, 2, 1, '1', '2222', 2, 2, 'asdasd', 'foto2.png', 'dfgdfg');
 
 --
 -- Índices para tablas volcadas
@@ -649,7 +552,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`

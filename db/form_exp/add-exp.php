@@ -2,7 +2,7 @@
 <?php
 include('conexionDb.php');
 
-$iduser = 1;
+$iduser = $_POST['iduser'];
 $idempresa = 1;
 $empresa = $_POST['empresa'];
 $puesto = $_POST['puesto'];

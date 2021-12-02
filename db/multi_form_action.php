@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+include('../php/header.php');
 require('../db/conexionDb.php');
 session_start();
 
@@ -131,20 +131,16 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				//comprueba si no hay idiomas guardados
 				if (mysqli_num_rows($datos) == 0) {
-					echo "<br>si el us no tiene idiomas guardados entra aca<br>";
 					//se guardan los idiomas ingresados
 					for ($y = 0; $y < count($idiomas); $y++) {
 						$aux = $idiomas[$y];
 						$x = mysqli_query($conexion, "INSERT INTO idioxuser (iduser, idi) VALUES ('$idloc','$aux')");
 					}
 				} else {
-					echo "<br>si tiene idiomas guardados<br>";
 					$b = 0;
 					// For de los idiomas ingresados  aca esta el problem
-					echo "Cantidad de idiomas ingresados: " . count($idiomas)  . "<br>";
 					for ($y = 0; $y < count($idiomas); $y++) {
 						while ($fila = mysqli_fetch_row($datos)) {
-							echo "Idioma ingresado: " . $idiomas[$y] . " " . "Idioma en bd: " . $fila[0] . "<br>";
 							if ($idiomas[$y] == $fila[0]) {
 								$b = 1;
 							}
@@ -225,14 +221,13 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				$foto = $_FILES['foto']['name'];
 				echo "foto<br>" . $foto;
 				$temp = $_FILES['foto']['tmp_name'];
-				if (move_uploaded_file($temp, "images/" . $foto)) {
+				if (move_uploaded_file($temp, "../db/images/" . $foto)) {
 					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
 					//chmod('images/' . $foto, 0777);
 				} else {
-					echo "<br>no se guardo en carpeta<br>";
+					//echo "<br>no se guardo en carpeta<br>";
 				}
 			} else {
-				echo "<br>cuando no cargas foto entra aca<br>";
 				$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
 				$row = mysqli_fetch_array($fotobd);
 				if($row[0]){
@@ -242,8 +237,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				}
 				
 			}
-
-
 
 			if (isset($_FILES["pdf"]) && $_FILES["pdf"]['name'] != '') {
 				
@@ -263,12 +256,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				//$tamano = $_FILES['pdf']['size'];
 				$pdf = $_FILES['pdf']['name'];
 				$temp = $_FILES['pdf']['tmp_name'];
-				if (move_uploaded_file($temp, 'cv/' . $pdf)) {
+				if (move_uploaded_file($temp, '../db/cv/' . $pdf)) {
 					//Cambiamos los permisos del archivo a 777 para poder modificarlo posteriormente
 					//chmod('images/' . $pdf, 0777);
 					//Mostramos el mensaje de que se ha subido co éxito
 				} else {
-					echo "no se guardo en carpeta<br>";
+					//echo "no se guardo en carpeta<br>";
 				}
 			} else {
 				$cvbd = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");

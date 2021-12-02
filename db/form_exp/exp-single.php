@@ -2,7 +2,7 @@
 
 <?php
 
-include('conexionDb.php');
+require('conexionDb.php');
 $id = $_POST['id'];
 
 $query = "SELECT * FROM experiencia WHERE idexp = $id";

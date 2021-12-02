@@ -2,7 +2,7 @@ $(document).ready(function () {
   //let id = 213;
   var iduser = document.getElementById("iduser");
   let id = iduser.value;
-  $.post("mostrar_reg.php", { id }, function (response) {
+  $.post("../db/mostrar_reg.php", { id }, function (response) {
     if (response) {
       const datos = JSON.parse(response);
       //console.log(response);
@@ -171,7 +171,7 @@ $(document).ready(function () {
     }
   });
 
-  $.post("mostrar_carrera.php", { id }, function (response) {
+  $.post("../db/mostrar_carrera.php", { id }, function (response) {
     if (response) {
       //console.log(response);
       const datos = JSON.parse(response);

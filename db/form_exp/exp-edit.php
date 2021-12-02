@@ -2,11 +2,9 @@
 
 <?php 
 
-include ('conexionDb.php');
+require('conexionDb.php');
 
-echo "dentro de edit ";
 $idexp = $_POST['idexp'];
-echo $idexp;
 $empresa = $_POST['empresa'];
 $puesto = $_POST['puesto'];
 $desde = $_POST['desde'];

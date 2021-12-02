@@ -1,6 +1,6 @@
 <?php
 
-include('conexionDb.php');
+require('../db/conexionDb.php');
 $id = $_POST['id'];
 
 $query = "SELECT * FROM carxuser WHERE iduser = '$id'";

@@ -30,15 +30,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 <body>
 	<?php
-	include('header.php');
-	include('conexionDb.php');
-	include('idiomas.php');
+	include('../php/header.php');
+	//include('conexionDb.php');
+	include('../db/idiomas.php');
 	//include('mostrar_reg.php');
 	?>
 
 
-	<script type="text/javascript" src="script/form.js"></script>
-	<script type="text/javascript" src="input.js"></script>
+	<script type="text/javascript" src="../assets/js/form.js"></script>
+	<script type="text/javascript" src="../assets/js/input.js"></script>
 
 	<style type="text/css">
 		#register_form fieldset:not(:first-of-type) {
@@ -57,7 +57,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<div class="alert alert-success hide"></div>
 
 		<?php $iduser = $_SESSION['id_user']; ?>
-		<form enctype="multipart/form-data" id="register_form" novalidate action="multi_form_action.php" method="post">
+		<form enctype="multipart/form-data" id="register_form" novalidate action="../db/multi_form_action.php" method="post">
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
@@ -338,7 +338,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<h2> Experiencias laborales</h2>
 
 				<div class="form-group">
-					<a href="formulario_experiencia/index.php" target="_blank" class="btn btn-primary stretched-link">Cargar experiencias<br></a>
+					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Cargar experiencias<br></a>
 				</div>
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />

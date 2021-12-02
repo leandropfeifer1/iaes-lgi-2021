@@ -1,4 +1,24 @@
-<?php include 'conexionDb.php' ?>
+
+<?php
+session_start();
+require('../db/conexionDb.php');
+
+if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
+	$sql = 'SELECT idrol from roles where descripcion = "usuario"';
+	$resultado = mysqli_query($conexion, $sql);
+	if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
+		$row = mysqli_fetch_assoc($resultado);
+	}
+	if (isset($row['idrol'])) {
+		if ($_SESSION['id_rol'] != $row['idrol']) {
+			header('location: ../db/logout.php');
+		}
+	}
+	mysqli_close($conexion);
+} else {
+	header('location: ../logout.php');
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +40,7 @@
         <div class="abs-center">
 
             <form id="form-exp">  
+                <input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
                        
                 <fieldset>                   
 
@@ -71,7 +92,7 @@
                         
             <!-- -------------------------------------------------------------------------------------------------------------------------->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="app.js"></script>
+            <script src="../assets/js/appexp.js"></script>
 </body>
 
 </html>

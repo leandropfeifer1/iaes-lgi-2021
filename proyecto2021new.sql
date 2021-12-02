@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-11-2021 a las 22:11:26
+-- Tiempo de generación: 02-12-2021 a las 00:48:01
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -39,9 +39,10 @@ CREATE TABLE `carrera` (
 
 INSERT INTO `carrera` (`idcar`, `carrera`, `duracion`) VALUES
 (1, 'Analista de Sistemas', 3),
-(2, 'Analista de Sistemas', 3),
+(2, 'Turismo y Gestion Hotelera', 3),
 (3, 'Administración de Empresas', 3),
-(4, 'Régimen Aduanero  ', 3);
+(4, 'Régimen Aduanero  ', 3),
+(5, 'Recursos Humanos', 3);
 
 -- --------------------------------------------------------
 
@@ -52,8 +53,19 @@ INSERT INTO `carrera` (`idcar`, `carrera`, `duracion`) VALUES
 CREATE TABLE `carxuser` (
   `idcar` int(3) NOT NULL,
   `iduser` int(8) NOT NULL,
-  `añofinal` date NOT NULL
+  `añofinal` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `carxuser`
+--
+
+INSERT INTO `carxuser` (`idcar`, `iduser`, `añofinal`) VALUES
+(1, 1, '2022-11-17'),
+(3, 2, '2022-11-17'),
+(1, 3, '2021-11-25'),
+(2, 2, '2022-11-22'),
+(1, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,8 +84,23 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`idep`, `departamento`, `idpro`) VALUES
-(1, 'General San Martin', 1),
-(2, 'Montecarlo', 1);
+(1, 'Libertador General San Martin', 1),
+(2, 'Montecarlo', 1),
+(3, 'San Ignacio', 1),
+(4, 'Candelaria', 1),
+(5, 'Capital', 1),
+(6, 'Eldorado', 1),
+(7, 'Iguazu', 1),
+(8, 'Apostoles', 1),
+(9, 'Concepcion', 1),
+(10, 'Obera', 1),
+(11, 'Leandro N Alem', 1),
+(12, 'San Javier', 1),
+(13, 'Cainguas', 1),
+(14, 'Veinticinco de Mayo', 1),
+(15, 'Guarani', 1),
+(16, 'San Pedro', 1),
+(17, 'General Manuel Belgrano', 1);
 
 -- --------------------------------------------------------
 
@@ -96,12 +123,7 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`, `buscando`) VALUES
-(9, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1),
-(8, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1),
-(6, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1),
-(5, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1),
-(10, 'sdfsd', 3434, 'asdas', 'asdasd', '34343', 1),
-(11, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1);
+(5, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +138,7 @@ CREATE TABLE `experiencia` (
   `empresa` varchar(100) NOT NULL,
   `puesto` varchar(50) NOT NULL,
   `desde` date DEFAULT NULL,
-  `hasta` date DEFAULT NULL,
+  `hasta` date NOT NULL,
   `contacto` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -125,7 +147,28 @@ CREATE TABLE `experiencia` (
 --
 
 INSERT INTO `experiencia` (`idexp`, `iduser`, `idempresa`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
-(110, 1, 1, 'sdfsd', 'asdasd', '1111-11-11', '0001-11-11', '1');
+(3, 8, 97, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `genero`
+--
+
+CREATE TABLE `genero` (
+  `idgenero` int(1) NOT NULL,
+  `tipo` varchar(30) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`idgenero`, `tipo`) VALUES
+(1, 'hombre'),
+(2, 'mujer'),
+(3, 'nobinarix'),
+(4, 'otro');
 
 -- --------------------------------------------------------
 
@@ -143,8 +186,8 @@ CREATE TABLE `idiomas` (
 --
 
 INSERT INTO `idiomas` (`idi`, `idioma`) VALUES
-(1, 'Español'),
-(2, 'Ingles'),
+(1, 'Ingles'),
+(2, 'Español'),
 (3, 'Portugués '),
 (4, 'Frances'),
 (5, 'Aleman'),
@@ -166,7 +209,111 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(5, 1);
+(1, 1),
+(1, 2),
+(2, 3),
+(8, 1),
+(8, 2),
+(8, 6),
+(8, 3),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(6, 1),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 2),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 2),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 1),
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +333,17 @@ CREATE TABLE `localidad` (
 
 INSERT INTO `localidad` (`idloc`, `localidad`, `idep`) VALUES
 (1, 'Puerto Rico', 1),
-(2, 'Garuhapé', 1);
+(2, 'Garuhapé', 1),
+(3, 'Capiovi', 1),
+(4, 'El Alcazar', 1),
+(5, 'Jardin America', 3),
+(6, 'Montecarlo', 2),
+(7, 'Puerto Iguazu', 7),
+(8, 'Eldorado', 6),
+(9, 'Posadas', 5),
+(10, 'Garupa', 5),
+(11, 'Obera', 10),
+(12, 'San Ignacio', 3);
 
 -- --------------------------------------------------------
 
@@ -206,9 +363,32 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`idlog`, `username`, `password`, `rol`) VALUES
+(1, 'martin', '$2y$10$r7dyAxL3qa1ScLOcEsjPEOxn0Ss9xMb7DomAwBV3iOTtPylMWOsya', 3),
 (3, 'test', '$2y$10$F45nV5H8Pg0mwtyptMyefeSxU4TYqzgm/pfgH/Yvinhv9/AJdhCCu', 3),
 (4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1),
-(5, 'martin', '$2y$10$ej55I.NwNNbLTnVEeovDl.Us5mp3HiMrX7Rl2eO69D77OSC8zD0R6', 3);
+(5, 'test', '$2y$10$77aUT/P38UafC.Gj8nhNxOrb0aApPeNd3nEdG9ZAFSlMApY8HvZy.', 1),
+(6, 'martin', '$2y$10$1drPKbdQOeuuwDMnY/SZYOgHiXjKTGdGWg.ju4PAUZl0wgZng9q22', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modalidades`
+--
+
+CREATE TABLE `modalidades` (
+  `idmodalidad` int(2) NOT NULL,
+  `descripcion` varchar(30) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `modalidades`
+--
+
+INSERT INTO `modalidades` (`idmodalidad`, `descripcion`) VALUES
+(1, 'full-time'),
+(2, 'part-time'),
+(3, 'trainee'),
+(4, 'pasantias');
 
 -- --------------------------------------------------------
 
@@ -227,7 +407,8 @@ CREATE TABLE `pais` (
 
 INSERT INTO `pais` (`idpais`, `pais`) VALUES
 (1, 'Argentina'),
-(2, 'Paraguay');
+(2, 'Paraguay'),
+(3, 'Brasil');
 
 -- --------------------------------------------------------
 
@@ -247,7 +428,13 @@ CREATE TABLE `provincia` (
 
 INSERT INTO `provincia` (`idpro`, `provincia`, `idpais`) VALUES
 (1, 'Misiones', 1),
-(2, 'Corrientes', 1);
+(2, 'Corrientes', 1),
+(3, 'Formosa', 1),
+(4, 'Chaco', 1),
+(5, 'Entre Rios', 1),
+(6, 'Buenos Aires', 1),
+(7, 'Cordoba', 1),
+(8, 'Santa Fe', 1);
 
 -- --------------------------------------------------------
 
@@ -294,44 +481,43 @@ CREATE TABLE `sucursales` (
 CREATE TABLE `usuario` (
   `iduser` int(8) NOT NULL,
   `usuario` varchar(50) NOT NULL,
-  `apellido` varchar(50) DEFAULT NULL,
-  `fechanacimiento` date DEFAULT NULL,
-  `dni` int(8) DEFAULT NULL,
-  `genero` varchar(20) DEFAULT NULL,
-  `discapacidad` int(10) DEFAULT NULL,
-  `detdiscapacidad` varchar(200) DEFAULT NULL,
-  `ecivil` varchar(15) DEFAULT NULL,
-  `correo` varchar(100) DEFAULT NULL,
-  `contacto` varchar(30) DEFAULT NULL,
-  `codpostal` int(10) DEFAULT NULL,
-  `domicilio` varchar(100) DEFAULT NULL,
-  `localidad` int(3) DEFAULT NULL,
-  `departamento` int(3) DEFAULT NULL,
-  `provincia` int(2) DEFAULT NULL,
-  `idpais` int(4) DEFAULT NULL,
-  `idlog` int(8) DEFAULT NULL,
-  `lastlogin` datetime DEFAULT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `fechanacimiento` date NOT NULL,
+  `dni` int(8) NOT NULL,
+  `genero` int(1) NOT NULL DEFAULT 4,
+  `discapacidades` varchar(200) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `contacto` varchar(30) NOT NULL,
+  `domicilio` varchar(100) NOT NULL,
+  `localidad` int(3) NOT NULL,
+  `departamento` int(3) NOT NULL,
+  `provincia` int(2) NOT NULL,
+  `idpais` int(4) NOT NULL,
+  `idloc` int(8) NOT NULL,
   `cursos` varchar(200) DEFAULT NULL,
   `pdf` varchar(100) DEFAULT NULL,
-  `licencia` int(1) DEFAULT NULL,
-  `auto` int(1) DEFAULT NULL,
-  `situacionlab` int(1) DEFAULT NULL,
-  `area` varchar(200) DEFAULT NULL,
-  `salariomin` int(10) DEFAULT NULL,
-  `dispoviajar` int(1) DEFAULT NULL,
-  `dispomuda` int(1) DEFAULT NULL,
-  `progs` varchar(200) DEFAULT NULL,
+  `licencia` int(1) NOT NULL,
+  `auto` int(1) NOT NULL,
+  `situacionlab` int(1) NOT NULL,
+  `modalidad` int(2) NOT NULL,
+  `area` varchar(200) NOT NULL,
+  `salariomin` decimal(8,0) NOT NULL,
+  `dispoviajar` int(1) NOT NULL,
+  `dispomuda` int(1) NOT NULL,
+  `habilidades` varchar(200) DEFAULT NULL,
   `foto` varchar(200) DEFAULT NULL,
-  `niveledu` varchar(100) DEFAULT NULL,
-  `puestodeseado` varchar(100) DEFAULT NULL
+  `progs` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidad`, `detdiscapacidad`, `ecivil`, `correo`, `contacto`, `codpostal`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idlog`, `lastlogin`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `progs`, `foto`, `niveledu`, `puestodeseado`) VALUES
-(217, 'martin', 'sdsd', '0111-11-11', 2323, 'hombre', 1, 'vbnvbn', 'Soltero', 'martinchoo_13@hotmail.com', '222', 33, 'dsfsdf', 1, 1, 1, 1, 5, NULL, 'asd', '', 1, 1, 1, 'asdasd', 2323, 1, 1, 'asdasd', '', 'Universitario completo', 'asdasdas');
+INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idloc`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `modalidad`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `habilidades`, `foto`, `progs`) VALUES
+(1, 'Javier', 'Pineyro', '1999-05-22', 41872061, 1, 'no', 'javi@gmail.com', '3743-121293', 'Eldorado 521', 2, 1, 1, 1, 1, 'Front end', NULL, 1, 1, 1, 1, 'informatica', '50000', 1, 1, NULL, NULL, ''),
+(2, 'Lore', 'Lopez', '1998-11-02', 40768326, 2, 'no', 'lore@gail', '3784-322454', 'Calle 12', 1, 1, 1, 1, 1, 'No', NULL, 2, 2, 1, 1, 'administracion', '45000', 1, 2, NULL, NULL, ''),
+(3, 'Pedro', 'Henrriquez', '2000-09-13', 3123233, 1, 'no', 'pedro@gmail', '3754-944382', 'Av roques', 1, 1, 1, 1, 1, 'react js', NULL, 1, 2, 2, 2, 'informatica', '45000', 1, 1, NULL, NULL, ''),
+(7, 'martin', 'sdsd', '0011-11-11', 2323, 1, 'asdasd', 'martinchoo_13@hotmail.com', '1', 'dfdfdfdfd', 2, 14, 5, 2, 6, 'asdasd', '', 2, 2, 2, 1, '1', '2222', 2, 2, 'asdasd', 'foto2.png', 'dfgdfg');
 
 --
 -- Índices para tablas volcadas
@@ -372,6 +558,12 @@ ALTER TABLE `experiencia`
   ADD KEY `idempresa` (`idempresa`);
 
 --
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`idgenero`);
+
+--
 -- Indices de la tabla `idiomas`
 --
 ALTER TABLE `idiomas`
@@ -389,6 +581,12 @@ ALTER TABLE `localidad`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`idlog`);
+
+--
+-- Indices de la tabla `modalidades`
+--
+ALTER TABLE `modalidades`
+  ADD PRIMARY KEY (`idmodalidad`);
 
 --
 -- Indices de la tabla `pais`
@@ -433,13 +631,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -451,7 +649,13 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `idgenero` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
@@ -463,25 +667,31 @@ ALTER TABLE `idiomas`
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
-  MODIFY `idloc` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idloc` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `modalidades`
+--
+ALTER TABLE `modalidades`
+  MODIFY `idmodalidad` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
-  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --
 ALTER TABLE `provincia`
-  MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -493,7 +703,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

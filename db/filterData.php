@@ -18,7 +18,7 @@
     // }
 
 if(isset($_SESSION['id_user'])){
-    $consulta = "SELECT iduser, usuario, apellido, genero, situacionlab, cursos FROM usuario WHERE iduser!=0";
+    $consulta = "SELECT iduser, usuario, apellido, genero, situacionlab, modalidad, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
 
     if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
         $consulta .= " AND iduser in(select  iduser from carxuser 
@@ -34,19 +34,21 @@ if(isset($_SESSION['id_user'])){
     if(isset($_POST['vehiculo'])&& $_POST['vehiculo'] != 0){
         $consulta .= " AND auto=".$_POST['vehiculo'];
     }
-    if(isset($_POST['edad'])&& $_POST['edad'] != 0){
-        $consulta .= " AND edad=".$_POST['edad'];
+    if(isset($_POST['edadMin']) && $_POST['edadMin'] != 0 && isset($_POST['edadMax']) && $_POST['edadMax'] != 0){
+        $consulta .= " AND (TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) BETWEEN ".$_POST['edadMin']." AND ".$_POST['edadMax'].")";
     }
     if(isset($_POST['modalidad'])&& $_POST['modalidad'] != 0){
-        $consulta .= " AND modalidad=".$_POST['modalidad'];
+        $consulta .= " AND modalidad in(select idmodalidad from modalidades where idmodalidad =".$_POST['modalidad'].")";
     }
     if(isset($_POST['buscador']) && $_POST['buscador'] != ""){
         $busc = $_POST['buscador'];
-        $consulta .= '  AND (cursos LIKE "%'.$busc.'%"';
+        $consulta .= '  AND (habilidades LIKE "%'.$busc.'%"';
         $consulta .= ' OR area LIKE "%'.$busc.'%")';
     }
     if(isset($_POST['genero'])&& $_POST['genero'] != 0){
-        $consulta .= " AND genero='".$_POST['genero']."'";
+        // $consulta .= " AND genero=".$_POST['genero'];
+        $consulta .= " AND genero in (select idgenero from genero where idgenero =".$_POST['genero'].")";
+        
     }
     if(isset($_POST['disponible'])&& $_POST['disponible'] != 0){
         $consulta .= " AND (situacionlab=".$_POST['disponible'].")";

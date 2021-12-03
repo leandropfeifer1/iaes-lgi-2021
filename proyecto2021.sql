@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-12-2021 a las 17:26:21
+-- Tiempo de generación: 03-12-2021 a las 23:24:38
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -65,7 +65,7 @@ INSERT INTO `carxuser` (`idcar`, `iduser`, `añofinal`) VALUES
 (3, 2, '2022-11-17'),
 (1, 3, '2021-11-25'),
 (2, 2, '2022-11-22'),
-(1, 6, NULL);
+(4, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,12 +211,7 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(6, 1),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6);
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +286,8 @@ INSERT INTO `modalidades` (`idmodalidad`, `descripcion`) VALUES
 (1, 'full-time'),
 (2, 'part-time'),
 (3, 'trainee'),
-(4, 'pasantias');
+(4, 'pasantias'),
+(5, 'sin preferencia');
 
 -- --------------------------------------------------------
 
@@ -409,7 +405,7 @@ CREATE TABLE `usuario` (
   `dispomuda` int(1) NOT NULL,
   `habilidades` varchar(200) DEFAULT NULL,
   `foto` varchar(200) DEFAULT NULL,
-  `progs` text NOT NULL,
+  `progs` varchar(200) NOT NULL,
   `ecivil` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -421,7 +417,7 @@ INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`
 (1, 'Javier', 'Pineyro', '1999-05-22', 41872061, 1, 'no', 'javi@gmail.com', '3743-121293', 'Eldorado 521', 2, 1, 1, 1, 1, 'Front end', NULL, 1, 1, 1, 1, 'informatica', '50000', 1, 1, NULL, NULL, '', 0),
 (2, 'Lore', 'Lopez', '1998-11-02', 40768326, 2, 'no', 'lore@gail', '3784-322454', 'Calle 12', 1, 1, 1, 1, 1, 'No', NULL, 2, 2, 1, 1, 'administracion', '45000', 1, 2, NULL, NULL, '', 0),
 (3, 'Pedro', 'Henrriquez', '2000-09-13', 3123233, 1, 'no', 'pedro@gmail', '3754-944382', 'Av roques', 1, 1, 1, 1, 1, 'react js', NULL, 1, 2, 2, 2, 'informatica', '45000', 1, 1, NULL, NULL, '', 0),
-(8, 'martin', 'bar345345345', '0111-11-11', 234234, 1, 'asdasd', 'martinchoo_13@hotmail.com', '222', 'san martin', 1, 11, 3, 3, 6, 'tec', 'Sin título 1.pdf', 2, 2, 1, 1, '2', '33', 2, 2, 'asdasd', 'foto2.png', 'asdasd', 3);
+(14, 'martin', 'sdsd', '0001-11-11', 232323, 1, '', 'martinchoo_13@hotmail.com', '22', 'xsad', 8, 11, 2, 1, 6, 'dhdfh', 'Sin título 1.pdf', 1, 1, 2, 5, 'direccion', '2222', 2, 2, 'dfhdfh', 'consola.png', 'dfhdfh', 2);
 
 --
 -- Índices para tablas volcadas
@@ -583,7 +579,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT de la tabla `modalidades`
 --
 ALTER TABLE `modalidades`
-  MODIFY `idmodalidad` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idmodalidad` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
@@ -607,7 +603,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

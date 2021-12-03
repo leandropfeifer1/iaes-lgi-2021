@@ -27,7 +27,7 @@ $(document).ready(function () {
       .html(percent + "%");
   }
   $("#register_form").submit(function (event) {
-    var error = "Por favor, complete los siguientes campos: <br>";
+    var error = "Por favor, complete los siguientes campos: ";
     var error_message = "";
     var error_preferencias = "";
     var b = 0;
@@ -40,10 +40,6 @@ $(document).ready(function () {
       error_message += "<br>*Apellido";
       b = 1;
     }
-    if (!$("#fechanacimiento").val()) {
-      error_message += "<br>*Fecha de nacimiento";
-      b = 1;
-    }
     if (!$("#dni").val()) {
       error_message += "<br>*Dni";
       b = 1;
@@ -52,20 +48,29 @@ $(document).ready(function () {
       error_message += "<br>*Email";
       b = 1;
     }
+    if (!$("#fechanacimiento").val()) {
+      error_message += "<br>*Fecha de nacimiento";
+      b = 1;
+    }
+    
     if(!$("input[name='genero']:radio").is(':checked')) {
       error_message += "<br>*Genero";
       b = 1;
     }
-    if (!$("#discapacidades").val()) {
+    /*if (!$("#discapacidades").val()) {
       error_message += "<br>*Discapacidades";
       b = 1;
-    }        
+    }   */     
     if (!$("#contacto").val()) {
-      error_message += "<br>*Contacto";
+      error_message += "<br>*Telefono";
       b = 1;
     }
     if (!$("#domicilio").val()) {
       error_message += "<br>*Domicilio";
+      b = 1;
+    }
+    if (!$("#ecivil").val()) {
+      error_message += "<br>*Estado civil";
       b = 1;
     }
     if (!$("#localidad").val()) {
@@ -123,12 +128,12 @@ $(document).ready(function () {
       b = 1;
     }
     if(b == 1){
-      error_preferencias = "<br>Preferencias laborales:" + error_preferencias;
+      error_preferencias = "<br><br>Preferencias laborales:" + error_preferencias;
       b = 0;
     }
 
     // Display error if any else submit form
-    if (error_message) {      
+    if (error_message || error_preferencias) {      
       $(".alert-success").removeClass("hide").html(error + error_message + error_preferencias);
       return false;
     } else {
@@ -150,16 +155,5 @@ $(document).ready(function () {
     var auto = document.getElementsByName("auto");
     auto.value = 0;
   });
-/*
-  $("#discsi").click(function () {
-    var d = document.getElementById("disc");
-    d.style.display = "block";
-  });
 
-  $("#discno").click(function () {
-    var d = document.getElementById("disc");
-    var dis = document.getElementById("discapacidades");
-    d.style.display = "none";
-    dis.value = "";
-  });*/
 });

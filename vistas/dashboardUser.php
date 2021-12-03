@@ -66,22 +66,22 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="usuario">Nombre:</label>
-					<input type="text" class="form-control" id="usuario" name="usuario" value="">
+					<input type="text" class="form-control" id="usuario" name="usuario" maxlength="50">
 				</div>
 
 				<div class="form-group">
 					<label for="apellido">Apellido:</label>
-					<input type="text" class="form-control" id="apellido" name="apellido" value="">
+					<input type="text" class="form-control" id="apellido" name="apellido" maxlength="50">
+				</div>				
+
+				<div class="form-group">
+					<label for="dni">Numero documento:</label>
+					<input type="number" class="form-control" id="dni" name="dni" maxlength="8">
 				</div>
 
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="text" class="form-control" id="email" name="email" value="">
-				</div>
-
-				<div class="form-group">
-					<label for="dni">Numero documento:</label>
-					<input type="text" class="form-control" id="dni" name="dni">
+					<input type="text" class="form-control" id="email" name="email" maxlength="100">
 				</div>
 
 				<div class="form-group">
@@ -100,7 +100,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="ecivil">Estado civil:</label>
-					<select id="ecivil" name="ecivil" value="">
+					<select id="ecivil" name="ecivil">
 						<option id="e1" value="1"></option>
 						<option id="e2" value="2">Soltero</option>
 						<option id="e3" value="3">Casado</option>
@@ -109,7 +109,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="contacto">Telefono:</label>
-					<input type="tel" class="form-control" id="contacto" name="contacto" value="">
+					<input type="tel" class="form-control" id="contacto" name="contacto" maxlength="30">
+				</div>
+
+				<div class="form-group">
+					<label for="domicilio">Domicilio:</label>
+					<input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="100">
 				</div>
 
 				<table>
@@ -257,18 +262,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						</td>
 					</tr>
 				</table>
-
-				<!--
-				<div class="form-group">
-					<label for="codpostal"> Codigo postal:</label>
-					<input type="number" class="form-control" id="codpostal" name="codpostal" value="">
-				</div>-->
-				<div class="form-group">
-					<label for="domicilio">Domicilio:</label>
-					<input type="text" class="form-control" id="domicilio" name="domicilio" value="">
-				</div>
-
-
+				
+				
 
 				<div class="form-group">
 					<label for="licencia">Licencia de conducir:</label>
@@ -284,7 +279,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="discapacidades">Especifique su discapacidad:</label>
-					<textarea id="discapacidades" name="detdiscapacidad" rows="5" cols="40" value=""></textarea>
+					<textarea id="discapacidades" name="detdiscapacidad" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
 
@@ -307,17 +302,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 			<fieldset>
 				<h2> Datos Academicos</h2>
-				<!--
+				
 				<div class="form-group">
-					<label for="neducativo">Indicá tu nivel educativo alcanzado:</label><br>
-					<input type="radio" name="neducativo" id="n1" value="1">Terciario incompleto<br>
-					<input type="radio" name="neducativo" id="n2" value="2">Terciario completo<br>
-					<input type="radio" name="neducativo" id="n3" value="3">Universitario incompleto<br>
-					<input type="radio" name="neducativo" id="n4" value="4">Universitario completo<br><br>
-				</div>-->
-				<div class="form-group">
-					<label for="ecivil">Carreras hechas:</label>
-					<select id="ecivil" name="carh" value="">
+					<label for="carh">Carreras hechas:</label>
+					<select id="carh" name="carh" value="">
 						<option id="c1" value=""></option>
 						<option id="c2" value="1">Analistas de Sistemas</option>
 						<option id="c3" value="2">Turismo y Gestion Hotelera</option>
@@ -327,7 +315,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
-					<textarea name="cursos" id="cursos" rows="5" cols="40" value=""></textarea>
+					<textarea name="cursos" id="cursos" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
@@ -361,12 +349,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="progs">Que programas domina/conoce:</label>
-					<textarea name="progs" id="progs" rows="4" cols="40" placeholder="Word, Excel, Visual studio code"></textarea><br>
+					<textarea name="progs" id="progs" rows="4" cols="40" placeholder="Word, Excel, Visual studio code" maxlength="200"></textarea><br>
 				</div>
 
 				<div class="form-group">
 					<label for="habilidades">Habilidades:</label>
-					<textarea name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota"></textarea><br>
+					<textarea name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea><br>
 				</div>
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
@@ -384,41 +372,36 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<option id="s3" value=1 >Ocupado</option>
 					</select>
 				</div>
-				<!--
-				<div class="form-group">
-					<label for="pdeseado">Puesto de trabajo deseado:</label>
-					<input type="text" id="puestodeseado" name="pdeseado" value="">
-				</div>-->
-
 
 				<div class="form-group">
 					<label for="area">Area:</label>
-					<select id="area" name="area" value="">
+					<select id="area" name="area" >
 						<option id="s1" value=""></option>
-						<option id="s2" value=1>Direccion</option>
-						<option id="s3" value=2>Recursos humanos</option>
-						<option id="s4" value=3>Finanzas o contabilidad</option>
-						<option id="s5" value=4>Marketing y ventas</option>
-						<option id="s6" value=5>Tecnología</option>
-						<option id="s7" value=6>Producción</option>
-						<option id="s8" value=7>Servicio al cliente</option>
+						<option id="s2" value="direccion">Direccion</option>
+						<option id="s3" value="recursos humanos">Recursos humanos</option>
+						<option id="s4" value="finanzas o contabilidad">Finanzas o contabilidad</option>
+						<option id="s5" value="marketing y ventas">Marketing y ventas</option>
+						<option id="s6" value="tecnología">Tecnología</option>
+						<option id="s7" value="producción">Producción</option>
+						<option id="s8" value="servicio al cliente">Servicio al cliente</option>
 					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="modalidad">Modalidad:</label>
-					<select id="modalidad" name="modalidad" value="">
+					<select id="modalidad" name="modalidad" >
 						<option id="m0" value=""></option>
-						<option id="m1" value=1>full-time</option>
-						<option id="m2" value=2>part-time</option>
-						<option id="m3" value=3>trainee</option>
-						<option id="m4" value=4>pasantias</option>
+						<option id="m1" value=1>Full-time</option>
+						<option id="m2" value=2>Part-time</option>
+						<option id="m3" value=3>Trainee</option>
+						<option id="m4" value=4>Pasantias</option>
+						<option id="m5" value=5>Sin preferencia</option>
 					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="sma">Salaro minimo aceptado:</label>
-					<input type="number" id="salariomin" name="sma" value="">
+					<input type="number" id="salariomin" name="sma" maxlength="8">
 				</div>
 
 				<div class="form-group">

@@ -1,8 +1,15 @@
+$('.div-datos').append(
+  `<div class="errorMessage">No se encontraron Resultados</div>`
+);
+
 $('#carrera').change(() => sendRequest());
 $('#localidad').change(() => sendRequest());
 $('#licencia').change(() => sendRequest());
 $('#vehiculo').change(() => sendRequest());
-$('#edad').keyup(() => sendRequest());
+$('#edadMin').keyup(() => sendRequest());
+$('#edadMax').keyup(() => sendRequest());
+$('#edadMin').click(() => sendRequest());
+$('#edadMax').click(() => sendRequest());
 $('#modalidad').change(() => sendRequest());
 $('#genero').change(() => sendRequest());
 $('#disponible').change(() => sendRequest());
@@ -15,11 +22,18 @@ const sendRequest = () => {
   const localidad = parseInt($('#localidad').val());
   const licencia = parseInt($('#licencia').val());
   const vehiculo = parseInt($('#vehiculo').val());
-  let edad = $('#edad').val(); // Es "" si no se pone nada
+  let edadMinima = $('#edadMin').val(); // Es "" si no se pone nada
+  let edadMaxima = $('#edadMax').val();
   const modalidad = parseInt($('#modalidad').val());
-  const genero = $('#genero').val(); // es tipo string
+  const genero = parseInt($('#genero').val());
   const disponible = parseInt($('#disponible').val());
   let buscador = $('#buscador').val(); // Es "" si no se pone nada
+
+  edadMinima === '' ? (edadMinima = '1') : edadMinima;
+  edadMaxima === '' ? (edadMaxima = '1') : edadMaxima;
+  let edadMin = parseInt(edadMinima);
+  let edadMax = parseInt(edadMaxima);
+  edadMin >= edadMax ? (edadMax = 99) : edadMax;
 
   $.ajax({
     url: '../db/filterData.php',
@@ -30,7 +44,8 @@ const sendRequest = () => {
       localidad: localidad,
       licencia: licencia,
       vehiculo: vehiculo,
-      edad: edad,
+      edadMin: edadMin,
+      edadMax: edadMax,
       modalidad: modalidad,
       genero: genero,
       disponible: disponible,
@@ -38,44 +53,72 @@ const sendRequest = () => {
     },
     success: (data) => {
       $('.div-datos').empty();
-      let contadorUsuario = 0;
       let disponibilidad = '';
+      let classAvailable = '';
+      let gender = '';
+      let tipoModalidad = '';
 
       if (data['data']) {
         data['data'].forEach((user) => {
-          contadorUsuario++;
-
-          if (user.situacionlab == 1) {
+          if (user.situacionlab && user.situacionlab === '1') {
             disponibilidad = 'Disponible';
+            classAvailable = 'tag-purple';
           } else {
             disponibilidad = 'No Disponible';
+            classNoAvailable = 'tag-red';
           }
+
+          if (user.genero === '1') {
+            gender = 'Hombre';
+          } else if (user.genero === '2') {
+            gender = 'Mujer';
+          } else if (user.genero === '3') {
+            gender = 'No Binarix';
+          } else {
+            gender = 'Otro';
+          }
+
+          user.modalidad === '1'
+            ? (tipoModalidad = 'Full-Time')
+            : tipoModalidad;
+
+          user.modalidad === '2'
+            ? (tipoModalidad = 'Part-Time')
+            : tipoModalidad;
+
+          user.modalidad === '3' ? (tipoModalidad = 'Trainee') : tipoModalidad;
+
+          user.modalidad === '4'
+            ? (tipoModalidad = 'Pasantías')
+            : tipoModalidad;
+
           $('.div-datos').append(
             `<a href="#" class="card">
-            <div class="card-header">
-              <img src="../assets/logo.jpg" alt="logo" />
-            </div>
-            <div class="card-body">
-              <span class="tag tag-purple">${disponibilidad}</span>
-              <h4>
-                ${user.usuario} ${user.apellido}
-              </h4>
-              <p>
-                ${capitalizarPrimeraLetra(user.genero)}
-              </p>
-              <div class="user">
-                <div class="user-info">
-                  <h5>Id Usuario: ${user.iduser}</h5>
-                </div>
+              <div class="card-header">
+                <img src="../assets/logo.jpg" alt="logo" />
               </div>
-            </div>
+              <div class="card-body">
+                  <span class="tag ${classAvailable}">${disponibilidad}</span>
+                  <h4 class="nombreCompleto">
+                    ${user.usuario} ${user.apellido} <small>(${user.edad} años)</small>
+                  </h4>
+                  <p class="modalidadParrafo">
+                    ${tipoModalidad}
+                  </p>
+                  <div class="user">
+                    <div class="user-info">
+                      <h5>${gender}</h5>
+                    </div>
+                  </div>
+              </div>
           </a>`
           );
+          classAvailable = '';
         });
       } else {
         $('.div-datos').empty();
         $('.div-datos').append(`
-          <div>No se encontraron Resultados</div>
+          <div class="errorMessage">No se encontraron Resultados</div>
         `);
       }
     },
@@ -85,7 +128,7 @@ const sendRequest = () => {
   });
 };
 
+// Retorna el genero con la primera letra en Mayuscula
 const capitalizarPrimeraLetra = (str) => {
-  // Retorna el genero con la primera letra en Mayuscula
   return str.charAt(0).toUpperCase() + str.slice(1);
 };

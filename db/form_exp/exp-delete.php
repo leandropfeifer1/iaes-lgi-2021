@@ -1,6 +1,6 @@
 
 <?php
-include 'conexionDb.php';
+require('conexionDb.php');
 
     if (isset($_POST['id'])) {
         $idexp = $_POST['id'];
@@ -9,6 +9,5 @@ include 'conexionDb.php';
         if(!$result){
             die('Query failed');
         }
-        echo "exp eliminada";
     }
 ?>

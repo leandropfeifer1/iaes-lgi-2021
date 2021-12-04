@@ -1,21 +1,6 @@
 <?php
-session_start();
 require('../db/conexionDb.php');
-    
-    // Si no tiene las credenciales no accede
-    if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-        $sql = 'SELECT idrol from roles where descripcion = "admin"';
-        $resultado = mysqli_query($conexion, $sql);
-        if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
-            $row = mysqli_fetch_assoc($resultado);
-        }
-        if(isset($row['idrol']) && $row['idrol']!=$_SESSION['id_rol']){
-            header('location: ../db/logout.php');
-        }
-        mysqli_close($conexion);
-    }else{
-        header('location: ../db/logout.php');
-    }
+require('../db/verificarCredenciales.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,11 +21,13 @@ require('../db/conexionDb.php');
             />
             </a>
         </div>
+        <div class="create">
+            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+        </div>
         <header id="header" class="header_dasboard">
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>
-            <a class="header_link" href="./dashboardAdmin.php">Volver</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>
@@ -52,6 +39,7 @@ require('../db/conexionDb.php');
     </div>
     <main>
             <form id="filterData" action="" method="post">
+                <input id="reset" type="reset" value="Limpiar">
                 <label class="label-input" for="carrera">Carrera</label>
                 <select name="carrera" id="carrera">
                     <option value="0">---</option>
@@ -74,6 +62,7 @@ require('../db/conexionDb.php');
                     <option value="2">Part-Time</option>
                     <option value="3">Trainee</option>
                     <option value="4">Pasantías</option>
+                    <option value="5">Sin Preferencias</option>
                 </select>
                 <label class="label-input" for="genero">Género</label>
                 <select name="genero" id="genero">

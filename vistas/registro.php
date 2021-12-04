@@ -1,5 +1,7 @@
 <?php 
-    require('../db/verificarCredenciales.php');
+// require('../db/verificarCredenciales.php');
+require('../db/conexionDb.php');
+ require('../db/verificarAdminSecretaria.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +12,6 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="../assets/css/register.css">
-    
     <title>Registrar Nuevo Usuario</title>
 </head>
 <body>
@@ -29,7 +30,13 @@
                  echo $_SESSION['usuario'];
                 ?>
             </a>
-            <a class="header_link" href="./dashboardAdmin.php">Volver</a>
+            <?php
+                if(isset($_GET['tipo'])){
+                    echo '<a class="header_link" href="./dashboardSecretaria.php">Volver</a>';
+                }else{
+                    echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                }
+            ?>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>
@@ -39,11 +46,20 @@
         <form id="formSignUp" action="signup.php" method="POST">
         <input id="usuario" type="text" placeholder="Ingresa tu usuario" name="usuario">
         <div class="caja">
-            <select name="rol" id="select">
-                <option selected value="3">Usuario</option>
-                <option value="2">Secretaría</option>
-                <option value="1">Administrador</option>
-            </select>
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<select name="rol" id="select">
+                            <option selected value="3">Usuario</option>
+                            <option value="2">Secretaría</option>
+                        </select>';
+                }else{
+                    echo '<select name="rol" id="select">
+                            <option selected value="3">Usuario</option>
+                            <option value="2">Secretaría</option>
+                            <option value="1">Administrador</option>
+                        </select>';
+                }
+            ?>
         </div>
         <input id="password" type="password" placeholder="Ingresa tu contraseña" name="password">
         <input id="passwordConfirm" type="password" placeholder="Confirma tu contraseña" name="passwordConfirm">

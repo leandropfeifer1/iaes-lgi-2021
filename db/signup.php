@@ -1,18 +1,19 @@
 <?php 
+// require('../db/verificarAdminSecretaria.php');
+
 require("../db/conexionDb.php");
-
 session_start();
-if(!isset($_SESSION['id_user'])||!isset($_SESSION['usuario'])){
-    header('location: ./logout.php');
-}
-$query = "SELECT descripcion from roles where idrol in(SELECT rol from login 
-            WHERE idlog=".$_SESSION['id_user'].");";
+// if(!isset($_SESSION['id_user'])||!isset($_SESSION['usuario'])){
+//     header('location: ./logout.php');
+// }
+// $query = "SELECT descripcion from roles where idrol in(SELECT rol from login 
+//             WHERE idlog=".$_SESSION['id_user'].");";
 
-$result = mysqli_query($conexion, $query);
-$rolUser = mysqli_fetch_assoc($result);
-if($rolUser['rol'] != 'admin'){
-    header('location: ./logout.php');
-}
+// $result = mysqli_query($conexion, $query);
+// $rolUser = mysqli_fetch_assoc($result);
+// if($rolUser['rol'] != 'Admin'){
+//     header('location: ./logout.php');
+// }
 
 if(!empty($_POST["usuario"]) && !empty($_POST["password"]) && !empty($_POST["select"])){
     $user = $_POST["usuario"];

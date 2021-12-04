@@ -21,7 +21,7 @@ body {
 }
 
 #header {
-  width: 70%;
+  width: 40%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
@@ -30,10 +30,40 @@ body {
   padding: 10px;
 }
 
+.create {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
 #log_img {
   width: 30%;
   height: 100%;
   padding-left: 35px;
+}
+
+#botonCrear {
+  text-decoration: none;
+  margin: auto;
+  background-color: #d9d9d9;
+  color: #006d1b;
+  border: 2px solid #006d1b;
+  padding: 6px;
+  border-radius: 3px;
+  transition: color ease-in 0.15s, border ease-in 0.15s,
+    background-color ease-in 0.15s;
+  width: 150px;
+  font-weight: 600;
+}
+
+#botonCrear:hover {
+  background-color: #006d1b;
+  color: #d9d9d9;
+  border: 2px solid #006d1b;
 }
 
 #header a {

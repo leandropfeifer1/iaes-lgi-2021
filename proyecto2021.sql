@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
+-- version 4.5.5.1
+-- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 03-12-2021 a las 23:24:38
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 7.3.28
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-12-2021 a las 23:57:33
+-- Versión del servidor: 5.7.11
+-- Versión de PHP: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -114,16 +113,15 @@ CREATE TABLE `empresas` (
   `cuit` int(12) NOT NULL,
   `presidente` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `telefono` varchar(50) NOT NULL,
-  `buscando` int(1) NOT NULL
+  `telefono` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empresas`
 --
 
-INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`, `buscando`) VALUES
-(5, 'sdfsd', 3434, '3434', 'asdasd', '34343', 1);
+INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
+(5, 'sdfsd', 3434, '3434', 'asdasd', '34343');
 
 -- --------------------------------------------------------
 
@@ -368,7 +366,8 @@ CREATE TABLE `sucursales` (
   `provincia` int(3) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `gerente` varchar(50) NOT NULL,
-  `central` int(1) NOT NULL
+  `central` int(1) NOT NULL,
+  `busca` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -383,7 +382,7 @@ CREATE TABLE `usuario` (
   `apellido` varchar(50) NOT NULL,
   `fechanacimiento` date NOT NULL,
   `dni` int(8) NOT NULL,
-  `genero` int(1) NOT NULL DEFAULT 4,
+  `genero` int(1) NOT NULL DEFAULT '4',
   `discapacidades` varchar(200) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contacto` varchar(30) NOT NULL,
@@ -532,80 +531,66 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `carrera`
   MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
   MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
   MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
   MODIFY `idgenero` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
 ALTER TABLE `idiomas`
   MODIFY `idi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
   MODIFY `idloc` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
   MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `modalidades`
 --
 ALTER TABLE `modalidades`
   MODIFY `idmodalidad` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
   MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --
 ALTER TABLE `provincia`
   MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `idrol` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

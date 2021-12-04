@@ -1,5 +1,6 @@
 <?php 
 // require('../db/verificarCredenciales.php');
+require('../db/conexionDb.php');
  require('../db/verificarAdminSecretaria.php');
 ?>
 <!DOCTYPE html>

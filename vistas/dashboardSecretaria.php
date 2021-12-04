@@ -77,6 +77,7 @@
                     <option value="2">Part-Time</option>
                     <option value="3">Trainee</option>
                     <option value="4">Pasantías</option>
+                    <option value="5">Sin Preferencias</option>
                 </select>
                 <label class="label-input" for="genero">Género</label>
                 <select name="genero" id="genero">

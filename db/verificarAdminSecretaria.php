@@ -1,6 +1,5 @@
 <?php 
 session_start();
-    require('../db/conexionDb.php');
     $data;
     // // Si no tiene las credenciales no accede
     if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){

@@ -1,5 +1,7 @@
 <?php
-require('../db/verificarAdminSecretaria.php');
+session_start();
+require('./conexionDb.php');
+// require('./db/verificarAdminSecretaria.php');
 $data;
 if(isset($_SESSION['id_user'])){
     $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";

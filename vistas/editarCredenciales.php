@@ -27,12 +27,24 @@
             </a>
         </div>
         <header id="header" class="header_dasboard">
-            <a id="nombreUsuario" class="header_link" href="./editarCredenciales.php">
-                <?php  
-                 echo $_SESSION['usuario'];
-                ?>
-            </a>
-            <a class="header_link" href="./filtro.php">Volver</a>
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php?tipo=1">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }else{
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }
+            ?>
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a class="header_link" href="./dashboardSecretaria.php">Volver</a>';
+                }else{
+                    echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                }
+            ?>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

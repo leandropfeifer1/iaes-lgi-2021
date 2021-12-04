@@ -37,13 +37,12 @@ require('../db/conexionDb.php');
             </a>
         </div>
         <div class="create">
-            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+            <a id="botonCrear" href="./registro.php?tipo=secretaria">Crear Usuario</a>
         </div>
         <header id="header" class="header_dasboard">
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>
-            <a class="header_link" href="./dashboardAdmin.php">Volver</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

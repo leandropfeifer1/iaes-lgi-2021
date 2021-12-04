@@ -1,22 +1,6 @@
 <?php
-    session_start();
-    require('../db/conexionDb.php');
-    $data;
-    // // Si no tiene las credenciales no accede
-    // if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-    //     $sql = 'SELECT descripcion from roles where idrol in (SELECT rol from login where idlog ='.$_SESSION['id_user'].')';
-    //     $resultado = mysqli_query($conexion, $sql);
-    //     if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
-    //         $row = mysqli_fetch_assoc($resultado);
-    //     }
-    //     if(isset($row['descripcion']) && $row['descripcion']!='admin' || $row['descripcion']!='secretaria'){
-    //         header('location: ../db/logout.php');
-    //     }
-    //     mysqli_close($conexion);
-    // }else{
-    //     header('location: ../db/logout.php');
-    // }
-
+require('../db/verificarAdminSecretaria.php');
+$data;
 if(isset($_SESSION['id_user'])){
     $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
 

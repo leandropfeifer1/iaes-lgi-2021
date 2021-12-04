@@ -2,7 +2,7 @@
     session_start();
     require('../db/conexionDb.php');
     if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
-         $sql = 'SELECT idrol from roles where descripcion = "secretaria"';
+         $sql = 'SELECT idrol from roles where descripcion = "Secretaria"';
         $resultado = mysqli_query($conexion, $sql);
         if (!empty($resultado) && mysqli_num_rows($resultado) != 0){
             $row = mysqli_fetch_assoc($resultado);

@@ -1,5 +1,6 @@
 <?php 
-    require('../db/verificarCredenciales.php');
+// require('../db/verificarCredenciales.php');
+ require('../db/verificarAdminSecretaria.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +11,6 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="../assets/css/register.css">
-    
     <title>Registrar Nuevo Usuario</title>
 </head>
 <body>

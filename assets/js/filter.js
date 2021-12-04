@@ -14,6 +14,19 @@ $('#modalidad').change(() => sendRequest());
 $('#genero').change(() => sendRequest());
 $('#disponible').change(() => sendRequest());
 $('#buscador').keyup(() => sendRequest());
+$('#reset').click(() => {
+  $('#carrera').val('');
+  $('#localidad').val('');
+  $('#licencia').val('');
+  $('#vehiculo').val('');
+  $('#edadMin').val('');
+  $('#edadMax').val('');
+  $('#modalidad').val('');
+  $('#genero').val('');
+  $('#disponible').val('');
+  $('#buscador').val('');
+  sendRequest();
+});
 
 // Funcion para enviar Datos
 const sendRequest = () => {
@@ -107,8 +120,11 @@ const sendRequest = () => {
                   </p>
                   <div class="user">
                     <div class="user-info">
-                      <h5>${gender}</h5>
+                      <p>${gender}</p>
                     </div>
+                  </div>
+                  <div class="user-info">
+                    <p>Area: ${user.area}</p>
                   </div>
               </div>
           </a>`

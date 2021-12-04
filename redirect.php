@@ -13,7 +13,7 @@ if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
     // Compruebo de que exista
     if(isset($row['idrol'])){
         if($row['idrol'] == 1){
-            header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/dashboardAdmin.php');
+            header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/filtro.php');
         } else if($row['idrol'] == 2){
             header('location: /bolsa-empleo-php/iaes-lgi-2021/vistas/dashboardSecretaria.php');
         } else if($row['idrol'] == 3){

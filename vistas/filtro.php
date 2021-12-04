@@ -36,6 +36,9 @@ require('../db/conexionDb.php');
             />
             </a>
         </div>
+        <div class="create">
+            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+        </div>
         <header id="header" class="header_dasboard">
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
@@ -52,6 +55,7 @@ require('../db/conexionDb.php');
     </div>
     <main>
             <form id="filterData" action="" method="post">
+                <input id="reset" type="reset" value="Limpiar">
                 <label class="label-input" for="carrera">Carrera</label>
                 <select name="carrera" id="carrera">
                     <option value="0">---</option>

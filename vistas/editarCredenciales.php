@@ -32,7 +32,7 @@
                  echo $_SESSION['usuario'];
                 ?>
             </a>
-            <a class="header_link" href="./dashboardAdmin.php">Volver</a>
+            <a class="header_link" href="./filtro.php">Volver</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

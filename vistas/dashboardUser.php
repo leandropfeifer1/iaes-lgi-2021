@@ -31,9 +31,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 <body>
 	<?php
 	include('../php/header.php');
-	//include('conexionDb.php');
 	include('../db/idiomas.php');
-	//include('mostrar_reg.php');
 	?>
 
 
@@ -58,6 +56,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 		<?php $iduser = $_SESSION['id_user']; ?>
 		<form enctype="multipart/form-data" id="register_form" novalidate action="../db/multi_form_action.php" method="post">
+			
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
@@ -281,8 +280,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<label for="discapacidades">Especifique su discapacidad:</label>
 					<textarea id="discapacidades" name="detdiscapacidad" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
-
-
 
 				<div class="form-group">
 					<label for="foto">Sube tu foto:</label>

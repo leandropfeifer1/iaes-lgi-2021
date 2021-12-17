@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-12-2021 a las 23:57:33
--- Versión del servidor: 5.7.11
--- Versión de PHP: 5.6.19
+-- Servidor: localhost
+-- Tiempo de generación: 17-12-2021 a las 22:07:26
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -64,7 +65,7 @@ INSERT INTO `carxuser` (`idcar`, `iduser`, `añofinal`) VALUES
 (3, 2, '2022-11-17'),
 (1, 3, '2021-11-25'),
 (2, 2, '2022-11-22'),
-(4, 6, NULL);
+(1, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,6 @@ INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, 
 CREATE TABLE `experiencia` (
   `idexp` int(11) NOT NULL,
   `iduser` int(8) NOT NULL,
-  `idempresa` int(8) NOT NULL,
   `empresa` varchar(100) NOT NULL,
   `puesto` varchar(50) NOT NULL,
   `desde` date DEFAULT NULL,
@@ -144,10 +144,10 @@ CREATE TABLE `experiencia` (
 -- Volcado de datos para la tabla `experiencia`
 --
 
-INSERT INTO `experiencia` (`idexp`, `iduser`, `idempresa`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
-(3, 8, 97, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222'),
-(31, 6, 1, 'yghjgh', 'ghjghj', '0111-11-11', '0111-11-11', '1'),
-(30, 6, 1, 'sdfsd', 'asdasd', '0001-11-11', '0001-11-11', '1');
+INSERT INTO `experiencia` (`idexp`, `iduser`, `empresa`, `puesto`, `desde`, `hasta`, `contacto`) VALUES
+(3, 8, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222'),
+(32, 6, 'sdfsd', 'a', '0021-02-22', '0001-02-22', '1'),
+(30, 6, 'sdfsd', 'ffffffffffff', '0001-11-11', '0001-11-11', '1');
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,8 @@ CREATE TABLE `idioxuser` (
 --
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
-(6, 1);
+(6, 1),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -263,7 +264,9 @@ INSERT INTO `login` (`idlog`, `username`, `password`, `rol`) VALUES
 (3, 'test', '$2y$10$F45nV5H8Pg0mwtyptMyefeSxU4TYqzgm/pfgH/Yvinhv9/AJdhCCu', 3),
 (4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1),
 (5, 'test', '$2y$10$77aUT/P38UafC.Gj8nhNxOrb0aApPeNd3nEdG9ZAFSlMApY8HvZy.', 1),
-(6, 'martin', '$2y$10$1drPKbdQOeuuwDMnY/SZYOgHiXjKTGdGWg.ju4PAUZl0wgZng9q22', 3);
+(6, 'martin', '$2y$10$1drPKbdQOeuuwDMnY/SZYOgHiXjKTGdGWg.ju4PAUZl0wgZng9q22', 3),
+(7, 's', '$2y$10$rG0SSapMfeATHkTnAizKTu7Olg3Ix/N5QrXVFhHmOL27hbyIpzmzu', 2),
+(8, 'secre', '$2y$10$BsaYju/dtOMzjj6ii8RS4uzhd1oMXyoIi3hCJLtFlf758gcl3pJYm', 2);
 
 -- --------------------------------------------------------
 
@@ -382,7 +385,7 @@ CREATE TABLE `usuario` (
   `apellido` varchar(50) NOT NULL,
   `fechanacimiento` date NOT NULL,
   `dni` int(8) NOT NULL,
-  `genero` int(1) NOT NULL DEFAULT '4',
+  `genero` int(1) NOT NULL DEFAULT 4,
   `discapacidades` varchar(200) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contacto` varchar(30) NOT NULL,
@@ -416,7 +419,7 @@ INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`
 (1, 'Javier', 'Pineyro', '1999-05-22', 41872061, 1, 'no', 'javi@gmail.com', '3743-121293', 'Eldorado 521', 2, 1, 1, 1, 1, 'Front end', NULL, 1, 1, 1, 1, 'informatica', '50000', 1, 1, NULL, NULL, '', 0),
 (2, 'Lore', 'Lopez', '1998-11-02', 40768326, 2, 'no', 'lore@gail', '3784-322454', 'Calle 12', 1, 1, 1, 1, 1, 'No', NULL, 2, 2, 1, 1, 'administracion', '45000', 1, 2, NULL, NULL, '', 0),
 (3, 'Pedro', 'Henrriquez', '2000-09-13', 3123233, 1, 'no', 'pedro@gmail', '3754-944382', 'Av roques', 1, 1, 1, 1, 1, 'react js', NULL, 1, 2, 2, 2, 'informatica', '45000', 1, 1, NULL, NULL, '', 0),
-(14, 'martin', 'sdsd', '0001-11-11', 232323, 1, '', 'martinchoo_13@hotmail.com', '22', 'xsad', 8, 11, 2, 1, 6, 'dhdfh', 'Sin título 1.pdf', 1, 1, 2, 5, 'direccion', '2222', 2, 2, 'dfhdfh', 'consola.png', 'dfhdfh', 2);
+(16, 'martin', 'sdsd', '0111-11-11', 2323, 1, 'asdasd', 'martinchoo_13@hotmail.com', '11', 'dsfsdfsdf', 2, 14, 2, 2, 6, 'asdasd', '', 2, 1, 1, 2, 'direccion', '2222', 2, 2, 'asdasd', '', 'asd', 2);
 
 --
 -- Índices para tablas volcadas
@@ -453,8 +456,7 @@ ALTER TABLE `empresas`
 --
 ALTER TABLE `experiencia`
   ADD PRIMARY KEY (`idexp`),
-  ADD KEY `iduser` (`iduser`),
-  ADD KEY `idempresa` (`idempresa`);
+  ADD KEY `iduser` (`iduser`);
 
 --
 -- Indices de la tabla `genero`
@@ -531,66 +533,80 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `carrera`
   MODIFY `idcar` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
   MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
   MODIFY `idgenero` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `idiomas`
 --
 ALTER TABLE `idiomas`
   MODIFY `idi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
   MODIFY `idloc` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `modalidades`
 --
 ALTER TABLE `modalidades`
   MODIFY `idmodalidad` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
   MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --
 ALTER TABLE `provincia`
   MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `idrol` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

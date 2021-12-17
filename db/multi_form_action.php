@@ -182,19 +182,20 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					$pdf = NULL;
 				}
 			}
-
+			$guardar = 0;
 			$x = mysqli_query($conexion, "SELECT * FROM carxuser WHERE iduser='$idloc'");
 			if ($carrera != 0) {
 				if (mysqli_num_rows($x) == 0) {
 					if (mysqli_query($conexion, "INSERT INTO carxuser (iduser, idcar) VALUES ('$idloc','$carrera')")) {
 						echo "Carrera actualizada";
+						echo "<a href='../vistas/dashboardUser.php'>Volver</a>";
 					} else {
-						echo "Error en guardar carrera!";
+						$guardar = 1;
 					}
 				} else {
 					if (mysqli_query($conexion, "UPDATE `carxuser` SET `idcar`='$carrera' WHERE iduser='$idloc'")) {
 					} else {
-						echo "error en actualizar carrera";
+						$guardar = 1;
 					}
 				}
 			} else {
@@ -205,19 +206,22 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			$query = mysqli_query($conexion, "SELECT * FROM usuario WHERE idloc='$idloc'");
 			if (mysqli_num_rows($query) == 0) {
 				$result = mysqli_query($conexion, "INSERT INTO `usuario`(`usuario`, `apellido`, `fechanacimiento`, `dni`, `genero`, `discapacidades`, `correo`, `contacto`, `domicilio`, `localidad`, `departamento`, `provincia`, `idpais`, `idloc`, `cursos`, `pdf`, `licencia`, `auto`, `situacionlab`, `modalidad`, `area`, `salariomin`, `dispoviajar`, `dispomuda`, `habilidades`, `foto`,`progs`,`ecivil`) VALUES ('$usuario', '$apellido', '$fechanacimiento','$dni','$genero','$discapacidades','$correo','$contacto','$domicilio','$localidad','$departamento','$provincia','$idpais','$idloc','$cursos','$pdf','$licencia','$auto','$situacionlab','$modalidad','$area','$salariomin','$dispoviajar','$dispomuda','$habilidades','$foto','$progs','$ecivil')");
-				if ($result) {
-					echo "Se registro correctamente!";
+				if ($result && $guardar==0) {
+					echo "Se registro correctamente!<br><br>";
+					echo "<a href='../vistas/dashboardUser.php' class='btn btn-success' >Volver</a>";
 				} else {
-					printf("Errormessage: %s\n", mysqli_error($conexion));
-					echo "Error en registrar... Por favor intentelo de nuevo!";
+					echo "Error en registrar... Por favor intentelo de nuevo!<br><br>";
+					echo "<a href='../vistas/dashboardUser.php' class='btn btn-success' >Volver</a>";
 				}
 			} else {
 				$result = mysqli_query($conexion, "UPDATE `usuario` SET `usuario`='$usuario',`apellido`='$apellido',`fechanacimiento`='$fechanacimiento',`dni`='$dni',`genero`='$genero',`discapacidades`='$discapacidades',`correo`='$correo',`contacto`='$contacto',`domicilio`='$domicilio',`localidad`='$localidad',`departamento`='$departamento',`provincia`='$provincia',`idpais`='$idpais',`idloc`='$idloc',`cursos`='$cursos',`pdf`='$pdf',`licencia`='$licencia',`auto`='$auto',`situacionlab`='$situacionlab',`modalidad`='$modalidad',`area`='$area',`salariomin`='$salariomin',`dispoviajar`='$dispoviajar',`dispomuda`='$dispomuda',`habilidades`='$habilidades',`foto`='$foto',`progs`='$progs',`ecivil`='$ecivil' WHERE idloc = $idloc");
-				if ($result) {
-					echo "Registro actualizado!";
+				if ($result && $guardar==0) {
+					echo "Registro actualizado!<br><br>";
+					echo "<a href='../vistas/dashboardUser.php' class='btn btn-success' >Volver</a>";
 				} else {
 					printf("Errormessage: %s\n", mysqli_error($conexion));
-					echo "No se pudo actualizar";
+					echo "No se pudo actualizar<br><br>";
+					echo "<a href='../vistas/dashboardUser.php' class='btn btn-success' >Volver</a>";
 				}
 			}
 		}

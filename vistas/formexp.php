@@ -71,6 +71,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
                 <div class="input-group">
                     <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
+                    <Input type ="button" value="Cerrar" onclick = "window.close()" class="btn btn-danger">
                 </div>                
 
             </form>

@@ -35,7 +35,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
         $json[] = array(
             'idexp' => $row['idexp'],
             'iduser' => $row['iduser'],
-            'idempresa' => $row['idempresa'],
             'empresa' => $row['empresa'],
             'puesto' => $row['puesto'],
             'desde' => $row['desde'],

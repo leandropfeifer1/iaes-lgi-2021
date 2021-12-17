@@ -25,15 +25,19 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<title>DashboardUser</title>
 </head>
 
 <body>
 	<?php
-	include('../php/header.php');
 	include('../db/idiomas.php');
 	?>
-
 
 	<script type="text/javascript" src="../assets/js/form.js"></script>
 	<script type="text/javascript" src="../assets/js/input.js"></script>
@@ -43,6 +47,21 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			display: none;
 		}
 	</style>
+
+	<div class="content">
+        <div id="log_img" class="logo">
+            <a href="#" class="logo__link">
+            <img
+                src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
+                alt="Logo del IAES"
+            />
+            </a>
+        </div>
+        <header id="header" class="header_dasboard">
+            
+		<a class="header_link btn btn-danger"  href="../db/logout.php" >Salir</a> 
+        </header>
+    </div>
 
 	<div class="container">
 		<br>

@@ -231,12 +231,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
             </div>
         </div>
-
+        <div class="container" align="center">
+            <button type="button" onclick="javascript:window.print()">Imprimir</button><br><br>
+        </div>
+        
     </div>
-    <?php
-
-
-    ?>
+   
 </body>
 
 </html>

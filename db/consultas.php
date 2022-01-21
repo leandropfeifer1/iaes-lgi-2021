@@ -1,7 +1,7 @@
 <?php
     function datosUsuario($iduser){
         include 'conexionDb.php';
-        $query = "SELECT * FROM usuario WHERE idloc = '$iduser'";
+        $query = "SELECT * FROM usuario WHERE iduser = '$iduser'";
         $result = mysqli_query($conexion, $query);
         $row = mysqli_fetch_assoc($result);
         return $row;
@@ -9,7 +9,7 @@
     
     function localidad($iduser){
         include 'conexionDb.php';
-        $query = "SELECT localidad.localidad AS locnom FROM usuario, localidad WHERE usuario.idloc = '6' AND localidad.idloc = usuario.localidad";
+        $query = "SELECT localidad.localidad AS locnom FROM usuario, localidad WHERE usuario.iduser = '$iduser' AND localidad.idloc = usuario.localidad";
         $result = mysqli_query($conexion, $query);
         if (mysqli_num_rows($result) != 0) {
             $row = mysqli_fetch_assoc($result);
@@ -20,7 +20,7 @@
 
     function departamento($iduser){
         include 'conexionDb.php';
-        $query = "SELECT departamento.departamento AS depnom FROM usuario, departamento WHERE usuario.idloc='$iduser' AND departamento.idep = usuario.departamento";
+        $query = "SELECT departamento.departamento AS depnom FROM usuario, departamento WHERE usuario.iduser='$iduser' AND departamento.idep = usuario.departamento";
 	    $result = mysqli_query($conexion, $query);
 		if (mysqli_num_rows($result) != 0) {
 			$row = mysqli_fetch_assoc($result);
@@ -28,9 +28,10 @@
 		}
         return $depnom;
     }
+    
     function provincia($iduser){
         include 'conexionDb.php';
-        $query = "SELECT provincia.provincia AS provnom FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
+        $query = "SELECT provincia.provincia AS provnom FROM usuario, provincia WHERE usuario.iduser='$iduser' AND provincia.idpro = usuario.provincia";
 		$result = mysqli_query($conexion, $query);
 	    if (mysqli_num_rows($result) != 0) {
             $row = mysqli_fetch_assoc($result);
@@ -40,7 +41,7 @@
     }
     function pais($iduser){
         include 'conexionDb.php';
-        $query = "SELECT pais.pais AS paisnom FROM usuario, pais WHERE usuario.idloc='$iduser' AND pais.idpais = usuario.idpais";
+        $query = "SELECT pais.pais AS paisnom FROM usuario, pais WHERE usuario.iduser='$iduser' AND pais.idpais = usuario.idpais";
 		$result = mysqli_query($conexion, $query);
 		if (mysqli_num_rows($result) != 0) {
 			$row = mysqli_fetch_assoc($result);
@@ -51,7 +52,11 @@
 
     function carrera($iduser){
         include 'conexionDb.php';
-        $query = "SELECT carrera.carrera FROM carrera, carxuser WHERE carxuser.iduser='$iduser' AND carxuser.idcar=carrera.idcar";
+        $id = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE iduser='$iduser'");
+        $id = mysqli_fetch_assoc($id);
+        $id = $id['idloc'];
+        echo $id;
+        $query = "SELECT carrera.carrera FROM carrera, carxuser WHERE carxuser.iduser='$id' AND carxuser.idcar=carrera.idcar";
 		$result = mysqli_query($conexion, $query);
 		if (mysqli_num_rows($result) != 0) {
 			$row = mysqli_fetch_assoc($result);
@@ -60,9 +65,9 @@
         return $carrera;
     }
 
-    function idiomasbd($idloc){
+    function idiomasbd($iduser){
         require('conexionDb.php');
-        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas WHERE iduser='$idloc' AND idiomas.idi = idioxuser.idi");
+        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas WHERE iduser='$iduser' AND idiomas.idi = idioxuser.idi");
         $x=0;
         $result = array();
         while ($fila = mysqli_fetch_row($datos)) {
@@ -72,18 +77,18 @@
         return $result;
     }
 
-    function experiencia($idloc){
+    function experiencia($iduser){
         require('conexionDb.php');
-        $query = "SELECT * FROM experiencia WHERE iduser='$idloc'";
+        $query = "SELECT * FROM experiencia WHERE iduser='$iduser'";
         $result = mysqli_query($conexion, $query);/*
         while ($fila = mysqli_fetch_assoc($result)) {
             echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . "<br>";          
         }*/
         return $result;
     }
-    function foto($idloc){
+    function foto($iduser){
         require('conexionDb.php');
-        $query = "SELECT foto FROM usuario WHERE idloc='$idloc'";
+        $query = "SELECT foto FROM usuario WHERE iduser='$iduser'";
         $result = mysqli_query($conexion, $query);
         if (!$result) {
             die('Query failed!'. mysqli_error($conexion));

@@ -1,22 +1,6 @@
 <?php
 session_start();
 require('../db/conexionDb.php');
-
-if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
-	$sql = 'SELECT idrol from roles where descripcion = "Usuario"';
-	$resultado = mysqli_query($conexion, $sql);
-	if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
-		$row = mysqli_fetch_assoc($resultado);
-	}
-	if (isset($row['idrol'])) {
-		if ($_SESSION['id_rol'] != $row['idrol']) {
-			header('location: ../db/logout.php');
-		}
-	}
-	mysqli_close($conexion);
-} else {
-	header('location: ../logout.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,16 +59,17 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 <body>
     <?php 
     include('../db/consultas.php');
+    $iduser = $_GET["iduser"];
 
-    $usuario = datosUsuario($_SESSION['id_user']);
-    $localidad = localidad($_SESSION['id_user']);
-    $departamento = departamento($_SESSION['id_user']);
-    $pais = pais($_SESSION['id_user']);
-    $provincia = provincia($_SESSION['id_user']);
-    $idiomasbd = idiomasbd($_SESSION['id_user']);
-    $carrera = carrera($_SESSION['id_user']);
-    $foto = foto($_SESSION['id_user']);
-    $exp = experiencia($_SESSION['id_user']);
+    $usuario = datosUsuario($iduser);
+    $localidad = localidad($iduser);
+    $departamento = departamento($iduser);
+    $pais = pais($iduser);
+    $provincia = provincia($iduser);
+    $idiomasbd = idiomasbd($iduser);
+    $carrera = carrera($iduser);
+    $foto = foto($iduser);
+    $exp = experiencia($iduser);
     ?>
     
     <div class="container" id="box-general">

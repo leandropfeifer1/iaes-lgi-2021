@@ -66,6 +66,7 @@ const sendRequest = () => {
       buscador: buscador,
     },
     success: (data) => {
+      console.log(data)
       $('.div-datos').empty();
       let disponibilidad = '';
       let classAvailable = '';
@@ -107,7 +108,7 @@ const sendRequest = () => {
             : tipoModalidad;
 
           $('.div-datos').append(
-            `<a href="#" class="card">
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">;
               <div class="card-header">
                 <img src="../assets/logo.jpg" alt="logo" />
               </div>

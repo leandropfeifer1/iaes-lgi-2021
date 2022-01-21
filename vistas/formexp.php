@@ -66,8 +66,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         <label for="contacto">Numero de contacto:</label>
                         <input type="text" id="contacto" value="">
                     </div>
-                </fieldset>
-                <input type="hidden" id="idexp">   
+                </fieldset>  
 
                 <div class="input-group">
                     <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>

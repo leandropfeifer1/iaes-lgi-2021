@@ -1,6 +1,5 @@
 <?php
 require('../db/conexionDb.php');
-require('../db/verificarCredenciales.php');
 ?>
 <html lang="es">
 <head>
@@ -13,174 +12,67 @@ require('../db/verificarCredenciales.php');
     <link rel="stylesheet" href="../assets/css/register.css">
 </head>
 <body>
-  
-    <div class="row">
-        <div class="col 14">
-            <h5 class="text-decoration-underline">Registrar Empresas</h5><br>
-            <form id="sucursales" method="post">
-                <table>
-                    <tr>
-			<th>Empresa</th>
-                    </tr>
-			<tr>
-                            <td>
-				<select name="empresa" class="form-control" placeholder>
-                                    <?php
-                                    include '../db/conexionDb.php';
-                                    $sql = "SELECT `idempresa`, `empresa` FROM `empresas`";
-                                    $lista = mysqli_query($conexion, $sql);
-                                    while ($fila = $lista->fetch_assoc()) {
-                                        $idempresa = $fila['idempresa'];
-                                        $empresa = $fila['empresa'];
-                                        echo "<option value=$idempresa>$empresa</option>";
-                                        }
-                                    ?>
-				</select>
-                            </td>
-			</tr>
-		</table>
-                <div class="input-field">
-                    <label for="direccion">Direccion</label>
-                    <input  type="text" name="direccion" value="" id="direccion" placeholder="">
-                    
-                </div>
-                <div class="input-field">
-                    <label for="telefono">Telefono</label>
-                    <input  type="text" name="telefono" value="" id="telefono" placeholder="">
-                    
-                </div>
-                <table>
-                <div class="input-field">
-                    <label for="gerente">Gerente</label>
-                    <input  type="text" name="gerente" value="" id="gerente">
-                    
-                </div>
-                    </table>
-                <table>
-					<tr>
-						<th>Localidad</th>
-					</tr>
-					<tr>
-						<td>
-							<select name="localidad" class="form-control" placeholder>
-								<?php
-								include '../db/conexionDb.php';
-								$sql = "SELECT * FROM localidad";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									$localidad = $fila['idloc'];
-									$nombre = $fila['localidad'];
-									echo "<option value=$localidad>$nombre</option>";
-								}
-								?>
-							</select>
-						</td>
-					</tr>
-				</table>
-
-				<table>
-					<tr>
-						<th>Departamento</th>
-					</tr>
-					<tr>
-						<td>
-							<select name="departamento" class="form-control">
-								<?php
-								include '../db/conexionDb.php';
-								$sql = "SELECT * FROM departamento";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									$id = $fila['idep'];
-									$nombre = $fila['departamento'];
-									echo "<option value=$id>$nombre</option>";
-								}
-								?>
-							</select>
-						</td>
-					</tr>
-				</table>
-
-				<table>
-					<tr>
-						<th>Provincia</th>
-					</tr>
-					<tr>
-						<td>
-							<select name="provincia" class="form-control">
-								<?php
-								include '../db/conexionDb.php';
-								$sql = "SELECT * FROM provincia";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									$id = $fila['idpro'];
-									$nombre = $fila['provincia'];
-									echo "<option value=$id>$nombre</option>";
-								}
-								?>
-							</select>
-						</td>
-					</tr>
-				</table>
-
-				<table>
-					<tr>
-						<th>Paises</th>
-					</tr>
-					<tr>
-						<td>
-							<select name="pais" class="form-control">
-								<?php
-								include '../db/conexionDb.php';
-								$sql = "SELECT * FROM pais";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									$idpais = $fila['idpais'];
-									$nombre = $fila['pais'];
-									echo "<option value = $idpais >$nombre</option>";
-								}
-								?>
-							</select>
-						</td>
-					</tr>
-				</table>
-  
-                
-                <br>
-                <table>
-                    <tr>
-                        <th>Central?</th>
-                    </tr>
-                    <td>
-                        <select name="central" class="form-control">
-                            <?php
-                            echo "<option value= 1>Central</option>";
-                            echo "<option value= 0>No es Central</option>";
-                            ?>
-                        </select>
-                    </td>
-                </table>
-                <table>
-                    <tr>
-                        <th>Buscando Empleado?</th>
-                    </tr>
-                    <td>
-                        <select name="buscando" class="form-control">
-                            <?php
-                            echo "<option value= 1>Si</option>";
-                            echo "<option value=0>No</option>";
-                            ?>
-                        </select>
-                    </td>
-                </table>
-                 <div class="input-field">
-                     <button  type="submit" name="guardar" class="btn-success">Guardar</button>
-                    
-                </div>
-              
-            </form>
-        </div>
+    <header>
+        <h3 class="text-center">Todas las Sucursales</h3>        
+    </header>
+    <div class="container">
+        <div id="tabla"></div>
     </div>
+    <div class="modal fade" id="modalagregarsuc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar Sucursal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label>Empresa</label>
+                <input type="text" name="empresa" id="empresa" class="form-control input-sm">
+                <label>CUIT</label>
+                <input type="text" name="cuit" id="cuit" class="form-control input-sm">
+                <label>Presidente</label>
+                <input type="text" name="presidente" id="presidente" class="form-control input-sm">
+                <label>Correo</label>
+                <input type="text" name="correo" id="correo" class="form-control input-sm"> 
+                <label>Telefono</label>
+                <input type="text" name="telefono" id="telefono" class="form-control input-sm"> 
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="guardarN">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
 
+<div class="modal fade" id="modaleditarsuc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Informacion de Sucursal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                <label>Empresa</label>
+                <input type="text" name="empresae" id="empresae" class="form-control input-sm">
+                <label>CUIT</label>
+                <input type="text" name="cuite" id="cuite" class="form-control input-sm">
+                <label>Presidente</label>
+                <input type="text" name="presidentee" id="presidentee" class="form-control input-sm">
+                <label>Correo</label>
+                <input type="text" name="correoe" id="correoe" class="form-control input-sm"> 
+                <label>Telefono</label>
+                <input type="text" name="telefonoe" id="telefonoe" class="form-control input-sm"> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
 
 <script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -188,12 +80,9 @@ require('../db/verificarCredenciales.php');
 <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="../assets/js/sucursalesjs.js"></script>
 
-<!--<script>
+
+<script type="text/javascript">
     $(document).ready(function(){
-        M.AutoInit();
+       $('#tabla').load('sucursalestabla.php');
     });
-    $(document).ready(function(){
-        
-    });
-</script>-->
-</body>
+</script>

@@ -26,19 +26,85 @@ require('../db/conexionDb.php');
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label>Empresa</label>
-                <input type="text" name="empresa" id="empresa" class="form-control input-sm">
-                <label>CUIT</label>
-                <input type="text" name="cuit" id="cuit" class="form-control input-sm">
-                <label>Presidente</label>
-                <input type="text" name="presidente" id="presidente" class="form-control input-sm">
-                <label>Correo</label>
-                <input type="text" name="correo" id="correo" class="form-control input-sm"> 
+                <th>Empresa</th>
+		<select name="empresa" id="empresa" class="form-control">
+		<option value=""></option>
+                <?php
+                $sql = "SELECT * FROM empresas";
+		$lista = mysqli_query($conexion, $sql);
+		while ($fila = $lista->fetch_assoc()) {
+                    
+                        $empresa = $fila['idempresa'];
+			$nombre = $fila['empresa'];
+			echo "<option value=$empresa>$nombre</option>";
+                }
+                ?>
+                </select>
+                <label>Direccion</label>
+                <input type="text" name="direccion" id="direccion" class="form-control input-sm">
+                <th>Localidad</th>
+		<select name="localidad" id="localidad" class="form-control">
+		<option value=""></option>
+                <?php
+                $sql ="SELECT * FROM localidad";
+		$lista = mysqli_query($conexion, $sql);
+		while ($fila = $lista->fetch_assoc()) {
+                    
+                        $localidad = $fila['idloc'];
+			$nombre = $fila['localidad'];
+			echo "<option value=$localidad>$nombre</option>";
+                }
+                ?>
+                </select>
+                <th>Departamento</th>
+		<select name="departamento" id="departamento" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM departamento";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $departamento = $fila['idep'];
+                            $nombre = $fila['departamento'];
+                            echo "<option value=$departamento>$nombre</option>";
+                    }
+                ?>
+                </select>
+                <th>Provincia</th>
+		<select name="provincia" id="provincia" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM provincia";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $provincia = $fila['idpro'];
+                            $nombre = $fila['provincia'];
+                            echo "<option value=$provincia>$nombre</option>";
+                    }
+                ?>
+                </select>
+                <th>Pais</th>
+		<select name="pais" id="pais" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM pais";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $pais = $fila['idpais'];
+                            $nombre = $fila['pais'];
+                            echo "<option value=$pais>$nombre</option>";
+                    }
+                ?>
+                </select>
                 <label>Telefono</label>
                 <input type="text" name="telefono" id="telefono" class="form-control input-sm"> 
+                <label>Gerente</label>
+                <input type="text" name="gerente" id="gerente" class="form-control input-sm"> 
             </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="guardarN">Guardar</button>
           </div>
         </div>
@@ -54,20 +120,74 @@ require('../db/conexionDb.php');
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-                <label>Empresa</label>
-                <input type="text" name="empresae" id="empresae" class="form-control input-sm">
-                <label>CUIT</label>
-                <input type="text" name="cuite" id="cuite" class="form-control input-sm">
-                <label>Presidente</label>
-                <input type="text" name="presidentee" id="presidentee" class="form-control input-sm">
-                <label>Correo</label>
-                <input type="text" name="correoe" id="correoe" class="form-control input-sm"> 
+                </select>
+                <label>Direccion</label>
+                <input type="text" name="direccion" id="direccion" class="form-control input-sm">
+                <th>Localidad</th>
+		<select name="localidade" id="localidade" class="form-control">
+		<option value=""></option>
+                <?php
+                $sql ="SELECT * FROM localidad";
+		$lista = mysqli_query($conexion, $sql);
+		while ($fila = $lista->fetch_assoc()) {
+                    
+                        $localidad = $fila['idloc'];
+			$nombre = $fila['localidad'];
+			echo "<option value=$localidad>$nombre</option>";
+                }
+                ?>
+                </select>
+                <th>Departamento</th>
+		<select name="departamentoe" id="departamentoe" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM departamento";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $departamento = $fila['idep'];
+                            $nombre = $fila['departamento'];
+                            echo "<option value=$departamento>$nombre</option>";
+                    }
+                ?>
+                </select>
+                <th>Provincia</th>
+		<select name="provinciae" id="provinciae" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM provincia";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $provincia = $fila['idpro'];
+                            $nombre = $fila['provincia'];
+                            echo "<option value=$provincia>$nombre</option>";
+                    }
+                ?>
+                </select>
+                <th>Pais</th>
+		<select name="paise" id="paise" class="form-control">
+		<option value=""></option>
+                <?php
+                    $sql ="SELECT * FROM pais";
+                    $lista = mysqli_query($conexion, $sql);
+                    while ($fila = $lista->fetch_assoc()) {
+
+                            $pais = $fila['idpais'];
+                            $nombre = $fila['pais'];
+                            echo "<option value=$pais>$nombre</option>";
+                    }
+                ?>
+                </select>
                 <label>Telefono</label>
                 <input type="text" name="telefonoe" id="telefonoe" class="form-control input-sm"> 
+                <label>Gerente</label>
+                <input type="text" name="gerentee" id="gerentee" class="form-control input-sm"> 
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Guardar Cambios</button>
           </div>
         </div>
       </div>

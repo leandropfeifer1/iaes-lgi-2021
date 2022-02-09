@@ -54,7 +54,12 @@ require '../db/conexionDb.php';
                 <td><?php echo $pais[0]?></td>
                 <td><?php echo $fila['telefono']?></td>
                 <td><?php echo $fila['gerente']?></td> 
-                <td><?php echo $fila['direccion']?></td> 
+                <td><?php if($fila['central']==1){
+                        echo 'Central';
+                }else{
+                    echo 'Sucursal';
+                }
+                ?>
                 <td><?php 
                     $sql7="SELECT `idsucursal` FROM `buscaempleado` WHERE `idsucursal`="+$fila['idsucursal'];
                     $busca = mysqli_query($conexion, $sql);

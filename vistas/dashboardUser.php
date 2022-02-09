@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('../db/conexionDb.php');
+include('../db/idiomas.php');
 
 if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	$sql = 'SELECT idrol from roles where descripcion = "Usuario"';
@@ -28,6 +29,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../assets/css/styleUser.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -35,47 +37,35 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 </head>
 
 <body>
-	<?php
-	include('../db/idiomas.php');
-	?>
-
-	<script type="text/javascript" src="../assets/js/form.js"></script>
-	<script type="text/javascript" src="../assets/js/input.js"></script>
-
 	<style type="text/css">
 		#register_form fieldset:not(:first-of-type) {
 			display: none;
 		}
 	</style>
 
-	<div class="content">
-        <div id="log_img" class="logo">
-            <a href="#" class="logo__link">
-            <img
-                src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
-                alt="Logo del IAES"
-            />
-            </a>
-        </div>
-        <header id="header" class="header_dasboard">
-            
-		<a class="header_link btn btn-danger"  href="../db/logout.php" >Salir</a> 
-        </header>
-    </div>
+	<header id="head">
+		<div class="logo">
+			<a href="#" class="logo__link">
+				<img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
+			</a>
+		</div>
+		<nav class="nav">
+			<a href="../db/logout.php" class="nav__link">Salir</a>
+		</nav>
+	</header>
 
-	<div class="container">
-		<br>
+	<div class="container">		
 		<h2 align="center">Informacion del usuario:</h2>
 
 		<div class="progress">
 			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 		</div>
-		
+
 		<div class="alert alert-success hide"></div>
 
 		<?php $iduser = $_SESSION['id_user']; ?>
 		<form enctype="multipart/form-data" id="register_form" novalidate action="../db/multi_form_action.php" method="post">
-			
+
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
@@ -90,7 +80,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group">
 					<label for="apellido">Apellido:</label>
 					<input type="text" class="form-control" id="apellido" name="apellido" maxlength="50">
-				</div>				
+				</div>
 
 				<div class="form-group">
 					<label for="dni">Numero documento:</label>
@@ -280,8 +270,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						</td>
 					</tr>
 				</table>
-				
-				
+
+
 
 				<div class="form-group">
 					<label for="licencia">Licencia de conducir:</label>
@@ -293,7 +283,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<label for="auto">Dispone de vehiculo propio:</label>
 					<input id="vsi" type="radio" name="auto" value="2">Si
 					<input id="vno" type="radio" name="auto" value="1">No
-				</div>				
+				</div>
 
 				<div class="form-group">
 					<label for="discapacidades">Especifique su discapacidad:</label>
@@ -318,7 +308,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 			<fieldset>
 				<h2> Datos Academicos</h2>
-				
+
 				<div class="form-group">
 					<label for="carh">Carreras hechas:</label>
 					<select id="carh" name="carh" value="">
@@ -357,7 +347,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<label for=""> Idiomas:</label>
 					<input type="checkbox" name="idiomas[]" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
 					<input type="checkbox" name="idiomas[]" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
-					<input type="checkbox" name="idiomas[]" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>					
+					<input type="checkbox" name="idiomas[]" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
 					<input type="checkbox" name="idiomas[]" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
 					<input type="checkbox" name="idiomas[]" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
 					<input type="checkbox" name="idiomas[]" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input>
@@ -384,14 +374,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<label for="slaboral">Situacion actual:</label>
 					<select id="slaboral" name="slaboral" value="">
 						<option id="s1" value=""></option>
-						<option id="s2" value=2 >Disponible</option>
-						<option id="s3" value=1 >Ocupado</option>
+						<option id="s2" value=2>Disponible</option>
+						<option id="s3" value=1>Ocupado</option>
 					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="area">Area:</label>
-					<select id="area" name="area" >
+					<select id="area" name="area">
 						<option id="s1" value=""></option>
 						<option id="s2" value="direccion">Direccion</option>
 						<option id="s3" value="recursos humanos">Recursos humanos</option>
@@ -405,7 +395,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="modalidad">Modalidad:</label>
-					<select id="modalidad" name="modalidad" >
+					<select id="modalidad" name="modalidad">
 						<option id="m0" value=""></option>
 						<option id="m1" value=1>Full-time</option>
 						<option id="m2" value=2>Part-time</option>
@@ -438,6 +428,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 		</form>
 	</div>
+
+	<script type="text/javascript" src="../assets/js/form.js"></script>
+	<script type="text/javascript" src="../assets/js/input.js"></script>
 </body>
 
 </html>

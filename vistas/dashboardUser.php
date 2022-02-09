@@ -136,7 +136,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								<?php
 								include '../db/conexionDb.php';
 
-								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.iduser='$iduser' AND localidad.idloc = usuario.localidad";
+								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
 								$usloc = mysqli_query($conexion, $sql2);
 								if (mysqli_num_rows($usloc) != 0) {
 									$fila = $usloc->fetch_assoc();
@@ -172,7 +172,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								include '../db/conexionDb.php';
 
 
-								$sql2 = "SELECT departamento.departamento AS depnom, usuario.departamento AS usdep FROM usuario, departamento WHERE usuario.iduser='$iduser' AND departamento.idep = usuario.departamento";
+								$sql2 = "SELECT departamento.departamento AS depnom, usuario.departamento AS usdep FROM usuario, departamento WHERE usuario.idloc='$iduser' AND departamento.idep = usuario.departamento";
 								$usdep = mysqli_query($conexion, $sql2);
 								if (mysqli_num_rows($usdep) != 0) {
 									$fila = $usdep->fetch_assoc();
@@ -209,7 +209,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								include '../db/conexionDb.php';
 
 
-								$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE idlog='$iduser' AND provincia.idpro = usuario.provincia";
+								$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
 								$usprov = mysqli_query($conexion, $sql2);
 								if (mysqli_num_rows($usprov) != 0) {
 									$fila = $usprov->fetch_assoc();

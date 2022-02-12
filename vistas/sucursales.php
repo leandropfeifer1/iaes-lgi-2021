@@ -102,6 +102,12 @@ require('../db/conexionDb.php');
                 <input type="text" name="telefono" id="telefono" class="form-control input-sm"> 
                 <label>Gerente</label>
                 <input type="text" name="gerente" id="gerente" class="form-control input-sm"> 
+                <th>Central</th>
+		<select name="central" id="central" class="form-control">
+		<option value=""></option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
+                </select>
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -120,9 +126,11 @@ require('../db/conexionDb.php');
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-                </select>
+              
+                <input type="text" hidden="" name="" id="idsucursal">
+                
                 <label>Direccion</label>
-                <input type="text" name="direccion" id="direccion" class="form-control input-sm">
+                <input type="text" name="direccione" id="direccione" class="form-control input-sm">
                 <th>Localidad</th>
 		<select name="localidade" id="localidade" class="form-control">
 		<option value=""></option>
@@ -182,7 +190,13 @@ require('../db/conexionDb.php');
                 <label>Telefono</label>
                 <input type="text" name="telefonoe" id="telefonoe" class="form-control input-sm"> 
                 <label>Gerente</label>
-                <input type="text" name="gerentee" id="gerentee" class="form-control input-sm"> 
+                <input type="text" name="gerentee" id="gerentee" class="form-control input-sm">                                
+                <th>Central</th>
+		<select name="centrale" id="centrale" class="form-control">
+		<option value=""></option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
+                </select>
             </div>
           </div>
           <div class="modal-footer">
@@ -204,5 +218,21 @@ require('../db/conexionDb.php');
 <script type="text/javascript">
     $(document).ready(function(){
        $('#tabla').load('sucursalestabla.php');
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#guardarN').click(function(){
+           empresa=$('#empresa').val();
+           direccion=$('#direccion').val();
+           localidad=$('#localidad').val();
+           departamento=$('#departamento').val();
+           provincia=$('#provincia').val();
+           pais=$('#pais').val();
+           telefono=$('#telefono').val();
+           gerente=$('#gerente').val();
+           central=$('#central').val();
+           agregardatos(empresa,direccion,localidad,departamento,provincia,pais,telefono,gerente,central);
+       }); 
     });
 </script>

@@ -24,6 +24,7 @@ require '../db/conexionDb.php';
                 $sql = "SELECT `idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono` FROM `empresas` WHERE 1";
 		$lista = mysqli_query($conexion, $sql);
                 while ($fila = $lista->fetch_assoc()) {
+                    $datos=$fila['idempresa']."||".$fila['empresa']."||".$fila['cuit']."||".$fila['presidente']."||".$fila['correo']."||".$fila['telefono'];
             ?>
             <tr>
                 <td><?php echo $fila['empresa']?></td>
@@ -32,10 +33,10 @@ require '../db/conexionDb.php';
                 <td><?php echo $fila['correo']?></td> 
                 <td><?php echo $fila['telefono']?></td> 
                 <td>
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaleditar">Editar</button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaleditar" onclick="agregaform('<?php echo $datos ?>')">Editar</button>
                 </td>  
                 <td>
-                    <button class="btn btn-danger">Eliminar</button>
+                    <button class="btn btn-danger" onclick="confirmaciondel('<?php echo $fila['idempresa'] ?>')">Eliminar</button>
                 </td>
              <?php
                 }

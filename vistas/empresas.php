@@ -63,6 +63,7 @@ require('../db/conexionDb.php');
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+                <input type="text" hidden="" id="idempresa" name="">
                 <label>Empresa</label>
                 <input type="text" name="empresae" id="empresae" class="form-control input-sm">
                 <label>CUIT</label>
@@ -75,8 +76,8 @@ require('../db/conexionDb.php');
                 <input type="text" name="telefonoe" id="telefonoe" class="form-control input-sm"> 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="modificar" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
           </div>
         </div>
       </div>
@@ -91,12 +92,17 @@ require('../db/conexionDb.php');
 <script type="text/javascript">
     $(document).ready(function(){
        $('#guardarN').click(function(){
-           empresa=$('#empresa').val();
-           cuit=$('#cuit').val();
-           presidente=$('#presidente').val();
-           correo=$('#correo').val();
-           telefono=$('#telefono').val();
-           agregardatos(empresa,cuit,presidente,correo,telefono);
-       }); 
+          empresa=$('#empresa').val();
+          cuit=$('#cuit').val();
+          presidente=$('#cuit').val();
+          correo=$('#correo').val();
+          telefono=$('#telefono').val();
+          agregardatos(empresa,cuit,presidente,correo,telefono);
+       });
+       
+       
+       $('#modificar').click(function(){
+           modificar();
+       });
     });
 </script>

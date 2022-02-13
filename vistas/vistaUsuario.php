@@ -3,13 +3,13 @@ session_start();
 require('../db/conexionDb.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
+    <title>Usuario</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vistaUsuario</title>
     <link rel="stylesheet" href="../bootstrap/css/vistaUsuario.min.css">
 </head>
 
@@ -18,8 +18,7 @@ require('../db/conexionDb.php');
         background-color: black;
         color: white;
     }
-</style>
-<style>
+
     .box-header {
         margin-top: 35px;
         color: rgba(36, 34, 34, 0.671);
@@ -57,7 +56,7 @@ require('../db/conexionDb.php');
 </style>
 
 <body>
-    <?php 
+    <?php
     include('../db/consultas.php');
     $iduser = $_GET["iduser"];
 
@@ -71,7 +70,7 @@ require('../db/conexionDb.php');
     $foto = foto($iduser);
     $exp = experiencia($iduser);
     ?>
-    
+
     <div class="container" id="box-general">
 
         <!--BOX  -->
@@ -89,20 +88,6 @@ require('../db/conexionDb.php');
                             </a>
                         </div>
                         <font size=10><?php echo ucfirst($carrera); ?></font>
-                        <!--<ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="" class="badge badge-primary badge-pill">Facebook</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="" class="badge badge-danger badge-pill">Google +</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=" " class="badge badge-primary badge-pill">Linkedin</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="http://github.com/JuanTorres99" class="badge badge-dark badge-pill">Github</a>
-                            </li>
-                        </ul>-->
                     </div>
                 </div>
             </div>
@@ -173,12 +158,12 @@ require('../db/conexionDb.php');
                 <div class="col col-md-12">
                     <h5><mark>Experiencia Laboral</mark></h5>
                     <ul>
-                        <?php 
-                            while ($fila = mysqli_fetch_assoc($exp)) {
-                                echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . "<br>";          
-                            } 
-                        ?>  
-                    </ul>           
+                        <?php
+                        while ($fila = mysqli_fetch_assoc($exp)) {
+                            echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . "<br>";
+                        }
+                        ?>
+                    </ul>
                 </div>
 
             </div>
@@ -219,9 +204,9 @@ require('../db/conexionDb.php');
         <div class="container" align="center">
             <button type="button" onclick="javascript:window.print()">Imprimir</button><br><br>
         </div>
-        
+
     </div>
-   
+
 </body>
 
 </html>

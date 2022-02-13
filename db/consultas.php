@@ -55,7 +55,6 @@
         $id = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE iduser='$iduser'");
         $id = mysqli_fetch_assoc($id);
         $id = $id['idloc'];
-        echo $id;
         $query = "SELECT carrera.carrera FROM carrera, carxuser WHERE carxuser.iduser='$id' AND carxuser.idcar=carrera.idcar";
 		$result = mysqli_query($conexion, $query);
 		if (mysqli_num_rows($result) != 0) {
@@ -67,7 +66,7 @@
 
     function idiomasbd($iduser){
         require('conexionDb.php');
-        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas WHERE iduser='$iduser' AND idiomas.idi = idioxuser.idi");
+        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas, usuario WHERE usuario.iduser='$iduser' AND idiomas.idi = idioxuser.idi");
         $x=0;
         $result = array();
         while ($fila = mysqli_fetch_row($datos)) {

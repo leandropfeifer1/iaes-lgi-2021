@@ -1,5 +1,5 @@
 <?php
-require('./conexionDb.php');
+require('conexionDb.php');
 $empresa=$_POST['empresa'];
 $direccion=$_POST['direccion'];
 $telefono=$_POST['telefono'];
@@ -9,17 +9,10 @@ $departamento=$_POST['departamento'];
 $provincia=$_POST['provincia'];
 $pais=$_POST['pais'];
 $central=$_POST['central'];
-$buscando=$_POST['buscando'];
         
-$sql ="INSERT INTO `sucursales`(`idempresa`, `direccion`, `idloc`, `departamento`, `provincia`, `idpais`, `telefono`, `gerente`, `central`, `busca`) VALUES('".$empresa."','".$direccion."','".$telefono."','".$localidad."','".$departamento."','".$provincia."','".$pais."','".$telefono."','".$gerente."','".$central."','".$buscando."');";
+$sql ="INSERT INTO `sucursales`(`empresa`, `direccion`, `localidad`, `departamento`, `provincia`, `pais`, `telefono`, `gerente`, `central`) VALUES('$empresa','$direccion','$localidad','$departamento','$provincia','$pais','$telefono','$gerente','$central')";
+echo mysqli_query($conexion, $sql);
 
 
-if (mysqli_query($conexion, $sql)) {
-        $data = array('empresa'=>$empresa);
-        print $data;
-    }else{
-        $data = false;
-    }
-print json_encode($data);
 mysqli_close($conexion);
 ?>

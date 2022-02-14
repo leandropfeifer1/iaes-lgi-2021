@@ -41,6 +41,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
             <form id="form-exp">  
                 <input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
+                <input type="hidden" id="idexp">
                        
                 <fieldset>                   
 

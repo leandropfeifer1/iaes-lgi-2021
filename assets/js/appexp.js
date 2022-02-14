@@ -6,6 +6,7 @@ $(document).ready(function () {
   //----------------------------------------------------------------------------------------------funcion que se ejecuta al guardar
   $("#form-exp").submit(function (e) {
     e.preventDefault();
+    console.log($("#empresa").val());
     const postData = {
       //Toma los valores cargados en los inputs
       iduser: $("#iduser").val(),
@@ -24,7 +25,7 @@ $(document).ready(function () {
     $.post(url, postData, function (response) {
       // Resetea el formulario despues de presionar el boton guardar
       $("#form-exp").trigger("reset");
-      //console.log(response);
+      console.log(response);
       fetchExps();
       edit = false;
 
@@ -44,8 +45,7 @@ $(document).ready(function () {
         let template = "";
         exps.forEach((exps) => {
           template += `
-                <tr idexp="${exps.idexp}">
-                  
+                <tr idexp="${exps.idexp}">                  
                   <td>${exps.empresa}</td>
                   <td>${exps.puesto}</td>
                   <td>${exps.desde}</td>
@@ -72,7 +72,8 @@ $(document).ready(function () {
   $(document).on('click', '.exp-delete', function() {
     const element = $(this)[0].parentElement.parentElement;
     const id = $(element).attr("idexp");
-    $.post('../db/form_exp/exp-delete.php', {id},function(response){ 
+
+    $.post('../db/form_exp/exp-delete.php', {id}, function(response){ 
       //console.log(response);     
       fetchExps();
       $("#form-exp").trigger("reset");

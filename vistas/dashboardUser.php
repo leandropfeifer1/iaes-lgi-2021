@@ -20,28 +20,21 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 }
 ?>
 
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit-no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="../assets/css/styleUser.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
 
 	<title>DashboardUser</title>
 </head>
 
 <body>
-	<style type="text/css">
-		#register_form fieldset:not(:first-of-type) {
-			display: none;
-		}
-	</style>
 
 	<header id="head">
 		<div class="logo">
@@ -54,7 +47,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		</nav>
 	</header>
 
-	<div class="container">		
+	<div class="container">
 		<h2 align="center">Informacion del usuario:</h2>
 
 		<div class="progress">
@@ -64,7 +57,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<div class="alert alert-success hide"></div>
 
 		<?php $iduser = $_SESSION['id_user']; ?>
-		<form enctype="multipart/form-data" id="register_form" novalidate action="../db/multi_form_action.php" method="post">
+		<form enctype="multipart/form-data" id="register_form" action="" method="post">
 
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
@@ -89,7 +82,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="text" class="form-control" id="email" name="email" maxlength="100">
+					<input type="email" class="form-control" id="email" name="email" maxlength="100">
 				</div>
 
 				<div class="form-group">
@@ -100,10 +93,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="genero">Genero:</label>
-					<input type="radio" id="g1" name="genero" value="2">Mujer
-					<input type="radio" id="g2" name="genero" value="1">Hombre
-					<input type="radio" id="g3" name="genero" value="3">No binario
-					<input type="radio" id="g4" name="genero" value="4">Otro
+					<input type="radio" class="genero" id="g2" name="genero" value="1">Hombre
+					<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer					
+					<input type="radio" class="genero" id="g3" name="genero" value="3">No binario
+					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro
 				</div>
 
 				<div class="form-group">
@@ -275,19 +268,19 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="licencia">Licencia de conducir:</label>
-					<input type="radio" name="licencia" value="2" id="licsi">Si
-					<input type="radio" name="licencia" value="1" id="licno">No
+					<input type="radio" class="licencia" name="licencia" value="2" id="licsi">Si
+					<input type="radio" class="licencia" name="licencia" value="1" id="licno">No
 				</div>
 
 				<div id="auto" class="form-group" style="display:none">
 					<label for="auto">Dispone de vehiculo propio:</label>
-					<input id="vsi" type="radio" name="auto" value="2">Si
-					<input id="vno" type="radio" name="auto" value="1">No
+					<input id="vsi" type="radio" class="auto" name="auto" value="2">Si
+					<input id="vno" type="radio" class="auto" name="auto" value="1">No
 				</div>
 
 				<div class="form-group">
 					<label for="discapacidades">Especifique su discapacidad:</label>
-					<textarea id="discapacidades" name="detdiscapacidad" rows="5" cols="40" maxlength="200"></textarea>
+					<textarea id="discapacidades" name="discapacidades" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -345,12 +338,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for=""> Idiomas:</label>
-					<input type="checkbox" name="idiomas[]" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
-					<input type="checkbox" name="idiomas[]" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
-					<input type="checkbox" name="idiomas[]" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
-					<input type="checkbox" name="idiomas[]" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
-					<input type="checkbox" name="idiomas[]" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
-					<input type="checkbox" name="idiomas[]" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
+					<input type="checkbox" id="idiomas" name="idiomas" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input>
 				</div>
 
 				<div class="form-group">
@@ -406,20 +399,20 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 
 				<div class="form-group">
-					<label for="sma">Salaro minimo aceptado:</label>
-					<input type="number" id="salariomin" name="sma" maxlength="8">
+					<label for="salariomin">Salaro minimo aceptado:</label>
+					<input type="number" id="salariomin" name="salariomin" maxlength="8">
 				</div>
 
 				<div class="form-group">
-					<label for="dcr">Disponibilidad para viajar:</label>
-					<input type="radio" id="dvsi" name="dv" value=2>Si
-					<input type="radio" id="dvno" name="dv" value=1>No
+					<label for="dv">Disponibilidad para viajar:</label>
+					<input type="radio" class="dv" id="dvsi" name="dv" value=2>Si
+					<input type="radio" class="dv" id="dvno" name="dv" value=1>No
 				</div>
 
 				<div class="form-group">
 					<label for="dcr">Disponibilidad para cambio de residencia:</label>
-					<input type="radio" id="dcsi" name="dcr" value=2>Si
-					<input type="radio" id="dcno" name="dcr" value=1>No
+					<input type="radio" class="dcr" id="dcsi" name="dcr" value=2>Si
+					<input type="radio" class="dcr" id="dcno" name="dcr" value=1>No
 				</div>
 
 				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
@@ -429,8 +422,16 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		</form>
 	</div>
 
+	<script src="../jquery/jquery-3.6.0.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../popper/popper.min.js"></script>
+	<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+
 	<script type="text/javascript" src="../assets/js/form.js"></script>
 	<script type="text/javascript" src="../assets/js/input.js"></script>
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 
 </html>

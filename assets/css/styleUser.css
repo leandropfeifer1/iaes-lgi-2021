@@ -99,3 +99,8 @@
   z-index: 2;
   opacity: 1;
 }
+
+
+#register_form fieldset:not(:first-of-type) {
+  display: none;
+}

@@ -1,9 +1,9 @@
 <?php
-
-require('../db/conexionDb.php');
+session_start();
+require('./conexionDb.php');
 $id = $_POST['id'];
 
-$query = "SELECT * FROM carxuser WHERE iduser = '$id'";
+$query = "SELECT * FROM carxuser WHERE carxuser.iduser= '$id'";
 $result = mysqli_query($conexion, $query);
 if (!$result) {
     die('Query failed!');

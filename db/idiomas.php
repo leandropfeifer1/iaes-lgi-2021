@@ -9,6 +9,7 @@
             $result[$x]=$fila[0];
             $x++;            
         }
+        mysqli_close($conexion);
         return $result;
     }
     function comparar($idioma, $iduser){

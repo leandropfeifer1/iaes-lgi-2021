@@ -101,5 +101,6 @@
                    
         return $foto;
     }
+    mysqli_close($conexion);
     
 ?>

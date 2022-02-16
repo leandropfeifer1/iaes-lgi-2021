@@ -126,7 +126,7 @@ $(document).ready(function () {
 
   $.post("../db/mostrar_carrera.php", { id }, function (response) {
     if (response) {
-      //console.log(response);
+      console.log(response);
       const datos = JSON.parse(response);
       switch (datos.idcar) {
         case "":

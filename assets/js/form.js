@@ -58,11 +58,22 @@ $(document).ready(function () {
       error_fechanacimiento = "Complete este campo";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").addClass("has-error");
-    } else {
+    } else {        
       error_fechanacimiento = "";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").removeClass("has-error");
+      if($.trim($("#fechanacimiento").val()) <= "1950-01-01"){
+            error_fechanacimiento = "Fecha invalida";
+            $("#error_fechanacimiento").text(error_fechanacimiento);
+            $("#fechanacimiento").addClass("has-error");
+        }else{
+            error_fechanacimiento = "";
+            $("#error_fechanacimiento").text(error_fechanacimiento);
+            $("#fechanacimiento").removeClass("has-error");
+        }
     }
+    
+    
 
     if ($.trim($("#genero").val()).length == 0) {
       error_genero = "Complete este campo";
@@ -397,6 +408,11 @@ $(document).ready(function () {
     const discapacidades = $.trim($("#discapacidades").val());
     const carh = $.trim($("#carh").val());
     const cursos = $.trim($("#cursos").val());
+    /*
+    var foto = new FormData();
+    var files = $('#foto')[0].files[0];
+    console.log(files['name']);
+    foto.append('file',files);*/
 
     var idiomas = [];
     $(":checkbox[name=idiomas]").each(function () {
@@ -449,6 +465,7 @@ $(document).ready(function () {
         dcr: dcr,
       },
       success: (data) => {
+          console.log(data)
         if (data === "false") {
           Swal.fire({
             icon: "success",

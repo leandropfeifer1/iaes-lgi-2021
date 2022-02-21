@@ -1,10 +1,10 @@
 $(document).ready(function () {
-  //let id = 213;
   var iduser = document.getElementById("iduser");
   let id = iduser.value;
   $.post("../db/mostrar_reg.php", { id }, function (response) {
-    if (response) {
+    if (response) {        
       const datos = JSON.parse(response);
+      console.log(datos.usuario);
       $("#usuario").val(datos.usuario);
       $("#apellido").val(datos.apellido);
       $("#email").val(datos.correo);
@@ -126,7 +126,6 @@ $(document).ready(function () {
 
   $.post("../db/mostrar_carrera.php", { id }, function (response) {
     if (response) {
-      console.log(response);
       const datos = JSON.parse(response);
       switch (datos.idcar) {
         case "":

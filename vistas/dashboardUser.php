@@ -85,7 +85,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="email">Email:</label>
-					<input type="email" class="form-control" id="email" name="email" maxlength="100">
+					<input type="text" class="form-control" id="email" name="email" maxlength="100">
 					<span id="error_email" class="text-danger"></span>
 				</div>
 
@@ -292,10 +292,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="foto">Sube tu foto:</label>
-					<input type="file" name="foto" accept="image/*" class="form-control" id="foto">
+					<input type="file" id="foto" name="foto" accept="image/*" class="form-control" >
 				</div>
 
-				<div class="form-group mb-3">
+				<div class="form-group">
 					<label for="pdf">CV: </label>
 					<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
 					<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">

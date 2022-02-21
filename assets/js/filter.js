@@ -108,7 +108,7 @@ const sendRequest = () => {
             : tipoModalidad;
 
           $(".div-datos").append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">;
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
               <div class="card-header">
                 <img src="../assets/logo.jpg" alt="logo" />
               </div>

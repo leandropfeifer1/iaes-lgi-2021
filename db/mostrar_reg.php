@@ -2,8 +2,6 @@
 
 include('conexionDb.php');
 $id = $_POST['id'];
-//$query = "SELECT idlog FROM usuario WHERE iduser = '$id'";
-
 
 $query = "SELECT * FROM usuario WHERE idloc = '$id'";
 $result = mysqli_query($conexion, $query);

@@ -82,16 +82,21 @@
 
     function experiencia($iduser){
         require('conexionDb.php');
-        $query = "SELECT * FROM experiencia WHERE iduser='$iduser'";
-        $result = mysqli_query($conexion, $query);/*
-        while ($fila = mysqli_fetch_assoc($result)) {
-            echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . "<br>";          
-        }*/
+        
+        $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
+        $idloc = mysqli_fetch_row($idloc);
+        
+        $query = "SELECT * FROM experiencia WHERE iduser='$idloc[0]'";
+        $result = mysqli_query($conexion, $query);
+        
         return $result;
     }
     function foto($iduser){
         require('conexionDb.php');
-        $query = "SELECT foto FROM usuario WHERE iduser='$iduser'";
+        $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
+        $idloc = mysqli_fetch_row($idloc);
+        
+        $query = "SELECT foto FROM usuario WHERE iduser='$idloc[0]'";
         $result = mysqli_query($conexion, $query);
         if (!$result) {
             die('Query failed!'. mysqli_error($conexion));

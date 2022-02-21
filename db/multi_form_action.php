@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('./conexionDb.php');
+
 function validar_input($data)
 {
 	$data = trim($data);
@@ -37,6 +38,7 @@ $licencia = $_POST["licencia"];
 $carrera = $_POST["carh"];
 $dispoviajar = $_POST["dv"];
 $dispomuda = $_POST["dcr"];
+//$foto = $_POST["foto"];
 if (isset($_POST["auto"])) {
 	$auto = $_POST["auto"];
 } else {
@@ -88,20 +90,22 @@ if (isset($_POST["idiomas"])) {
 	}
 }
 
-if (isset($_FILES["foto"]) && $_FILES["foto"]['name'] != '') {
+if (isset($_FILES["foto"])) {
+        $prueba ="entro";
 	$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
 	$row = mysqli_fetch_array($fotobd);
 	if ($row[0]) {
 		if (unlink('../db/images/' . $row[0])) {
-		} else {
+                    echo "se borro la foto guardada";
 		}
 	}
 	$foto = $_FILES['foto']['name'];
 	$temp = $_FILES['foto']['tmp_name'];
 	if (move_uploaded_file($temp, "../db/images/" . $foto)) {
-	} else {
-	}
+            echo "se subio la imagen";
+	} 
 } else {
+    $prueba ="else";
 	$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
 	$row = mysqli_fetch_array($fotobd);
 	if ($row[0]) {

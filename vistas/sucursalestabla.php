@@ -44,7 +44,7 @@ require '../db/conexionDb.php';
                     $sql5 = "SELECT pais FROM `pais` WHERE idpais = ".$fila['pais']."";
                     $result5 = mysqli_query($conexion, $sql5);
                     $pais = mysqli_fetch_array($result5);
-                $datos=$fila['idsucursal']."||".$fila['direccion']."||".$localidad[0]."||".$departamento[0]."||".$provincia[0]."||".$pais[0]."||".$fila['telefono']."||".$fila['gerente']."||".$fila['central'];
+                    $datos=$fila['idsucursal']."||".$fila['direccion']."||".$localidad[0]."||".$departamento[0]."||".$provincia[0]."||".$pais[0]."||".$fila['telefono']."||".$fila['gerente']."||".$fila['central'];
             ?>
             <tr>
                 <td><?php echo $empresa[0]?></td>
@@ -67,7 +67,7 @@ require '../db/conexionDb.php';
                     $res=mysqli_fetch_array($busca);
                     $q=$res[0];
                     if($q>0){                                           
-                        ?> <button class="btn btn-success" >Buscando</button><?php
+                        ?> <button class="btn btn-success btnbuscando">Buscando</button><?php
                         $q=0;
                     }else{
                        echo "No Busca";

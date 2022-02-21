@@ -1,5 +1,9 @@
 <?php
 require('../db/conexionDb.php');
+    session_start();
+    if(!isset($_SESSION['usuario'])){
+        header('location: ../db/logout.php');
+    }
 ?>
 <html lang="es">
 <head>
@@ -10,8 +14,43 @@ require('../db/conexionDb.php');
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="../assets/css/register.css">
+    <link href="../select2/css/select2.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+        <div class="contenido">
+        <div id="log_img" class="logo">
+            <a href="#" class="logo__link">
+            <img
+                src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
+                alt="Logo del IAES"
+            />
+            </a>
+        </div>
+        <header id="header" class="header_dasboard">
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php?tipo=1">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }else{
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }
+            ?>
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a class="header_link" href="./dashboardSecretaria.php">Volver</a>';
+                }else{
+                    echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                }
+            ?>
+            <a class="header_link" href="empresas.php">Empresas</a>
+            <a class="header_link" href="../db/logout.php">Salir</a>
+            
+        </header>
+    </div>
+    
     <header>
         <h3 class="text-center">Todas las Sucursales</h3>        
     </header>
@@ -204,16 +243,30 @@ require('../db/conexionDb.php');
             <button type="button" class="btn btn-primary">Guardar Cambios</button>
           </div>
         </div>
-      </div>
-    </div>
-</body>
+         </div>
 
+         
+        <div class="modal fade" id="buscando" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Busquedas de la sucursal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+        
+</body>
 <script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../popper/popper.min.js"></script>
 <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="../assets/js/sucursalesjs.js"></script>
-
+<script src="../select2/js/select2.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -232,7 +285,101 @@ require('../db/conexionDb.php');
            telefono=$('#telefono').val();
            gerente=$('#gerente').val();
            central=$('#central').val();
-           agregardatos(empresa,direccion,localidad,departamento,provincia,pais,telefono,gerente,central);
+           if(empresa===''){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Falta Completar campo "Empresa"',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
+            }else{
+                if(direccion===''){   
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta Completar campo "CUIT"',
+                        confirmButtonColor: '#ffa361',
+                        confirmButtonText: 'Ok',
+                        });
+                }else{
+                    if(localidad===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Presidente"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                    }else{
+                        if(departamento===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Empresa"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                        }else{
+                            if(provincia===''){
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                            }else{
+                                if(pais===''){
+                                    Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                                }
+                                else{
+                                    if(telefono===''){
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Falta Completar campo "Telefono"',
+                                            confirmButtonColor: '#ffa361',
+                                            confirmButtonText: 'Ok',
+                                        });
+                                    }
+                                    else{
+                                        if(gerente===''){
+                                            Swal.fire({
+                                                icon: 'warning',
+                                                title: 'Falta Completar campo "Telefono"',
+                                                confirmButtonColor: '#ffa361',
+                                                confirmButtonText: 'Ok',
+                                            });
+                                        }
+                                        else{
+                                            if(central===''){
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    title: 'Falta Completar campo "Telefono"',
+                                                    confirmButtonColor: '#ffa361',
+                                                    confirmButtonText: 'Ok',
+                                                });
+                                            }
+                                            else{
+                                                agregardatos(empresa,direccion,localidad,departamento,provincia,pais,telefono,gerente,central);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }        
        }); 
     });
+</script>
+<script>
+$('.btnbuscando').on('click',function(){
+    idsucursal=$('#idsucusal').val();
+    $('.modal-body').load('bussuc.php?id=2',function(){
+        $('#buscando').modal({show:true});
+    });
+});
 </script>

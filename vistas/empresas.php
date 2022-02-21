@@ -1,5 +1,9 @@
 <?php
 require('../db/conexionDb.php');
+    session_start();
+    if(!isset($_SESSION['usuario'])){
+        header('location: ../db/logout.php');
+    }
 ?>
 <html lang="es">
 <head>
@@ -19,6 +23,39 @@ require('../db/conexionDb.php');
     <script src="../assets/js/empresasjs.js"></script>
 </head>
 <body>
+    <body>
+        <div class="contenido">
+        <div id="log_img" class="logo">
+            <a href="#" class="logo__link">
+            <img
+                src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
+                alt="Logo del IAES"
+            />
+            </a>
+        </div>
+        <header id="header" class="header_dasboard">
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php?tipo=1">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }else{
+                    echo '<a id="nombreUsuario" class="header_link" href="./editarCredenciales.php">';
+                    echo $_SESSION['usuario'];
+                    echo '</a>';
+                }
+            ?>
+            <?php 
+                if(isset($_GET['tipo'])){
+                    echo '<a class="header_link" href="./dashboardSecretaria.php">Volver</a>';
+                }else{
+                    echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                }
+            ?>
+            <a class="header_link" href="sucursales.php">sucursales</a>
+            <a class="header_link" href="../db/logout.php">Salir</a>
+        </header>
+    </div>
     <header>
         <h3 class="text-center">Listado de Empresas</h3>        
     </header>
@@ -97,7 +134,53 @@ require('../db/conexionDb.php');
           presidente=$('#cuit').val();
           correo=$('#correo').val();
           telefono=$('#telefono').val();
-          agregardatos(empresa,cuit,presidente,correo,telefono);
+          if(empresa===''){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Falta Completar campo "Empresa"',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
+            }else{
+                if(cuit===''){   
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta Completar campo "CUIT"',
+                        confirmButtonColor: '#ffa361',
+                        confirmButtonText: 'Ok',
+                        });
+                }else{
+                    if(presidente===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Presidente"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                    }else{
+                        if(correo===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Empresa"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                        }else{
+                            if(telefono===''){
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                            }else{
+                                agregardatos(empresa,cuit,presidente,correo,telefono);
+                            }
+                        }
+                    }
+                    
+                }
+            }
        });
        
        

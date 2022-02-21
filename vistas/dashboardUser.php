@@ -62,11 +62,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 
-
-
 			<fieldset>
-			<legend>Datos personales:</legend>
-				
+			<legend>Datos personales:</legend>				
 
 				<div class="form-group">
 					<label for="usuario">Nombre:</label>
@@ -338,9 +335,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<fieldset>
 			<legend>Experiencias laborales:</legend>
 				<div class="form-group">
-					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Experiencias<br></a>
+					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Ir a Experiencias<br></a>
 				</div>
-
 				<input type="button" id="atras" name="previous" class="previous-form btn btn-default" value="Atras" />
 				<input type="button" id="sig3" name="next" class="next-form btn btn-info" value="Siguiente" />
 			</fieldset>

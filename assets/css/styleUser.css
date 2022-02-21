@@ -65,10 +65,10 @@ input:focus {
 }
 
 fieldset {
-  border: 2px solid rgb(138, 133, 133);
-  border-radius: 12px;
   padding: 20px;
+  margin: 50px auto;
   background-color: #eee;
+  border-radius: 3px;  
 }
 
 legend {
@@ -79,3 +79,6 @@ legend {
   border-bottom: none;
 }
 
+table{
+  background-color: #eee;
+}

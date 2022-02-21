@@ -66,7 +66,11 @@
 
     function idiomasbd($iduser){
         require('conexionDb.php');
-        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas, usuario WHERE usuario.iduser='$iduser' AND idiomas.idi = idioxuser.idi");
+
+        $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
+        $idloc = mysqli_fetch_row($idloc);
+
+        $datos = mysqli_query($conexion, "SELECT idiomas.idioma FROM idioxuser, idiomas WHERE idioxuser.iduser='$idloc[0]' AND idiomas.idi = idioxuser.idi");
         $x=0;
         $result = array();
         while ($fila = mysqli_fetch_row($datos)) {

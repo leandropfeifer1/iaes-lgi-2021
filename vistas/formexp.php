@@ -40,9 +40,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
             </a>
         </div>
     </header>
-
     <!-- -->
-    <div class="container p-4">
+    <div class="container">
         <div class="abs-center">
 
             <form id="form-exp">
@@ -73,12 +72,13 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         <label for="contacto">Numero de contacto:</label>
                         <input type="text" id="contacto" value="">
                     </div>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
+                        <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger">
+                    </div>
                 </fieldset>
 
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
-                    <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger">
-                </div>
+
 
             </form>
             <!-- -------------------------------------------------------------------------------------------------------------------------->

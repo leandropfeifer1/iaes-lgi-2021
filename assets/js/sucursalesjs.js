@@ -6,11 +6,22 @@ function agregardatos(empresa,direccion,localidad,departamento,provincia,pais,te
         url:"../db/sucursalesdb.php",
         data:datos,  
         success:function(r){
-            if(r<1){
-                alert("Exito");
+            if(r===1){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucursal Guardada',
+                    confirmButtonColor: '#ffa361',
+                    confirmButtonText: 'Ok',
+                });
                 $('tabla').load('sucursalestabla.php');
             }else{
-                alert("Fallo");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucursal Guardada',
+                    confirmButtonColor: '#ffa361',
+                    confirmButtonText: 'Ok',
+                });
+                $('#tabla').load('sucursalestabla.php');
             }
         }
     });
@@ -37,7 +48,7 @@ function confirmaciondel(idsucursal){
     }).then((result) => {
     if (result.isConfirmed) {
         borrar(idsucursal)
-        $('#tabla').load('empresastabla.php')
+        $('#tabla').load('sucursalestabla.php')
         Swal.fire(
         'Deleted!',
         'Your file has been deleted.',
@@ -54,3 +65,17 @@ function borrar(idsucursal){
        data:cadena, 
     });
 }
+function busqueda(idsucursal){
+    cadena="idsucursal="+idsucursal;
+    $.ajax({
+       type:"POST",
+       url:"../db/sucbus.php",
+       data:cadena, 
+    });
+    $('tabla').load('sucursalestabla.php');
+}
+    function sucbus(idsucusal){
+        document.getElementById("sucbus").innerHTML="";
+        $('#buscando').modal('show');
+        $('#contenido').load("bussuc.php",{idsucursal:idsucursal});
+    }

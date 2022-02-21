@@ -6,7 +6,12 @@ function agregardatos(empresa,cuit,presidente,correo,telefono){
         data:cadena,
         success:function(r){
             if(r==1){
-                alert("Exito");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucursal Guardada',
+                    confirmButtonColor: '#ffa361',
+                    confirmButtonText: 'Ok',
+                });
                 $('#tabla').load('empresastabla.php');
             }else{
                 alert("Fallo");
@@ -18,16 +23,12 @@ function agregardatos(empresa,cuit,presidente,correo,telefono){
 
 function agregaform(datos){
     d=datos.split('||');
-    $('#idsucursal').val(d[0])
-    $('#direccione').val(d[1]);
-    $('#localidade').val(d[2]);
-    $('#departamentoe').val(d[3]);
-    $('#provinciae').val(d[4]);
-    $('#paise').val(d[5]);
-    $('#telefonoe').val(d[6]);
-    $('#gerentee').val(6);
-    $('#central').val(7);
-
+    $('#idempresa').val(d[0]);
+    $('#empresae').val(d[1]);
+    $('#cuite').val(d[2]);
+    $('#presidentee').val(d[3]);
+    $('#correoe').val(d[4])
+    $('#telefonoe').val(d[5]);
 }
 
 function modificar(){
@@ -37,20 +38,73 @@ function modificar(){
     presidentee=$('#presidentee').val();
     correoe=$('#correoe').val();
     telefonoe=$('#telefonoe').val();
-    cadena="idempresa="+idempresa+"&empresa="+empresae+"&cuit="+cuite+"&presidente="+presidentee+"&correo="+correoe+"&telefono="+telefonoe;
-    $.ajax({
-        type:"POST",
-        url:"../db/empresasmod.php",
-        data:cadena,
-        success:function(r){
-            if(r==1){
-                alert("Modificacion Exitosa");
-                $('#tabla').load('empresastabla.php');
+    
+    if(empresae===''){
+            Swal.fire({
+            icon: 'warning',
+            title: 'Falta Completar campo "Empresa"',
+            confirmButtonColor: '#ffa361',
+            confirmButtonText: 'Ok',
+          });
             }else{
-                alert("Fallo la Modificacion");
+                if(cuite===''){   
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta Completar campo "CUIT"',
+                        confirmButtonColor: '#ffa361',
+                        confirmButtonText: 'Ok',
+                        });
+                }else{
+                    if(presidentee===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Presidente"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                    }else{
+                        if(correoe===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Empresa"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                        }else{
+                            if(telefonoe===''){
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                            }else{
+                                    cadena="idempresa="+idempresa+"&empresa="+empresae+"&cuit="+cuite+"&presidente="+presidentee+"&correo="+correoe+"&telefono="+telefonoe;
+                                    $.ajax({
+                                        type:"POST",
+                                        url:"../db/empresasmod.php",
+                                        data:cadena,
+                                        success:function(r){
+                                            if(r==1){
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'Modificacion Exitosa',
+                                                    confirmButtonColor: '#ffa361',
+                                                    confirmButtonText: 'Ok',
+                                                });
+                                                $('#tabla').load('empresastabla.php');
+                                            }else{
+                                                alert("Fallo la Modificacion");
+                                            }
+                                        }
+                                    });
+                            }
+                        }
+                    }
+                    
+                }
             }
-        }
-    });
+
 }
 function confirmaciondel(idempresa){
     Swal.fire({
@@ -81,4 +135,5 @@ function borrar(idempresa){
        url:"../db/empresasdel.php",
        data:cadena, 
     });
+    $('#tabla').load('empresastabla.php')
 }

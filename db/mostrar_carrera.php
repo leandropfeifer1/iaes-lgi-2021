@@ -15,8 +15,9 @@ while ($row = mysqli_fetch_array($result)) {
         'idcar' => $row['idcar']
     );
 }
-
-$jsonstring = json_encode($json[0]);
-echo $jsonstring;
+if($json){
+    $jsonstring = json_encode($json[0]);
+    echo $jsonstring;
+}
 
 ?>

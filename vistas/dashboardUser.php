@@ -57,46 +57,52 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<div class="alert alert-success hide"></div>
 
 		<?php $iduser = $_SESSION['id_user']; ?>
-		<form enctype="multipart/form-data" id="register_form" action="" method="post">
+		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">
 
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-			<fieldset>
 
-				<h2>Datos personales:</h2>
+			<fieldset>
+			<legend>Datos personales:</legend>				
 
 				<div class="form-group">
 					<label for="usuario">Nombre:</label>
 					<input type="text" class="form-control" id="usuario" name="usuario" maxlength="50">
+					<span id="error_usuario" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="apellido">Apellido:</label>
 					<input type="text" class="form-control" id="apellido" name="apellido" maxlength="50">
+					<span id="error_apellido" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="dni">Numero documento:</label>
 					<input type="number" class="form-control" id="dni" name="dni" maxlength="8">
+					<span id="error_dni" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
-					<label for="email">Email</label>
+					<label for="email">Email:</label>
 					<input type="email" class="form-control" id="email" name="email" maxlength="100">
+					<span id="error_email" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="fechanacimiento">Fecha de nacimiento:</label>
 					<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
+					<span id="error_fechanacimiento" class="text-danger"></span>
 				</div>
 
 
 				<div class="form-group">
 					<label for="genero">Genero:</label>
 					<input type="radio" class="genero" id="g2" name="genero" value="1">Hombre
-					<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer					
+					<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer
 					<input type="radio" class="genero" id="g3" name="genero" value="3">No binario
-					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro
+					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro<br>
+					<span id="error_genero" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
@@ -106,59 +112,58 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<option id="e2" value="2">Soltero</option>
 						<option id="e3" value="3">Casado</option>
 					</select>
+					<span id="error_ecivil" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="contacto">Telefono:</label>
 					<input type="tel" class="form-control" id="contacto" name="contacto" maxlength="30">
+					<span id="error_contacto" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="domicilio">Domicilio:</label>
 					<input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="100">
+					<span id="error_domicilio" class="text-danger"></span>
 				</div>
 
-				<table>
-					<tr>
-						<th>Localidad</th>
-					</tr>
+				<div class="form-group">
+					<td>
+						<label for="localidad">Localidad:</label>
+						<select name="localidad" id="localidad" class="form-control">
+							<option value=""></option>
+							<?php
+							include '../db/conexionDb.php';
+
+							$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
+							$usloc = mysqli_query($conexion, $sql2);
+							if (mysqli_num_rows($usloc) != 0) {
+								$fila = $usloc->fetch_assoc();
+								$usloc = $fila['usloc'];
+								$locnom = $fila['locnom'];
+								echo "<option value=$usloc selected>$locnom</option>";
+							}
+
+							$sql = "SELECT * FROM localidad";
+							$lista = mysqli_query($conexion, $sql);
+							while ($fila = $lista->fetch_assoc()) {
+								if ($fila['idloc'] != $usloc) {
+									$localidad = $fila['idloc'];
+									$nombre = $fila['localidad'];
+									echo "<option value=$localidad>$nombre</option>";
+								}
+							}
+							?>
+						</select>
+						<span id="error_localidad" class="text-danger"></span>
+					</td>
+				</div>
+
+				<div class="form-group">
+
 					<tr>
 						<td>
-							<select name="localidad" id="localidad" class="form-control">
-								<option value=""></option>
-								<?php
-								include '../db/conexionDb.php';
-
-								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
-								$usloc = mysqli_query($conexion, $sql2);
-								if (mysqli_num_rows($usloc) != 0) {
-									$fila = $usloc->fetch_assoc();
-									$usloc = $fila['usloc'];
-									$locnom = $fila['locnom'];
-									echo "<option value=$usloc selected>$locnom</option>";
-								}
-
-								$sql = "SELECT * FROM localidad";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									if ($fila['idloc'] != $usloc) {
-										$localidad = $fila['idloc'];
-										$nombre = $fila['localidad'];
-										echo "<option value=$localidad>$nombre</option>";
-									}
-								}
-								?>
-							</select>
-						</td>
-					</tr>
-				</table>
-
-				<table>
-					<tr>
-						<th>Departamento</th>
-					</tr>
-					<tr>
-						<td>
+							<label for="localidad">Departamento:</label>
 							<select name="departamento" id="departamento" class="form-control">
 								<option value=""></option>
 								<?php
@@ -186,16 +191,16 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								}
 								?>
 							</select>
+							<span id="error_departamento" class="text-danger"></span>
 						</td>
 					</tr>
-				</table>
+				</div>
 
-				<table>
-					<tr>
-						<th>Provincia</th>
-					</tr>
+				<div class="form-group">
+
 					<tr>
 						<td>
+							<label for="localidad">Provincia:</label>
 							<select name="provincia" id="provincia" class="form-control">
 								<option value=""></option>
 								<?php
@@ -222,16 +227,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								}
 								?>
 							</select>
+							<span id="error_provincia" class="text-danger"></span>
 						</td>
 					</tr>
-				</table>
+				</div>
 
-				<table>
-					<tr>
-						<th>Paises</th>
-					</tr>
+				<div class="form-group">
 					<tr>
 						<td>
+							<label for="localidad">Pais:</label>
 							<select name="pais" id="pais" class="form-control">
 								<option value=""></option>
 								<?php
@@ -260,9 +264,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 								}
 								?>
 							</select>
+							<span id="error_pais" class="text-danger"></span>
 						</td>
 					</tr>
-				</table>
+				</div>
 
 
 
@@ -270,81 +275,86 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<label for="licencia">Licencia de conducir:</label>
 					<input type="radio" class="licencia" name="licencia" value="2" id="licsi">Si
 					<input type="radio" class="licencia" name="licencia" value="1" id="licno">No
+					<span id="error_licencia" class="text-danger"></span>
 				</div>
 
 				<div id="auto" class="form-group" style="display:none">
 					<label for="auto">Dispone de vehiculo propio:</label>
 					<input id="vsi" type="radio" class="auto" name="auto" value="2">Si
 					<input id="vno" type="radio" class="auto" name="auto" value="1">No
+					<span id="error_auto" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="discapacidades">Especifique su discapacidad:</label>
-					<textarea id="discapacidades" name="discapacidades" rows="5" cols="40" maxlength="200"></textarea>
+					<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="foto">Sube tu foto:</label>
-					<input type="file" name="foto" accept="image/*" class="form-control" id="foto"><br>
+					<input type="file" name="foto" accept="image/*" class="form-control" id="foto">
 				</div>
 
-				<div class="form-group">
+				<div class="form-group mb-3">
 					<label for="pdf">CV: </label>
 					<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
 					<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
 				</div>
 
-				<input type="button" class="next-form btn btn-info" value="Siguiente" />
+				<input type="button" id="sig1" class="next-form btn btn-info" value="Siguiente" /><span id="error" class="text-danger"></span><br><br>
+
 			</fieldset>
-
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-
 			<fieldset>
-				<h2> Datos Academicos</h2>
-
+			<legend>Datos Academicos:</legend>
 				<div class="form-group">
-					<label for="carh">Carreras hechas:</label>
+					<label for="carh">Carrera hechas:</label>
 					<select id="carh" name="carh" value="">
 						<option id="c1" value=""></option>
 						<option id="c2" value="1">Analistas de Sistemas</option>
 						<option id="c3" value="2">Turismo y Gestion Hotelera</option>
 						<option id="c4" value="3">Administración de Empresas</option>
-						<option id="c5" value="4">Régimen Aduanero</option>
+						<option id="c5" value="4">Régimen Aduanero</option><br>
 					</select>
+					<span id="error_carh" class="text-danger"></span>
+
 				</div>
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
 					<textarea name="cursos" id="cursos" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="button" name="next" class="next-form btn btn-info" value="Siguiente" />
+				<input type="button" id="atras1" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" id="sig2" name="next" class="next-form btn btn-info" value="Siguiente" /><span id="error2" class="text-danger"></span><br><br>
+
 			</fieldset>
+
+
+
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
-				<h2> Experiencias laborales</h2>
-
+			<legend>Experiencias laborales:</legend>
 				<div class="form-group">
-					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Cargar experiencias<br></a>
+					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Ir a Experiencias<br></a>
 				</div>
-
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="button" name="next" class="next-form btn btn-info" value="Siguiente" />
+				<input type="button" id="atras" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" id="sig3" name="next" class="next-form btn btn-info" value="Siguiente" />
 			</fieldset>
 
-
+			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
-				<h2> Conocimientos y habilidades</h2>
-
+			<legend>Conocimientos y habilidades:</legend>
 				<div class="form-group">
 					<label for=""> Idiomas:</label>
-					<input type="checkbox" id="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
-					<input type="checkbox" id="idiomas" name="idiomas" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
-					<input type="checkbox" id="idiomas" name="idiomas" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
-					<input type="checkbox" id="idiomas" name="idiomas" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
-					<input type="checkbox" id="idiomas" name="idiomas" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
-					<input type="checkbox" id="idiomas" name="idiomas" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
+					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input><br>
+					<span id="error_idiomas" class="text-danger"></span>
 				</div>
+
 
 				<div class="form-group">
 					<label for="progs">Que programas domina/conoce:</label>
@@ -356,12 +366,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<textarea name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea><br>
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="button" name="next" class="next-form btn btn-info" value="Siguiente" />
+				<input type="button" id="atras2" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" id="sig4" name="next" class="next-form btn btn-info" value="Siguiente" /><span id="error3" class="text-danger"></span><br><br>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
-				<h2> Preferencias laborales</h2>
+			<legend>Preferencias laborales:</legend>
 
 				<div class="form-group">
 					<label for="slaboral">Situacion actual:</label>
@@ -370,6 +380,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<option id="s2" value=2>Disponible</option>
 						<option id="s3" value=1>Ocupado</option>
 					</select>
+					<span id="error_slaboral" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
@@ -384,6 +395,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<option id="s7" value="producción">Producción</option>
 						<option id="s8" value="servicio al cliente">Servicio al cliente</option>
 					</select>
+					<span id="error_area" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
@@ -396,27 +408,31 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<option id="m4" value=4>Pasantias</option>
 						<option id="m5" value=5>Sin preferencia</option>
 					</select>
+					<span id="error_modalidad" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="salariomin">Salaro minimo aceptado:</label>
 					<input type="number" id="salariomin" name="salariomin" maxlength="8">
+					<span id="error_salariomin" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="dv">Disponibilidad para viajar:</label>
 					<input type="radio" class="dv" id="dvsi" name="dv" value=2>Si
 					<input type="radio" class="dv" id="dvno" name="dv" value=1>No
+					<span id="error_dv" class="text-danger"></span>
 				</div>
 
 				<div class="form-group">
 					<label for="dcr">Disponibilidad para cambio de residencia:</label>
 					<input type="radio" class="dcr" id="dcsi" name="dcr" value=2>Si
 					<input type="radio" class="dcr" id="dcno" name="dcr" value=1>No
+					<span id="error_dcr" class="text-danger"></span>
 				</div>
 
-				<input type="button" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" />
+				<input type="button" id="atras" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" /><span id="error4" class="text-danger"></span><br><br>
 			</fieldset>
 
 		</form>
@@ -427,11 +443,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<script src="../popper/popper.min.js"></script>
 	<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="../assets/js/form.js"></script>
 	<script type="text/javascript" src="../assets/js/input.js"></script>
 
-
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

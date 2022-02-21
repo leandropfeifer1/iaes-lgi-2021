@@ -1,22 +1,21 @@
-
 <?php
 session_start();
 require('../db/conexionDb.php');
 
 if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
-	$sql = 'SELECT idrol from roles where descripcion = "usuario"';
-	$resultado = mysqli_query($conexion, $sql);
-	if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
-		$row = mysqli_fetch_assoc($resultado);
-	}
-	if (isset($row['idrol'])) {
-		if ($_SESSION['id_rol'] != $row['idrol']) {
-			header('location: ../db/logout.php');
-		}
-	}
-	mysqli_close($conexion);
+    $sql = 'SELECT idrol from roles where descripcion = "usuario"';
+    $resultado = mysqli_query($conexion, $sql);
+    if (!empty($resultado) && mysqli_num_rows($resultado) != 0) {
+        $row = mysqli_fetch_assoc($resultado);
+    }
+    if (isset($row['idrol'])) {
+        if ($_SESSION['id_rol'] != $row['idrol']) {
+            header('location: ../db/logout.php');
+        }
+    }
+    mysqli_close($conexion);
 } else {
-	header('location: ../logout.php');
+    header('location: ../logout.php');
 }
 ?>
 
@@ -29,24 +28,30 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../assets/css/styleUser.css">
     <title>Experiencia laboral</title>
 </head>
 
 <body>
-
+    <header id="head">
+        <div class="logo">
+            <a href="#" class="logo__link">
+                <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
+            </a>
+        </div>
+    </header>
     <!-- -->
-    <div class="container p-4">
+    <div class="container">
         <div class="abs-center">
 
-            <form id="form-exp">  
+            <form id="form-exp">
                 <input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
                 <input type="hidden" id="idexp">
-                       
-                <fieldset>                   
+
+                <fieldset>
 
                     <legend>Experiencias:</legend>
-                    
+
                     <div class="form-group">
                         <label for="empresa">Empresa:</label>
                         <input type="text" id="empresa" value="">
@@ -67,12 +72,13 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         <label for="contacto">Numero de contacto:</label>
                         <input type="text" id="contacto" value="">
                     </div>
-                </fieldset>  
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
+                        <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger">
+                    </div>
+                </fieldset>
 
-                <div class="input-group">
-                    <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
-                    <Input type ="button" value="Cerrar" onclick = "window.close()" class="btn btn-danger">
-                </div>                
+
 
             </form>
             <!-- -------------------------------------------------------------------------------------------------------------------------->
@@ -90,7 +96,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                 <tbody id="exps"></tbody>
 
             </table>
-                        
+
             <!-- -------------------------------------------------------------------------------------------------------------------------->
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
             <script src="../assets/js/appexp.js"></script>

@@ -96,7 +96,7 @@
         $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
         $idloc = mysqli_fetch_row($idloc);
         
-        $query = "SELECT foto FROM usuario WHERE iduser='$idloc[0]'";
+        $query = "SELECT foto FROM usuario WHERE idloc='$idloc[0]'";
         $result = mysqli_query($conexion, $query);
         if (!$result) {
             die('Query failed!'. mysqli_error($conexion));

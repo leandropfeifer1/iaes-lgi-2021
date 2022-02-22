@@ -4,7 +4,6 @@ $(document).ready(function () {
   $.post("../db/mostrar_reg.php", { id }, function (response) {
     if (response) {        
       const datos = JSON.parse(response);
-      console.log(datos.usuario);
       $("#usuario").val(datos.usuario);
       $("#apellido").val(datos.apellido);
       $("#email").val(datos.correo);

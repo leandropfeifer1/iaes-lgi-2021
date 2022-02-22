@@ -43,6 +43,8 @@ require('../db/conexionDb.php');
                     echo '<a class="header_link" href="./filtro.php">Volver</a>';
                 }
             ?>
+            <a class="header_link" href="sucursales.php">Sucursales</a>
+            <a class="header_link" href="empresas.php">Empresas</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

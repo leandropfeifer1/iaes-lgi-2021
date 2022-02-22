@@ -27,8 +27,9 @@ require '../db/conexionDb.php';
             <?php
             
                 $sql = "SELECT `idsucursal`, `empresa`, `direccion`, `localidad`, `departamento`, `provincia`, `pais`, `telefono`, `gerente`, `central` FROM `sucursales` WHERE 1";
-		$lista = mysqli_query($conexion, $sql);               
+                $lista = mysqli_query($conexion, $sql);               
                 while ($fila = $lista->fetch_assoc()) {
+                    $datos=$fila['idsucursal']."||".$fila['empresa']."||".$fila['direccion']."||".$fila['localidad']."||".$fila['departamento']."||".$fila['provincia']."||".$fila['pais']."||".$fila['telefono']."||".$fila['gerente']."||".$fila['central'];
                     $sql1 = "SELECT empresa FROM `empresas` WHERE idempresa=".$fila['empresa']."";
                     $result1 = mysqli_query($conexion, $sql1);
                     $empresa= mysqli_fetch_array($result1);

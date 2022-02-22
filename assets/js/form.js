@@ -58,22 +58,20 @@ $(document).ready(function () {
       error_fechanacimiento = "Complete este campo";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").addClass("has-error");
-    } else {        
+    } else {
       error_fechanacimiento = "";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").removeClass("has-error");
-      if($.trim($("#fechanacimiento").val()) <= "1950-01-01"){
-            error_fechanacimiento = "Fecha invalida";
-            $("#error_fechanacimiento").text(error_fechanacimiento);
-            $("#fechanacimiento").addClass("has-error");
-        }else{
-            error_fechanacimiento = "";
-            $("#error_fechanacimiento").text(error_fechanacimiento);
-            $("#fechanacimiento").removeClass("has-error");
-        }
+      if ($.trim($("#fechanacimiento").val()) <= "1950-01-01") {
+        error_fechanacimiento = "Fecha invalida";
+        $("#error_fechanacimiento").text(error_fechanacimiento);
+        $("#fechanacimiento").addClass("has-error");
+      } else {
+        error_fechanacimiento = "";
+        $("#error_fechanacimiento").text(error_fechanacimiento);
+        $("#fechanacimiento").removeClass("has-error");
+      }
     }
-    
-    
 
     if ($.trim($("#genero").val()).length == 0) {
       error_genero = "Complete este campo";
@@ -156,7 +154,7 @@ $(document).ready(function () {
     }
 
     if (!$("input[name='licencia']:radio").is(":checked")) {
-      console.log("no esta chekeado");
+     
       error_licencia = "Complete este campo";
       $("#error_licencia").text(error_licencia);
       $("#licencia").addClass("has-error");
@@ -165,7 +163,6 @@ $(document).ready(function () {
       $("#error_licencia").text(error_licencia);
       $("#liceerror_licencia").removeClass("has-error");
       if ($("#licsi").is(":checked")) {
-        console.log("el si esta chekeado");
         if (!$("input[name='auto']:radio").is(":checked")) {
           error_auto = "";
           $("#error_licencia").text(error_auto);
@@ -192,7 +189,7 @@ $(document).ready(function () {
       error_provincia != "" ||
       error_pais != ""
     ) {
-      error = " Campos faltantes*";
+      error = " Campos faltantes o invalidos*";
       $("#error").text(error);
       $("#error").addClass("has-error");
       return false;
@@ -200,9 +197,6 @@ $(document).ready(function () {
       error = "";
       $("#error").text(error);
       $("#error").removeClass("has-error");
-
-      
-
     }
 
     previous_form = $(this).parent();
@@ -214,7 +208,6 @@ $(document).ready(function () {
   //-----------------------------------------------------------------------------------------------------------------
   $("#sig2").click(function () {
     if ($.trim($("#carh").val()).length == 0) {
-      console.log("asdasdaaa");
       error_carh = "Complete este campo";
       $("#error_carh").text(error_carh);
       $("#carh").addClass("has-error");
@@ -225,7 +218,7 @@ $(document).ready(function () {
     }
 
     if (error_carh != "") {
-      error = " Campos faltantes*";
+      error = " Campos faltantes o invalidos*";
       $("#error2").text(error);
       $("#error2").addClass("has-error");
       return false;
@@ -263,7 +256,7 @@ $(document).ready(function () {
       $("#idiomas").removeClass("has-error");
     }
     if (error_idiomas != "") {
-      error3 = " Campos faltantes*";
+      error3 = " Campos faltantes o invalidos*";
       $("#error3").text(error);
       $("#error3").addClass("has-error");
       return false;
@@ -281,7 +274,6 @@ $(document).ready(function () {
   });
   //-----------------------------------------------------------------------------------------------------------------
   $(".previous-form").click(function () {
-    console.log("atras2");
     previous_form = $(this).parent();
     next_form = $(this).parent().prev();
     next_form.show();
@@ -380,7 +372,7 @@ $(document).ready(function () {
       error_dv != "" ||
       error_dcr != ""
     ) {
-      error4 = " Campos faltantes*";
+      error4 = " Campos faltantes o invalidos*";
       $("#error4").text(error4);
       $("#error4").addClass("has-error");
       return false;
@@ -407,12 +399,7 @@ $(document).ready(function () {
     const auto = $(".auto:checked").val();
     const discapacidades = $.trim($("#discapacidades").val());
     const carh = $.trim($("#carh").val());
-    const cursos = $.trim($("#cursos").val());
-    /*
-    var foto = new FormData();
-    var files = $('#foto')[0].files[0];
-    console.log(files['name']);
-    foto.append('file',files);*/
+    const cursos = $.trim($("#cursos").val());  
 
     var idiomas = [];
     $(":checkbox[name=idiomas]").each(function () {
@@ -430,6 +417,63 @@ $(document).ready(function () {
     const salariomin = $.trim($("#salariomin").val());
     const dv = $(".dv:checked").val();
     const dcr = $(".dcr:checked").val();
+
+    //----------------------FOTO
+    var fd = new FormData();
+    var files = $("#foto")[0].files;
+    // Check file selected or not
+    if (files.length > 0) {
+      fd.append("foto", files[0]);
+    }
+
+    $.ajax({
+      url: "../db/archivos.php",
+      type: "POST",
+      datatype: "json",
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        console.log(data);
+      },
+    });
+//----------------------------------PDF
+var fd = new FormData();
+var files = $("#pdf")[0].files;
+// Check file selected or not
+if (files.length > 0) {
+  fd.append("pdf", files[0]);
+}
+
+    $.ajax({
+      url: "../db/archivos.php",
+      type: "POST",
+      datatype: "json",
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        console.log(data);
+      },
+    });
+
+/*
+    $.ajax({
+      url: 'upload.php',
+      type: 'post',
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: function(response){
+         if(response != 0){
+            $("#img").attr("src",response); 
+            $(".preview img").show(); // Display image element
+         }else{
+            alert('file not uploaded');
+         }
+      },
+   });*/
+
 
     $.ajax({
       url: "../db/multi_form_action.php",
@@ -465,7 +509,6 @@ $(document).ready(function () {
         dcr: dcr,
       },
       success: (data) => {
-          console.log(data)
         if (data === "false") {
           Swal.fire({
             icon: "success",

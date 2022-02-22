@@ -28,14 +28,127 @@ function agregardatos(empresa,direccion,localidad,departamento,provincia,pais,te
 }
 function agregaform(datos){
     d=datos.split('||');
-    $('#idempresa').val(d[0]);
-    $('#empresae').val(d[1]);
-    $('#cuite').val(d[2]);
-    $('#presidentee').val(d[3]);
-    $('#correoe').val(d[4]);
-    $('#telefonoe').val(d[5]);
+    $('#idsucursal').val(d[0]);
+    $('#direccione').val(d[1]);
+    $('#localidad').val(d[2]);
+    $('#departamento').val(d[3]);
+    $('#provincia').val(d[4]);
+    $('#pais').val(d[5]);
+    $('#telefonoe').val(d[6]);
+    $('#gerentee').val(d[7]);
+    $('#centrale').val(d[8]);
 
 }
+function modsucursal(){
+           idsucursal=$('#idsucursal').val();
+           direccione=$('#direccione').val();
+           localidade=$('#localidade').val();
+           departamentoe=$('#departamentoe').val();
+           provinciae=$('#provinciae').val();
+           paise=$('#paise').val();
+           telefonoe=$('#telefonoe').val();
+           gerentee=$('#gerentee').val();
+           centrale=$('#centrale').val();
+                if(direccione===''){   
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Falta Completar campo "CUIT"',
+                        confirmButtonColor: '#ffa361',
+                        confirmButtonText: 'Ok',
+                        });
+                }else{
+                    if(localidade===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Presidente"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                    }else{
+                        if(departamentoe===''){
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Falta Completar campo "Empresa"',
+                                confirmButtonColor: '#ffa361',
+                                confirmButtonText: 'Ok',
+                            });
+                        }else{
+                            if(provinciae===''){
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                            }else{
+                                if(paise===''){
+                                    Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Falta Completar campo "Telefono"',
+                                    confirmButtonColor: '#ffa361',
+                                    confirmButtonText: 'Ok',
+                                });
+                                }
+                                else{
+                                    if(telefonoe===''){
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Falta Completar campo "Telefono"',
+                                            confirmButtonColor: '#ffa361',
+                                            confirmButtonText: 'Ok',
+                                        });
+                                    }
+                                    else{
+                                        if(gerentee===''){
+                                            Swal.fire({
+                                                icon: 'warning',
+                                                title: 'Falta Completar campo "Telefono"',
+                                                confirmButtonColor: '#ffa361',
+                                                confirmButtonText: 'Ok',
+                                            });
+                                        }
+                                        else{
+                                            if(centrale===''){
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    title: 'Falta Completar campo "Telefono"',
+                                                    confirmButtonColor: '#ffa361',
+                                                    confirmButtonText: 'Ok',
+                                                });
+                                            }
+                                            else{
+                                                cadena="empresae="+empresae+"&direccione="+direccione+"&localidade="+localidade+"&departamentoe="+departamentoe+"&provinciae="+provinciae+"&paise="+paise+"&telefonoe="+telefonoe+"&gerentee="+gerentee+"&centrale="+centrale;
+                                                $.ajax({
+                                                    type:"POST",
+                                                    url:"../db/sucursalesmod.php",
+                                                    data:cadena,
+                                                    success:function(r){
+                                                        if(r==1){
+                                                            Swal.fire({
+                                                                icon: 'success',
+                                                                title: 'Modificacion Exitosa',
+                                                                confirmButtonColor: '#ffa361',
+                                                                confirmButtonText: 'Ok',
+                                                            });
+                                                            $('#tabla').load('empresastabla.php');
+                                                        }else{
+                                                            alert("Fallo la Modificacion");
+                                                            $('#tabla').load('empresastabla.php');
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+    }
+}
+
+
+
 function confirmaciondel(idsucursal){
     Swal.fire({
     title: 'Confirme',

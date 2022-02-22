@@ -292,7 +292,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="foto">Sube tu foto:</label>
-					<input type="file" id="foto" name="foto" accept="image/*" class="form-control" >
+					<input type="file" id="foto" name="foto" accept="image/*" class="form-control" <?php echo "aaaaaaaaaaaaaaaaaaaaaa"; ?>>
 				</div>
 
 				<div class="form-group">
@@ -376,9 +376,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group">
 					<label for="slaboral">Situacion actual:</label>
 					<select id="slaboral" name="slaboral" value="">
-						<option id="s1" value=""></option>
-						<option id="s2" value=2>Disponible</option>
-						<option id="s3" value=1>Ocupado</option>
+						<option id="s1" value=""></option>		
+						<option id="s2" value=1>Disponible</option>				
+						<option id="s3" value=2>Ocupado</option>
+						
 					</select>
 					<span id="error_slaboral" class="text-danger"></span>
 				</div>

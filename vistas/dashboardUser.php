@@ -344,14 +344,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset>
 			<legend>Conocimientos y habilidades:</legend>
-				<div class="form-group">
+				<div class="form-group" id="idiomas">
 					<label for=""> Idiomas:</label>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
-					<input type="checkbox" id="idiomas" class="idiomas" name="idiomas" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input><br>
+					<input type="checkbox" class="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
+					<input type="checkbox" class="idiomas" name="idiomas" value="2" <?php if (comparar(2, $_SESSION['id_user'])) { ?> checked <?php } ?>>Español</input>
+					<input type="checkbox" class="idiomas" name="idiomas" value="3" <?php if (comparar(3, $_SESSION['id_user'])) { ?> checked <?php } ?>>Portugues</input>
+					<input type="checkbox" class="idiomas" name="idiomas" value="4" <?php if (comparar(4, $_SESSION['id_user'])) { ?> checked <?php } ?>>Francés</input>
+					<input type="checkbox" class="idiomas" name="idiomas" value="5" <?php if (comparar(5, $_SESSION['id_user'])) { ?> checked <?php } ?>>Alemán</input>
+					<input type="checkbox" class="idiomas" name="idiomas" value="6" <?php if (comparar(6, $_SESSION['id_user'])) { ?> checked <?php } ?>>Guarani</input><br>
 					<span id="error_idiomas" class="text-danger"></span>
 				</div>
 

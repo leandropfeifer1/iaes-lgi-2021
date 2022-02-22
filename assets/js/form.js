@@ -154,7 +154,6 @@ $(document).ready(function () {
     }
 
     if (!$("input[name='licencia']:radio").is(":checked")) {
-     
       error_licencia = "Complete este campo";
       $("#error_licencia").text(error_licencia);
       $("#licencia").addClass("has-error");
@@ -246,7 +245,23 @@ $(document).ready(function () {
   $("#sig4").click(function () {
     var error_idiomas = "";
 
-    if (!$(".idiomas").prop("checked")) {
+    // Obtener hijos dentro de etiqueta <div>
+    var cont = document.getElementById("idiomas").children;
+    var i = 0;
+    var al_menos_uno = false;
+    //Recorrido de checkbox's
+    while (i < cont.length) {
+      // Verifica si el elemento es un checkbox
+      if (cont[i].tagName == "INPUT" && cont[i].type == "checkbox") {
+        // Verifica si esta checked
+        if (cont[i].checked) {
+          al_menos_uno = true;
+        }
+      }
+      i++;
+    }    
+
+    if (!$("#idiomas").prop("checked")) {
       error_idiomas = "Complete este campo";
       $("#error_idiomas").text(error_idiomas);
       $("#idiomas").addClass("has-error");
@@ -255,8 +270,10 @@ $(document).ready(function () {
       $("#error_idiomas").text(error_idiomas);
       $("#idiomas").removeClass("has-error");
     }
-    if (error_idiomas != "") {
-      error3 = " Campos faltantes o invalidos*";
+
+
+    if (!al_menos_uno) {
+      error = " Campos faltantes o invalidos*";
       $("#error3").text(error);
       $("#error3").addClass("has-error");
       return false;
@@ -399,7 +416,7 @@ $(document).ready(function () {
     const auto = $(".auto:checked").val();
     const discapacidades = $.trim($("#discapacidades").val());
     const carh = $.trim($("#carh").val());
-    const cursos = $.trim($("#cursos").val());  
+    const cursos = $.trim($("#cursos").val());
 
     var idiomas = [];
     $(":checkbox[name=idiomas]").each(function () {
@@ -437,13 +454,13 @@ $(document).ready(function () {
         console.log(data);
       },
     });
-//----------------------------------PDF
-var fd = new FormData();
-var files = $("#pdf")[0].files;
-// Check file selected or not
-if (files.length > 0) {
-  fd.append("pdf", files[0]);
-}
+    //----------------------------------PDF
+    var fd = new FormData();
+    var files = $("#pdf")[0].files;
+    // Check file selected or not
+    if (files.length > 0) {
+      fd.append("pdf", files[0]);
+    }
 
     $.ajax({
       url: "../db/archivos.php",
@@ -457,7 +474,7 @@ if (files.length > 0) {
       },
     });
 
-/*
+    /*
     $.ajax({
       url: 'upload.php',
       type: 'post',
@@ -473,7 +490,6 @@ if (files.length > 0) {
          }
       },
    });*/
-
 
     $.ajax({
       url: "../db/multi_form_action.php",

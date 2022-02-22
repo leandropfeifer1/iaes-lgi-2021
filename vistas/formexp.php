@@ -55,27 +55,33 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                     <div class="form-group">
                         <label for="empresa">Empresa:</label>
                         <input type="text" id="empresa" value="">
+                        <span id="error_empresa" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="puesto">Puesto:</label>
                         <input type="text" id="puesto" value="">
+                        <span id="error_puesto" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="desde">Desde:</label>
                         <input type="date" id="desde" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
+                        <span id="error_desde" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="hasta">Hasta:</label>
                         <input type="date" id="hasta" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
+                        <span id="error_hasta" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="contacto">Numero de contacto:</label>
                         <input type="text" id="contacto" value="">
+                        <span id="error_contacto" class="text-danger"></span>
                     </div>
                     <div class="input-group">
                         <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
-                        <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger">
+                        <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger"><span id="error" class="text-danger"></span>
                     </div>
+                    
                 </fieldset>
 
 

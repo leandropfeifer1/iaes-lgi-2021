@@ -110,6 +110,27 @@
                    
         return $foto;
     }
+
+    function pdf($iduser){
+        require('conexionDb.php');
+        $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
+        $idloc = mysqli_fetch_row($idloc);
+        
+        $query = "SELECT pdf FROM usuario WHERE idloc='$idloc[0]'";
+        $result = mysqli_query($conexion, $query);
+        if (!$result) {
+            die('Query failed!'. mysqli_error($conexion));
+        }
+        $fila = mysqli_fetch_row($result);
+        if(!empty($fila[0])){
+            $pdf = $fila[0];
+        }else{
+            $pdf = false;
+        }             
+                   
+        return $pdf;
+    }
+
     mysqli_close($conexion);
     
 ?>

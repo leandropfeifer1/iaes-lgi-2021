@@ -69,7 +69,16 @@ require('../db/conexionDb.php');
     $carrera = carrera($iduser);
     $foto = foto($iduser);
     $exp = experiencia($iduser);
+    $pdf = pdf($iduser);
     ?>
+
+    <div class="container" id="cv">
+        <br>
+        <a title="Descargar Archivo" class="btn btn-info" href="../db/images/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a>
+    </div>
+    <div>
+
+    </div>
 
     <div class="container" id="box-general">
 
@@ -202,11 +211,12 @@ require('../db/conexionDb.php');
             </div>
         </div>
         <div class="container" align="center">
-            <button type="button" onclick="javascript:window.print()">Imprimir</button><br><br>
+            <button type="button" id="imprimir">Imprimir</button><br><br>
         </div>
 
     </div>
-
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../assets/js/usuario.js"></script>
 </body>
 
 </html>

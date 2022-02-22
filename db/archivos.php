@@ -42,7 +42,7 @@ if (isset($_FILES['pdf']['name'])) {
     $pdf = $_FILES['pdf']['name'];
     $temp = $_FILES['pdf']['tmp_name'];
     if (move_uploaded_file($temp, "../db/cv/" . $pdf)) {
-        echo "se subio la imagen";
+        echo "se subio el pdf";
     }
     guardarPdf($idloc, $pdf);
 } else {

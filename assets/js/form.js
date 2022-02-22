@@ -259,28 +259,26 @@ $(document).ready(function () {
         }
       }
       i++;
-    }    
-
-    if (!$("#idiomas").prop("checked")) {
-      error_idiomas = "Complete este campo";
-      $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").addClass("has-error");
-    } else {
-      error_idiomas = "";
-      $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").removeClass("has-error");
-    }
+    }   
 
 
     if (!al_menos_uno) {
       error = " Campos faltantes o invalidos*";
       $("#error3").text(error);
       $("#error3").addClass("has-error");
+
+      error_idiomas = "Complete este campo";
+      $("#error_idiomas").text(error_idiomas);
+      $("#idiomas").addClass("has-error");
       return false;
     } else {
       error = "";
       $("#error3").text(error);
       $("#error3").removeClass("has-error");
+
+      error_idiomas = "";
+      $("#error_idiomas").text(error_idiomas);
+      $("#idiomas").removeClass("has-error");
     }
 
     previous_form = $(this).parent();

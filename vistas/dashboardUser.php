@@ -63,7 +63,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 
 			<fieldset>
-			<legend>Datos personales:</legend>				
+							
 
 				<div class="form-group">
 					<label for="usuario">Nombre:</label>

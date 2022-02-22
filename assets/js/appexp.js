@@ -6,7 +6,94 @@ $(document).ready(function () {
   //----------------------------------------------------------------------------------------------funcion que se ejecuta al guardar
   $("#form-exp").submit(function (e) {
     e.preventDefault();
-    console.log($("#empresa").val());
+
+    if ($.trim($("#empresa").val()).length == 0) {
+      error_empresa = "Complete este campo";
+      $("#error_empresa").text(error_empresa);
+      $("#empresa").addClass("has-error");
+    } else {
+      error_empresa = "";
+      $("#error_empresa").text(error_empresa);
+      $("#empresa").removeClass("has-error");
+    }
+    
+    if ($.trim($("#puesto").val()).length == 0) {
+      error_puesto = "Complete este campo";
+      $("#error_puesto").text(error_puesto);
+      $("#puesto").addClass("has-error");
+    } else {
+      error_puesto = "";
+      $("#error_puesto").text(error_puesto);
+      $("#puesto").removeClass("has-error");
+    }
+
+    if ($.trim($("#desde").val()).length == 0) {
+      error_desde = "Complete este campo";
+      $("#error_desde").text(error_desde);
+      $("#desde").addClass("has-error");
+    } else {
+      error_desde = "";
+      $("#error_desde").text(error_desde);
+      $("#desde").removeClass("has-error");
+      if ($.trim($("#desde").val()) <= "1950-01-01") {
+        error_desde = "Fecha invalida";
+        $("#error_desde").text(error_desde);
+        $("#desde").addClass("has-error");
+      } else {
+        error_desde = "";
+        $("#error_desde").text(error_desde);
+        $("#desde").removeClass("has-error");
+      }
+    }
+
+    if ($.trim($("#hasta").val()).length == 0) {
+      error_hasta = "Complete este campo";
+      $("#error_hasta").text(error_hasta);
+      $("#hasta").addClass("has-error");
+    } else {
+      error_hasta = "";
+      $("#error_hasta").text(error_hasta);
+      $("#hasta").removeClass("has-error");
+      if ($.trim($("#hasta").val()) <= "1950-01-01") {
+        error_hasta = "Fecha invalida";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").addClass("has-error");
+      } else {
+        error_hasta = "";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").removeClass("has-error");
+      }
+    }
+
+    if ($.trim($("#contacto").val()).length == 0) {
+      error_contacto = "Complete este campo";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").addClass("has-error");
+    } else {
+      error_contacto = "";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").removeClass("has-error");
+    }
+
+    if (
+      error_empresa != "" ||
+      error_puesto != "" ||
+      error_desde != "" ||
+      error_hasta != "" ||      
+      error_contacto != ""
+    ) {
+      error = "Campos faltantes o invalidos*";
+      $("#error").text(error);
+      $("#error").addClass("has-error");
+      return false;
+    } else {
+      error = "";
+      $("#error").text(error);
+      $("#error").removeClass("has-error");
+    }
+
+
+
     const postData = {
       //Toma los valores cargados en los inputs
       iduser: $("#iduser").val(),

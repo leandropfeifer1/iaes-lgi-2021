@@ -216,7 +216,7 @@ require('../db/conexionDb.php');
 
     </div>
     <script src="../jquery/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="usuario.js"></script>
+    <script type="text/javascript" src="../assets/js/usuario.js"></script>
 </body>
 
 </html>

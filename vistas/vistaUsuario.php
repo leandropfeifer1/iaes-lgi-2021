@@ -169,7 +169,7 @@ require('../db/conexionDb.php');
                     <ul>
                         <?php
                         while ($fila = mysqli_fetch_assoc($exp)) {
-                            echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . "<br>";
+                            echo $fila["puesto"] . " en la empresa " . $fila["empresa"] . ", desde " . $fila["desde"] . ", hasta " . $fila["hasta"] . ". Numero de contacto referencia: " . $fila["contacto"] . "<br>";
                         }
                         ?>
                     </ul>

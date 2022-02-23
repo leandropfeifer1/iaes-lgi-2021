@@ -72,13 +72,13 @@ require('../db/conexionDb.php');
     $pdf = pdf($iduser);
     ?>
 
-    <div class="container" id="cv">
+    <input type="hidden" id="pdf" value="<?php echo $pdf ?>">
+    <div class="container" id="descargarcv" >
         <br>
-        <a title="Descargar Archivo" class="btn btn-info" href="../db/images/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a>
-    </div>
-    <div>
-
-    </div>
+        <a id="cv" title="Descargar Archivo" class="btn btn-info" href="../db/cv/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
+    </div> 
+    
+    
 
     <div class="container" id="box-general">
 

@@ -7,7 +7,7 @@ if(isset($_SESSION['id_user'])){
     $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
 
     if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
-        $consulta .= " AND iduser in(select  iduser from carxuser 
+        $consulta .= " AND idloc in(select  iduser from carxuser 
                 where idcar in (SELECT idcar from carrera 
                 where idcar = ".$_POST['carrera']."))";
     }

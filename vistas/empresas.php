@@ -75,7 +75,7 @@ require('../db/conexionDb.php');
                 <label>Empresa</label>
                 <input type="text" name="empresa" id="empresa" class="form-control input-sm">
                 <label>CUIT</label>
-                <input type="text" name="cuit" id="cuit" class="form-control input-sm">
+                <input type="number" name="cuit" id="cuit" class="form-control input-sm">
                 <label>Presidente</label>
                 <input type="text" name="presidente" id="presidente" class="form-control input-sm">
                 <label>Correo</label>
@@ -104,7 +104,7 @@ require('../db/conexionDb.php');
                 <label>Empresa</label>
                 <input type="text" name="empresae" id="empresae" class="form-control input-sm">
                 <label>CUIT</label>
-                <input type="text" name="cuite" id="cuite" class="form-control input-sm">
+                <input type="number" name="cuite" id="cuite" class="form-control input-sm">
                 <label>Presidente</label>
                 <input type="text" name="presidentee" id="presidentee" class="form-control input-sm">
                 <label>Correo</label>

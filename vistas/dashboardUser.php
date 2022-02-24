@@ -292,7 +292,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="foto">Sube tu foto:</label>
-					<input type="file" id="foto" name="foto" accept="image/*" class="form-control" <?php echo "aaaaaaaaaaaaaaaaaaaaaa"; ?>>
+					<input type="file" id="foto" name="foto" accept="image/*" class="form-control">
 				</div>
 
 				<div class="form-group">

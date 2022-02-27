@@ -5,7 +5,25 @@ $(document).ready(function () {
     total_forms;
   total_forms = $("fieldset").length;
   //-----------------------------------------------------------------------------------------------------------------
-  $("#sig1").click(function () {
+
+  $("form").keydown(function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      val_usuario();
+      val_academicos();
+      val_habilidades();
+      val_laborales();
+    }
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == 9) {
+      val_usuario();
+      val_academicos();
+      val_habilidades();
+      val_laborales();
+    }
+  });
+
+  function val_usuario() {
     var dni_validation = /^\d{8}$/;
     var letters_validation = /^[a-zA-Z ]+$/;
     var email_validation = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
@@ -204,15 +222,20 @@ $(document).ready(function () {
       $("#error").text(error);
       $("#error").removeClass("has-error");
     }
+  }
 
-    previous_form = $(this).parent();
-    next_form = $(this).parent().next();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(++form_count);
+  $("#sig1").click(function () {
+    val_personales = val_usuario();
+    if (val_personales != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
+    }
   });
-  //-----------------------------------------------------------------------------------------------------------------
-  $("#sig2").click(function () {
+
+  function val_academicos() {
     if ($.trim($("#carh").val()).length == 0) {
       error_carh = "Complete este campo";
       $("#error_carh").text(error_carh);
@@ -233,14 +256,19 @@ $(document).ready(function () {
       $("#error2").text(error);
       $("#error2").removeClass("has-error");
     }
+  }
 
-    previous_form = $(this).parent();
-    next_form = $(this).parent().next();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(++form_count);
+  $("#sig2").click(function () {
+    academicos = val_academicos();
+    if (academicos != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
+    }
   });
-
+  //-----------------------------------------------------------------------------------------------------------------
   $("#sig3").click(function () {
     previous_form = $(this).parent();
     next_form = $(this).parent().next();
@@ -249,7 +277,7 @@ $(document).ready(function () {
     setProgressBarValue(++form_count);
   });
   //-----------------------------------------------------------------------------------------------------------------
-  $("#sig4").click(function () {
+  function val_habilidades() {
     var error_idiomas = "";
 
     // Obtener hijos dentro de etiqueta <div>
@@ -286,12 +314,17 @@ $(document).ready(function () {
       $("#error_idiomas").text(error_idiomas);
       $("#idiomas").removeClass("has-error");
     }
+  }
 
-    previous_form = $(this).parent();
-    next_form = $(this).parent().next();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(++form_count);
+  $("#sig4").click(function () {
+    habilidades = val_habilidades();
+    if (habilidades != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
+    }
   });
   //-----------------------------------------------------------------------------------------------------------------
   $(".previous-form").click(function () {
@@ -312,9 +345,7 @@ $(document).ready(function () {
   }
 
   //-----------------------------------------------------------------------------------------------------------------
-  $("#register_form").submit(function (event) {
-    event.preventDefault();
-
+  function val_laborales() {
     if ($.trim($("#slaboral").val()).length == 0) {
       error_slaboral = "Complete este campo";
       $("#error_slaboral").text(error_slaboral);
@@ -402,149 +433,138 @@ $(document).ready(function () {
       $("#error4").text(error4);
       $("#error4").removeClass("has-error");
     }
+  }
 
-    const usuario = $.trim($("#usuario").val());
-    const apellido = $.trim($("#apellido").val());
-    const dni = $.trim($("#dni").val());
-    const email = $.trim($("#email").val());
-    const fechanacimiento = $.trim($("#fechanacimiento").val());
-    const genero = $(".genero:checked").val();
-    const ecivil = $.trim($("#ecivil").val());
-    const contacto = $.trim($("#contacto").val());
-    const domicilio = $.trim($("#domicilio").val());
-    const localidad = $.trim($("#localidad").val());
-    const departamento = $.trim($("#departamento").val());
-    const provincia = $.trim($("#provincia").val());
-    const pais = $.trim($("#pais").val());
-    const licencia = $(".licencia:checked").val();
-    const auto = $(".auto:checked").val();
-    const discapacidades = $.trim($("#discapacidades").val());
-    const carh = $.trim($("#carh").val());
-    const cursos = $.trim($("#cursos").val());
+  $("#register_form").submit(function (event) {
+    event.preventDefault();
+    val_laborales();
+    if (val_laborales != "") {
+      const usuario = $.trim($("#usuario").val());
+      const apellido = $.trim($("#apellido").val());
+      const dni = $.trim($("#dni").val());
+      const email = $.trim($("#email").val());
+      const fechanacimiento = $.trim($("#fechanacimiento").val());
+      const genero = $(".genero:checked").val();
+      const ecivil = $.trim($("#ecivil").val());
+      const contacto = $.trim($("#contacto").val());
+      const domicilio = $.trim($("#domicilio").val());
+      const localidad = $.trim($("#localidad").val());
+      const departamento = $.trim($("#departamento").val());
+      const provincia = $.trim($("#provincia").val());
+      const pais = $.trim($("#pais").val());
+      const licencia = $(".licencia:checked").val();
+      const auto = $(".auto:checked").val();
+      const discapacidades = $.trim($("#discapacidades").val());
+      const carh = $.trim($("#carh").val());
+      const cursos = $.trim($("#cursos").val());
 
-    var idiomas = [];
-    $(":checkbox[name=idiomas]").each(function () {
-      if (this.checked) {
-        // agregas cada elemento.
-        idiomas.push($(this).val());
-      }
-    });
-
-    const progs = $.trim($("#progs").val());
-    const habilidades = $.trim($("#habilidades").val());
-    const slaboral = $.trim($("#slaboral").val());
-    const area = $.trim($("#area").val());
-    const modalidad = $.trim($("#modalidad").val());
-    const salariomin = $.trim($("#salariomin").val());
-    const dv = $(".dv:checked").val();
-    const dcr = $(".dcr:checked").val();
-
-    //----------------------FOTO
-    var fd = new FormData();
-    var files = $("#foto")[0].files;
-    // Check file selected or not
-    if (files.length > 0) {
-      fd.append("foto", files[0]);
-    }
-
-    $.ajax({
-      url: "../db/archivos.php",
-      type: "POST",
-      datatype: "json",
-      data: fd,
-      contentType: false,
-      processData: false,
-      success: (data) => {
-        console.log(data);
-      },
-    });
-    //----------------------------------PDF
-    var fd = new FormData();
-    var files = $("#pdf")[0].files;
-    // Check file selected or not
-    if (files.length > 0) {
-      fd.append("pdf", files[0]);
-    }
-
-    $.ajax({
-      url: "../db/archivos.php",
-      type: "POST",
-      datatype: "json",
-      data: fd,
-      contentType: false,
-      processData: false,
-      success: (data) => {
-        console.log(data);
-      },
-    });
-
-    /*
-    $.ajax({
-      url: 'upload.php',
-      type: 'post',
-      data: fd,
-      contentType: false,
-      processData: false,
-      success: function(response){
-         if(response != 0){
-            $("#img").attr("src",response); 
-            $(".preview img").show(); // Display image element
-         }else{
-            alert('file not uploaded');
-         }
-      },
-   });*/
-
-    $.ajax({
-      url: "../db/multi_form_action.php",
-      type: "POST",
-      datatype: "json",
-      data: {
-        usuario: usuario,
-        apellido: apellido,
-        dni: dni,
-        email: email,
-        fechanacimiento: fechanacimiento,
-        genero: genero,
-        ecivil: ecivil,
-        contacto: contacto,
-        domicilio: domicilio,
-        localidad: localidad,
-        departamento: departamento,
-        provincia: provincia,
-        pais: pais,
-        licencia: licencia,
-        auto: auto,
-        discapacidades: discapacidades,
-        carh: carh,
-        cursos: cursos,
-        idiomas: idiomas,
-        progs: progs,
-        habilidades: habilidades,
-        slaboral: slaboral,
-        area: area,
-        modalidad: modalidad,
-        salariomin: salariomin,
-        dv: dv,
-        dcr: dcr,
-      },
-      success: (data) => {
-        if (data === "false") {
-          Swal.fire({
-            icon: "success",
-            title: "¡Guardado correctamente!",
-            confirmButtonColor: "#ffa361",
-            confirmButtonText: "Entrar",
-          });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Ups! No se pudo guardar correctamente",
-          });
+      var idiomas = [];
+      $(":checkbox[name=idiomas]").each(function () {
+        if (this.checked) {
+          // agregas cada elemento.
+          idiomas.push($(this).val());
         }
-      },
-    });
-    return true;
+      });
+
+      const progs = $.trim($("#progs").val());
+      const habilidades = $.trim($("#habilidades").val());
+      const slaboral = $.trim($("#slaboral").val());
+      const area = $.trim($("#area").val());
+      const modalidad = $.trim($("#modalidad").val());
+      const salariomin = $.trim($("#salariomin").val());
+      const dv = $(".dv:checked").val();
+      const dcr = $(".dcr:checked").val();
+
+      //----------------------FOTO
+      var fd = new FormData();
+      var files = $("#foto")[0].files;
+      // Check file selected or not
+      if (files.length > 0) {
+        fd.append("foto", files[0]);
+      }
+      //----------------------------------PDF
+      var fd = new FormData();
+      var files = $("#pdf")[0].files;
+      // Check file selected or not
+      if (files.length > 0) {
+        fd.append("pdf", files[0]);
+      }
+
+      $.ajax({
+        url: "../db/archivos.php",
+        type: "POST",
+        datatype: "json",
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: () => {
+          //console.log(data);
+        },
+      });
+
+      $.ajax({
+        url: "../db/archivos.php",
+        type: "POST",
+        datatype: "json",
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          //console.log(data);
+        },
+      });
+
+      $.ajax({
+        url: "../db/multi_form_action.php",
+        type: "POST",
+        datatype: "json",
+        data: {
+          usuario: usuario,
+          apellido: apellido,
+          dni: dni,
+          email: email,
+          fechanacimiento: fechanacimiento,
+          genero: genero,
+          ecivil: ecivil,
+          contacto: contacto,
+          domicilio: domicilio,
+          localidad: localidad,
+          departamento: departamento,
+          provincia: provincia,
+          pais: pais,
+          licencia: licencia,
+          auto: auto,
+          discapacidades: discapacidades,
+          carh: carh,
+          cursos: cursos,
+          idiomas: idiomas,
+          progs: progs,
+          habilidades: habilidades,
+          slaboral: slaboral,
+          area: area,
+          modalidad: modalidad,
+          salariomin: salariomin,
+          dv: dv,
+          dcr: dcr,
+        },
+        success: (data) => {
+          if (data === "false") {
+            Swal.fire({
+              icon: "success",
+              title: "¡Guardado correctamente!",
+              confirmButtonColor: "#ffa361",
+              confirmButtonText: "Entrar",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Ups! No se pudo guardar correctamente",
+            });
+          }
+        },
+      });
+      return true;
+    }
   });
 
   $("#licsi").click(function () {

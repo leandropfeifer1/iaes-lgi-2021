@@ -62,7 +62,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 
-			<fieldset>
+			<fieldset class="personales">
 			<legend>Datos personales:</legend>				
 
 				<div class="form-group">
@@ -91,7 +91,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="fechanacimiento">Fecha de nacimiento:</label>
-					<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
+					<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento">
 					<span id="error_fechanacimiento" class="text-danger"></span>
 				</div>
 
@@ -117,7 +117,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="contacto">Telefono:</label>
-					<input type="tel" class="form-control" id="contacto" name="contacto" maxlength="30">
+					<input type="number" class="form-control" id="contacto" name="contacto" maxlength="30">
 					<span id="error_contacto" class="text-danger"></span>
 				</div>
 
@@ -305,7 +305,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-			<fieldset>
+			<fieldset class="academicos">
 			<legend>Datos Academicos:</legend>
 				<div class="form-group">
 					<label for="carh">Carrera hechas:</label>
@@ -342,7 +342,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			</fieldset>
 
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-			<fieldset>
+			<fieldset class="habilidades">
 			<legend>Conocimientos y habilidades:</legend>
 				<div class="form-group" id="idiomas">
 					<label for=""> Idiomas:</label>
@@ -370,7 +370,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<input type="button" id="sig4" name="next" class="next-form btn btn-info" value="Siguiente" /><span id="error3" class="text-danger"></span><br><br>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-			<fieldset>
+			<fieldset class="laborales">
 			<legend>Preferencias laborales:</legend>
 
 				<div class="form-group">

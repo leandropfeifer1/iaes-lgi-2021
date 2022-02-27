@@ -1,11 +1,21 @@
 $(document).ready(function () {
-  
   let edit = false;
   fetchExps();
 
   //----------------------------------------------------------------------------------------------funcion que se ejecuta al guardar
   $("#form-exp").submit(function (e) {
     e.preventDefault();
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hoy =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
 
     if ($.trim($("#empresa").val()).length == 0) {
       error_empresa = "Complete este campo";
@@ -16,7 +26,7 @@ $(document).ready(function () {
       $("#error_empresa").text(error_empresa);
       $("#empresa").removeClass("has-error");
     }
-    
+
     if ($.trim($("#puesto").val()).length == 0) {
       error_puesto = "Complete este campo";
       $("#error_puesto").text(error_puesto);
@@ -54,11 +64,19 @@ $(document).ready(function () {
       error_hasta = "";
       $("#error_hasta").text(error_hasta);
       $("#hasta").removeClass("has-error");
-      if ($.trim($("#hasta").val()) <= "1950-01-01") {
+      if (
+        $.trim($("#hasta").val()) <= "1950-01-01" ||
+        $("#fechanacimiento").val() > hoy
+      ) {
         error_hasta = "Fecha invalida";
         $("#error_hasta").text(error_hasta);
         $("#hasta").addClass("has-error");
-      } else {
+      } else if($("#desde").val() > $("#hasta").val()){
+        error_hasta = "La fecha 'Hasta' no puede ser inferior a la fecha 'Desde'";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").addClass("has-error");
+
+      }else{
         error_hasta = "";
         $("#error_hasta").text(error_hasta);
         $("#hasta").removeClass("has-error");
@@ -79,7 +97,7 @@ $(document).ready(function () {
       error_empresa != "" ||
       error_puesto != "" ||
       error_desde != "" ||
-      error_hasta != "" ||      
+      error_hasta != "" ||
       error_contacto != ""
     ) {
       error = "Campos faltantes o invalidos*";
@@ -92,8 +110,6 @@ $(document).ready(function () {
       $("#error").removeClass("has-error");
     }
 
-
-
     const postData = {
       //Toma los valores cargados en los inputs
       iduser: $("#iduser").val(),
@@ -102,11 +118,14 @@ $(document).ready(function () {
       desde: $("#desde").val(),
       hasta: $("#hasta").val(),
       contacto: $("#contacto").val(),
-      idexp: $("#idexp").val()
+      idexp: $("#idexp").val(),
     };
 
     //comprueba si se esta creando un nuevo reg o actualizando
-    const url = edit === false ? '../db/form_exp/add-exp.php' : '../db/form_exp/exp-edit.php';
+    const url =
+      edit === false
+        ? "../db/form_exp/add-exp.php"
+        : "../db/form_exp/exp-edit.php";
     console.log(url);
 
     $.post(url, postData, function (response) {
@@ -116,12 +135,10 @@ $(document).ready(function () {
       fetchExps();
       edit = false;
 
-      
       //document.getElementById('form-exp').reset();
     });
-    
   });
-//------------------------------------------------------------------------------------------------------Lista los registros
+  //------------------------------------------------------------------------------------------------------Lista los registros
   function fetchExps() {
     $.ajax({
       url: "../db/form_exp/exp-list.php",
@@ -155,34 +172,32 @@ $(document).ready(function () {
       },
     });
   }
-//---------------------------------------------------------------------------------------------Borrado
-  $(document).on('click', '.exp-delete', function() {
+  //---------------------------------------------------------------------------------------------Borrado
+  $(document).on("click", ".exp-delete", function () {
     const element = $(this)[0].parentElement.parentElement;
     const id = $(element).attr("idexp");
 
-    $.post('../db/form_exp/exp-delete.php', {id}, function(response){ 
-      //console.log(response);     
+    $.post("../db/form_exp/exp-delete.php", { id }, function (response) {
+      //console.log(response);
       fetchExps();
       $("#form-exp").trigger("reset");
     });
-
   });
-//-----------------------------------------------------------------------------------------------Editar
-  $(document).on('click', '.exp-item', function() {
+  //-----------------------------------------------------------------------------------------------Editar
+  $(document).on("click", ".exp-item", function () {
     let element = $(this)[0].parentElement.parentElement;
     let id = $(element).attr("idexp");
 
-    $.post('../db/form_exp/exp-single.php', {id}, function(response){
+    $.post("../db/form_exp/exp-single.php", { id }, function (response) {
       const exp = JSON.parse(response);
-      $('#empresa').val(exp.empresa);
-      $('#puesto').val(exp.puesto);
-      $('#desde').val(exp.desde);
-      $('#hasta').val(exp.hasta);
-      $('#contacto').val(exp.contacto);
-      $('#idexp').val(exp.idexp);
+      $("#empresa").val(exp.empresa);
+      $("#puesto").val(exp.puesto);
+      $("#desde").val(exp.desde);
+      $("#hasta").val(exp.hasta);
+      $("#contacto").val(exp.contacto);
+      $("#idexp").val(exp.idexp);
 
       edit = true;
     });
-
   });
 });

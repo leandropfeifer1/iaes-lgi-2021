@@ -6,19 +6,47 @@ $(document).ready(function () {
   total_forms = $("fieldset").length;
   //-----------------------------------------------------------------------------------------------------------------
 
-  $("form").keydown(function (e) {
+  $(".personales").keydown(function (e) {
     if (e.which == 13) {
       e.preventDefault();
       val_usuario();
-      val_academicos();
-      val_habilidades();
-      val_laborales();
     }
     var keyCode = e.keyCode || e.which;
     if (keyCode == 9) {
       val_usuario();
+    }
+  });
+
+  $(".academicos").keydown(function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
       val_academicos();
+    }
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == 9) {
+      val_academicos();
+    }
+  });
+
+  $(".habilidades").keydown(function (e) {
+    console.log("asdahhab");
+    if (e.which == 13) {
+      e.preventDefault();
       val_habilidades();
+    }
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == 9) {
+      val_academicos();
+    }
+  });
+
+  $(".laborales").keydown(function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
+      val_laborales();
+    }
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == 9) {
       val_laborales();
     }
   });
@@ -27,6 +55,17 @@ $(document).ready(function () {
     var dni_validation = /^\d{8}$/;
     var letters_validation = /^[a-zA-Z ]+$/;
     var email_validation = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hoy =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
 
     if ($.trim($("#usuario").val()).length == 0) {
       error_usuario = "Complete este campo*";
@@ -88,7 +127,10 @@ $(document).ready(function () {
       error_fechanacimiento = "Complete este campo*";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").addClass("has-error");
-    } else if ($.trim($("#fechanacimiento").val()) <= "1950-01-01") {
+    } else if (
+      $("#fechanacimiento").val() <= "1950-01-01" ||
+      $("#fechanacimiento").val() > hoy
+    ) {
       error_fechanacimiento = "Fecha invalida";
       $("#error_fechanacimiento").text(error_fechanacimiento);
       $("#fechanacimiento").addClass("has-error");

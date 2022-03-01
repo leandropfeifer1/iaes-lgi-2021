@@ -101,8 +101,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<input type="radio" class="genero" id="g2" name="genero" value="1">Hombre
 					<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer
 					<input type="radio" class="genero" id="g3" name="genero" value="3">No binario
-					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro<br>
-					<span id="error_genero" class="text-danger"></span>
+					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro  <span id="error_genero" class="text-danger"></span><br>
+					
 				</div>
 
 				<div class="form-group">
@@ -163,7 +163,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 					<tr>
 						<td>
-							<label for="localidad">Departamento:</label>
+							<label for="departamento">Departamento:</label>
 							<select name="departamento" id="departamento" class="form-control">
 								<option value=""></option>
 								<?php
@@ -200,7 +200,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 					<tr>
 						<td>
-							<label for="localidad">Provincia:</label>
+							<label for="provincia">Provincia:</label>
 							<select name="provincia" id="provincia" class="form-control">
 								<option value=""></option>
 								<?php
@@ -235,7 +235,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group">
 					<tr>
 						<td>
-							<label for="localidad">Pais:</label>
+							<label for="pais">Pais:</label>
 							<select name="pais" id="pais" class="form-control">
 								<option value=""></option>
 								<?php
@@ -286,7 +286,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 
 				<div class="form-group">
-					<label for="discapacidades">Especifique su discapacidad:</label>
+					<label for="discapacidades">Especifique su discapacidad (si tiene):</label>
 					<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 

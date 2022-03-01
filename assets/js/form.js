@@ -4,256 +4,68 @@ $(document).ready(function () {
     next_form,
     total_forms;
   total_forms = $("fieldset").length;
-  //-----------------------------------------------------------------------------------------------------------------
-
-  $(".personales").keydown(function (e) {
-    if (e.which == 13) {
-      e.preventDefault();
-      val_usuario();
-    }
-    var keyCode = e.keyCode || e.which;
-    if (keyCode == 9) {
-      val_usuario();
-    }
-  });
-
-  $(".academicos").keydown(function (e) {
-    if (e.which == 13) {
-      e.preventDefault();
-      val_academicos();
-    }
-    var keyCode = e.keyCode || e.which;
-    if (keyCode == 9) {
-      val_academicos();
+  //---------------------------------------------------------------Botones
+  $("#sig1").click(function () {
+    val_personales = val_usuario();
+    if (val_personales != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
     }
   });
-
-  $(".habilidades").keydown(function (e) {
-    console.log("asdahhab");
-    if (e.which == 13) {
-      e.preventDefault();
-      val_habilidades();
-    }
-    var keyCode = e.keyCode || e.which;
-    if (keyCode == 9) {
-      val_academicos();
+  $("#sig2").click(function () {
+    academicos = val_academicos();
+    if (academicos != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
     }
   });
-
-  $(".laborales").keydown(function (e) {
-    if (e.which == 13) {
-      e.preventDefault();
-      val_laborales();
+  $("#sig3").click(function () {
+    previous_form = $(this).parent();
+    next_form = $(this).parent().next();
+    next_form.show();
+    previous_form.hide();
+    setProgressBarValue(++form_count);
+  });
+  $("#sig4").click(function () {
+    habilidades = val_habilidades();
+    if (habilidades != "") {
+      previous_form = $(this).parent();
+      next_form = $(this).parent().next();
+      next_form.show();
+      previous_form.hide();
+      setProgressBarValue(++form_count);
     }
-    var keyCode = e.keyCode || e.which;
-    if (keyCode == 9) {
-      val_laborales();
-    }
+  });
+  $(".previous-form").click(function () {
+    previous_form = $(this).parent();
+    next_form = $(this).parent().prev();
+    next_form.show();
+    previous_form.hide();
+    setProgressBarValue(--form_count);
   });
 
   function val_usuario() {
-    var dni_validation = /^\d{8}$/;
-    var letters_validation = /^[a-zA-Z ]+$/;
-    var email_validation = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-    var hoy =
-      d.getFullYear() +
-      "-" +
-      (month < 10 ? "0" : "") +
-      month +
-      "-" +
-      (day < 10 ? "0" : "") +
-      day;
-
-    if ($.trim($("#usuario").val()).length == 0) {
-      error_usuario = "Complete este campo*";
-      $("#error_usuario").text(error_usuario);
-      $("#usuario").addClass("has-error");
-    } else if (!letters_validation.test($("#usuario").val())) {
-      error_usuario = "usuario invalido!";
-      $("#error_usuario").text(error_usuario);
-      $("#usuario").addClass("has-error");
-    } else {
-      error_usuario = "";
-      $("#error_usuario").text(error_usuario);
-      $("#usuario").removeClass("has-error");
-    }
-
-    if ($.trim($("#apellido").val()).length == 0) {
-      error_apellido = "Complete este campo*";
-      $("#error_apellido").text(error_apellido);
-      $("#apellido").addClass("has-error");
-    } else if (!letters_validation.test($("#apellido").val())) {
-      error_apellido = "apellido invalido!";
-      $("#error_apellido").text(error_apellido);
-      $("#apellido").addClass("has-error");
-    } else {
-      error_apellido = "";
-      $("#error_apellido").text(error_apellido);
-      $("#apellido").removeClass("has-error");
-    }
-
-    if ($.trim($("#dni").val()).length == 0) {
-      error_dni = "Complete este campo*";
-      $("#error_dni").text(error_dni);
-      $("#dni").addClass("has-error");
-    } else if (!dni_validation.test($("#dni").val())) {
-      error_dni = "Dni invalido!";
-      $("#error_dni").text(error_dni);
-      $("#dni").addClass("has-error");
-    } else {
-      error_dni = "";
-      $("#error_dni").text(error_dni);
-      $("#dni").removeClass("has-error");
-    }
-
-    if ($.trim($("#email").val()).length == 0) {
-      error_email = "Complete este campo*";
-      $("#error_email").text(error_email);
-      $("#email").addClass("has-error");
-    } else if (!email_validation.test($("#email").val())) {
-      error_email = "email invalido!";
-      $("#error_email").text(error_email);
-      $("#email").addClass("has-error");
-    } else {
-      error_email = "";
-      $("#error_email").text(error_email);
-      $("#email").removeClass("has-error");
-    }
-
-    if ($.trim($("#fechanacimiento").val()).length == 0) {
-      error_fechanacimiento = "Complete este campo*";
-      $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").addClass("has-error");
-    } else if (
-      $("#fechanacimiento").val() <= "1950-01-01" ||
-      $("#fechanacimiento").val() > hoy
-    ) {
-      error_fechanacimiento = "Fecha invalida";
-      $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").addClass("has-error");
-    } else {
-      error_fechanacimiento = "";
-      $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").removeClass("has-error");
-    }
-
-    if ($.trim($("#genero").val()).length == 0) {
-      error_genero = "Complete este campo*";
-      $("#error_genero").text(error_genero);
-      $("#genero").addClass("has-error");
-    } else {
-      error_genero = "";
-      $("#error_genero").text(error_genero);
-      $("#genero").removeClass("has-error");
-    }
-
-    if (!$("input[name='genero']:radio").is(":checked")) {
-      error_genero = "Complete este campo*";
-      $("#error_genero").text(error_genero);
-      $("#genero").addClass("has-error");
-    } else {
-      error_genero = "";
-      $("#error_genero").text(error_genero);
-      $("#genero").removeClass("has-error");
-    }
-
-    if ($.trim($("#contacto").val()).length == 0) {
-      error_contacto = "Complete este campo*";
-      $("#error_contacto").text(error_contacto);
-      $("#contacto").addClass("has-error");
-    } else {
-      error_contacto = "";
-      $("#error_contacto").text(error_contacto);
-      $("#contacto").removeClass("has-error");
-    }
-
-    if ($.trim($("#domicilio").val()).length == 0) {
-      error_domicilio = "Complete este campo*";
-      $("#error_domicilio").text(error_domicilio);
-      $("#domicilio").addClass("has-error");
-    } else {
-      error_domicilio = "";
-      $("#error_domicilio").text(error_domicilio);
-      $("#domicilio").removeClass("has-error");
-    }
-
-    if ($.trim($("#localidad").val()).length == 0) {
-      error_localidad = "Complete este campo*";
-      $("#error_localidad").text(error_localidad);
-      $("#localidad").addClass("has-error");
-    } else {
-      error_localidad = "";
-      $("#error_localidad").text(error_localidad);
-      $("#localidad").removeClass("has-error");
-    }
-
-    if ($.trim($("#departamento").val()).length == 0) {
-      error_departamento = "Complete este campo*";
-      $("#error_departamento").text(error_departamento);
-      $("#departamento").addClass("has-error");
-    } else {
-      error_departamento = "";
-      $("#error_departamento").text(error_departamento);
-      $("#departamento").removeClass("has-error");
-    }
-
-    if ($.trim($("#provincia").val()).length == 0) {
-      error_provincia = "Complete este campo*";
-      $("#error_provincia").text(error_provincia);
-      $("#provincia").addClass("has-error");
-    } else {
-      error_provincia = "";
-      $("#error_provincia").text(error_provincia);
-      $("#provincia").removeClass("has-error");
-    }
-
-    if ($.trim($("#pais").val()).length == 0) {
-      error_pais = "Complete este campo*";
-      $("#error_pais").text(error_pais);
-      $("#pais").addClass("has-error");
-    } else {
-      error_pais = "";
-      $("#error_pais").text(error_pais);
-      $("#pais").removeClass("has-error");
-    }
-
-    if (!$("input[name='licencia']:radio").is(":checked")) {
-      error_licencia = "Complete este campo*";
-      $("#error_licencia").text(error_licencia);
-      $("#licencia").addClass("has-error");
-    } else {
-      error_licencia = "";
-      $("#error_licencia").text(error_licencia);
-      $("#liceerror_licencia").removeClass("has-error");
-      if ($("#licsi").is(":checked")) {
-        if (!$("input[name='auto']:radio").is(":checked")) {
-          error_auto = "";
-          $("#error_licencia").text(error_auto);
-          $("#licencia").removeClass("has-error");
-        } else {
-          error_auto = "";
-          $("#error_auto").text(error_auto);
-          $("#liceerror_auto").removeClass("has-error");
-        }
-      }
-    }
-
     if (
-      error_usuario != "" ||
-      error_apellido != "" ||
-      error_email != "" ||
-      error_dni != "" ||
-      error_fechanacimiento != "" ||
-      error_genero != "" ||
-      error_contacto != "" ||
-      error_domicilio != "" ||
-      error_localidad != "" ||
-      error_departamento != "" ||
-      error_provincia != "" ||
-      error_pais != ""
+      val_nombre() != "" ||
+      val_apellido() != "" ||
+      val_dni() != "" ||
+      val_fechanacimiento() != "" ||
+      val_email() != "" ||
+      val_genero() != "" ||
+      val_contacto() != "" ||
+      val_domicilio() != "" ||
+      val_localidad() != "" ||
+      val_departamento() != "" ||
+      val_provincia() != "" ||
+      val_pais() != "" ||
+      val_licencia() != "" ||
+      val_auto() != ""
     ) {
       error = " Campos faltantes o invalidos*";
       $("#error").text(error);
@@ -266,116 +78,35 @@ $(document).ready(function () {
     }
   }
 
-  $("#sig1").click(function () {
-    val_personales = val_usuario();
-    if (val_personales != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
-    }
-  });
-
   function val_academicos() {
-    if ($.trim($("#carh").val()).length == 0) {
-      error_carh = "Complete este campo";
-      $("#error_carh").text(error_carh);
-      $("#carh").addClass("has-error");
-    } else {
-      error_carh = "";
-      $("#error_carh").text(error_carh);
-      $("#carh").removeClass("has-error");
-    }
-
-    if (error_carh != "") {
+    if (val_carrera() != "") {
       error = " Campos faltantes o invalidos*";
       $("#error2").text(error);
       $("#error2").addClass("has-error");
       return false;
     } else {
+      console.log("asddddddddd");
       error = "";
       $("#error2").text(error);
       $("#error2").removeClass("has-error");
     }
   }
 
-  $("#sig2").click(function () {
-    academicos = val_academicos();
-    if (academicos != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
-    }
-  });
-  //-----------------------------------------------------------------------------------------------------------------
-  $("#sig3").click(function () {
-    previous_form = $(this).parent();
-    next_form = $(this).parent().next();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(++form_count);
-  });
-  //-----------------------------------------------------------------------------------------------------------------
   function val_habilidades() {
-    var error_idiomas = "";
+    val_idiomas();
 
-    // Obtener hijos dentro de etiqueta <div>
-    var cont = document.getElementById("idiomas").children;
-    var i = 0;
-    var al_menos_uno = false;
-    //Recorrido de checkbox's
-    while (i < cont.length) {
-      // Verifica si el elemento es un checkbox
-      if (cont[i].tagName == "INPUT" && cont[i].type == "checkbox") {
-        // Verifica si esta checked
-        if (cont[i].checked) {
-          al_menos_uno = true;
-        }
-      }
-      i++;
-    }
-
-    if (!al_menos_uno) {
+    if (!val_idiomas()) {
       error = " Campos faltantes o invalidos*";
       $("#error3").text(error);
       $("#error3").addClass("has-error");
-
-      error_idiomas = "Complete este campo";
-      $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").addClass("has-error");
       return false;
     } else {
       error = "";
       $("#error3").text(error);
       $("#error3").removeClass("has-error");
-
-      error_idiomas = "";
-      $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").removeClass("has-error");
     }
   }
 
-  $("#sig4").click(function () {
-    habilidades = val_habilidades();
-    if (habilidades != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
-    }
-  });
-  //-----------------------------------------------------------------------------------------------------------------
-  $(".previous-form").click(function () {
-    previous_form = $(this).parent();
-    next_form = $(this).parent().prev();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(--form_count);
-  });
   //-----------------------------------------------------------------------------------------------------------------
   setProgressBarValue(form_count);
   function setProgressBarValue(value) {
@@ -388,83 +119,20 @@ $(document).ready(function () {
 
   //-----------------------------------------------------------------------------------------------------------------
   function val_laborales() {
-    if ($.trim($("#slaboral").val()).length == 0) {
-      error_slaboral = "Complete este campo";
-      $("#error_slaboral").text(error_slaboral);
-      $("#slaboral").addClass("has-error");
-    } else {
-      error_slaboral = "";
-      $("#error_slaboral").text(error_slaboral);
-      $("#slaboral").removeClass("has-error");
-    }
-
-    if ($.trim($("#area").val()).length == 0) {
-      error_area = "Complete este campo";
-      $("#error_area").text(error_area);
-      $("#area").addClass("has-error");
-    } else {
-      error_area = "";
-      $("#error_area").text(error_area);
-      $("#area").removeClass("has-error");
-    }
-
-    if ($.trim($("#modalidad").val()).length == 0) {
-      error_modalidad = "Complete este campo";
-      $("#error_modalidad").text(error_modalidad);
-      $("#modalidad").addClass("has-error");
-    } else {
-      error_modalidad = "";
-      $("#error_modalidad").text(error_modalidad);
-      $("#modalidad").removeClass("has-error");
-    }
-
-    if ($.trim($("#salariomin").val()).length == 0) {
-      error_salariomin = "Complete este campo";
-      $("#error_salariomin").text(error_salariomin);
-      $("#salariomin").addClass("has-error");
-    } else {
-      error_salariomin = "";
-      $("#error_salariomin").text(error_salariomin);
-      $("#salariomin").removeClass("has-error");
-    }
-
-    if ($.trim($("#dv").val()).length == 0) {
-      error_dv = "Complete este campo";
-      $("#error_dv").text(error_dv);
-      $("#dv").addClass("has-error");
-    } else {
-      error_dv = "";
-      $("#error_dv").text(error_dv);
-      $("#dv").removeClass("has-error");
-    }
-
-    if (!$("input[name='dv']:radio").is(":checked")) {
-      error_dv = "Complete este campo";
-      $("#error_dv").text(error_dv);
-      $("#dv").addClass("has-error");
-    } else {
-      error_dv = "";
-      $("#error_dv").text(error_dv);
-      $("#dv").removeClass("has-error");
-    }
-
-    if (!$("input[name='dcr']:radio").is(":checked")) {
-      error_dcr = "Complete este campo";
-      $("#error_dcr").text(error_dcr);
-      $("#dcr").addClass("has-error");
-    } else {
-      error_dcr = "";
-      $("#error_dcr").text(error_dcr);
-      $("#dcr").removeClass("has-error");
-    }
+    val_slaboral();
+    val_area();
+    val_modalidad();
+    val_salariomin();
+    val_dv();
+    val_dcr();
 
     if (
-      error_slaboral != "" ||
-      error_area != "" ||
-      error_modalidad != "" ||
-      error_salariomin != "" ||
-      error_dv != "" ||
-      error_dcr != ""
+      val_slaboral() != "" ||
+      val_area() != "" ||
+      val_modalidad() != "" ||
+      val_salariomin() != "" ||
+      val_dv() != "" ||
+      val_dcr() != ""
     ) {
       error4 = " Campos faltantes o invalidos*";
       $("#error4").text(error4);
@@ -622,5 +290,435 @@ $(document).ready(function () {
     document.getElementById("vno").checked = false;
     var auto = document.getElementsByName("auto");
     auto.value = 0;
+  });
+
+  //----------------------------------------------------------------------------------------
+
+  function val_nombre() {
+    var letters_validation = /^[a-zA-Z ]+$/;
+    if ($.trim($("#usuario").val()).length == 0) {
+      error_usuario = "Complete este campo*";
+      $("#error_usuario").text(error_usuario);
+      $("#usuario").addClass("has-error");
+    } else if (!letters_validation.test($("#usuario").val())) {
+      error_usuario = "usuario invalido!";
+      $("#error_usuario").text(error_usuario);
+      $("#usuario").addClass("has-error");
+    } else {
+      error_usuario = "";
+      $("#error_usuario").text(error_usuario);
+      $("#usuario").removeClass("has-error");
+    }
+    return error_usuario;
+  }
+  function val_apellido() {
+    var letters_validation = /^[a-zA-Z ]+$/;
+    if ($.trim($("#apellido").val()).length == 0) {
+      error_apellido = "Complete este campo*";
+      $("#error_apellido").text(error_apellido);
+      $("#apellido").addClass("has-error");
+    } else if (!letters_validation.test($("#apellido").val())) {
+      error_apellido = "apellido invalido!";
+      $("#error_apellido").text(error_apellido);
+      $("#apellido").addClass("has-error");
+    } else {
+      error_apellido = "";
+      $("#error_apellido").text(error_apellido);
+      $("#apellido").removeClass("has-error");
+    }
+    return error_apellido;
+  }
+  function val_dni() {
+    var dni_validation = /^\d{8}$/;
+    if ($.trim($("#dni").val()).length == 0) {
+      error_dni = "Complete este campo*";
+      $("#error_dni").text(error_dni);
+      $("#dni").addClass("has-error");
+    } else if (!dni_validation.test($("#dni").val())) {
+      error_dni = "Dni invalido!";
+      $("#error_dni").text(error_dni);
+      $("#dni").addClass("has-error");
+    } else {
+      error_dni = "";
+      $("#error_dni").text(error_dni);
+      $("#dni").removeClass("has-error");
+    }
+    return error_dni;
+  }
+  function val_email() {
+    var email_validation = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+    if ($.trim($("#email").val()).length == 0) {
+      error_email = "Complete este campo*";
+      $("#error_email").text(error_email);
+      $("#email").addClass("has-error");
+    } else if (!email_validation.test($("#email").val())) {
+      error_email = "Email invalido!";
+      $("#error_email").text(error_email);
+      $("#email").addClass("has-error");
+    } else {
+      error_email = "";
+      $("#error_email").text(error_email);
+      $("#email").removeClass("has-error");
+    }
+    return error_email;
+  }
+  function val_fechanacimiento() {
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hoy =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
+    if ($.trim($("#fechanacimiento").val()).length == 0) {
+      error_fechanacimiento = "Complete este campo*";
+      $("#error_fechanacimiento").text(error_fechanacimiento);
+      $("#fechanacimiento").addClass("has-error");
+    } else if (
+      $("#fechanacimiento").val() <= "1950-01-01" ||
+      $("#fechanacimiento").val() > hoy
+    ) {
+      error_fechanacimiento = "Fecha invalida";
+      $("#error_fechanacimiento").text(error_fechanacimiento);
+      $("#fechanacimiento").addClass("has-error");
+    } else {
+      error_fechanacimiento = "";
+      $("#error_fechanacimiento").text(error_fechanacimiento);
+      $("#fechanacimiento").removeClass("has-error");
+    }
+    return error_fechanacimiento;
+  }
+  function val_genero() {
+    if (!$("input[name='genero']:radio").is(":checked")) {
+      error_genero = "Complete este campo*";
+      $("#error_genero").text(error_genero);
+      $("#genero").addClass("has-error");
+    } else {
+      error_genero = "";
+      $("#error_genero").text(error_genero);
+      $("#genero").removeClass("has-error");
+    }
+    return error_genero;
+  }
+  function val_contacto() {
+    if ($.trim($("#contacto").val()).length == 0) {
+      error_contacto = "Complete este campo*";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").addClass("has-error");
+    } else {
+      error_contacto = "";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").removeClass("has-error");
+    }
+    return error_contacto;
+  }
+  function val_domicilio() {
+    if ($.trim($("#domicilio").val()).length == 0) {
+      error_domicilio = "Complete este campo*";
+      $("#error_domicilio").text(error_domicilio);
+      $("#domicilio").addClass("has-error");
+    } else {
+      error_domicilio = "";
+      $("#error_domicilio").text(error_domicilio);
+      $("#domicilio").removeClass("has-error");
+    }
+    return error_domicilio;
+  }
+  function val_localidad() {
+    if ($.trim($("#localidad").val()).length == 0) {
+      error_localidad = "Complete este campo*";
+      $("#error_localidad").text(error_localidad);
+      $("#localidad").addClass("has-error");
+    } else {
+      error_localidad = "";
+      $("#error_localidad").text(error_localidad);
+      $("#localidad").removeClass("has-error");
+    }
+    return error_localidad;
+  }
+  function val_departamento() {
+    if ($.trim($("#departamento").val()).length == 0) {
+      error_departamento = "Complete este campo*";
+      $("#error_departamento").text(error_departamento);
+      $("#departamento").addClass("has-error");
+    } else {
+      error_departamento = "";
+      $("#error_departamento").text(error_departamento);
+      $("#departamento").removeClass("has-error");
+    }
+    return error_departamento;
+  }
+  function val_provincia() {
+    if ($.trim($("#provincia").val()).length == 0) {
+      error_provincia = "Complete este campo*";
+      $("#error_provincia").text(error_provincia);
+      $("#provincia").addClass("has-error");
+    } else {
+      error_provincia = "";
+      $("#error_provincia").text(error_provincia);
+      $("#provincia").removeClass("has-error");
+    }
+    return error_provincia;
+  }
+  function val_pais() {
+    if ($.trim($("#pais").val()).length == 0) {
+      error_pais = "Complete este campo*";
+      $("#error_pais").text(error_pais);
+      $("#pais").addClass("has-error");
+    } else {
+      error_pais = "";
+      $("#error_pais").text(error_pais);
+      $("#pais").removeClass("has-error");
+    }
+    return error_pais;
+  }
+  function val_licencia() {
+    if (!$("input[name='licencia']:radio").is(":checked")) {
+      error_licencia = "Complete este campo*";
+      $("#error_licencia").text(error_licencia);
+      $("#licencia").addClass("has-error");
+    } else {
+      error_licencia = "";
+      $("#error_licencia").text(error_licencia);
+      $("#licencia").removeClass("has-error");
+      if (!$("input[name='auto']:radio").is(":checked")) {
+        error_auto = "Complete este campo*";
+        $("#error_auto").text(error_auto);
+        $("#auto").removeClass("has-error");
+      } else {
+        error_auto = "";
+        $("#error_auto").text(error_auto);
+        $("#auto").removeClass("has-error");
+      }
+    }
+    return error_licencia;
+  }
+  function val_auto() {
+    var licencia = $("input[name='licencia']:checked").val();
+    if (licencia == 2) {
+      console.log("si");
+      if (!$("input[name='auto']:radio").is(":checked")) {
+        error_auto = "Complete este campo*";
+        $("#error_auto").text(error_auto);
+        $("#auto").removeClass("has-error");
+      } else {
+        console.log("no");
+        error_auto = "";
+        $("#error_auto").text(error_auto);
+        $("#auto").removeClass("has-error");
+      }
+    } else {
+      error_auto = "";
+      $("#error_auto").text(error_auto);
+      $("#auto").removeClass("has-error");
+    }
+    return error_auto;
+  }
+  function val_carrera() {
+    if ($("#carh").val().length == 0) {
+      error_carh = "Complete este campo*";
+      $("#error_carh").text(error_carh);
+      $("#carh").addClass("has-error");
+    } else {
+      error_carh = "";
+      $("#error_carh").text(error_carh);
+      $("#carh").removeClass("has-error");
+    }
+    return error_carh;
+  }
+  function val_idiomas() {
+    // Obtener hijos dentro de etiqueta <div>
+    var cont = document.getElementById("idiomas").children;
+    var i = 0;
+    var al_menos_uno = false;
+    //Recorrido de checkbox's
+    while (i < cont.length) {
+      // Verifica si el elemento es un checkbox
+      if (cont[i].tagName == "INPUT" && cont[i].type == "checkbox") {
+        // Verifica si esta checked
+        if (cont[i].checked) {
+          al_menos_uno = true;
+        }
+      }
+      i++;
+    }
+    if (!al_menos_uno) {
+      error_idiomas = "Complete este campo*";
+      $("#error_idiomas").text(error_idiomas);
+      $("#idiomas").addClass("has-error");
+    } else {
+      error_idiomas = "";
+      $("#error_idiomas").text(error_idiomas);
+      $("#idiomas").removeClass("has-error");
+    }
+    return al_menos_uno;
+  }
+  function val_slaboral() {
+    if ($.trim($("#slaboral").val()).length == 0) {
+      console.log("sla");
+      error_slaboral = "Complete este campo*";
+      $("#error_slaboral").text(error_slaboral);
+      $("#slaboral").addClass("has-error");
+    } else {
+      console.log("slo");
+      error_slaboral = "";
+      $("#error_slaboral").text(error_slaboral);
+      $("#slaboral").removeClass("has-error");
+    }
+    return error_slaboral;
+  }
+
+  function val_area() {
+    if ($.trim($("#area").val()).length == 0) {
+      error_area = "Complete este campo*";
+      $("#error_area").text(error_area);
+      $("#area").addClass("has-error");
+    } else {
+      error_area = "";
+      $("#error_area").text(error_area);
+      $("#area").removeClass("has-error");
+    }
+    return error_area;
+  }
+  function val_modalidad() {
+    if ($.trim($("#modalidad").val()).length == 0) {
+      error_modalidad = "Complete este campo*";
+      $("#error_modalidad").text(error_modalidad);
+      $("#modalidad").addClass("has-error");
+    } else {
+      error_modalidad = "";
+      $("#error_modalidad").text(error_modalidad);
+      $("#modalidad").removeClass("has-error");
+    }
+    return error_modalidad;
+  }
+  function val_salariomin() {
+    if ($.trim($("#salariomin").val()).length == 0) {
+      error_salariomin = "Complete este campo*";
+      $("#error_salariomin").text(error_salariomin);
+      $("#salariomin").addClass("has-error");
+    } else {
+      error_salariomin = "";
+      $("#error_salariomin").text(error_salariomin);
+      $("#salariomin").removeClass("has-error");
+    }
+    return error_salariomin;
+  }
+  function val_dv() {
+    if (!$("input[name='dv']:radio").is(":checked")) {
+      error_dv = "Complete este campo*";
+      $("#error_dv").text(error_dv);
+      $("#dv").addClass("has-error");
+    } else {
+      error_dv = "";
+      $("#error_dv").text(error_dv);
+      $("#dv").removeClass("has-error");
+    }
+    return error_dv;
+  }
+  function val_dcr() {
+    if (!$("input[name='dcr']:radio").is(":checked")) {
+      error_dcr = "Complete este campo*";
+      $("#error_dcr").text(error_dcr);
+      $("#dcr").addClass("has-error");
+    } else {
+      error_dcr = "";
+      $("#error_dcr").text(error_dcr);
+      $("#dcr").removeClass("has-error");
+    }
+    return error_dcr;
+  }
+
+  $("#usuario").keyup(function () {
+    val_nombre();
+  });
+  $("#apellido").keyup(function () {
+    val_apellido();
+  });
+  $("#dni").keyup(function () {
+    val_dni();
+  });
+  $("#email").keyup(function () {
+    val_email();
+  });
+  $("#fechanacimiento").keyup(function () {
+    val_fechanacimiento();
+  });
+  $(".genero").change(function () {
+    val_genero();
+  });
+
+  $("#contacto").keyup(function () {
+    val_contacto();
+  });
+  $("#domicilio").keyup(function () {
+    val_domicilio();
+  });
+  $("#localidad").keyup(function () {
+    val_localidad();
+  });
+  $("#localidad").change(function () {
+    val_localidad();
+  });
+  $("#departamento").keyup(function () {
+    val_departamento();
+  });
+  $("#departamento").change(function () {
+    val_departamento();
+  });
+  $("#provincia").keyup(function () {
+    val_provincia();
+  });
+  $("#provincia").change(function () {
+    val_provincia();
+  });
+  $("#pais").keyup(function () {
+    val_pais();
+  });
+  $("#pais").change(function () {
+    val_pais();
+  });
+  $(".licencia").change(function () {
+    val_licencia();
+  });
+  $(".auto").change(function () {
+    val_auto();
+  });
+  $("#carh").change(function () {
+    val_carrera();
+  });
+  $("#idiomas").change(function () {
+    val_idiomas();
+  });
+  $("#slaboral").change(function () {
+    val_slaboral();
+  });
+  $("#slaboral").keyup(function () {
+    val_slaboral();
+  });
+  $("#area").change(function () {
+    val_area();
+  });
+  $("#area").keyup(function () {
+    val_area();
+  });
+  $("#modalidad").change(function () {
+    val_modalidad();
+  });
+  $("#modalidad").keyup(function () {
+    val_modalidad();
+  });
+  $("#salariomin").keyup(function () {
+    val_salariomin();
+  });
+  $(".dv").change(function () {
+    val_dv();
+  });
+  $(".dcr").change(function () {
+    val_dcr();
   });
 });

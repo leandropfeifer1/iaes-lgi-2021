@@ -85,7 +85,6 @@ $(document).ready(function () {
       $("#error2").addClass("has-error");
       return false;
     } else {
-      console.log("asddddddddd");
       error = "";
       $("#error2").text(error);
       $("#error2").removeClass("has-error");
@@ -500,13 +499,11 @@ $(document).ready(function () {
   function val_auto() {
     var licencia = $("input[name='licencia']:checked").val();
     if (licencia == 2) {
-      console.log("si");
       if (!$("input[name='auto']:radio").is(":checked")) {
         error_auto = "Complete este campo*";
         $("#error_auto").text(error_auto);
         $("#auto").removeClass("has-error");
       } else {
-        console.log("no");
         error_auto = "";
         $("#error_auto").text(error_auto);
         $("#auto").removeClass("has-error");
@@ -559,12 +556,10 @@ $(document).ready(function () {
   }
   function val_slaboral() {
     if ($.trim($("#slaboral").val()).length == 0) {
-      console.log("sla");
       error_slaboral = "Complete este campo*";
       $("#error_slaboral").text(error_slaboral);
       $("#slaboral").addClass("has-error");
     } else {
-      console.log("slo");
       error_slaboral = "";
       $("#error_slaboral").text(error_slaboral);
       $("#slaboral").removeClass("has-error");

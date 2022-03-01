@@ -18,7 +18,7 @@ $(document).ready(function () {
       day;
 
     if ($.trim($("#empresa").val()).length == 0) {
-      error_empresa = "Complete este campo";
+      error_empresa = "Complete este campo*";
       $("#error_empresa").text(error_empresa);
       $("#empresa").addClass("has-error");
     } else {
@@ -28,7 +28,7 @@ $(document).ready(function () {
     }
 
     if ($.trim($("#puesto").val()).length == 0) {
-      error_puesto = "Complete este campo";
+      error_puesto = "Complete este campo*";
       $("#error_puesto").text(error_puesto);
       $("#puesto").addClass("has-error");
     } else {
@@ -38,7 +38,7 @@ $(document).ready(function () {
     }
 
     if ($.trim($("#desde").val()).length == 0) {
-      error_desde = "Complete este campo";
+      error_desde = "Complete este campo*";
       $("#error_desde").text(error_desde);
       $("#desde").addClass("has-error");
     } else {
@@ -57,7 +57,7 @@ $(document).ready(function () {
     }
 
     if ($.trim($("#hasta").val()).length == 0) {
-      error_hasta = "Complete este campo";
+      error_hasta = "Complete este campo*";
       $("#error_hasta").text(error_hasta);
       $("#hasta").addClass("has-error");
     } else {
@@ -84,7 +84,7 @@ $(document).ready(function () {
     }
 
     if ($.trim($("#contacto").val()).length == 0) {
-      error_contacto = "Complete este campo";
+      error_contacto = "Complete este campo*";
       $("#error_contacto").text(error_contacto);
       $("#contacto").addClass("has-error");
     } else {
@@ -200,4 +200,103 @@ $(document).ready(function () {
       edit = true;
     });
   });
+
+
+  $("#empresa").keyup(function () {
+    if ($.trim($("#empresa").val()).length == 0) {
+      error_empresa = "Complete este campo*";
+      $("#error_empresa").text(error_empresa);
+      $("#empresa").addClass("has-error");
+    } else {
+      error_empresa = "";
+      $("#error_empresa").text(error_empresa);
+      $("#empresa").removeClass("has-error");
+    }
+  });
+
+  $("#puesto").keyup(function () {
+    if ($.trim($("#puesto").val()).length == 0) {
+      error_puesto = "Complete este campo*";
+      $("#error_puesto").text(error_puesto);
+      $("#puesto").addClass("has-error");
+    } else {
+      error_puesto = "";
+      $("#error_puesto").text(error_puesto);
+      $("#puesto").removeClass("has-error");
+    }
+  });
+
+  $("#desde").keyup(function () {    
+    if ($.trim($("#desde").val()).length == 0) {
+      error_desde = "Complete este campo*";
+      $("#error_desde").text(error_desde);
+      $("#desde").addClass("has-error");
+    } else {
+      error_desde = "";
+      $("#error_desde").text(error_desde);
+      $("#desde").removeClass("has-error");
+      if ($.trim($("#desde").val()) <= "1950-01-01") {
+        error_desde = "Fecha invalida";
+        $("#error_desde").text(error_desde);
+        $("#desde").addClass("has-error");
+      } else {
+        error_desde = "";
+        $("#error_desde").text(error_desde);
+        $("#desde").removeClass("has-error");
+      }
+    }
+  });
+
+  $("#hasta").keyup(function () {
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hoy =
+      d.getFullYear() +
+      "-" +
+      (month < 10 ? "0" : "") +
+      month +
+      "-" +
+      (day < 10 ? "0" : "") +
+      day;
+    if ($.trim($("#hasta").val()).length == 0) {
+      error_hasta = "Complete este campo*";
+      $("#error_hasta").text(error_hasta);
+      $("#hasta").addClass("has-error");
+    } else {
+      error_hasta = "";
+      $("#error_hasta").text(error_hasta);
+      $("#hasta").removeClass("has-error");
+      if (
+        $.trim($("#hasta").val()) <= "1950-01-01" ||
+        $("#fechanacimiento").val() > hoy
+      ) {
+        error_hasta = "Fecha invalida";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").addClass("has-error");
+      } else if($("#desde").val() > $("#hasta").val()){
+        error_hasta = "La fecha 'Hasta' no puede ser inferior a la fecha 'Desde'";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").addClass("has-error");
+
+      }else{
+        error_hasta = "";
+        $("#error_hasta").text(error_hasta);
+        $("#hasta").removeClass("has-error");
+      }
+    }
+  });
+  
+  $("#contacto").keyup(function () {
+    if ($.trim($("#contacto").val()).length == 0) {
+      error_contacto = "Complete este campo*";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").addClass("has-error");
+    } else {
+      error_contacto = "";
+      $("#error_contacto").text(error_contacto);
+      $("#contacto").removeClass("has-error");
+    }
+  });
+
 });

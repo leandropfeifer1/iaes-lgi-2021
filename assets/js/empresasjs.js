@@ -8,10 +8,16 @@ function agregardatos(empresa,cuit,presidente,correo,telefono){
             if(r==1){
                 Swal.fire({
                     icon: 'success',
-                    title: 'Sucursal Guardada',
+                    title: 'Empresa Guardada',
                     confirmButtonColor: '#ffa361',
                     confirmButtonText: 'Ok',
                 });
+                $('#empresa').val('');
+                $('#cuit').val('');
+                $('#cuit').val('');
+                $('#presidente').val('');
+                $('#correo').val('');
+                $('#telefono').val('');
                 $('#tabla').load('empresastabla.php');
             }else{
                 alert("Fallo");

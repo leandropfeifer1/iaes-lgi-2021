@@ -13,6 +13,7 @@ session_start();
         }
         mysqli_close($conexion);
     }else{
-        header('location: ../db/logout.php');
+        // header('location: ../db/logout.php');
+         header('location: ./logout.php');
     }
 ?>

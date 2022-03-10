@@ -1,7 +1,8 @@
 <?php 
 // require('../db/verificarAdminSecretaria.php');
 
-require("../db/conexionDb.php");
+// require("../db/conexionDb.php");
+require("./conexionDb.php");
 session_start();
 // if(!isset($_SESSION['id_user'])||!isset($_SESSION['usuario'])){
 //     header('location: ./logout.php');

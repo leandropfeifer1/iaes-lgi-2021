@@ -1,5 +1,5 @@
 <?php
-$servername = "https://iaes.edu.ar/phpmyadmin/";
+$servername = "localhost";
 $username = "lgi21@iaes.edu.ar";
 $password = "lwBx0c4dPEpKsgA";
 $db = "iaes_lgi21";

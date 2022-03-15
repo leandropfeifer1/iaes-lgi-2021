@@ -48,6 +48,15 @@ function agregardatos(
           confirmButtonColor: "#ffa361",
           confirmButtonText: "Ok",
         });
+        $("#empresa").val('');
+        $("#direccion").val('');
+        $("#localidad").val('');
+        $("#departamento").val('');
+        $("#provincia").val('');
+        $("#pais").val('');
+        $("#telefono").val('');
+        $("#gerente").val('');
+        $("#central").val('');
         $("#tabla").load("sucursalestabla.php");
       }
     },
@@ -57,10 +66,10 @@ function agregaform(datos) {
   d = datos.split("||");
   $("#idsucursal").val(d[0]);
   $("#direccione").val(d[1]);
-  $("#localidad").val(d[2]);
-  $("#departamento").val(d[3]);
-  $("#provincia").val(d[4]);
-  $("#pais").val(d[5]);
+  $("#localidade").val(d[2]);
+  $("#departamentoe").val(d[3]);
+  $("#provinciae").val(d[4]);
+  $("#paise").val(d[5]);
   $("#telefonoe").val(d[6]);
   $("#gerentee").val(d[7]);
   $("#centrale").val(d[8]);
@@ -73,7 +82,6 @@ function modsucursal() {
   provinciae = $("#provinciae").val();
   paise = $("#paise").val();
   telefonoe = $("#telefonoe").val();
-  console.log(telefonoe);
   gerentee = $("#gerentee").val();
   centrale = $("#centrale").val();
 
@@ -167,7 +175,6 @@ function modsucursal() {
                     url: "../db/sucursalesmod.php",
                     data: cadena,
                     success: function (r) {
-                      console.log(r);
                       if (r == 1) {
                         Swal.fire({
                           icon: "success",
@@ -175,12 +182,20 @@ function modsucursal() {
                           confirmButtonColor: "#ffa361",
                           confirmButtonText: "Ok",
                         });
-                        $("#tabla").load("empresastabla.php");
+                        $("#idsucursal").val('');
+                        $("#direccione").val('');
+                        $("#localidade").val('');
+                        $("#departamentoe").val('');
+                        $("#provinciae").val('');
+                        $("#paise").val('');
+                        $("#telefonoe").val('');
+                        $("#gerentee").val('');
+                        $("#centrale").val('');
+                        $("#tabla").load("sucursalestabla.php");
                       } else {
-                        alert("Fallo la Modificacion");
-                        $("#tabla").load("empresastabla.php");
+                        alert("Fallo la Modificacion");                       
                       }
-                    },
+                    }
                   });
                 }
               }
@@ -225,9 +240,4 @@ function busqueda(idsucursal) {
     data: cadena,
   });
   $("tabla").load("sucursalestabla.php");
-}
-function sucbus(idsucusal) {
-  document.getElementById("sucbus").innerHTML = "";
-  $("#buscando").modal("show");
-  $("#contenido").load("bussuc.php", { idsucursal: idsucursal });
 }

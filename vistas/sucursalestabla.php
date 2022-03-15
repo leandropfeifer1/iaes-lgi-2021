@@ -45,7 +45,7 @@ require '../db/conexionDb.php';
                     $sql5 = "SELECT pais FROM `pais` WHERE idpais = ".$fila['pais']."";
                     $result5 = mysqli_query($conexion, $sql5);
                     $pais = mysqli_fetch_array($result5);
-                    $datos=$fila['idsucursal']."||".$fila['direccion']."||".$localidad[0]."||".$departamento[0]."||".$provincia[0]."||".$pais[0]."||".$fila['telefono']."||".$fila['gerente']."||".$fila['central'];
+                    $datos=$fila['idsucursal']."||".$fila['direccion']."||".$fila['localidad']."||".$fila['departamento']."||".$fila['provincia']."||".$fila['pais']."||".$fila['telefono']."||".$fila['gerente']."||".$fila['central'];
             ?>
             <tr>
                 <td><?php echo $empresa[0]?></td>

@@ -51,6 +51,20 @@ $(document).ready(function () {
   });
 
   function val_usuario() {
+      val_nombre();
+      val_apellido();
+      val_dni();
+      val_fechanacimiento();
+      val_email();
+      val_genero();
+      val_contacto();
+      val_domicilio();
+      val_localidad();
+      val_departamento();
+      val_provincia();
+      val_pais();
+      val_licencia();
+      val_auto();
     if (
       val_nombre() != "" ||
       val_apellido() != "" ||

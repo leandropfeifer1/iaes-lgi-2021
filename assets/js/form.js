@@ -204,26 +204,15 @@ $(document).ready(function () {
       // Check file selected or not
       if (files.length > 0) {
         fd.append("foto", files[0]);
+        console.log(fd);
       }
       //----------------------------------PDF
-      var fd = new FormData();
+      var cd = new FormData();
       var files = $("#pdf")[0].files;
       // Check file selected or not
       if (files.length > 0) {
-        fd.append("pdf", files[0]);
+        cd.append("pdf", files[0]);
       }
-
-      $.ajax({
-        url: "../db/archivos.php",
-        type: "POST",
-        datatype: "json",
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: () => {
-          //console.log(data);
-        },
-      });
 
       $.ajax({
         url: "../db/archivos.php",
@@ -233,7 +222,19 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         success: (data) => {
-          //console.log(data);
+          console.log(data);
+        },
+      });
+
+      $.ajax({
+        url: "../db/archivos.php",
+        type: "POST",
+        datatype: "json",
+        data: cd,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          console.log(data);
         },
       });
 

@@ -91,7 +91,7 @@ if (isset($_POST["idiomas"])) {
 }
 
 if (isset($_FILES["foto"])) {
-        $prueba ="entro";
+    echo "asdasdasdddddddd";
 	$fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
 	$row = mysqli_fetch_array($fotobd);
 	if ($row[0]) {

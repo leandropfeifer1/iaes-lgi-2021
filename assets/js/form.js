@@ -4,6 +4,12 @@ $(document).ready(function () {
     next_form,
     total_forms;
   total_forms = $("fieldset").length;
+  
+  $("#register_form").keypress(function(e) {
+    if(e.which == 13) {
+       e.preventDefault();
+    }
+ });
   //---------------------------------------------------------------Botones
   $("#sig1").click(function () {
     val_personales = val_usuario();

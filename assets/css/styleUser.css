@@ -55,6 +55,11 @@
   color: var(--main-color);
 }
 
+#title {
+  margin: 15px auto;
+  text-align: center;
+}
+
 #register_form fieldset:not(:first-of-type) {
   display: none;
 }
@@ -66,7 +71,7 @@ input:focus {
 
 fieldset {
   padding: 20px;
-  margin: 50px auto;
+  margin: 20px auto;
   background-color: #eee;
   border-radius: 3px;  
 }
@@ -81,4 +86,11 @@ legend {
 
 table{
   background-color: #eee;
+}
+
+#guardarExp{
+  margin: 0 10px; 
+}
+#cerrarExp{
+  margin: 0 10px; 
 }

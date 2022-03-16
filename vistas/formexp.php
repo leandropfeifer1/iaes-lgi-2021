@@ -78,8 +78,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         <span id="error_contacto" class="text-danger"></span>
                     </div>
                     <div class="input-group">
-                        <button type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
-                        <Input type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger"><span id="error" class="text-danger"></span>
+                        <button id="guardarExp" type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
+                        <Input id="cerrarExp" type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger"><span id="error" class="text-danger"></span>
                     </div>
                     
                 </fieldset>

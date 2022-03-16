@@ -43,27 +43,34 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			</a>
 		</div>
 		<nav class="nav">
+			<a class="nav__link" href="./editarCredenciales.php">
+				<?php
+				echo $_SESSION['usuario'];
+				//  if(isset($row['nombre'])){echo($row['nombre']);}
+				?>
+			</a>
 			<a href="../db/logout.php" class="nav__link">Salir</a>
 		</nav>
+
 	</header>
 
 	<div class="container">
-		<h2 align="center">Informacion del usuario:</h2>
+		<h1 id="title">Informacion del usuario</h1>
 
 		<div class="progress">
 			<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 		</div>
 
-		<div class="alert alert-success hide"></div>
-
 		<?php $iduser = $_SESSION['id_user']; ?>
-		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">
+		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">			
 
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-
+			<div class="container">
+				<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Ir a Experiencias Laborales</a>
+			</div>	
 			<fieldset class="personales">
-			<legend>Datos personales:</legend>				
+				<legend>Datos personales:</legend>
 
 				<div class="form-group">
 					<label for="usuario">Nombre:</label>
@@ -101,8 +108,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<input type="radio" class="genero" id="g2" name="genero" value="1">Hombre
 					<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer
 					<input type="radio" class="genero" id="g3" name="genero" value="3">No binario
-					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro  <span id="error_genero" class="text-danger"></span><br>
-					
+					<input type="radio" class="genero" id="g4" name="genero" value="4">Otro <span id="error_genero" class="text-danger"></span><br>
+
 				</div>
 
 				<div class="form-group">
@@ -306,9 +313,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="academicos">
-			<legend>Datos Academicos:</legend>
+				<legend>Datos Academicos:</legend>
 				<div class="form-group">
-					<label for="carh">Carrera hechas:</label>
+					<label for="carh">Carrera hecha:</label>
 					<select id="carh" name="carh" value="">
 						<option id="c1" value=""></option>
 						<option id="c2" value="1">Analistas de Sistemas</option>
@@ -321,29 +328,17 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
-					<textarea name="cursos" id="cursos" rows="5" cols="40" maxlength="200"></textarea>
+					<textarea class="form-control" name="cursos" id="cursos" rows="5" cols="40" maxlength="200"></textarea>
 				</div>
 
 				<input type="button" id="atras1" name="previous" class="previous-form btn btn-default" value="Atras" />
 				<input type="button" id="sig2" name="next" class="next-form btn btn-info" value="Siguiente" /><span id="error2" class="text-danger"></span><br><br>
 
-			</fieldset>
-
-
-
-			<!-- ----------------------------------------------------------------------------------------------------------------------------->
-			<fieldset>
-			<legend>Experiencias laborales:</legend>
-				<div class="form-group">
-					<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Ir a Experiencias<br></a>
-				</div>
-				<input type="button" id="atras" name="previous" class="previous-form btn btn-default" value="Atras" />
-				<input type="button" id="sig3" name="next" class="next-form btn btn-info" value="Siguiente" />
-			</fieldset>
+			</fieldset>			
 
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="habilidades">
-			<legend>Conocimientos y habilidades:</legend>
+				<legend>Conocimientos y habilidades:</legend>
 				<div class="form-group" id="idiomas">
 					<label for=""> Idiomas:</label>
 					<input type="checkbox" class="idiomas" name="idiomas" value="1" <?php if (comparar(1, $_SESSION['id_user'])) { ?> checked <?php } ?>>Inglés</input>
@@ -366,20 +361,20 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<textarea name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea><br>
 				</div>
 
-				<input type="button" id="atras2" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" id="atras3" name="previous" class="previous-form btn btn-default" value="Atras" />
 				<input type="button" id="sig4" name="next" class="next-form btn btn-info" value="Siguiente" /><span id="error3" class="text-danger"></span><br><br>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="laborales">
-			<legend>Preferencias laborales:</legend>
+				<legend>Preferencias laborales:</legend>
 
 				<div class="form-group">
 					<label for="slaboral">Situacion actual:</label>
 					<select id="slaboral" name="slaboral" value="">
-						<option id="s1" value=""></option>		
-						<option id="s2" value=1>Disponible</option>				
+						<option id="s1" value=""></option>
+						<option id="s2" value=1>Disponible</option>
 						<option id="s3" value=2>Ocupado</option>
-						
+
 					</select>
 					<span id="error_slaboral" class="text-danger"></span>
 				</div>
@@ -432,7 +427,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<span id="error_dcr" class="text-danger"></span>
 				</div>
 
-				<input type="button" id="atras" name="previous" class="previous-form btn btn-default" value="Atras" />
+				<input type="button" id="atras4" name="previous" class="previous-form btn btn-default" value="Atras" />
 				<input type="submit" name="submit" class="submit btn btn-success" value="Enviar" /><span id="error4" class="text-danger"></span><br><br>
 			</fieldset>
 
@@ -449,6 +444,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<script type="text/javascript" src="../assets/js/input.js"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+	<!-- Latest minified bootstrap js -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 

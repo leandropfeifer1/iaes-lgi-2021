@@ -59,7 +59,8 @@ require('../db/conexionDb.php');
     <?php
     include('../db/consultas.php');
     $iduser = $_GET["iduser"];
-
+    
+    $modalidad = modalidad($iduser);
     $usuario = datosUsuario($iduser);
     $localidad = localidad($iduser);
     $departamento = departamento($iduser);
@@ -185,7 +186,7 @@ require('../db/conexionDb.php');
                     <ul>
                         <li>Situacion actual: <?php echo $usuario['situacionlab'] == 1 ? "Dispobible" : "Ocupado" ?></li>
                         <li>Area: <?php echo $usuario['area'] ?></li>
-                        <li>Modalidad <?php echo $usuario['modalidad'] ?></li>
+                        <li>Modalidad: <?php echo ucfirst($modalidad) ?></li>
                         <li>Salario minimo aceptado: <?php echo $usuario['salariomin'] ?></li>
                         <li>Disponibilidad para viajar: <?php echo $usuario['dispoviajar'] == 1 ? "No" : "Si" ?></li>
                         <li>Disponibilidad para cambio de residencia: <?php echo $usuario['dispomuda'] == 1 ? "No" : "Si" ?></li>

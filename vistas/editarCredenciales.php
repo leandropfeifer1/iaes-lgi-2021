@@ -37,12 +37,17 @@
                     echo $_SESSION['usuario'];
                     echo '</a>';
                 }
-            ?>
+            ?>             
             <?php 
                 if(isset($_GET['tipo'])){
                     echo '<a class="header_link" href="./dashboardSecretaria.php">Volver</a>';
                 }else{
-                    echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                    if($_SESSION['id_rol'] == 3){
+                        echo '<a class="header_link" href="./dashboardUser.php">Volver</a>';
+                    } else {
+                        echo '<a class="header_link" href="./filtro.php">Volver</a>';
+                    }
+                    
                 }
             ?>
             <a class="header_link" href="../db/logout.php">Salir</a>

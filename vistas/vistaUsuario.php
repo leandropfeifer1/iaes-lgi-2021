@@ -59,7 +59,7 @@ require('../db/conexionDb.php');
     <?php
     include('../db/consultas.php');
     $iduser = $_GET["iduser"];
-    
+
     $modalidad = modalidad($iduser);
     $usuario = datosUsuario($iduser);
     $localidad = localidad($iduser);
@@ -78,6 +78,9 @@ require('../db/conexionDb.php');
         <br>
         <a id="cv" title="Descargar Archivo" class="btn btn-info" href="../db/cv/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
     </div> 
+    <div class="container">
+        <hr>
+    </div>
     
     
 

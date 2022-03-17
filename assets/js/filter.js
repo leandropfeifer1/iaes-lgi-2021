@@ -108,10 +108,15 @@ const sendRequest = () => {
             ? (tipoModalidad = "Pasantías")
             : tipoModalidad;
 
+          if(user.foto){
+            foto = "../db/images/" + user.foto;
+          } else {
+            foto = "../assets/logo.jpg";
+          }
           $(".div-datos").append(
             `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
               <div class="card-header">
-                <img src="../assets/logo.jpg" alt="logo" />
+                <img src="${foto}" alt="logo" />
               </div>
               <div class="card-body">
                   <span class="tag ${classAvailable}">${disponibilidad}</span>

@@ -4,7 +4,7 @@ require('./conexionDb.php');
 // require('./db/verificarAdminSecretaria.php');
 $data;
 if(isset($_SESSION['id_user'])){
-    $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
+    $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, foto, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
 
     if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
         $consulta .= " AND idloc in(select  iduser from carxuser 

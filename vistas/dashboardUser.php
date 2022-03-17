@@ -353,12 +353,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="progs">Que programas domina/conoce:</label>
-					<textarea name="progs" id="progs" rows="4" cols="40" placeholder="Word, Excel, Visual studio code" maxlength="200"></textarea><br>
+					<textarea class="form-control" name="progs" id="progs" rows="4" cols="40" placeholder="Word, Excel, Visual studio code" maxlength="200"></textarea><br>
 				</div>
 
 				<div class="form-group">
 					<label for="habilidades">Habilidades:</label>
-					<textarea name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea><br>
+					<textarea class="form-control" name="habilidades" id="habilidades" rows="4" cols="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea><br>
 				</div>
 
 				<input type="button" id="atras3" name="previous" class="previous-form btn btn-default" value="Atras" />

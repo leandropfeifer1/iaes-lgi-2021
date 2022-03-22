@@ -1,7 +1,6 @@
 $(".div-datos").append(
   `<div class="errorMessage">No se encontraron Resultados</div>`
 );
-console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 $("#carrera").change(() => sendRequest());
 $("#localidad").change(() => sendRequest());

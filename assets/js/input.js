@@ -46,13 +46,11 @@ $(document).ready(function () {
       switch (datos.licencia) {
         case "2":
           $("#licsi").prop("checked", true);
-          var d = document.getElementById("auto");
-          d.style.display = "block";
+          $('.auto').prop('disabled',false);
           break;
         case "1":
           $("#licno").prop("checked", true);
-          var d = document.getElementById("auto");
-          d.style.display = "none";
+          $('.auto').prop('disabled',true);
           break;
       }
 

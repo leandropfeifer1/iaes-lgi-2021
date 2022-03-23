@@ -47,6 +47,7 @@ function guardarFoto($idloc, $foto)
             $error = true;
         }
     }
+    mysqli_close($conexion);
     return $error;
 }
 
@@ -96,6 +97,7 @@ function guardarPdf($idloc, $pdf)
             $error = true;
         }
     }
+    mysqli_close($conexion);
     return $error;
 }
 

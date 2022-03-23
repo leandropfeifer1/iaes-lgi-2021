@@ -47,5 +47,5 @@ if($json){
 }
 
 
-
+mysqli_close($conexion);
 ?>

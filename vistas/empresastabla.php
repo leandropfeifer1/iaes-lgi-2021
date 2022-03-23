@@ -1,5 +1,6 @@
 <?php
 require '../db/conexionDb.php';
+mysqli_set_charset($conexion, "utf8");
 ?>
 
 <div class="row">
@@ -20,7 +21,7 @@ require '../db/conexionDb.php';
                 <td>Eliminar</td>
             </tr>
             <?php
-            
+                
                 $sql = "SELECT `idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono` FROM `empresas` WHERE 1";
 		$lista = mysqli_query($conexion, $sql);
                 while ($fila = $lista->fetch_assoc()) {

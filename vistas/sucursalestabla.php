@@ -1,5 +1,6 @@
 <?php
 require '../db/conexionDb.php';
+mysqli_set_charset($conexion, "utf8");
 ?>
 
 <div class="row">

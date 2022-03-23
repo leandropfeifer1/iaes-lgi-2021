@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('conexionDb.php');
+mysqli_set_charset($conexion, "utf8");
 //$empresa = $_POST['empresa'];
 $idsucursal = $_POST['idsucursal'];
 $direccion = $_POST['direccion'];

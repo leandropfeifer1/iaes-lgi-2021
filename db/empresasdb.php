@@ -1,5 +1,6 @@
 <?php
 require('conexionDb.php');
+mysqli_set_charset($conexion, "utf8");
 $empresa=$_POST['empresa'];
 $cuit=$_POST['cuit'];
 $presidente=$_POST['presidente'];

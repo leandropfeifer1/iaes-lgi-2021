@@ -2,7 +2,7 @@
 
 <?php 
 
-require('conexionDb.php');
+require('../conexionDb.php');
 
 $idexp = $_POST['idexp'];
 $empresa = $_POST['empresa'];
@@ -19,5 +19,5 @@ if (!$result) {
     die('Query failed!');
 }
 echo "Task Update Successfully";  
-
+mysqli_close($conexion);
 ?>

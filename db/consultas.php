@@ -5,6 +5,7 @@ function datosUsuario($iduser)
     $query = "SELECT * FROM usuario WHERE iduser = '$iduser'";
     $result = mysqli_query($conexion, $query);
     $row = mysqli_fetch_assoc($result);
+    mysqli_close($conexion);
     return $row;
 }
 
@@ -15,6 +16,7 @@ function modalidad($iduser)
     $result = mysqli_query($conexion, $query);
     $row = mysqli_fetch_array($result);
     $mod = $row[0];
+    mysqli_close($conexion);
     return $mod;
 }
 
@@ -27,6 +29,7 @@ function localidad($iduser)
         $row = mysqli_fetch_assoc($result);
         $locnom = $row['locnom'];
     }
+    mysqli_close($conexion);
     return $locnom;
 }
 
@@ -39,6 +42,7 @@ function departamento($iduser)
         $row = mysqli_fetch_assoc($result);
         $depnom = $row['depnom'];
     }
+    mysqli_close($conexion);
     return $depnom;
 }
 
@@ -51,6 +55,7 @@ function provincia($iduser)
         $row = mysqli_fetch_assoc($result);
         $provnom = $row['provnom'];
     }
+    mysqli_close($conexion);
     return $provnom;
 }
 function pais($iduser)
@@ -62,6 +67,7 @@ function pais($iduser)
         $row = mysqli_fetch_assoc($result);
         $paisnom = $row['paisnom'];
     }
+    mysqli_close($conexion);
     return $paisnom;
 }
 
@@ -77,6 +83,7 @@ function carrera($iduser)
         $row = mysqli_fetch_assoc($result);
         $carrera = $row['carrera'];
     }
+    mysqli_close($conexion);
     return $carrera;
 }
 
@@ -93,6 +100,7 @@ function idiomasbd($iduser)
         $result[$x] = $fila[0];
         $x++;
     }
+    mysqli_close($conexion);
     return $result;
 }
 
@@ -106,6 +114,7 @@ function experiencia($iduser)
     $query = "SELECT * FROM experiencia WHERE iduser='$idloc[0]'";
     $result = mysqli_query($conexion, $query);
 
+    mysqli_close($conexion);
     return $result;
 }
 function foto($iduser)
@@ -125,6 +134,7 @@ function foto($iduser)
     } else {
         $foto = "../db/images/default.png";
     }
+    mysqli_close($conexion);
     return $foto;
 }
 
@@ -145,8 +155,8 @@ function pdf($iduser)
     } else {
         $pdf = false;
     }
-
+    mysqli_close($conexion);
     return $pdf;
 }
 
-mysqli_close($conexion);
+?>

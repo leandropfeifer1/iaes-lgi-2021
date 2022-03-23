@@ -2,7 +2,7 @@
 
 <?php
 
-require('conexionDb.php');
+require('../conexionDb.php');
 $id = $_POST['id'];
 
 $query = "SELECT * FROM experiencia WHERE idexp = $id";
@@ -23,7 +23,7 @@ while ($row = mysqli_fetch_array($result)) {
         'contacto' => $row['contacto']
     );
 }
-
+mysqli_close($conexion);
 $jsonstring = json_encode($json[0]);
 echo $jsonstring;
 ?>

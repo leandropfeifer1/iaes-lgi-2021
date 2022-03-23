@@ -1,6 +1,6 @@
 
 <?php
-require('conexionDb.php');
+require('../conexionDb.php');
 
     if (isset($_POST['id'])) {
         $idexp = $_POST['id'];
@@ -10,4 +10,5 @@ require('conexionDb.php');
             die('Query failed');
         }
     }
+    mysqli_close($conexion);
 ?>

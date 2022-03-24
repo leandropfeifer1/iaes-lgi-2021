@@ -1,76 +1,195 @@
 $(document).ready(function () {
-  var form_count = 1,
-    previous_form,
-    next_form,
-    total_forms;
-  total_forms = $("fieldset").length;
+
   
-  $("#register_form").keypress(function(e) {
-    if(e.which == 13) {
-       e.preventDefault();
+  var previous_form, next_form, total_forms; //fieldsets
+  total_forms = $("fieldset").length;
+  var opacity;
+  var current = 1;
+  var total_forms = $("fieldset").length;
+
+  setProgressBar(current); 
+
+  function setProgressBar(curStep) {
+    var percent = parseFloat(100 / total_forms) * curStep;
+    percent = percent.toFixed();
+    $(".progress-bar").css("width", percent + "%");
+  }
+
+  $("#register_form").keypress(function (e) {
+    if (e.which == 13) {
+      e.preventDefault();
     }
- });
+  });
+
   //---------------------------------------------------------------Botones
   $("#sig1").click(function () {
     val_personales = val_usuario();
     if (val_personales != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
+      current_fs = $(this).parent();
+    next_form = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+
+    //show the next fieldset
+    next_form.show();
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
+
+          current_fs.css({
+            display: "none",
+            position: "relative",
+          });
+          next_form.css({ opacity: opacity });
+        },
+        duration: 500,
+      }
+    );
+    setProgressBar(++current);
     }
   });
   $("#sig2").click(function () {
     academicos = val_academicos();
     if (academicos != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
+      current_fs = $(this).parent();
+    next_form = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+
+    //show the next fieldset
+    next_form.show();
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
+
+          current_fs.css({
+            display: "none",
+            position: "relative",
+          });
+          next_form.css({ opacity: opacity });
+        },
+        duration: 500,
+      }
+    );
+    setProgressBar(++current);
     }
   });
   $("#sig3").click(function () {
-    previous_form = $(this).parent();
+    current_fs = $(this).parent();
     next_form = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+
+    //show the next fieldset
     next_form.show();
-    previous_form.hide();
-    setProgressBarValue(++form_count);
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
+
+          current_fs.css({
+            display: "none",
+            position: "relative",
+          });
+          next_form.css({ opacity: opacity });
+        },
+        duration: 500,
+      }
+    );
+    setProgressBar(++current);;
   });
   $("#sig4").click(function () {
     habilidades = val_habilidades();
     if (habilidades != "") {
-      previous_form = $(this).parent();
-      next_form = $(this).parent().next();
-      next_form.show();
-      previous_form.hide();
-      setProgressBarValue(++form_count);
+      current_fs = $(this).parent();
+    next_form = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+
+    //show the next fieldset
+    next_form.show();
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
+
+          current_fs.css({
+            display: "none",
+            position: "relative",
+          });
+          next_form.css({ opacity: opacity });
+        },
+        duration: 500,
+      }
+    );
+    setProgressBar(++current);
     }
   });
-  $(".previous-form").click(function () {
-    previous_form = $(this).parent();
-    next_form = $(this).parent().prev();
-    next_form.show();
-    previous_form.hide();
-    setProgressBarValue(--form_count);
+  $(".previous").click(function () {
+    current_fs = $(this).parent();
+    previous_form = $(this).parent().prev();
+
+    //Remove class active
+    $("#progressbar li")
+      .eq($("fieldset").index(current_fs))
+      .removeClass("active");
+
+    //show the previous fieldset
+    previous_form.show();
+
+    //hide the current fieldset with style
+    current_fs.animate(
+      { opacity: 0 },
+      {
+        step: function (now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
+
+          current_fs.css({
+            display: "none",
+            position: "relative",
+          });
+          previous_form.css({ opacity: opacity });
+        },
+        duration: 500,
+      }
+    );
+    setProgressBar(--current);
   });
 
   function val_usuario() {
-      val_nombre();
-      val_apellido();
-      val_dni();
-      val_fechanacimiento();
-      val_email();
-      val_genero();
-      val_contacto();
-      val_domicilio();
-      val_localidad();
-      val_departamento();
-      val_provincia();
-      val_pais();
-      val_licencia();
-      val_auto();
+    val_nombre();
+    val_apellido();
+    val_dni();
+    val_fechanacimiento();
+    val_email();
+    val_genero();
+    val_contacto();
+    val_domicilio();
+    val_localidad();
+    val_departamento();
+    val_provincia();
+    val_pais();
+    val_licencia();
+    val_auto();
     if (
       val_nombre() != "" ||
       val_apellido() != "" ||
@@ -124,16 +243,6 @@ $(document).ready(function () {
       $("#error3").text(error);
       $("#error3").removeClass("has-error");
     }
-  }
-
-  //-----------------------------------------------------------------------------------------------------------------
-  setProgressBarValue(form_count);
-  function setProgressBarValue(value) {
-    var percent = parseFloat(100 / total_forms) * value;
-    percent = percent.toFixed();
-    $(".progress-bar")
-      .css("width", percent + "%")
-      .html(percent + "%");
   }
 
   //-----------------------------------------------------------------------------------------------------------------
@@ -295,20 +404,24 @@ $(document).ready(function () {
       });
       return true;
     }
-  });
+  });   
+
+
+  var lic = document.getElementById("licsi").checked;
+  console.log(lic);
+  if (lic) {
+    $('.auto').prop('disabled',false);
+  } 
 
   $("#licsi").click(function () {
     var v = document.getElementById("auto");
     if (document.getElementById("licsi").checked) {
-      v.style.display = "block";
+      $('.auto').prop('disabled',false);
     }
   });
   $("#licno").click(function () {
     var v = document.getElementById("auto");
-    v.style.display = "none";
-    document.getElementById("vsi").checked = false;
-    document.getElementById("vno").checked = false;
-    var auto = document.getElementsByName("auto");
+    $('.auto').prop('disabled',true);
     auto.value = 0;
   });
 

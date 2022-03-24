@@ -9,6 +9,74 @@
   padding: 0;
 }
 
+
+#entradas > div{
+  margin: 10px 10px 10px 10px;
+  width: 100%;
+}
+
+#sig1{
+  margin: 10px 10px 10px 10px;
+}
+
+p{
+  display: inline-block ;
+  width: 300px;
+}
+
+#entradas .a{  
+  width: 500px;
+  display: inline-block ;
+}
+#entradas .b{  
+  width: 500px;
+  display: inline-block ;
+}
+
+#entradas .c{  
+  width: 200px;
+  display: inline-block ;
+}
+#entradas .d{  
+  width: 200px;
+  display: inline-block ;
+}
+
+#entradas .e{  
+  width: 500px;
+  display: inline-block ;
+}
+#entradas .f{  
+  width: 400px;
+  display: inline-block ;
+}
+
+#entradas .g{  
+  display: inline-block ;
+}
+#entradas .h{  
+  display: inline-block ;
+}
+
+
+#localizacion .localidad, .departamento, .provincia, .pais{
+  margin: 0px 10px 0px 0px;
+  display: inline-block ;
+}
+
+#localizacion .domicilio{
+  width: 300px;
+  margin: 0px 10px 0px 0px;  
+  display: inline-block ;
+}
+
+#vehiculo .lic, .aut{
+  
+  display: inline-block ;
+}
+
+
+
 /* HEADER */
 #head {
   height: 100px;
@@ -68,12 +136,22 @@ input:focus {
   border: 2px solid #000;
   background: #f3f3f3;
 }
-
+form{
+  align-items: center;
+}
 fieldset {
   padding: 20px;
   margin: 20px auto;
   background-color: #eee;
   border-radius: 3px;  
+}
+#completar{
+  padding: 15px;
+  margin: 20px auto;
+  background-color: #eee;
+  border-radius: 3px;
+  text-align: center;
+  width: inherit;
 }
 
 legend {
@@ -94,3 +172,84 @@ table{
 #cerrarExp{
   margin: 0 10px; 
 }
+
+/*----step-by-step-------*/
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: black;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    text-align: center;
+    color: black;
+}
+
+#progressbar #account:before {    
+    content: "1";
+    text-align: center;
+}
+
+#progressbar #personal:before {    
+    content: "2";
+    text-align: center;
+}
+
+#progressbar #payment:before {    
+    content: "3";
+    text-align: center;
+}
+
+#progressbar #confirm:before {    
+    content: "4";
+    text-align: center;
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: orange;
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color: orange;
+}
+/*-----------*/

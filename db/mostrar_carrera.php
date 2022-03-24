@@ -19,5 +19,5 @@ if($json){
     $jsonstring = json_encode($json[0]);
     echo $jsonstring;
 }
-
+mysqli_close($conexion);
 ?>

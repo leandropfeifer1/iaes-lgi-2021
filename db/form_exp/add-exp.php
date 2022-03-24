@@ -1,6 +1,6 @@
 
 <?php
-include('conexionDb.php');
+include('../conexionDb.php');
 
 $iduser = $_POST['iduser'];
 $empresa = $_POST['empresa'];
@@ -14,7 +14,7 @@ $result = mysqli_query($conexion, $query);
 if (!$result) {
 	die('Query failed!');
 }
-
+mysqli_close($conexion);
 ?>
 
 

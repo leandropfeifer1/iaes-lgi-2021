@@ -97,7 +97,7 @@ const sendRequest = () => {
             : tipoModalidad;
 
           $(".div-datos").append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.idbusqueda}" target="_blank" class="card">
+            `<a="_blank" class="card">
               <div class="card-header">
                 <img src="../assets/logo.jpg" alt="logo" />
               </div>
@@ -115,7 +115,7 @@ const sendRequest = () => {
                     </div>
                   </div>
                   <div class="user-info">
-                    <p>Disponibilidad: ${tipoModalidad}</p>
+                    <p>Disponibilidad: ${tipoModalidad}</p><button class="btn" onclick="confimaciondel(${user.idbusqueda})">Eliminar</button><p></>
                   </div>
               </div>
           </a>`

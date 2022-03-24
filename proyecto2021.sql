@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-02-2022 a las 21:38:37
+-- Tiempo de generación: 24-03-2022 a las 04:52:40
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -27,18 +27,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `buscaempleado` (
-  `idbusqueda` int(8) NOT NULL,
+  `idbusqueda` int(5) NOT NULL,
   `idsucursal` int(8) NOT NULL,
-  `idcarrera` int(3) NOT NULL
+  `edadmin` int(3) NOT NULL,
+  `edadmax` int(3) NOT NULL,
+  `carrera` int(2) NOT NULL,
+  `genero` int(1) NOT NULL,
+  `localidad` int(3) NOT NULL,
+  `departamento` int(5) NOT NULL,
+  `provincia` int(8) NOT NULL,
+  `disponibilidad` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `buscaempleado`
 --
 
-INSERT INTO `buscaempleado` (`idbusqueda`, `idsucursal`, `idcarrera`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+INSERT INTO `buscaempleado` (`idbusqueda`, `idsucursal`, `edadmin`, `edadmax`, `carrera`, `genero`, `localidad`, `departamento`, `provincia`, `disponibilidad`) VALUES
+(1, 2, 16, 64, 1, 1, 1, 1, 1, 1),
+(2, 4, 23, 54, 1, 2, 2, 1, 1, 2),
+(3, 9, 32, 64, 1, 4, 1, 1, 1, 3),
+(4, 4, 16, 32, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -85,10 +94,7 @@ INSERT INTO `carxuser` (`idcar`, `iduser`, `añofinal`) VALUES
 (1, 3, '2021-11-25'),
 (2, 2, '2022-11-22'),
 (4, 6, NULL),
-(1, 7, NULL),
-(1, 8, NULL),
-(1, 9, NULL),
-(1, 10, NULL);
+(1, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,8 +151,10 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
-(5, 'sdfs', 343445, 'carlos', 'asdasd', '34343'),
-(12, 'Todo Maderas', 4578965, 'Carlos', 'tes@g', '3457822');
+(5, 'Leña', 343445, 'carlos', 'asdasd', '34343'),
+(23, 'Cañon', 32423443, '32423443', 'sadasd@gmail.com', '123123'),
+(15, 'Todo ceramica', 424442, 'Pedro', 'TD', '986322'),
+(22, 'todo', 34344, '34344', 'TD', '123123');
 
 -- --------------------------------------------------------
 
@@ -172,8 +180,7 @@ INSERT INTO `experiencia` (`idexp`, `iduser`, `empresa`, `puesto`, `desde`, `has
 (3, 8, 'sdfsd', 'asdasd', '1111-11-11', '1111-11-11', '2222'),
 (31, 6, 'yghjgh', 'ghjghj', '0111-11-11', '0111-11-11', '1'),
 (30, 6, 'sdfsd', 'asdasd', '0001-11-11', '0001-11-11', '1'),
-(33, 9, 'asdasd', 'qqqq', '0002-02-22', '0002-02-22', '2'),
-(34, 10, 'arcor', 'gerente', '0001-11-11', '0001-11-11', '234234234234');
+(32, 7, 'Todo ceramica', 'sdfsd', '2022-03-01', '2022-03-15', '234234');
 
 -- --------------------------------------------------------
 
@@ -236,11 +243,7 @@ CREATE TABLE `idioxuser` (
 
 INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
 (6, 1),
-(7, 2),
-(8, 1),
-(9, 1),
-(10, 1),
-(10, 2);
+(7, 2);
 
 -- --------------------------------------------------------
 
@@ -290,12 +293,12 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`idlog`, `username`, `password`, `rol`) VALUES
+(1, 'martin', '$2y$10$r7dyAxL3qa1ScLOcEsjPEOxn0Ss9xMb7DomAwBV3iOTtPylMWOsya', 3),
 (3, 'test', '$2y$10$F45nV5H8Pg0mwtyptMyefeSxU4TYqzgm/pfgH/Yvinhv9/AJdhCCu', 3),
 (4, 'Admin', '$2y$10$9tti6lrdIduuYLz9PVJ3CuFgXoO7p.Qh3VmD1MhI7jy8FbD6HWGtG', 1),
 (5, 'test', '$2y$10$77aUT/P38UafC.Gj8nhNxOrb0aApPeNd3nEdG9ZAFSlMApY8HvZy.', 1),
-(7, 'user1', '$2y$10$U5UIKJk2/fKw/xZDXgawwusP.6d6uPWlxmPPwaedNMBy5/4vuceoW', 3),
-(10, 'martin', '$2y$10$wMp3kbg76DG2B0y6PPGTUuKLt2VNg5I5Sr4A.5uV1gNJQPDPRtSE.', 3),
-(9, 'rodolfi', '$2y$10$nn1oLwVDa3yG8PBvsfqoTe0a8fbESYnjOiq3A3AalFSsOChNM4tZ6', 3);
+(6, 'martin', '$2y$10$1drPKbdQOeuuwDMnY/SZYOgHiXjKTGdGWg.ju4PAUZl0wgZng9q22', 3),
+(7, 'user1', '$2y$10$U5UIKJk2/fKw/xZDXgawwusP.6d6uPWlxmPPwaedNMBy5/4vuceoW', 3);
 
 -- --------------------------------------------------------
 
@@ -409,8 +412,10 @@ CREATE TABLE `sucursales` (
 --
 
 INSERT INTO `sucursales` (`idsucursal`, `empresa`, `direccion`, `localidad`, `departamento`, `provincia`, `pais`, `telefono`, `gerente`, `central`) VALUES
-(1, 12, 'Los lapachos', 1, 1, 1, 1, '3213123', 'carlos', 1),
-(2, 5, 'Las Americas', 2, 1, 1, 1, '3442325', 'Pedro', 0);
+(2, 5, 'Las Americas', 1, 1, 1, 1, '3442325', 'Pedro', 1),
+(4, 15, 'jghhdf', 2, 1, 1, 1, '986322', 'dgfdg', 0),
+(9, 15, '9 de julio', 1, 8, 1, 1, '123123', 'dgfdg', 0),
+(12, 15, 'as2', 2, 1, 1, 1, 'asdas', 'dgfdg', 0);
 
 -- --------------------------------------------------------
 
@@ -458,9 +463,8 @@ INSERT INTO `usuario` (`iduser`, `usuario`, `apellido`, `fechanacimiento`, `dni`
 (1, 'Javier', 'Pineyro', '1999-05-22', 41872061, 1, 'no', 'javi@gmail.com', '3743-121293', 'Eldorado 521', 2, 1, 1, 1, 1, 'Front end', NULL, 1, 1, 1, 1, 'informatica', '50000', 1, 1, NULL, NULL, '', 0),
 (2, 'Lore', 'Lopez', '1998-11-02', 40768326, 2, 'no', 'lore@gail', '3784-322454', 'Calle 12', 1, 1, 1, 1, 1, 'No', NULL, 2, 2, 1, 1, 'administracion', '45000', 1, 2, NULL, NULL, '', 0),
 (3, 'Pedro', 'Henrriquez', '2000-09-13', 3123233, 1, 'no', 'pedro@gmail', '3754-944382', 'Av roques', 1, 1, 1, 1, 1, 'react js', NULL, 1, 2, 2, 2, 'informatica', '45000', 1, 1, NULL, NULL, '', 0),
-(15, 'marcelo', 'antoni', '1998-09-18', 12442345, 1, '', 'fhfhfhfhf@gmail.com', '323232', 'sarmiento 443', 1, 1, 1, 1, 7, '', '', 1, 1, 2, 1, 'recursos humanos', '62999', 2, 1, 'mirar para adentro', '', 'word,excel, paint', 2),
-(18, 'martin', 'bar', '1980-02-22', 11222333, 1, 'asdasd', 'martinchoo_13@hotmail.com', '234234234234', 'asdasdasd', 1, 1, 1, 1, 10, '', '', 2, 2, 1, 1, 'direccion', '123123', 2, 2, '', '', '', 2),
-(17, 'rodi', 'rodolfen', '0001-01-01', 21312312, 1, '', 'masr', '234234234234', 'asdasdasd', 1, 15, 5, 1, 9, '', '', 2, 2, 1, 1, 'direccion', '123123', 2, 2, '', '', '', 2);
+(14, 'martin', 'sdsd', '2000-11-11', 232323, 1, '', 'martinchoo_13@hotmail.com', '22', 'xsad', 8, 11, 2, 1, 6, 'dhdfh', 'Sin título 1.pdf', 1, 1, 2, 5, 'direccion', '2222', 2, 2, 'dfhdfh', 'consola.png', 'dfhdfh', 2),
+(15, 'marcelo', 'antoni', '1998-09-18', 12442345, 1, '', 'fhfhfhfhf@gmail.com', '323232', 'sarmiento 443', 1, 1, 1, 1, 7, '', '', 1, 1, 2, 1, 'recursos humanos', '62999', 2, 1, 'mirar para adentro', '', 'word,excel, paint', 2);
 
 --
 -- Índices para tablas volcadas
@@ -580,7 +584,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `buscaempleado`
 --
 ALTER TABLE `buscaempleado`
-  MODIFY `idbusqueda` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idbusqueda` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
@@ -595,12 +599,12 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
 ALTER TABLE `experiencia`
-  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idexp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
@@ -620,7 +624,7 @@ ALTER TABLE `localidad`
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idlog` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `modalidades`
 --
@@ -645,12 +649,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `iduser` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

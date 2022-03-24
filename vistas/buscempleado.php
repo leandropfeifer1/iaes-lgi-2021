@@ -9,6 +9,9 @@ require('../db/verificarCredenciales.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/filtro.css">
+    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css"> 
+    <link rel="stylesheet" href="../assets/css/register.css">
+    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <title>Buscar Alumnos</title>
 </head>
 <body>
@@ -22,7 +25,7 @@ require('../db/verificarCredenciales.php');
             </a>
         </div>
         <div class="create">
-            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+            <a id="botonCrear" href="./agregarbus.php">Nueva Busqueda</a>
         </div>
        
         <header id="header" class="header_dasboard">
@@ -90,5 +93,53 @@ require('../db/verificarCredenciales.php');
     </main>
     <script src="../jquery/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/busqueda.js"></script>
+    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 </body>
-</html>
+<script>
+function confimaciondel(idbusqueda) {
+  Swal.fire({
+    title: "Confirme",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si",
+    cancelButtonText: "No",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      borrar(idbusqueda);     
+      Swal.fire("Borrado!", "Se Elimino con Exito.", "Exito");
+    }
+  });
+}
+function borrar(idbusqueda) {
+  cadena = "idbusqueda=" + idbusqueda;
+  console.log(cadena)
+  $.ajax({
+    type: "POST",
+    url: "../db/delbus.php",
+    data: cadena,
+    success: function (r) {
+      if (r === "1") {
+        Swal.fire({
+          icon: 'success',
+          title: "Borrado",
+          confirmButtonColor: "#ffa361",
+          confirmButtonText: "Ok",
+          
+        });        
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: "Fallo al Borrar",
+          confirmButtonColor: "#ffa361",
+          confirmButtonText: "Ok",
+           
+        });
+      }
+    },
+  });
+  setTimeout("location.reload(true);",1500)
+}
+
+</script>

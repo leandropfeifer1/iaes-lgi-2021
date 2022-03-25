@@ -1,8 +1,12 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "proyecto2021";
+// $servername = "localhost";
+$servername = "https://iaes.edu.ar/phpmyadmin";
+// $username = "root";
+$username = "lgi21@iaes.edu.ar";
+// $password = "";
+$password = "lwBx0c4dPEpKsgA";
+// $db = "proyecto2021";
+$db = "iaes_lgi21";
 
 $conexion = mysqli_connect($servername, $username, $password, $db);
 

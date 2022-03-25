@@ -331,7 +331,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<label for="foto">Sube tu foto:</label>
-						<input type="file" id="foto" name="foto" accept="image/*" class="form-control">
+						<input accept="image/*" type="file" id="foto" name="foto" class="form-control">
 					</div>
 
 					<div class="col-sm-5">

@@ -423,7 +423,7 @@ $(document).ready(function () {
     }
   });
   $("#licno").click(function () {
-    var v = document.getElementById("auto");    
+    var v = document.getElementById("auto");
     $('input[name="auto"]')[0].checked = false;
     $('input[name="auto"]')[1].checked = false;
     $(".auto").prop("disabled", true);
@@ -797,3 +797,49 @@ $(document).ready(function () {
     val_dcr();
   });
 });
+
+$("#pdf").on("change", function () {
+  var ext = $(this).val().split(".").pop();
+  if ($(this).val() != "") {
+    if (ext == "pdf") {
+      if ($(this)[0].files[0].size > 1048576) {
+        console.log("El documento excede el tamaño máximo");
+        $("#modal-title").text("¡Precaución!");
+        $("#modal-msg").html(
+          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
+        );
+        $("#modal-gral").modal();
+        $(this).val("");
+      } else {
+        $("#modal-gral").hide();
+      }
+    } else {
+      $(this).val("");
+      alert("Extensión no permitida: " + ext);
+    }
+  }
+});
+
+$("#foto").on("change", function () {
+  var ext = $(this).val().split(".").pop();
+  if ($(this).val() != "") {
+    if (ext == "png" || ext == "jpeg" || ext == "jpg") {
+      if ($(this)[0].files[0].size > 1048576) {
+        console.log("El documento excede el tamaño máximo");
+        $("#modal-title").text("¡Precaución!");
+        $("#modal-msg").html(
+          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
+        );
+        $("#modal-gral").modal();
+        $(this).val("");
+      } else {
+        $("#modal-gral").hide();
+      }
+    } else {
+      $(this).val("");
+      alert("Extensión no permitida: " + ext);
+    }
+  }
+});
+
+

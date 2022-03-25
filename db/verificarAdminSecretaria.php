@@ -9,7 +9,7 @@ session_start();
             $row = mysqli_fetch_assoc($resultado);
         }
         if($row['descripcion']!='Admin' && $row['descripcion']!='Secretaria'){
-            header('location: ../db/logout.php');
+            header('location: ./logout.php');
         }
         mysqli_close($conexion);
     }else{

@@ -16,7 +16,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	}
 	mysqli_close($conexion);
 } else {
-	header('location: ../logout.php');
+	header('location: ../db/logout.php');
 }
 ?>
 

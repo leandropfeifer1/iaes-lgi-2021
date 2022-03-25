@@ -14,7 +14,7 @@
         }
         mysqli_close($conexion);
     }else{
-        header('location: ../logout.php');
+        header('location: ../db/logout.php');
     }
 ?>
 <!DOCTYPE html>

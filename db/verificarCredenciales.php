@@ -1,6 +1,7 @@
 <?php 
     session_start();
-    require('../db/conexionDb.php');
+    // require('./db/conexionDb.php');
+    require('conexionDb.php');
     
     // Si no tiene las credenciales no accede
     if(isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])){
@@ -10,7 +11,8 @@
             $row = mysqli_fetch_assoc($resultado);
         }
         if(isset($row['idrol']) && $row['idrol']!=$_SESSION['id_rol']){
-            header('location: ../db/logout.php');
+            // header('location: ../db/logout.php');
+            header('location: ./logout.php');
         }
         mysqli_close($conexion);
     }else{

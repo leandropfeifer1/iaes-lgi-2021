@@ -86,7 +86,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                     </div>
                     <div class="form-group">
                         <label for="contacto">Numero de contacto:</label>
-                        <input type="text" id="contacto" value="">
+                        <input type="number" id="contacto" value="">
                         <span id="error_contacto" class="text-danger"></span>
                     </div>
                     <div class="input-group">

@@ -5,12 +5,21 @@ require('./conexionDb.php');
 $data;
 if(isset($_SESSION['id_user'])){
     $consulta = "SELECT iduser, usuario, apellido, area, genero, situacionlab, modalidad, foto, TIMESTAMPDIFF(YEAR,fechanacimiento,CURDATE()) as 'edad' FROM usuario WHERE iduser!=0";
+    // ---------------- ESTO ESTA MAL -----------------------
+    // if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
+    //     $consulta .= " AND idloc in(select  iduser from carxuser 
+    //             where idcar in (SELECT idcar from carrera 
+    //             where idcar = ".$_POST['carrera']."))";
+    // }
+    // ------------------------------------------------------
 
+    // COMO ESTABA ANTES, arreglado
     if(isset($_POST['carrera']) && $_POST['carrera'] != 0){
-        $consulta .= " AND idloc in(select  iduser from carxuser 
+        $consulta .= " AND iduser in(select  iduser from carxuser 
                 where idcar in (SELECT idcar from carrera 
                 where idcar = ".$_POST['carrera']."))";
     }
+
     if(isset($_POST['localidad'])&& $_POST['localidad'] != 0){
         $consulta .= " AND localidad=".$_POST['localidad'];
     }

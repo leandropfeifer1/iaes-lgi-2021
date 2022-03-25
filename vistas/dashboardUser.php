@@ -43,13 +43,16 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			</a>
 		</div>
 		<nav class="nav">
+
 			<a class="nav__link" href="./editarCredenciales.php">
 				<?php
 				echo $_SESSION['usuario'];
 				//  if(isset($row['nombre'])){echo($row['nombre']);}
 				?>
 			</a>
+			<a href="formexp.php" class="nav__link">Experiencias Laborales</a>
 			<a href="../db/logout.php" class="nav__link">Salir</a>
+
 		</nav>
 
 	</header>
@@ -61,10 +64,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<!-- ----------------------------------------------------------------------------------------------------------------------------->
 		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
-
-			<div class="container">
-				<a href="formexp.php" target="_blank" class="btn btn-primary stretched-link">Ir a Experiencias Laborales</a>
-			</div>
 
 			<div class="container" id="completar">
 				Por favor, tomese unos minutos para completar el formulario. Muchas gracias.
@@ -81,44 +80,51 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 			<fieldset class="personales form-step form-step-active">
 				<legend>Datos personales:</legend>
 
-				<div id="entradas">
-					<div class="a">
 
+				<div class="form-group row">
+					<div class="col-sm-5">
 						<label for="usuario">Nombre:</label>
 						<input type="text" class="form-control" id="usuario" name="usuario" maxlength="50" placeholder="John">
 						<p id="error_usuario" class="text-danger"></p>
 					</div>
 
-					<div class="b">
+					<div class="col-sm-5">
 
 						<label for="apellido">Apellido:</label>
 						<input type="text" class="form-control" id="apellido" name="apellido" maxlength="50" placeholder="Doe">
 						<p id="error_apellido" class="text-danger"></p>
 					</div>
+				</div>
 
-					<div class="c">
+				<div class="form-group row">
+					<div class="col-sm-5">
 						<label for="fechanacimiento">Fecha de nacimiento:</label>
 						<input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento">
 						<p id="error_fechanacimiento" class="text-danger"></p>
 					</div>
 
-					<div class="d">
+					<div class="col-sm-5">
 						<label for="dni">Numero documento:</label>
 						<input type="number" class="form-control" id="dni" name="dni" maxlength="8" placeholder="123456789">
 						<p id="error_dni" class="text-danger"></p>
 					</div>
+				</div>
 
 
-					<div class="g">
+				<div class="form-group row">
+					<div class="col-sm-5">
 						<label for="genero">Genero:</label>
-						<input type="radio" class="genero" id="g2" name="genero" value="1">Hombre
-						<input type="radio" class="genero" id="g1" name="genero" value="2">Mujer
-						<input type="radio" class="genero" id="g3" name="genero" value="3">No binario
-						<input type="radio" class="genero" id="g4" name="genero" value="4">Otro <p id="error_genero" class="text-danger"></p>
+						<input type="radio" class="genero" id="g2" name="genero" value="1"> Hombre
+						<input type="radio" class="genero" id="g1" name="genero" value="2"> Mujer
+						<input type="radio" class="genero" id="g3" name="genero" value="3"> No binario
+						<input type="radio" class="genero" id="g4" name="genero" value="4"> Otro <p id="error_genero" class="text-danger"></p>
 					</div>
-					<div class="h">
+					
+				</div>
+				<div class="form-group row">
+				<div class="col-sm-3">
 						<label for="ecivil">Estado civil:</label>
-						<select id="ecivil" name="ecivil">
+						<select id="ecivil" name="ecivil" class="form-control">
 							<option id="e1" value="1"></option>
 							<option id="e2" value="2">Soltero</option>
 							<option id="e3" value="3">Casado</option>
@@ -126,229 +132,244 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<p id="error_ecivil" class="text-danger"></p>
 					</div>
 
+				</div>
 
 
-					<div class="e">
+
+				<div class="form-group row">
+					<div class="col-sm-5">
 						<label for="email">Email:</label>
 						<input type="text" class="form-control" id="email" name="email" maxlength="100" placeholder="john_doe@gmail.com">
 						<p id="error_email" class="text-danger"></p>
 
 					</div>
-					<div class="f">
+					<div class="col-sm-5">
 						<label for="contacto">Telefono:</label>
 						<input type="number" class="form-control" id="contacto" name="contacto" maxlength="30">
 						<p id="error_contacto" class="text-danger"></p>
 					</div>
-					<div id="localizacion">
-						<div class="domicilio">
-							<label for="domicilio">Domicilio:</label>
-							<input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="100">
-							<p id="error_domicilio" class="text-danger"></p>
-						</div>
+				</div>
 
 
-						<div class="localidad">
+				<div class="form-group row">
+					<div class="col-sm-8">
+						<label for="domicilio">Domicilio:</label>
+						<input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="100">
+						<p id="error_domicilio" class="text-danger"></p>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<div class="col-sm-2">
+						<td>
+							<label for="localidad">Localidad:</label>
+							<select name="localidad" id="localidad" class="form-control">
+								<option value=""></option>
+								<?php
+								include '../db/conexionDb.php';
+
+								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
+								$usloc = mysqli_query($conexion, $sql2);
+								if (mysqli_num_rows($usloc) != 0) {
+									$fila = $usloc->fetch_assoc();
+									$usloc = $fila['usloc'];
+									$locnom = $fila['locnom'];
+									echo "<option value=$usloc selected>$locnom</option>";
+								}
+
+								$sql = "SELECT * FROM localidad";
+								$lista = mysqli_query($conexion, $sql);
+								while ($fila = $lista->fetch_assoc()) {
+									if ($fila['idloc'] != $usloc) {
+										$localidad = $fila['idloc'];
+										$nombre = $fila['localidad'];
+										echo "<option value=$localidad>$nombre</option>";
+									}
+								}
+								mysqli_close($conexion);
+								?>
+							</select>
+							<p id="error_localidad" class="text-danger"></p>
+						</td>
+					</div>
+
+					<div class="col-sm-3">
+
+						<tr>
 							<td>
-								<label for="localidad">Localidad:</label>
-								<select name="localidad" id="localidad" class="form-control">
+								<label for="departamento">Departamento:</label>
+								<select name="departamento" id="departamento" class="form-control">
 									<option value=""></option>
 									<?php
 									include '../db/conexionDb.php';
 
-									$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
-									$usloc = mysqli_query($conexion, $sql2);
-									if (mysqli_num_rows($usloc) != 0) {
-										$fila = $usloc->fetch_assoc();
-										$usloc = $fila['usloc'];
-										$locnom = $fila['locnom'];
-										echo "<option value=$usloc selected>$locnom</option>";
+
+									$sql2 = "SELECT departamento.departamento AS depnom, usuario.departamento AS usdep FROM usuario, departamento WHERE usuario.idloc='$iduser' AND departamento.idep = usuario.departamento";
+									$usdep = mysqli_query($conexion, $sql2);
+									if (mysqli_num_rows($usdep) != 0) {
+										$fila = $usdep->fetch_assoc();
+										$usdep = $fila['usdep'];
+										$depnom = $fila['depnom'];
+										echo "<option value=$usdep selected>$depnom</option>";
 									}
 
-									$sql = "SELECT * FROM localidad";
+
+									$sql = "SELECT * FROM departamento";
 									$lista = mysqli_query($conexion, $sql);
 									while ($fila = $lista->fetch_assoc()) {
-										if ($fila['idloc'] != $usloc) {
-											$localidad = $fila['idloc'];
-											$nombre = $fila['localidad'];
-											echo "<option value=$localidad>$nombre</option>";
+										if ($fila['idep'] != $usdep) {
+											$id = $fila['idep'];
+											$nombre = $fila['departamento'];
+											echo "<option value=$id>$nombre</option>";
 										}
 									}
 									mysqli_close($conexion);
 									?>
 								</select>
-								<p id="error_localidad" class="text-danger"></p>
+								<p id="error_departamento" class="text-danger"></p>
 							</td>
-						</div>
-
-						<div class="departamento">
-
-							<tr>
-								<td>
-									<label for="departamento">Departamento:</label>
-									<select name="departamento" id="departamento" class="form-control">
-										<option value=""></option>
-										<?php
-										include '../db/conexionDb.php';
-
-
-										$sql2 = "SELECT departamento.departamento AS depnom, usuario.departamento AS usdep FROM usuario, departamento WHERE usuario.idloc='$iduser' AND departamento.idep = usuario.departamento";
-										$usdep = mysqli_query($conexion, $sql2);
-										if (mysqli_num_rows($usdep) != 0) {
-											$fila = $usdep->fetch_assoc();
-											$usdep = $fila['usdep'];
-											$depnom = $fila['depnom'];
-											echo "<option value=$usdep selected>$depnom</option>";
-										}
-
-
-										$sql = "SELECT * FROM departamento";
-										$lista = mysqli_query($conexion, $sql);
-										while ($fila = $lista->fetch_assoc()) {
-											if ($fila['idep'] != $usdep) {
-												$id = $fila['idep'];
-												$nombre = $fila['departamento'];
-												echo "<option value=$id>$nombre</option>";
-											}
-										}
-										mysqli_close($conexion);
-										?>
-									</select>
-									<p id="error_departamento" class="text-danger"></p>
-								</td>
-							</tr>
-						</div>
-
-						<div class="provincia">
-
-							<tr>
-								<td>
-									<label for="provincia">Provincia:</label>
-									<select name="provincia" id="provincia" class="form-control">
-										<option value=""></option>
-										<?php
-										include '../db/conexionDb.php';
-
-
-										$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
-										$usprov = mysqli_query($conexion, $sql2);
-										if (mysqli_num_rows($usprov) != 0) {
-											$fila = $usprov->fetch_assoc();
-											$usprov = $fila['usprov'];
-											$provnom = $fila['provnom'];
-											echo "<option value=$usprov selected>$provnom</option>";
-										}
-
-										$sql = "SELECT * FROM provincia";
-										$lista = mysqli_query($conexion, $sql);
-										while ($fila = $lista->fetch_assoc()) {
-											if ($fila['idpro'] != $usprov) {
-												$id = $fila['idpro'];
-												$nombre = $fila['provincia'];
-												echo "<option value=$id>$nombre</option>";
-											}
-										}
-										mysqli_close($conexion);
-										?>
-									</select>
-									<p id="error_provincia" class="text-danger"></p>
-								</td>
-							</tr>
-						</div>
-
-						<div class="pais">
-							<tr>
-								<td>
-									<label for="pais">Pais:</label>
-									<select name="pais" id="pais" class="form-control">
-										<option value=""></option>
-										<?php
-										include '../db/conexionDb.php';
-
-										$sql2 = "SELECT pais.pais AS paisnom, usuario.idpais AS uspais FROM usuario, pais WHERE usuario.idloc='$iduser' AND pais.idpais = usuario.idpais";
-										$uspais = mysqli_query($conexion, $sql2);
-										if (mysqli_num_rows($uspais) != 0) {
-											$fila = $uspais->fetch_assoc();
-											$uspais = $fila['uspais'];
-											$paisnom = $fila['paisnom'];
-											echo "<option value=$uspais selected>$paisnom</option>";
-										}
-										$sql = "SELECT * FROM pais";
-										$lista = mysqli_query($conexion, $sql);
-										while ($fila = $lista->fetch_assoc()) {
-											if ($fila['idpais'] != $uspais) {
-												$idpais = $fila['idpais'];
-												$nombre = $fila['pais'];
-												echo "<option value = $idpais >$nombre</option>";
-											}
-										}
-										mysqli_close($conexion);
-										?>
-									</select>
-									<p id="error_pais" class="text-danger"></p>
-								</td>
-							</tr>
-						</div>
+						</tr>
 					</div>
 
-					<div id="vehiculo">
-						<div class="lic">
-							<label for="licencia">Licencia de conducir:</label>
-							<input type="radio" class="licencia" name="licencia" value="2" id="licsi">Si
-							<input type="radio" class="licencia" name="licencia" value="1" id="licno">No
-							<p id="error_licencia" class="text-danger"></p>
-						</div>
+					<div class="col-sm-2">
 
-						<div id="auto" class="aut">
-							<label for="auto">Dispone de vehiculo propio:</label>
-							<input id="vsi" type="radio" class="auto" name="auto" value="2" disabled>Si
-							<input id="vno" type="radio" class="auto" name="auto" value="1" disabled>No
-							<p id="error_auto" class="text-danger"></p>
-						</div>
+						<tr>
+							<td>
+								<label for="provincia">Provincia:</label>
+								<select name="provincia" id="provincia" class="form-control">
+									<option value=""></option>
+									<?php
+									include '../db/conexionDb.php';
+
+
+									$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
+									$usprov = mysqli_query($conexion, $sql2);
+									if (mysqli_num_rows($usprov) != 0) {
+										$fila = $usprov->fetch_assoc();
+										$usprov = $fila['usprov'];
+										$provnom = $fila['provnom'];
+										echo "<option value=$usprov selected>$provnom</option>";
+									}
+
+									$sql = "SELECT * FROM provincia";
+									$lista = mysqli_query($conexion, $sql);
+									while ($fila = $lista->fetch_assoc()) {
+										if ($fila['idpro'] != $usprov) {
+											$id = $fila['idpro'];
+											$nombre = $fila['provincia'];
+											echo "<option value=$id>$nombre</option>";
+										}
+									}
+									mysqli_close($conexion);
+									?>
+								</select>
+								<p id="error_provincia" class="text-danger"></p>
+							</td>
+						</tr>
 					</div>
 
+					<div class="col-sm-2">
+						<tr>
+							<td>
+								<label for="pais">Pais:</label>
+								<select name="pais" id="pais" class="form-control">
+									<option value=""></option>
+									<?php
+									include '../db/conexionDb.php';
 
-					<div class="form-group">
+									$sql2 = "SELECT pais.pais AS paisnom, usuario.idpais AS uspais FROM usuario, pais WHERE usuario.idloc='$iduser' AND pais.idpais = usuario.idpais";
+									$uspais = mysqli_query($conexion, $sql2);
+									if (mysqli_num_rows($uspais) != 0) {
+										$fila = $uspais->fetch_assoc();
+										$uspais = $fila['uspais'];
+										$paisnom = $fila['paisnom'];
+										echo "<option value=$uspais selected>$paisnom</option>";
+									}
+									$sql = "SELECT * FROM pais";
+									$lista = mysqli_query($conexion, $sql);
+									while ($fila = $lista->fetch_assoc()) {
+										if ($fila['idpais'] != $uspais) {
+											$idpais = $fila['idpais'];
+											$nombre = $fila['pais'];
+											echo "<option value = $idpais >$nombre</option>";
+										}
+									}
+									mysqli_close($conexion);
+									?>
+								</select>
+								<p id="error_pais" class="text-danger"></p>
+							</td>
+						</tr>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-3">
+						<label for="licencia">Licencia de conducir:</label>
+						<input type="radio" class="licencia" name="licencia" value="2" id="licsi">Si
+						<input type="radio" class="licencia" name="licencia" value="1" id="licno">No
+						<p id="error_licencia" class="text-danger"></p>
+					</div>
+
+					<div id="auto" class="col-sm-4">
+						<label for="auto">Dispone de vehiculo propio:</label>
+						<input id="vsi" type="radio" class="auto" name="auto" value="2" disabled>Si
+						<input id="vno" type="radio" class="auto" name="auto" value="1" disabled>No
+						<p id="error_auto" class="text-danger"></p>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<div class="col-sm-10">
 						<label for="discapacidades">Especifique su discapacidad (si tiene):</label>
 						<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5" s="40" maxlength="200" placeholder="Dificultad para escuchar"></textarea>
 					</div>
+				</div>
 
-
-					<div class="form-group">
+				<div class="form-group row">
+					<div class="col-sm-5">
 						<label for="foto">Sube tu foto:</label>
-						<input type="file" id="foto" name="foto" accept="image/*" class="form-control">
+						<input accept="image/*" type="file" id="foto" name="foto" class="form-control">
 					</div>
 
-					<div class="form-group">
+					<div class="col-sm-5">
 						<label for="pdf">CV: </label>
 						<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
 						<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
 					</div>
-
 				</div>
-				<input type="button" id="sig1" class="btn btn-info next" value="Siguiente" /><p id="error" class="text-danger"></p>
+
+				<input type="button" id="sig1" class="btn btn-info next" value="Siguiente" />
+				<p id="error" class="text-danger"></p>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="academicos form-step">
 				<legend>Datos Academicos:</legend>
-				<div class="form-group">
-					<label for="carh">Carrera hecha:</label>
-					<select id="carh" name="carh" value="">
-						<option id="c1" value=""></option>
-						<option id="c2" value="1">Analistas de Sistemas</option>
-						<option id="c3" value="2">Turismo y Gestion Hotelera</option>
-						<option id="c4" value="3">Administración de Empresas</option>
-						<option id="c5" value="4">Régimen Aduanero</option><br>
-					</select>
-					<p id="error_carh" class="text-danger"></p>
 
+				<div class="form-group row">
+					<div class="col-sm-5">
+						<label for="carh">Carrera hecha:</label>
+						<select id="carh" name="carh" value="" class="form-control">
+							<option id="c1" value=""></option>
+							<option id="c2" value="1">Analistas de Sistemas</option>
+							<option id="c3" value="2">Turismo y Gestion Hotelera</option>
+							<option id="c4" value="3">Administración de Empresas</option>
+							<option id="c5" value="4">Régimen Aduanero</option><br>
+						</select>
+						<p id="error_carh" class="text-danger"></p>
+					</div>
 				</div>
+
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
 					<textarea class="form-control" name="cursos" id="cursos" rows="5" s="40" maxlength="200" placeholder="Refrigeracion de materiales de construccion"></textarea>
 				</div>
 
 				<input type="button" id="atras1" name="previous" class="btn btn-info previous" value="Atras" />
-				<input type="button" id="sig2" name="next" class="btn btn-info next" value="Siguiente" /><p id="error2" class="text-danger"></p><br><br>
+				<input type="button" id="sig2" name="next" class="btn btn-info next" value="Siguiente" />
+				<p id="error2" class="text-danger"></p><br><br>
 
 			</fieldset>
 
@@ -378,69 +399,76 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 
 				<input type="button" id="atras3" name="previous" class="btn btn-info previous" value="Atras" />
-				<input type="button" id="sig4" name="next" class="btn btn-info next" value="Siguiente" /><p id="error3" class="text-danger"></p><br><br>
+				<input type="button" id="sig4" name="next" class="btn btn-info next" value="Siguiente" />
+				<p id="error3" class="text-danger"></p><br><br>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="laborales form-step">
 				<legend>Preferencias laborales:</legend>
 
-				<div class="form-group">
-					<label for="slaboral">Situacion actual:</label>
-					<select id="slaboral" name="slaboral" value="">
-						<option id="s1" value=""></option>
-						<option id="s2" value=1>Disponible</option>
-						<option id="s3" value=2>Ocupado</option>
+				<div class="form-group row">
 
-					</select>
-					<p id="error_slaboral" class="text-danger"></p>
+					<div class="col-sm-2">
+						<label for="slaboral">Situacion actual:</label>
+						<select id="slaboral" name="slaboral" value="" class="form-control">
+							<option id="s1" value=""></option>
+							<option id="s2" value=1>Disponible</option>
+							<option id="s3" value=2>Ocupado</option>
+
+						</select>
+						<p id="error_slaboral" class="text-danger"></p>
+					</div>
+					<div class="col-sm-3">
+						<label for="area">Area:</label>
+						<select id="area" name="area" class="form-control">
+							<option id="s1" value=""></option>
+							<option id="s2" value="direccion">Direccion</option>
+							<option id="s3" value="recursos humanos">Recursos humanos</option>
+							<option id="s4" value="finanzas o contabilidad">Finanzas o contabilidad</option>
+							<option id="s5" value="marketing y ventas">Marketing y ventas</option>
+							<option id="s6" value="tecnología">Tecnología</option>
+							<option id="s7" value="producción">Producción</option>
+							<option id="s8" value="servicio al cliente">Servicio al cliente</option>
+						</select>
+						<p id="error_area" class="text-danger"></p>
+					</div>
+
 				</div>
 
-				<div class="form-group">
-					<label for="area">Area:</label>
-					<select id="area" name="area">
-						<option id="s1" value=""></option>
-						<option id="s2" value="direccion">Direccion</option>
-						<option id="s3" value="recursos humanos">Recursos humanos</option>
-						<option id="s4" value="finanzas o contabilidad">Finanzas o contabilidad</option>
-						<option id="s5" value="marketing y ventas">Marketing y ventas</option>
-						<option id="s6" value="tecnología">Tecnología</option>
-						<option id="s7" value="producción">Producción</option>
-						<option id="s8" value="servicio al cliente">Servicio al cliente</option>
-					</select>
-					<p id="error_area" class="text-danger"></p>
+				<div class="form-group row">
+					<div class="col-sm-3">
+						<label for="modalidad">Modalidad:</label>
+						<select id="modalidad" name="modalidad" class="form-control">
+							<option id="m0" value=""></option>
+							<option id="m1" value=1>Full-time</option>
+							<option id="m2" value=2>Part-time</option>
+							<option id="m3" value=3>Trainee</option>
+							<option id="m4" value=4>Pasantias</option>
+							<option id="m5" value=5>Sin preferencia</option>
+						</select>
+						<p id="error_modalidad" class="text-danger"></p>
+					</div>
+					<div class="col-sm-4">
+						<label for="salariomin">Salaro minimo aceptado:</label>
+						<input type="number" id="salariomin" name="salariomin" maxlength="8" class="form-control">
+						<p id="error_salariomin" class="text-danger"></p>
+					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="modalidad">Modalidad:</label>
-					<select id="modalidad" name="modalidad">
-						<option id="m0" value=""></option>
-						<option id="m1" value=1>Full-time</option>
-						<option id="m2" value=2>Part-time</option>
-						<option id="m3" value=3>Trainee</option>
-						<option id="m4" value=4>Pasantias</option>
-						<option id="m5" value=5>Sin preferencia</option>
-					</select>
-					<p id="error_modalidad" class="text-danger"></p>
-				</div>
 
-				<div class="form-group">
-					<label for="salariomin">Salaro minimo aceptado:</label>
-					<input type="number" id="salariomin" name="salariomin" maxlength="8">
-					<p id="error_salariomin" class="text-danger"></p>
-				</div>
-
-				<div class="form-group">
-					<label for="dv">Disponibilidad para viajar:</label>
-					<input type="radio" class="dv" id="dvsi" name="dv" value=2>Si
-					<input type="radio" class="dv" id="dvno" name="dv" value=1>No
-					<p id="error_dv" class="text-danger"></p>
-				</div>
-
-				<div class="form-group">
-					<label for="dcr">Disponibilidad para cambio de residencia:</label>
-					<input type="radio" class="dcr" id="dcsi" name="dcr" value=2>Si
-					<input type="radio" class="dcr" id="dcno" name="dcr" value=1>No
-					<p id="error_dcr" class="text-danger"></p>
+				<div class="form-group row">
+					<div class="col-sm-3">
+						<label for="dv">Disponibilidad para viajar:</label>
+						<input type="radio" class="dv" id="dvsi" name="dv" value=2>Si
+						<input type="radio" class="dv" id="dvno" name="dv" value=1>No
+						<p id="error_dv" class="text-danger"></p>
+					</div>
+					<div class="col-sm-5">
+						<label for="dcr">Disponibilidad para cambio de residencia:</label>
+						<input type="radio" class="dcr" id="dcsi" name="dcr" value=2>Si
+						<input type="radio" class="dcr" id="dcno" name="dcr" value=1>No
+						<p id="error_dcr" class="text-danger"></p>
+					</div>
 				</div>
 
 				<input type="button" id="atras4" name="previous" class="btn btn-info previous" value="Atras" />

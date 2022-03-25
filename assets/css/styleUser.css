@@ -9,74 +9,6 @@
   padding: 0;
 }
 
-
-#entradas > div{
-  margin: 10px 10px 10px 10px;
-  width: 100%;
-}
-
-#sig1{
-  margin: 10px 10px 10px 10px;
-}
-
-p{
-  display: inline-block ;
-  width: 300px;
-}
-
-#entradas .a{  
-  width: 500px;
-  display: inline-block ;
-}
-#entradas .b{  
-  width: 500px;
-  display: inline-block ;
-}
-
-#entradas .c{  
-  width: 200px;
-  display: inline-block ;
-}
-#entradas .d{  
-  width: 200px;
-  display: inline-block ;
-}
-
-#entradas .e{  
-  width: 500px;
-  display: inline-block ;
-}
-#entradas .f{  
-  width: 400px;
-  display: inline-block ;
-}
-
-#entradas .g{  
-  display: inline-block ;
-}
-#entradas .h{  
-  display: inline-block ;
-}
-
-
-#localizacion .localidad, .departamento, .provincia, .pais{
-  margin: 0px 10px 0px 0px;
-  display: inline-block ;
-}
-
-#localizacion .domicilio{
-  width: 300px;
-  margin: 0px 10px 0px 0px;  
-  display: inline-block ;
-}
-
-#vehiculo .lic, .aut{
-  
-  display: inline-block ;
-}
-
-
-
 /* HEADER */
 #head {
   height: 100px;
@@ -140,10 +72,11 @@ form{
   align-items: center;
 }
 fieldset {
-  padding: 20px;
+  align-content: center;
+  padding: 30px;
   margin: 20px auto;
   background-color: #eee;
-  border-radius: 3px;  
+  border-radius: 3px; 
 }
 #completar{
   padding: 15px;
@@ -252,4 +185,4 @@ table{
 .progress-bar {
     background-color: orange;
 }
-/*-----------*/
+

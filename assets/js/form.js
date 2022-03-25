@@ -1,13 +1,11 @@
 $(document).ready(function () {
-
-  
   var previous_form, next_form, total_forms; //fieldsets
   total_forms = $("fieldset").length;
   var opacity;
   var current = 1;
   var total_forms = $("fieldset").length;
 
-  setProgressBar(current); 
+  setProgressBar(current);
 
   function setProgressBar(curStep) {
     var percent = parseFloat(100 / total_forms) * curStep;
@@ -26,62 +24,66 @@ $(document).ready(function () {
     val_personales = val_usuario();
     if (val_personales != "") {
       current_fs = $(this).parent();
-    next_form = $(this).parent().next();
+      next_form = $(this).parent().next();
 
-    //Add Class Active
-    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+      //Add Class Active
+      $("#progressbar li")
+        .eq($("fieldset").index(next_form))
+        .addClass("active");
 
-    //show the next fieldset
-    next_form.show();
-    //hide the current fieldset with style
-    current_fs.animate(
-      { opacity: 0 },
-      {
-        step: function (now) {
-          // for making fielset appear animation
-          opacity = 1 - now;
+      //show the next fieldset
+      next_form.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-          current_fs.css({
-            display: "none",
-            position: "relative",
-          });
-          next_form.css({ opacity: opacity });
-        },
-        duration: 500,
-      }
-    );
-    setProgressBar(++current);
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            next_form.css({ opacity: opacity });
+          },
+          duration: 500,
+        }
+      );
+      setProgressBar(++current);
     }
   });
   $("#sig2").click(function () {
     academicos = val_academicos();
     if (academicos != "") {
       current_fs = $(this).parent();
-    next_form = $(this).parent().next();
+      next_form = $(this).parent().next();
 
-    //Add Class Active
-    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+      //Add Class Active
+      $("#progressbar li")
+        .eq($("fieldset").index(next_form))
+        .addClass("active");
 
-    //show the next fieldset
-    next_form.show();
-    //hide the current fieldset with style
-    current_fs.animate(
-      { opacity: 0 },
-      {
-        step: function (now) {
-          // for making fielset appear animation
-          opacity = 1 - now;
+      //show the next fieldset
+      next_form.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-          current_fs.css({
-            display: "none",
-            position: "relative",
-          });
-          next_form.css({ opacity: opacity });
-        },
-        duration: 500,
-      }
-    );
-    setProgressBar(++current);
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            next_form.css({ opacity: opacity });
+          },
+          duration: 500,
+        }
+      );
+      setProgressBar(++current);
     }
   });
   $("#sig3").click(function () {
@@ -110,37 +112,39 @@ $(document).ready(function () {
         duration: 500,
       }
     );
-    setProgressBar(++current);;
+    setProgressBar(++current);
   });
   $("#sig4").click(function () {
     habilidades = val_habilidades();
     if (habilidades != "") {
       current_fs = $(this).parent();
-    next_form = $(this).parent().next();
+      next_form = $(this).parent().next();
 
-    //Add Class Active
-    $("#progressbar li").eq($("fieldset").index(next_form)).addClass("active");
+      //Add Class Active
+      $("#progressbar li")
+        .eq($("fieldset").index(next_form))
+        .addClass("active");
 
-    //show the next fieldset
-    next_form.show();
-    //hide the current fieldset with style
-    current_fs.animate(
-      { opacity: 0 },
-      {
-        step: function (now) {
-          // for making fielset appear animation
-          opacity = 1 - now;
+      //show the next fieldset
+      next_form.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-          current_fs.css({
-            display: "none",
-            position: "relative",
-          });
-          next_form.css({ opacity: opacity });
-        },
-        duration: 500,
-      }
-    );
-    setProgressBar(++current);
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            next_form.css({ opacity: opacity });
+          },
+          duration: 500,
+        }
+      );
+      setProgressBar(++current);
     }
   });
   $(".previous").click(function () {
@@ -404,24 +408,25 @@ $(document).ready(function () {
       });
       return true;
     }
-  });   
-
+  });
 
   var lic = document.getElementById("licsi").checked;
   console.log(lic);
   if (lic) {
-    $('.auto').prop('disabled',false);
-  } 
+    $(".auto").prop("disabled", false);
+  }
 
   $("#licsi").click(function () {
     var v = document.getElementById("auto");
     if (document.getElementById("licsi").checked) {
-      $('.auto').prop('disabled',false);
+      $(".auto").prop("disabled", false);
     }
   });
   $("#licno").click(function () {
     var v = document.getElementById("auto");
-    $('.auto').prop('disabled',true);
+    $('input[name="auto"]')[0].checked = false;
+    $('input[name="auto"]')[1].checked = false;
+    $(".auto").prop("disabled", true);
     auto.value = 0;
   });
 
@@ -432,15 +437,12 @@ $(document).ready(function () {
     if ($.trim($("#usuario").val()).length == 0) {
       error_usuario = "Complete este campo*";
       $("#error_usuario").text(error_usuario);
-      $("#usuario").addClass("has-error");
     } else if (!letters_validation.test($("#usuario").val())) {
       error_usuario = "usuario invalido!";
       $("#error_usuario").text(error_usuario);
-      $("#usuario").addClass("has-error");
     } else {
       error_usuario = "";
       $("#error_usuario").text(error_usuario);
-      $("#usuario").removeClass("has-error");
     }
     return error_usuario;
   }
@@ -449,15 +451,12 @@ $(document).ready(function () {
     if ($.trim($("#apellido").val()).length == 0) {
       error_apellido = "Complete este campo*";
       $("#error_apellido").text(error_apellido);
-      $("#apellido").addClass("has-error");
     } else if (!letters_validation.test($("#apellido").val())) {
       error_apellido = "apellido invalido!";
       $("#error_apellido").text(error_apellido);
-      $("#apellido").addClass("has-error");
     } else {
       error_apellido = "";
       $("#error_apellido").text(error_apellido);
-      $("#apellido").removeClass("has-error");
     }
     return error_apellido;
   }
@@ -466,15 +465,12 @@ $(document).ready(function () {
     if ($.trim($("#dni").val()).length == 0) {
       error_dni = "Complete este campo*";
       $("#error_dni").text(error_dni);
-      $("#dni").addClass("has-error");
     } else if (!dni_validation.test($("#dni").val())) {
       error_dni = "Dni invalido!";
       $("#error_dni").text(error_dni);
-      $("#dni").addClass("has-error");
     } else {
       error_dni = "";
       $("#error_dni").text(error_dni);
-      $("#dni").removeClass("has-error");
     }
     return error_dni;
   }
@@ -483,15 +479,12 @@ $(document).ready(function () {
     if ($.trim($("#email").val()).length == 0) {
       error_email = "Complete este campo*";
       $("#error_email").text(error_email);
-      $("#email").addClass("has-error");
     } else if (!email_validation.test($("#email").val())) {
       error_email = "Email invalido!";
       $("#error_email").text(error_email);
-      $("#email").addClass("has-error");
     } else {
       error_email = "";
       $("#error_email").text(error_email);
-      $("#email").removeClass("has-error");
     }
     return error_email;
   }
@@ -510,18 +503,15 @@ $(document).ready(function () {
     if ($.trim($("#fechanacimiento").val()).length == 0) {
       error_fechanacimiento = "Complete este campo*";
       $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").addClass("has-error");
     } else if (
       $("#fechanacimiento").val() <= "1950-01-01" ||
       $("#fechanacimiento").val() > hoy
     ) {
       error_fechanacimiento = "Fecha invalida";
       $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").addClass("has-error");
     } else {
       error_fechanacimiento = "";
       $("#error_fechanacimiento").text(error_fechanacimiento);
-      $("#fechanacimiento").removeClass("has-error");
     }
     return error_fechanacimiento;
   }
@@ -529,11 +519,9 @@ $(document).ready(function () {
     if (!$("input[name='genero']:radio").is(":checked")) {
       error_genero = "Complete este campo*";
       $("#error_genero").text(error_genero);
-      $("#genero").addClass("has-error");
     } else {
       error_genero = "";
       $("#error_genero").text(error_genero);
-      $("#genero").removeClass("has-error");
     }
     return error_genero;
   }
@@ -541,11 +529,9 @@ $(document).ready(function () {
     if ($.trim($("#contacto").val()).length == 0) {
       error_contacto = "Complete este campo*";
       $("#error_contacto").text(error_contacto);
-      $("#contacto").addClass("has-error");
     } else {
       error_contacto = "";
       $("#error_contacto").text(error_contacto);
-      $("#contacto").removeClass("has-error");
     }
     return error_contacto;
   }
@@ -553,11 +539,9 @@ $(document).ready(function () {
     if ($.trim($("#domicilio").val()).length == 0) {
       error_domicilio = "Complete este campo*";
       $("#error_domicilio").text(error_domicilio);
-      $("#domicilio").addClass("has-error");
     } else {
       error_domicilio = "";
       $("#error_domicilio").text(error_domicilio);
-      $("#domicilio").removeClass("has-error");
     }
     return error_domicilio;
   }
@@ -565,11 +549,9 @@ $(document).ready(function () {
     if ($.trim($("#localidad").val()).length == 0) {
       error_localidad = "Complete este campo*";
       $("#error_localidad").text(error_localidad);
-      $("#localidad").addClass("has-error");
     } else {
       error_localidad = "";
       $("#error_localidad").text(error_localidad);
-      $("#localidad").removeClass("has-error");
     }
     return error_localidad;
   }
@@ -577,11 +559,9 @@ $(document).ready(function () {
     if ($.trim($("#departamento").val()).length == 0) {
       error_departamento = "Complete este campo*";
       $("#error_departamento").text(error_departamento);
-      $("#departamento").addClass("has-error");
     } else {
       error_departamento = "";
       $("#error_departamento").text(error_departamento);
-      $("#departamento").removeClass("has-error");
     }
     return error_departamento;
   }
@@ -589,11 +569,9 @@ $(document).ready(function () {
     if ($.trim($("#provincia").val()).length == 0) {
       error_provincia = "Complete este campo*";
       $("#error_provincia").text(error_provincia);
-      $("#provincia").addClass("has-error");
     } else {
       error_provincia = "";
       $("#error_provincia").text(error_provincia);
-      $("#provincia").removeClass("has-error");
     }
     return error_provincia;
   }
@@ -601,11 +579,9 @@ $(document).ready(function () {
     if ($.trim($("#pais").val()).length == 0) {
       error_pais = "Complete este campo*";
       $("#error_pais").text(error_pais);
-      $("#pais").addClass("has-error");
     } else {
       error_pais = "";
       $("#error_pais").text(error_pais);
-      $("#pais").removeClass("has-error");
     }
     return error_pais;
   }
@@ -613,20 +589,9 @@ $(document).ready(function () {
     if (!$("input[name='licencia']:radio").is(":checked")) {
       error_licencia = "Complete este campo*";
       $("#error_licencia").text(error_licencia);
-      $("#licencia").addClass("has-error");
     } else {
       error_licencia = "";
       $("#error_licencia").text(error_licencia);
-      $("#licencia").removeClass("has-error");
-      if (!$("input[name='auto']:radio").is(":checked")) {
-        error_auto = "Complete este campo*";
-        $("#error_auto").text(error_auto);
-        $("#auto").removeClass("has-error");
-      } else {
-        error_auto = "";
-        $("#error_auto").text(error_auto);
-        $("#auto").removeClass("has-error");
-      }
     }
     return error_licencia;
   }
@@ -636,16 +601,13 @@ $(document).ready(function () {
       if (!$("input[name='auto']:radio").is(":checked")) {
         error_auto = "Complete este campo*";
         $("#error_auto").text(error_auto);
-        $("#auto").removeClass("has-error");
       } else {
         error_auto = "";
         $("#error_auto").text(error_auto);
-        $("#auto").removeClass("has-error");
       }
     } else {
       error_auto = "";
       $("#error_auto").text(error_auto);
-      $("#auto").removeClass("has-error");
     }
     return error_auto;
   }
@@ -653,11 +615,9 @@ $(document).ready(function () {
     if ($("#carh").val().length == 0) {
       error_carh = "Complete este campo*";
       $("#error_carh").text(error_carh);
-      $("#carh").addClass("has-error");
     } else {
       error_carh = "";
       $("#error_carh").text(error_carh);
-      $("#carh").removeClass("has-error");
     }
     return error_carh;
   }
@@ -680,11 +640,9 @@ $(document).ready(function () {
     if (!al_menos_uno) {
       error_idiomas = "Complete este campo*";
       $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").addClass("has-error");
     } else {
       error_idiomas = "";
       $("#error_idiomas").text(error_idiomas);
-      $("#idiomas").removeClass("has-error");
     }
     return al_menos_uno;
   }
@@ -692,11 +650,9 @@ $(document).ready(function () {
     if ($.trim($("#slaboral").val()).length == 0) {
       error_slaboral = "Complete este campo*";
       $("#error_slaboral").text(error_slaboral);
-      $("#slaboral").addClass("has-error");
     } else {
       error_slaboral = "";
       $("#error_slaboral").text(error_slaboral);
-      $("#slaboral").removeClass("has-error");
     }
     return error_slaboral;
   }
@@ -705,11 +661,9 @@ $(document).ready(function () {
     if ($.trim($("#area").val()).length == 0) {
       error_area = "Complete este campo*";
       $("#error_area").text(error_area);
-      $("#area").addClass("has-error");
     } else {
       error_area = "";
       $("#error_area").text(error_area);
-      $("#area").removeClass("has-error");
     }
     return error_area;
   }
@@ -717,11 +671,9 @@ $(document).ready(function () {
     if ($.trim($("#modalidad").val()).length == 0) {
       error_modalidad = "Complete este campo*";
       $("#error_modalidad").text(error_modalidad);
-      $("#modalidad").addClass("has-error");
     } else {
       error_modalidad = "";
       $("#error_modalidad").text(error_modalidad);
-      $("#modalidad").removeClass("has-error");
     }
     return error_modalidad;
   }
@@ -729,11 +681,9 @@ $(document).ready(function () {
     if ($.trim($("#salariomin").val()).length == 0) {
       error_salariomin = "Complete este campo*";
       $("#error_salariomin").text(error_salariomin);
-      $("#salariomin").addClass("has-error");
     } else {
       error_salariomin = "";
       $("#error_salariomin").text(error_salariomin);
-      $("#salariomin").removeClass("has-error");
     }
     return error_salariomin;
   }
@@ -741,11 +691,9 @@ $(document).ready(function () {
     if (!$("input[name='dv']:radio").is(":checked")) {
       error_dv = "Complete este campo*";
       $("#error_dv").text(error_dv);
-      $("#dv").addClass("has-error");
     } else {
       error_dv = "";
       $("#error_dv").text(error_dv);
-      $("#dv").removeClass("has-error");
     }
     return error_dv;
   }
@@ -753,11 +701,9 @@ $(document).ready(function () {
     if (!$("input[name='dcr']:radio").is(":checked")) {
       error_dcr = "Complete este campo*";
       $("#error_dcr").text(error_dcr);
-      $("#dcr").addClass("has-error");
     } else {
       error_dcr = "";
       $("#error_dcr").text(error_dcr);
-      $("#dcr").removeClass("has-error");
     }
     return error_dcr;
   }
@@ -851,3 +797,49 @@ $(document).ready(function () {
     val_dcr();
   });
 });
+
+$("#pdf").on("change", function () {
+  var ext = $(this).val().split(".").pop();
+  if ($(this).val() != "") {
+    if (ext == "pdf") {
+      if ($(this)[0].files[0].size > 1048576) {
+        console.log("El documento excede el tamaño máximo");
+        $("#modal-title").text("¡Precaución!");
+        $("#modal-msg").html(
+          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
+        );
+        $("#modal-gral").modal();
+        $(this).val("");
+      } else {
+        $("#modal-gral").hide();
+      }
+    } else {
+      $(this).val("");
+      alert("Extensión no permitida: " + ext);
+    }
+  }
+});
+
+$("#foto").on("change", function () {
+  var ext = $(this).val().split(".").pop();
+  if ($(this).val() != "") {
+    if (ext == "png" || ext == "jpeg" || ext == "jpg") {
+      if ($(this)[0].files[0].size > 1048576) {
+        console.log("El documento excede el tamaño máximo");
+        $("#modal-title").text("¡Precaución!");
+        $("#modal-msg").html(
+          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
+        );
+        $("#modal-gral").modal();
+        $(this).val("");
+      } else {
+        $("#modal-gral").hide();
+      }
+    } else {
+      $(this).val("");
+      alert("Extensión no permitida: " + ext);
+    }
+  }
+});
+
+

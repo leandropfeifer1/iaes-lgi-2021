@@ -39,6 +39,18 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                 <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
             </a>
         </div>
+
+        <?php
+        if (isset($_GET['tipo'])) {
+            echo '<a class="nav__link" href="./dashboardSecretaria.php">Volver</a>';
+        } else {
+            if ($_SESSION['id_rol'] == 3) {
+                echo '<a class="nav__link" href="./dashboardUser.php">Volver</a>';
+            } else {
+                echo '<a class="nav__link" href="./filtro.php">Volver</a>';
+            }
+        }
+        ?>
     </header>
     <!-- -->
     <div class="container">
@@ -78,8 +90,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         <span id="error_contacto" class="text-danger"></span>
                     </div>
                     <div class="input-group">
-                        <button id="guardarExp" type="submit" class="btn btn-primary" value="Guardar">Guardar</button>
-                        <Input id="cerrarExp" type="button" value="Cerrar" onclick="window.close()" class="btn btn-danger"><span id="error" class="text-danger"></span>
+                        <button id="guardarExp" type="submit" class="btn btn-primary" value="Guardar">Guardar</button><span id="error" class="text-danger"></span>
+
                     </div>
 
                 </fieldset>

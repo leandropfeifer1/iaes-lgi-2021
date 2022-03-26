@@ -1,6 +1,7 @@
 <?php
 require('../db/conexionDb.php');
 session_start();
+unset($_SESSION['consulta']);
 if (!isset($_SESSION['usuario'])) {
     header('location: ../db/logout.php');
 }
@@ -15,6 +16,8 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="../assets/css/register.css">
+    <link href="../select2/css/select2.css" rel="stylesheet" type="text/css"/>
+   
 </head>
 
 <body>
@@ -44,6 +47,7 @@ if (!isset($_SESSION['usuario'])) {
             }
             ?>
             <a class="header_link" href="empresas.php">Empresas</a>
+            <a class="header_link" href="buscempleado.php">Busquedas de Empleados</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
 
         </header>
@@ -53,6 +57,7 @@ if (!isset($_SESSION['usuario'])) {
         <h3 class="text-center">Todas las Sucursales</h3>
     </header>
     <div class="container">
+        <div id="buscador"></div>
         <div id="tabla"></div>
     </div>
     <div class="modal fade" id="modalagregarsuc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -243,32 +248,17 @@ if (!isset($_SESSION['usuario'])) {
 
     </div>
 </div>
-
-
-<div class="modal fade" id="buscando" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Busquedas de la sucursal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
 <script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../popper/popper.min.js"></script>
 <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="../assets/js/sucursalesjs.js"></script>
-
+<script src="../select2/js/select2.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tabla').load('sucursalestabla.php');
+        $('#buscador').load('bussuc.php')
     });
 </script>
 <script type="text/javascript">
@@ -375,13 +365,5 @@ if (!isset($_SESSION['usuario'])) {
     $("#mod").click(function() {
         console.log("aaaaaaaa");
         modsucursal();
-    });
-    $('.btnbuscando').on('click', function() {
-        idsucursal = $('#idsucusal').val();
-        $('.modal-body').load('bussuc.php?id=2', function() {
-            $('#buscando').modal({
-                show: true
-            });
-        });
     });
 </script>

@@ -31,6 +31,7 @@ require('../db/verificarCredenciales.php');
             </a>
             <a class="header_link" href="sucursales.php">Sucursales</a>
             <a class="header_link" href="empresas.php">Empresas</a>
+            <a class="header_link" href="buscempleado.php">Busquedas de Empleados</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

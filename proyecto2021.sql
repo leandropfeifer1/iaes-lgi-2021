@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2022 a las 04:52:40
+-- Tiempo de generación: 26-03-2022 a las 02:08:17
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -139,6 +139,7 @@ INSERT INTO `departamento` (`idep`, `departamento`, `idpro`) VALUES
 
 CREATE TABLE `empresas` (
   `idempresa` int(8) NOT NULL,
+  `logo` varchar(20) NOT NULL,
   `empresa` varchar(100) NOT NULL,
   `cuit` int(12) NOT NULL,
   `presidente` varchar(50) NOT NULL,
@@ -150,11 +151,14 @@ CREATE TABLE `empresas` (
 -- Volcado de datos para la tabla `empresas`
 --
 
-INSERT INTO `empresas` (`idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
-(5, 'Leña', 343445, 'carlos', 'asdasd', '34343'),
-(23, 'Cañon', 32423443, '32423443', 'sadasd@gmail.com', '123123'),
-(15, 'Todo ceramica', 424442, 'Pedro', 'TD', '986322'),
-(22, 'todo', 34344, '34344', 'TD', '123123');
+INSERT INTO `empresas` (`idempresa`, `logo`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
+(5, '', 'Leña', 343445, 'carlos', 'asdasd', '34343'),
+(23, '', 'Cañon', 32423443, '32423443', 'sadasd@gmail.com', '123123'),
+(15, '', 'Todo ceramica', 424442, 'Pedro', 'TD', '986322'),
+(22, '', 'todo', 34344, '34344', 'TD', '123123'),
+(24, '', 'fdsfsd', 232323, '232323', 'ds', '123123'),
+(25, '', 'aaa', 333, '333', 'fggffg', '9863222332'),
+(29, '', 'todo', 3434, '3434', 'sadasd', '123123');
 
 -- --------------------------------------------------------
 
@@ -599,7 +603,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --

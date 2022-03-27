@@ -156,12 +156,12 @@ $(document).ready(function () {
                   <td>${exps.hasta}</td>
                   <td>${exps.contacto}</td>
                   <td>
-                    <button class="exp-delete btn btn-danger">
+                    <button class="exp-delete btn btn-danger" style="width: 100%;">
                       Borrar
                     </button>
                   </td>
                   <td>
-                    <button class="exp-item btn btn-secondary">
+                    <button class="exp-item btn btn-secondary" style="width: 100%;">
                       Editar
                     </button>
                   </td>                  

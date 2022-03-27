@@ -26,8 +26,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/styleUser.css">
 	<link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
 
@@ -35,22 +34,22 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 </head>
 
 <body>
-
 	<header id="head">
 		<div class="logo">
 			<a href="#" class="logo__link">
 				<img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
 			</a>
 		</div>
-		<nav class="nav">
 
+		<nav class="nav">
+		<a href="formexp.php" class="nav__link">Experiencias Laborales</a>
 			<a class="nav__link" href="./editarCredenciales.php">
 				<?php
 				echo $_SESSION['usuario'];
 				//  if(isset($row['nombre'])){echo($row['nombre']);}
 				?>
 			</a>
-			<a href="formexp.php" class="nav__link">Experiencias Laborales</a>
+			
 			<a href="../db/logout.php" class="nav__link">Salir</a>
 
 		</nav>
@@ -65,7 +64,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 
-			<div class="container" id="completar">
+			<div id="completar">
 				Por favor, tomese unos minutos para completar el formulario. Muchas gracias.
 			</div>
 
@@ -322,9 +321,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 
 				<div class="form-group row">
-					<div class="col-sm-10">
+					<div class="col-sm-11">
 						<label for="discapacidades">Especifique su discapacidad (si tiene):</label>
-						<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5" s="40" maxlength="200" placeholder="Dificultad para escuchar"></textarea>
+						<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5"  maxlength="200" placeholder="Dificultad para escuchar"></textarea>
 					</div>
 				</div>
 
@@ -339,7 +338,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
 						<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
 					</div>
-				</div>
+				</div><br>
 
 				<input type="button" id="sig1" class="btn btn-info next" value="Siguiente" />
 				<p id="error" class="text-danger"></p>
@@ -364,12 +363,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="cursos">Cursos realizados:</label>
-					<textarea class="form-control" name="cursos" id="cursos" rows="5" s="40" maxlength="200" placeholder="Refrigeracion de materiales de construccion"></textarea>
-				</div>
+					<textarea class="form-control" name="cursos" id="cursos" rows="5" maxlength="200" placeholder="Refrigeracion de materiales de construccion"></textarea>
+				</div><br>
 
 				<input type="button" id="atras1" name="previous" class="btn btn-info previous" value="Atras" />
 				<input type="button" id="sig2" name="next" class="btn btn-info next" value="Siguiente" />
-				<p id="error2" class="text-danger"></p><br><br>
+				<p id="error2" class="text-danger"></p>
 
 			</fieldset>
 
@@ -395,12 +394,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="habilidades">Habilidades:</label>
-					<textarea class="form-control" name="habilidades" id="habilidades" rows="4" s="40" placeholder="Dar la vuelta cambota" maxlength="200"></textarea>
-				</div>
+					<textarea class="form-control" name="habilidades" id="habilidades" rows="4"  placeholder="Dar la vuelta cambota" maxlength="200"></textarea>
+				</div><br>
 
 				<input type="button" id="atras3" name="previous" class="btn btn-info previous" value="Atras" />
 				<input type="button" id="sig4" name="next" class="btn btn-info next" value="Siguiente" />
-				<p id="error3" class="text-danger"></p><br><br>
+				<p id="error3" class="text-danger"></p>
 			</fieldset>
 			<!-- ----------------------------------------------------------------------------------------------------------------------------->
 			<fieldset class="laborales form-step">
@@ -472,7 +471,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				</div>
 
 				<input type="button" id="atras4" name="previous" class="btn btn-info previous" value="Atras" />
-				<input type="submit" name="submit" class="submit btn btn-success btn" value="Enviar" /><span id="error4" class="text-danger"></span><br><br>
+				<input type="submit" name="submit" class="submit btn btn-success btn" value="Enviar" /><span id="error4" class="text-danger"></span>
 			</fieldset>
 
 		</form>
@@ -482,14 +481,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<script src="../popper/popper.min.js"></script>
 	<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="../assets/js/form.js"></script>
 	<script type="text/javascript" src="../assets/js/input.js"></script>
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> <!-- Latest minified bootstrap js -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 

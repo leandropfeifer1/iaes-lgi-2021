@@ -23,11 +23,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/styleUser.css">
     <title>Experiencia laboral</title>
 </head>
@@ -39,7 +40,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                 <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
             </a>
         </div>
-
+        <nav>
+        
         <?php
         if (isset($_GET['tipo'])) {
             echo '<a class="nav__link" href="./dashboardSecretaria.php">Volver</a>';
@@ -51,6 +53,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
             }
         }
         ?>
+        <a href="../db/logout.php" class="nav__link">Salir</a>
+        </nav>
     </header>
     <!-- -->
     <div class="container">
@@ -64,34 +68,38 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
                     <legend>Experiencias:</legend>
 
-                    <div class="form-group">
-                        <label for="empresa">Empresa:</label>
-                        <input type="text" id="empresa" value="">
-                        <span id="error_empresa" class="text-danger"></span>
+                    <div class="form-group row">
+                        <div class="col-sm-5">
+                            <label for="empresa">Empresa:</label>
+                            <input type="text" id="empresa" class="form-control" value="">
+                            <span id="error_empresa" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="puesto">Puesto:</label>
+                            <input type="text" id="puesto" class="form-control" value="">
+                            <span id="error_puesto" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="puesto">Puesto:</label>
-                        <input type="text" id="puesto" value="">
-                        <span id="error_puesto" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="desde">Desde:</label>
-                        <input type="date" id="desde" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
-                        <span id="error_desde" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="hasta">Hasta:</label>
-                        <input type="date" id="hasta" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>">
-                        <span id="error_hasta" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="contacto">Numero de contacto:</label>
-                        <input type="number" id="contacto" value="">
-                        <span id="error_contacto" class="text-danger"></span>
-                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <label for="desde">Desde:</label>
+                            <input type="date" id="desde" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>" class="form-control">
+                            <span id="error_desde" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="hasta">Hasta:</label>
+                            <input type="date" id="hasta" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>" class="form-control">
+                            <span id="error_hasta" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="contacto">Numero de contacto:</label>
+                            <input type="number" id="contacto" class="form-control" value="">
+                            <span id="error_contacto" class="text-danger"></span>
+                        </div>
+                    </div><br>
                     <div class="input-group">
                         <button id="guardarExp" type="submit" class="btn btn-primary" value="Guardar">Guardar</button><span id="error" class="text-danger"></span>
-
                     </div>
 
                 </fieldset>
@@ -116,7 +124,8 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
             </table>
 
             <!-- -------------------------------------------------------------------------------------------------------------------------->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <script src="../jquery/jquery-3.6.0.min.js"></script>
+            <script src="../bootstrap/js/bootstrap.min.js"></script>
             <script src="../assets/js/appexp.js"></script>
 </body>
 

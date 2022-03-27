@@ -7,11 +7,12 @@ mysqli_set_charset($conexion, "utf8");
     <div class="col-sm-12">
         <table class="table table-bordered">
             <caption>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalagregar">Agregar                 
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalagregar">Agregar
                 </button>
             </caption>
-            
+
             <tr>
+                <td>Logo</td>
                 <td>Empresa</td>
                 <td>Cuit</td>
                 <td>Presidente</td>
@@ -21,28 +22,29 @@ mysqli_set_charset($conexion, "utf8");
                 <td>Eliminar</td>
             </tr>
             <?php
-                
-                $sql = "SELECT `idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono` FROM `empresas` WHERE 1";
-		$lista = mysqli_query($conexion, $sql);
-                while ($fila = $lista->fetch_assoc()) {
-                    $datos=$fila['idempresa']."||".$fila['empresa']."||".$fila['cuit']."||".$fila['presidente']."||".$fila['correo']."||".$fila['telefono'];
-            ?>
-            <tr>
-                <td><?php echo $fila['empresa']?></td>
-                <td><?php echo $fila['cuit']?></td> 
-                <td><?php echo $fila['presidente']?></td> 
-                <td><?php echo $fila['correo']?></td> 
-                <td><?php echo $fila['telefono']?></td> 
-                <td>
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaleditar" onclick="agregaform('<?php echo $datos ?>')">Editar</button>
-                </td>  
-                <td>
-                    <button class="btn btn-danger" onclick="confirmaciondel('<?php echo $fila['idempresa'] ?>')">Eliminar</button>
-                </td>
-             <?php
-                }
-             ?>
-            </tr>
-        </table>        
+
+            $sql = "SELECT `idempresa`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`, `logo` FROM `empresas` WHERE 1";
+            $lista = mysqli_query($conexion, $sql);
+            while ($fila = $lista->fetch_assoc()) {
+                $datos = $fila['idempresa'] . "||" . $fila['empresa'] . "||" . $fila['cuit'] . "||" . $fila['presidente'] . "||" . $fila['correo'] . "||" . $fila['telefono']. "||" . $fila['logo'];
+            ?>            
+                <tr>
+                    <td><img class="img-thumbnail" src="<?php echo $fila['logo'] ?>" width="40" height="40" alt=""></td>
+                    <td><?php echo $fila['empresa'] ?></td>
+                    <td><?php echo $fila['cuit'] ?></td>
+                    <td><?php echo $fila['presidente'] ?></td>
+                    <td><?php echo $fila['correo'] ?></td>
+                    <td><?php echo $fila['telefono'] ?></td>
+                    <td>
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaleditar" onclick="agregaform('<?php echo $datos ?>')" style="width: 100%;">Editar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" onclick="confirmaciondel('<?php echo $fila['idempresa'] ?>')" style="width: 100%;">Eliminar</button>
+                    </td>
+                <?php
+            }
+                ?>
+                </tr>
+        </table>
     </div>
 </div>

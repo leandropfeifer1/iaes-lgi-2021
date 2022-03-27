@@ -3,6 +3,16 @@ session_start();
 require('./conexionDb.php');
 $idloc = $_SESSION['id_user'];
 
+//----------------------------------------------EMPRESA
+if (isset($_FILES['logo']['name'])) {    
+    $logo = $_FILES['logo']['name'];
+    $temp = $_FILES['logo']['tmp_name'];
+    if (move_uploaded_file($temp, "../db/images/" . $logo)) {
+        echo "se subio la imagen";
+    }
+} 
+
+//----------------------------------------------USUARIO
 if (isset($_FILES['foto']['name'])) {
     $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
     $row = mysqli_fetch_array($fotobd);
@@ -33,17 +43,9 @@ function guardarFoto($idloc, $foto)
     $error = false;
     require('./conexionDb.php');
     $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE idloc='$idloc'");
-    if (mysqli_num_rows($query) == 0) {
-        $result = mysqli_query($conexion, "INSERT INTO `usuario`(`foto`) VALUES ('$foto')");
-        if ($result) {
-            $error = false;
-        } else {
-            $error = true;
-        }
-    } else {
+    if (mysqli_num_rows($query) != 0) {
         $result = mysqli_query($conexion, "UPDATE `usuario` SET `foto`='$foto' WHERE idloc = $idloc");
-        if ($result) {
-        } else {
+        if (!$result) {
             $error = true;
         }
     }
@@ -84,16 +86,8 @@ function guardarPdf($idloc, $pdf)
     $error = false;
     $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE idloc='$idloc'");
     if (mysqli_num_rows($query) == 0) {
-        $result = mysqli_query($conexion, "INSERT INTO `usuario`(`pdf`) VALUES ('$pdf')");
-        if ($result) {
-            $error = false;
-        } else {
-            $error = true;
-        }
-    } else {
         $result = mysqli_query($conexion, "UPDATE `usuario` SET `pdf`='$pdf' WHERE idloc = $idloc");
-        if ($result) {
-        } else {
+        if (!$result) {
             $error = true;
         }
     }

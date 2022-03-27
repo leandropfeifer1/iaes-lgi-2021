@@ -93,6 +93,7 @@ legend {
   width: inherit; /* Or auto */
   padding: 0 10px; /* To give a bit of padding on the left and right */
   border-bottom: none;
+  margin: 0 0 10px 0px;
 }
 
 table{
@@ -109,6 +110,7 @@ table{
 /*----step-by-step-------*/
 
 #progressbar {
+    padding: 0 0 10px;
     margin-bottom: 30px;
     overflow: hidden;
     color: lightgrey
@@ -186,3 +188,7 @@ table{
     background-color: orange;
 }
 
+.exp-delete{
+  width: max-content;
+  height: max-content;
+}

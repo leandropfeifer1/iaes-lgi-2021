@@ -218,6 +218,7 @@ $(document).ready(function () {
       error = "";
       $("#error").text(error);
       $("#error").removeClass("has-error");
+      return true;
     }
   }
 
@@ -231,6 +232,7 @@ $(document).ready(function () {
       error = "";
       $("#error2").text(error);
       $("#error2").removeClass("has-error");
+      return true;
     }
   }
 
@@ -246,6 +248,7 @@ $(document).ready(function () {
       error = "";
       $("#error3").text(error);
       $("#error3").removeClass("has-error");
+      return true;
     }
   }
 
@@ -268,19 +271,17 @@ $(document).ready(function () {
     ) {
       error4 = " Campos faltantes o invalidos*";
       $("#error4").text(error4);
-      $("#error4").addClass("has-error");
       return false;
     } else {
       error4 = "";
       $("#error4").text(error4);
-      $("#error4").removeClass("has-error");
+      return true;
     }
   }
 
   $("#register_form").submit(function (event) {
     event.preventDefault();
-    val_laborales();
-    if (val_laborales != "") {
+    if (val_laborales()) {
       const usuario = $.trim($("#usuario").val());
       const apellido = $.trim($("#apellido").val());
       const dni = $.trim($("#dni").val());
@@ -299,15 +300,6 @@ $(document).ready(function () {
       const discapacidades = $.trim($("#discapacidades").val());
       const carh = $.trim($("#carh").val());
       const cursos = $.trim($("#cursos").val());
-
-      var idiomas = [];
-      $(":checkbox[name=idiomas]").each(function () {
-        if (this.checked) {
-          // agregas cada elemento.
-          idiomas.push($(this).val());
-        }
-      });
-
       const progs = $.trim($("#progs").val());
       const habilidades = $.trim($("#habilidades").val());
       const slaboral = $.trim($("#slaboral").val());
@@ -316,6 +308,14 @@ $(document).ready(function () {
       const salariomin = $.trim($("#salariomin").val());
       const dv = $(".dv:checked").val();
       const dcr = $(".dcr:checked").val();
+
+      var idiomas = [];
+      $(":checkbox[name=idiomas]").each(function () {
+        if (this.checked) {
+          // agregas cada elemento.
+          idiomas.push($(this).val());
+        }
+      });
 
       //----------------------FOTO
       var fd = new FormData();
@@ -341,7 +341,6 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         success: (data) => {
-          console.log(data);
         },
       });
 
@@ -353,7 +352,6 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         success: (data) => {
-          console.log(data);
         },
       });
 
@@ -398,6 +396,7 @@ $(document).ready(function () {
               confirmButtonColor: "#ffa361",
               confirmButtonText: "Entrar",
             });
+            
           } else {
             Swal.fire({
               icon: "error",
@@ -411,7 +410,6 @@ $(document).ready(function () {
   });
 
   var lic = document.getElementById("licsi").checked;
-  console.log(lic);
   if (lic) {
     $(".auto").prop("disabled", false);
   }

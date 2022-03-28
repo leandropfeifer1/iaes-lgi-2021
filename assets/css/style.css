@@ -107,3 +107,8 @@ input[type='submit']:hover {
 #formLogin h3 {
   text-align: center;
 }
+
+#link_forgot {
+  margin-left: 20px;
+  font-size: 11;
+}

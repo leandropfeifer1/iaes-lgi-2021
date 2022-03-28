@@ -81,7 +81,7 @@ function modificar(lg, logomod) {
     }
     log(lg);
   } else {
-    var logo = 0;
+    var logomod = 0;
   }
 
   if (empresae === "") {
@@ -144,7 +144,8 @@ function modificar(lg, logomod) {
               url: "../db/empresasmod.php",
               data: cadena,
               success: function (r) {
-                if (r == 1) {
+                console.log(r);
+                if (r == '1') {
                   Swal.fire({
                     icon: "success",
                     title: "Modificacion Exitosa",

@@ -141,9 +141,9 @@ if (!isset($_SESSION['usuario'])) {
             correo = $('#correo').val();
             telefono = $('#telefono').val();
 
-            if ($("#logomod").val()) {
+            if ($("#logo").val()) {
                 var lg = new FormData();
-                var files = $("#logomod")[0].files;
+                var files = $("#logo")[0].files;
                 var f1 = files[0];
                 var logo = f1["name"];
                 // Check file selected or not
@@ -196,6 +196,7 @@ if (!isset($_SESSION['usuario'])) {
                                     confirmButtonText: 'Ok',
                                 });
                             } else {
+                                console.log(logo);
                                 agregardatos(empresa, cuit, presidente, correo, telefono, logo);
                                 log(lg);
                             }

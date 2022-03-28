@@ -30,7 +30,7 @@
         <input id="usuario" type="text" placeholder="Ingresa tu usuario" name="usuario">
         <input id="password" type="password" placeholder="Ingresa tu contraseña" name="password">
         <input name="submit" type="submit">
-        <a id="link_forgot" href="./vistas/recuperarContrasena.php">Olvidé mi contrseña</a>
+        <a id="link_forgot" href="./vistas/recuperarContrasena.php">Olvidé mi contraseña</a>
     </form>
 <script src="./jquery/jquery-3.6.0.min.js"></script>
 <script src="./bootstrap/js/bootstrap.min.js"></script>

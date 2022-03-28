@@ -11,7 +11,7 @@ mysqli_set_charset($conexion, "utf8");
                 </button>
             </caption>
 
-            <tr>
+            <tr style="background-color: #eee;">
                 <td>Logo</td>
                 <td>Empresa</td>
                 <td>Cuit</td>
@@ -28,7 +28,7 @@ mysqli_set_charset($conexion, "utf8");
             while ($fila = $lista->fetch_assoc()) {
                 $datos = $fila['idempresa'] . "||" . $fila['empresa'] . "||" . $fila['cuit'] . "||" . $fila['presidente'] . "||" . $fila['correo'] . "||" . $fila['telefono']. "||" . $fila['logo'];
             ?>            
-                <tr>
+                <tr style="background-color: #eee;">
                     <td><img class="img-thumbnail" src="<?php echo $fila['logo'] ?>" width="40" height="40" alt=""></td>
                     <td><?php echo $fila['empresa'] ?></td>
                     <td><?php echo $fila['cuit'] ?></td>

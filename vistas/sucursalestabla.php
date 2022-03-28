@@ -6,7 +6,7 @@ mysqli_set_charset($conexion, "utf8");
 
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="background-color: #eee;">
             <caption>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalagregarsuc">Agregar                 
                 </button>

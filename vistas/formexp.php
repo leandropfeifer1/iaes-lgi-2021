@@ -81,12 +81,12 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label for="desde">Desde:</label>
                             <input type="date" id="desde" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>" class="form-control">
                             <span id="error_desde" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <label for="hasta">Hasta:</label>
                             <input type="date" id="hasta" value="" min="1900/01/01" max="<?php echo date('Y-m-d') ?>" class="form-control">
                             <span id="error_hasta" class="text-danger"></span>

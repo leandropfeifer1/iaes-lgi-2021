@@ -124,9 +124,9 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="col-sm-3">
 						<label for="ecivil">Estado civil:</label>
 						<select id="ecivil" name="ecivil" class="form-control">
-							<option id="e1" value="1"></option>
-							<option id="e2" value="2">Soltero</option>
-							<option id="e3" value="3">Casado</option>
+							<option value=""></option>
+							<option id="e1" value="1">Soltero</option>
+							<option id="e2" value="2">Casado</option>
 						</select>
 						<p id="error_ecivil" class="text-danger"></p>
 					</div>
@@ -312,7 +312,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					</div>
 
 					<div id="auto" class="col-sm-4">
-						<label for="auto">Dispone de vehiculo propio:</label>
+						<label for="auto">Dispone de vehiculo propio(auto):</label>
 						<input id="vsi" type="radio" class="auto" name="auto" value="2" disabled>Si
 						<input id="vno" type="radio" class="auto" name="auto" value="1" disabled>No
 						<p id="error_auto" class="text-danger"></p>

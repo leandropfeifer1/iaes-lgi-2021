@@ -53,6 +53,7 @@ $(document).ready(function () {
       setProgressBar(++current);
     }
   });
+
   $("#sig2").click(function () {
     academicos = val_academicos();
     if (academicos != "") {
@@ -186,6 +187,8 @@ $(document).ready(function () {
     val_fechanacimiento();
     val_email();
     val_genero();
+    console.log("aaaaaa");
+    val_ecivil();
     val_contacto();
     val_domicilio();
     val_localidad();
@@ -201,6 +204,7 @@ $(document).ready(function () {
       val_fechanacimiento() != "" ||
       val_email() != "" ||
       val_genero() != "" ||
+      val_ecivil() != "" ||
       val_contacto() != "" ||
       val_domicilio() != "" ||
       val_localidad() != "" ||
@@ -436,7 +440,7 @@ $(document).ready(function () {
       error_usuario = "Complete este campo*";
       $("#error_usuario").text(error_usuario);
     } else if (!letters_validation.test($("#usuario").val())) {
-      error_usuario = "usuario invalido!";
+      error_usuario = "Usuario invalido!";
       $("#error_usuario").text(error_usuario);
     } else {
       error_usuario = "";
@@ -450,7 +454,7 @@ $(document).ready(function () {
       error_apellido = "Complete este campo*";
       $("#error_apellido").text(error_apellido);
     } else if (!letters_validation.test($("#apellido").val())) {
-      error_apellido = "apellido invalido!";
+      error_apellido = "Apellido invalido!";
       $("#error_apellido").text(error_apellido);
     } else {
       error_apellido = "";
@@ -582,6 +586,17 @@ $(document).ready(function () {
       $("#error_pais").text(error_pais);
     }
     return error_pais;
+  }
+  function val_ecivil() {
+    console.log($.trim($("#ecivil").val()));
+    if ($.trim($("#ecivil").val()).length == 0) {
+      error_ecivil = "Complete este campo*";
+      $("#error_ecivil").text(error_ecivil);
+    } else {
+      error_ecivil = "";
+      $("#error_ecivil").text(error_ecivil);
+    }
+    return error_ecivil;
   }
   function val_licencia() {
     if (!$("input[name='licencia']:radio").is(":checked")) {
@@ -724,19 +739,18 @@ $(document).ready(function () {
   $(".genero").change(function () {
     val_genero();
   });
-
   $("#contacto").keyup(function () {
     val_contacto();
+  });
+  $("#ecivil").change(function () {
+    val_ecivil();
   });
   $("#domicilio").keyup(function () {
     val_domicilio();
   });
   $("#localidad").keyup(function () {
     val_localidad();
-  });
-  $("#localidad").change(function () {
-    val_localidad();
-  });
+  });  
   $("#departamento").keyup(function () {
     val_departamento();
   });

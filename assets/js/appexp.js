@@ -2,112 +2,117 @@ $(document).ready(function () {
   let edit = false;
   fetchExps();
 
-  //----------------------------------------------------------------------------------------------funcion que se ejecuta al guardar
-  $("#form-exp").submit(function (e) {
-    e.preventDefault();
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-    var hoy =
-      d.getFullYear() +
-      "-" +
-      (month < 10 ? "0" : "") +
-      month +
-      "-" +
-      (day < 10 ? "0" : "") +
-      day;
+  var d = new Date();
+  var month = d.getMonth() + 1;
+  var day = d.getDate();
+  var hoy =
+    d.getFullYear() +
+    "-" +
+    (month < 10 ? "0" : "") +
+    month +
+    "-" +
+    (day < 10 ? "0" : "") +
+    day;
 
+  function val_empresa() {
     if ($.trim($("#empresa").val()).length == 0) {
       error_empresa = "Complete este campo*";
       $("#error_empresa").text(error_empresa);
-      $("#empresa").addClass("has-error");
     } else {
       error_empresa = "";
       $("#error_empresa").text(error_empresa);
-      $("#empresa").removeClass("has-error");
     }
+    return error_empresa;
+  }
 
+  function val_puesto() {
     if ($.trim($("#puesto").val()).length == 0) {
       error_puesto = "Complete este campo*";
       $("#error_puesto").text(error_puesto);
-      $("#puesto").addClass("has-error");
     } else {
       error_puesto = "";
       $("#error_puesto").text(error_puesto);
-      $("#puesto").removeClass("has-error");
     }
+    return error_puesto;
+  }
 
+  function val_desde(hoy) {
     if ($.trim($("#desde").val()).length == 0) {
       error_desde = "Complete este campo*";
       $("#error_desde").text(error_desde);
-      $("#desde").addClass("has-error");
     } else {
       error_desde = "";
       $("#error_desde").text(error_desde);
-      $("#desde").removeClass("has-error");
       if ($.trim($("#desde").val()) <= "1950-01-01") {
         error_desde = "Fecha invalida";
         $("#error_desde").text(error_desde);
-        $("#desde").addClass("has-error");
+      } else if ($("#desde").val() < $("#hasta").val()) {
+        error_desde = "'Desde' es superior a 'Hasta'";
+        $("#error_desde").text(error_desde);
       } else {
         error_desde = "";
         $("#error_desde").text(error_desde);
-        $("#desde").removeClass("has-error");
       }
     }
+    return error_desde;
+  }
 
+  function val_hasta(hoy) {
     if ($.trim($("#hasta").val()).length == 0) {
       error_hasta = "Complete este campo*";
       $("#error_hasta").text(error_hasta);
-      $("#hasta").addClass("has-error");
     } else {
       error_hasta = "";
       $("#error_hasta").text(error_hasta);
-      $("#hasta").removeClass("has-error");
       if (
         $.trim($("#hasta").val()) <= "1950-01-01" ||
         $("#fechanacimiento").val() > hoy
       ) {
         error_hasta = "Fecha invalida";
         $("#error_hasta").text(error_hasta);
-        $("#hasta").addClass("has-error");
-      } else if($("#desde").val() > $("#hasta").val()){
-        error_hasta = "La fecha 'Hasta' no puede ser inferior a la fecha 'Desde'";
+      } else if ($("#desde").val() > $("#hasta").val()) {
+        error_hasta = "'Hasta' es inferior a 'Desde'";
         $("#error_hasta").text(error_hasta);
-        $("#hasta").addClass("has-error");
-
-      }else{
+      } else {
         error_hasta = "";
         $("#error_hasta").text(error_hasta);
-        $("#hasta").removeClass("has-error");
       }
     }
+    return error_hasta;
+  }
 
+  function val_contacto() {
     if ($.trim($("#contacto").val()).length == 0) {
       error_contacto = "Complete este campo*";
       $("#error_contacto").text(error_contacto);
-      $("#contacto").addClass("has-error");
     } else {
       error_contacto = "";
       $("#error_contacto").text(error_contacto);
-      $("#contacto").removeClass("has-error");
     }
+    return error_contacto;
+  }
 
+  //----------------------------------------------------------------------------------------------funcion que se ejecuta al guardar
+  $("#form-exp").submit(function (e) {
+    e.preventDefault();
+    val_empresa();
+    val_puesto();
+    val_desde();
+    val_hasta();
+    val_contacto();
     if (
-      error_empresa != "" ||
-      error_puesto != "" ||
-      error_desde != "" ||
-      error_hasta != "" ||
-      error_contacto != ""
+      val_empresa() != "" ||
+      val_puesto() != "" ||
+      val_desde() != "" ||
+      val_hasta() != "" ||
+      val_contacto() != ""
     ) {
       error = "Campos faltantes o invalidos*";
       $("#error").text(error);
-      $("#error").addClass("has-error");
       return false;
     } else {
       error = "";
       $("#error").text(error);
-      $("#error").removeClass("has-error");
     }
 
     const postData = {
@@ -201,102 +206,24 @@ $(document).ready(function () {
     });
   });
 
-
+  //----------------------------------------------------------------------------------------------------
   $("#empresa").keyup(function () {
-    if ($.trim($("#empresa").val()).length == 0) {
-      error_empresa = "Complete este campo*";
-      $("#error_empresa").text(error_empresa);
-      $("#empresa").addClass("has-error");
-    } else {
-      error_empresa = "";
-      $("#error_empresa").text(error_empresa);
-      $("#empresa").removeClass("has-error");
-    }
+    val_empresa();
   });
 
   $("#puesto").keyup(function () {
-    if ($.trim($("#puesto").val()).length == 0) {
-      error_puesto = "Complete este campo*";
-      $("#error_puesto").text(error_puesto);
-      $("#puesto").addClass("has-error");
-    } else {
-      error_puesto = "";
-      $("#error_puesto").text(error_puesto);
-      $("#puesto").removeClass("has-error");
-    }
+    val_puesto();
   });
 
-  $("#desde").keyup(function () {    
-    if ($.trim($("#desde").val()).length == 0) {
-      error_desde = "Complete este campo*";
-      $("#error_desde").text(error_desde);
-      $("#desde").addClass("has-error");
-    } else {
-      error_desde = "";
-      $("#error_desde").text(error_desde);
-      $("#desde").removeClass("has-error");
-      if ($.trim($("#desde").val()) <= "1950-01-01") {
-        error_desde = "Fecha invalida";
-        $("#error_desde").text(error_desde);
-        $("#desde").addClass("has-error");
-      } else {
-        error_desde = "";
-        $("#error_desde").text(error_desde);
-        $("#desde").removeClass("has-error");
-      }
-    }
+  $("#desde").keyup(function () {
+    val_desde(hoy);
   });
 
   $("#hasta").keyup(function () {
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-    var hoy =
-      d.getFullYear() +
-      "-" +
-      (month < 10 ? "0" : "") +
-      month +
-      "-" +
-      (day < 10 ? "0" : "") +
-      day;
-    if ($.trim($("#hasta").val()).length == 0) {
-      error_hasta = "Complete este campo*";
-      $("#error_hasta").text(error_hasta);
-      $("#hasta").addClass("has-error");
-    } else {
-      error_hasta = "";
-      $("#error_hasta").text(error_hasta);
-      $("#hasta").removeClass("has-error");
-      if (
-        $.trim($("#hasta").val()) <= "1950-01-01" ||
-        $("#fechanacimiento").val() > hoy
-      ) {
-        error_hasta = "Fecha invalida";
-        $("#error_hasta").text(error_hasta);
-        $("#hasta").addClass("has-error");
-      } else if($("#desde").val() > $("#hasta").val()){
-        error_hasta = "La fecha 'Hasta' no puede ser inferior a la fecha 'Desde'";
-        $("#error_hasta").text(error_hasta);
-        $("#hasta").addClass("has-error");
-
-      }else{
-        error_hasta = "";
-        $("#error_hasta").text(error_hasta);
-        $("#hasta").removeClass("has-error");
-      }
-    }
+    val_hasta(hoy);
   });
-  
+
   $("#contacto").keyup(function () {
-    if ($.trim($("#contacto").val()).length == 0) {
-      error_contacto = "Complete este campo*";
-      $("#error_contacto").text(error_contacto);
-      $("#contacto").addClass("has-error");
-    } else {
-      error_contacto = "";
-      $("#error_contacto").text(error_contacto);
-      $("#contacto").removeClass("has-error");
-    }
+    val_contacto();
   });
-
 });

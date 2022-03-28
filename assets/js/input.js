@@ -33,14 +33,15 @@ $(document).ready(function () {
         $("#g3").prop("checked", true);
       } else if (datos.genero == $("#g4").val()) {
         $("#g4").prop("checked", true);
-      }
+      }      
 
-      if (datos.ecivil == $("#e1").val()) {
-        $("#e1").prop("selected", true);
-      } else if (datos.ecivil == $("#e2").val()) {
-        $("#e2").prop("selected", true);
-      } else if (datos.ecivil == $("#e3").val()) {
-        $("#e3").prop("selected", true);
+      switch (datos.ecivil) {
+        case "1":
+          $("#e1").prop("selected", true);
+          break;
+        case "2":
+          $("#e2").prop("selected", true);
+          break;
       }
 
       switch (datos.licencia) {

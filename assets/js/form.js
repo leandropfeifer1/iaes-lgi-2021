@@ -187,7 +187,6 @@ $(document).ready(function () {
     val_fechanacimiento();
     val_email();
     val_genero();
-    console.log("aaaaaa");
     val_ecivil();
     val_contacto();
     val_domicilio();
@@ -345,6 +344,7 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         success: (data) => {
+          //console.log(data);
         },
       });
 
@@ -356,6 +356,7 @@ $(document).ready(function () {
         contentType: false,
         processData: false,
         success: (data) => {
+          //console.log(data);
         },
       });
 
@@ -588,7 +589,6 @@ $(document).ready(function () {
     return error_pais;
   }
   function val_ecivil() {
-    console.log($.trim($("#ecivil").val()));
     if ($.trim($("#ecivil").val()).length == 0) {
       error_ecivil = "Complete este campo*";
       $("#error_ecivil").text(error_ecivil);

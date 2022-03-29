@@ -37,18 +37,16 @@ $(document).ready(function () {
   }
 
   function val_desde(hoy) {
-    if ($.trim($("#desde").val()).length == 0) {
+    if (($("#desde").val()).length == 0) {
       error_desde = "Complete este campo*";
       $("#error_desde").text(error_desde);
     } else {
       error_desde = "";
       $("#error_desde").text(error_desde);
-      if ($.trim($("#desde").val()) <= "1950-01-01") {
+      if (($("#desde").val()) <= "1950-01-01") {
         error_desde = "Fecha invalida";
         $("#error_desde").text(error_desde);
-      } else if ($("#desde").val() < $("#hasta").val()) {
-        error_desde = "'Desde' es superior a 'Hasta'";
-        $("#error_desde").text(error_desde);
+
       } else {
         error_desde = "";
         $("#error_desde").text(error_desde);
@@ -58,18 +56,19 @@ $(document).ready(function () {
   }
 
   function val_hasta(hoy) {
-    if ($.trim($("#hasta").val()).length == 0) {
+    if (($("#hasta").val()).length == 0) {
       error_hasta = "Complete este campo*";
       $("#error_hasta").text(error_hasta);
     } else {
       error_hasta = "";
       $("#error_hasta").text(error_hasta);
       if (
-        $.trim($("#hasta").val()) <= "1950-01-01" ||
+        ($("#hasta").val()) <= "1950-01-01" ||
         $("#fechanacimiento").val() > hoy
       ) {
         error_hasta = "Fecha invalida";
         $("#error_hasta").text(error_hasta);
+
       } else if ($("#desde").val() > $("#hasta").val()) {
         error_hasta = "'Hasta' es inferior a 'Desde'";
         $("#error_hasta").text(error_hasta);
@@ -131,7 +130,6 @@ $(document).ready(function () {
       edit === false
         ? "../db/form_exp/add-exp.php"
         : "../db/form_exp/exp-edit.php";
-    console.log(url);
 
     $.post(url, postData, function (response) {
       // Resetea el formulario despues de presionar el boton guardar

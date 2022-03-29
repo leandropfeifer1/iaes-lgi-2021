@@ -74,6 +74,7 @@ require('../db/conexionDb.php');
     ?>
 
     <input type="hidden" id="pdf" value="<?php echo $pdf ?>">
+    <input type="hidden" id="idUser" value="<?php echo $iduser ?>">
     <div class="container" id="descargarcv" >
         <br>
         <a id="cv" title="Descargar Archivo" class="btn btn-info" href="../db/cv/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
@@ -215,12 +216,18 @@ require('../db/conexionDb.php');
             </div>
         </div>
         <div class="container" align="center">
-            <button type="button" id="imprimir">Imprimir</button><br><br>
+            <button type="button" id="imprimir">Imprimir</button>
+            <button type="button" id="borrar">Borrar</button>
+            <button type="button" id="recuperarPass">Recuperar Contraseña</button>          
         </div>
 
     </div>
-    <script src="../jquery/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="../assets/js/usuario.js"></script>
+<script src="../jquery/jquery-3.6.0.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../popper/popper.min.js"></script>
+<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="../assets/js/recuperarPass.js"></script>
+<script type="text/javascript" src="../assets/js/borrarUser.js"></script>
+<script type="text/javascript" src="../assets/js/usuario.js"></script>
 </body>
-
 </html>

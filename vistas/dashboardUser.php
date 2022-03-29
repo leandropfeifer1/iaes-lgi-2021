@@ -469,7 +469,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<p id="error_dcr" class="text-danger"></p>
 					</div>
 				</div>
-
 				<input type="button" id="atras4" name="previous" class="btn btn-info previous" value="Atras" />
 				<input type="submit" name="submit" class="submit btn btn-success btn" value="Enviar" /><span id="error4" class="text-danger"></span>
 			</fieldset>

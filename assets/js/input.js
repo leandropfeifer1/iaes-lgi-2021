@@ -45,21 +45,21 @@ $(document).ready(function () {
       }
 
       switch (datos.licencia) {
-        case "2":
+        case "1":
           $("#licsi").prop("checked", true);
           $('.auto').prop('disabled',false);
           break;
-        case "1":
+        case "2":
           $("#licno").prop("checked", true);
           $('.auto').prop('disabled',true);
           break;
       }
 
       switch (datos.auto) {
-        case "2":
+        case "1":
           $("#vsi").prop("checked", true);
           break;
-        case "1":
+        case "2":
           $("#vno").prop("checked", true);
           break;
       }

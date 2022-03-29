@@ -32,7 +32,6 @@ $('#reset').click(() => {
 const sendRequest = () => {
   $('.div-datos').empty();
   const carrera = parseInt($('#carrera').val());
-  console.log(carrera);
   const localidad = parseInt($('#localidad').val());
   const licencia = parseInt($('#licencia').val());
   const vehiculo = parseInt($('#vehiculo').val());

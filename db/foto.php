@@ -36,8 +36,6 @@ if (isset($_FILES['foto']['name'])) {
     } 
     $guardar = guardarFoto($idloc, $foto);
     $res = $foto;
-
-
 }
 
 function guardarFoto($idloc, $foto)

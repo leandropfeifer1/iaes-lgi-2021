@@ -347,53 +347,7 @@ $(document).ready(function () {
         // agregas cada elemento.
         idiomas.push($(this).val());
       }
-    });
-
-    //----------------------FOTO
-    var fd = new FormData();
-    var files = $("#foto")[0].files;
-    console.log($("#foto").val());
-    // Check file selected or not
-    if (files.length > 0) {
-      fd.append("foto", files[0]);   
-    }
-
-    $.ajax({
-      url: "../db/foto.php",
-      type: "POST",
-      datatype: "json",
-      data: fd,
-      contentType: false,
-      processData: false,
-      success: (data) => {
-        data = data.replace(/['"]+/g, '');
-        if(data == ""){
-          $("#fotomostrar").attr("src","../db/images/default.png");
-        } else {
-          $("#fotomostrar").attr("src","../db/images/" + data);
-        }
-      },
-    });
-
-    //----------------------------------PDF
-    var cd = new FormData();
-    var files = $("#pdf")[0].files;
-    // Check file selected or not
-    if (files.length > 0) {
-      cd.append("pdf", files[0]);
-    }    
-
-    $.ajax({
-      url: "../db/cv.php",
-      type: "POST",
-      datatype: "json",
-      data: cd,
-      contentType: false,
-      processData: false,
-      success: (data) => {
-        //console.log(data);
-      },
-    });
+    });   
 
     $.ajax({
       url: "../db/multi_form_action.php",
@@ -445,7 +399,56 @@ $(document).ready(function () {
         }
       },
     });
+     //----------------------FOTO
+     var fd = new FormData();
+     var files = $("#foto")[0].files;
+     console.log($("#foto").val());
+     // Check file selected or not
+     if (files.length > 0) {
+       fd.append("foto", files[0]);   
+     }
+ 
+     $.ajax({
+       url: "../db/foto.php",
+       type: "POST",
+       datatype: "json",
+       data: fd,
+       contentType: false,
+       processData: false,
+       success: (data) => {
+         data = data.replace(/['"]+/g, '');
+         console.log(data);
+         if(data == ""){
+           $("#fotomostrar").attr("src","../db/images/default.png");
+         } else {
+           $("#fotomostrar").attr("src","../db/images/" + data);
+         }
+       },
+     });
+ 
+     //----------------------------------PDF
+     var cd = new FormData();
+     var files = $("#pdf")[0].files;
+     // Check file selected or not
+     if (files.length > 0) {
+       cd.append("pdf", files[0]);
+     }    
+ 
+     $.ajax({
+       url: "../db/cv.php",
+       type: "POST",
+       datatype: "json",
+       data: cd,
+       contentType: false,
+       processData: false,
+       success: (data) => {
+         console.log(data);
+       },
+     });
+
     return true;
+
+    
   });
 
   var lic = document.getElementById("licsi").checked;
@@ -584,6 +587,7 @@ $(document).ready(function () {
   }
   function val_localidad() {
     if ($.trim($("#localidad").val()).length == 0) {
+      console.log("aaaa");
       error_localidad = "Complete este campo*";
       $("#error_localidad").text(error_localidad);
     } else {
@@ -773,16 +777,25 @@ $(document).ready(function () {
   $(".genero").change(function () {
     val_genero();
   });
+  $(".genero").keyup(function () {
+    val_genero();
+  });
   $("#contacto").keyup(function () {
     val_contacto();
   });
   $("#ecivil").change(function () {
     val_ecivil();
   });
+  $("#ecivil").keyup(function () {
+    val_ecivil();
+  });
   $("#domicilio").keyup(function () {
     val_domicilio();
   });
   $("#localidad").keyup(function () {
+    val_localidad();
+  });
+  $("#localidad").change(function () {
     val_localidad();
   });
   $("#departamento").keyup(function () {
@@ -804,6 +817,9 @@ $(document).ready(function () {
     val_pais();
   });
   $(".licencia").change(function () {
+    val_licencia();
+  });
+  $(".licencia").keyup(function () {
     val_licencia();
   });
   $(".auto").change(function () {

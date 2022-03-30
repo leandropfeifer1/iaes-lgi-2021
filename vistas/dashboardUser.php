@@ -131,9 +131,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					</div>
 
 				</div>
-
-
-
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<label for="email">Email:</label>
@@ -147,8 +144,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<p id="error_contacto" class="text-danger"></p>
 					</div>
 				</div>
-
-
 				<div class="form-group row">
 					<div class="col-sm-8">
 						<label for="domicilio">Domicilio:</label>
@@ -156,8 +151,6 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<p id="error_domicilio" class="text-danger"></p>
 					</div>
 				</div>
-
-
 				<div class="form-group row">
 					<div class="col-sm-2">
 						<td>

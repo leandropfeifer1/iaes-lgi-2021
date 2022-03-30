@@ -10,7 +10,7 @@ if (isset($_FILES['pdf']['name'])) {
     $row = mysqli_fetch_array($pdfbd);
     if ($row[0]) {
         if (unlink('../db/cv/' . $row[0])) {
-            echo "se borro la pdf guardada";
+            echo "se borro el pdf guardado";
         }
     }
     $pdf = $_FILES['pdf']['name'];
@@ -18,7 +18,9 @@ if (isset($_FILES['pdf']['name'])) {
     if (move_uploaded_file($temp, "../db/cv/" . $pdf)) {
         echo "se subio el pdf";
     }
-    guardarPdf($idloc, $pdf);
+    $res = guardarPdf($idloc, $pdf);
+    echo "wwwwwwwww";
+    echo $res . "<--";
 } else {
     $pdfbd = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");
     $row = mysqli_fetch_array($pdfbd);
@@ -32,14 +34,14 @@ if (isset($_FILES['pdf']['name'])) {
 
 function guardarPdf($idloc, $pdf)
 {
-    require('./conexionDb.php');
     $error = false;
-    $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE idloc='$idloc'");
-    if (mysqli_num_rows($query) == 0) {
+    require('./conexionDb.php');
+    $query = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");
+    if (mysqli_num_rows($query) != 0) {
         $result = mysqli_query($conexion, "UPDATE `usuario` SET `pdf`='$pdf' WHERE idloc = $idloc");
         if (!$result) {
             $error = true;
-        }
+        } 
     }
     mysqli_close($conexion);
     return $error;

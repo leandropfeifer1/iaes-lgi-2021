@@ -130,6 +130,7 @@ $(document).ready(function () {
         "Por favor, tomese unos minutos para completar el formulario. Muchas gracias."
       );
       $("#completar").addClass("comp");
+      $("#fotomostrar").attr("src","../db/images/default.png");
     }
   });
 

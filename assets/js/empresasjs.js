@@ -1,15 +1,18 @@
 function log(lg) {
-  $.ajax({
-    url: "../db/archivos.php",
-    type: "POST",
-    datatype: "json",
-    data: lg,
-    contentType: false,
-    processData: false,
-    success: (data) => {
-      console.log(data);
-    },
-  });
+  if(lg){
+    $.ajax({
+      url: "../db/foto.php",
+      type: "POST",
+      datatype: "json",
+      data: lg,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        console.log(data);
+      },
+    });
+  }
+  
 }
 function agregardatos(empresa, cuit, presidente, correo, telefono, logo) {
   cadena =

@@ -22,7 +22,6 @@ $('#formUser').submit((event) => {
         password: passwordToConfirm,
       },
       success: (data) => {
-        console.log(data);
         let dataToJson = JSON.parse(data);
         if (dataToJson.verificar === false || dataToJson.error === 'vacio') {
           Swal.fire({

@@ -71,7 +71,6 @@ function pais($iduser)
     return $paisnom;
 }
 
-// Esto de carreras está MAL <------- Mirarlo
 function carrera($iduser)
 {
     include 'conexionDb.php';

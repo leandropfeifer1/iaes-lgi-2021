@@ -42,14 +42,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		</div>
 
 		<nav class="nav">
-		<a href="formexp.php" class="nav__link">Experiencias Laborales</a>
+			<a href="formexp.php" class="nav__link">Experiencias Laborales</a>
 			<a class="nav__link" href="./editarCredenciales.php">
 				<?php
 				echo $_SESSION['usuario'];
 				//  if(isset($row['nombre'])){echo($row['nombre']);}
 				?>
 			</a>
-			
+
 			<a href="../db/logout.php" class="nav__link">Salir</a>
 
 		</nav>
@@ -64,16 +64,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 		<form enctype="multipart/form-data" id="register_form" name="register_form" action="" method="post">
 			<input type="hidden" id="iduser" value="<?php echo $_SESSION['id_user']; ?>">
 
-			<div id="completar">
-				Por favor, tomese unos minutos para completar el formulario. Muchas gracias.
-			</div>
+			<div id="completar"></div>
 
 			<!-- progressbar -->
 			<ul id="progressbar">
-				<li class="active" id="account"><strong>Datos Personales</strong></li>
-				<li id="personal"><strong>Datos Academicos</strong></li>
-				<li id="payment"><strong>Conocimientos y habilidades</strong></li>
-				<li id="confirm"><strong>Preferencias laborales</strong></li>
+				<li class="active" id="personales"><strong>Datos Personales</strong></li>
+				<li id="academicos"><strong>Datos Academicos</strong></li>
+				<li id="conocimientos"><strong>Conocimientos y habilidades</strong></li>
+				<li id="laborales"><strong>Preferencias laborales</strong></li>
+				<li id="confirm"><strong>Archivos</strong></li>
 			</ul>
 
 			<fieldset class="personales form-step form-step-active">
@@ -118,10 +117,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<input type="radio" class="genero" id="g3" name="genero" value="3"> No binario
 						<input type="radio" class="genero" id="g4" name="genero" value="4"> Otro <p id="error_genero" class="text-danger"></p>
 					</div>
-					
+
 				</div>
 				<div class="form-group row">
-				<div class="col-sm-3">
+					<div class="col-sm-3">
 						<label for="ecivil">Estado civil:</label>
 						<select id="ecivil" name="ecivil" class="form-control">
 							<option value=""></option>
@@ -323,20 +322,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group row">
 					<div class="col-sm-11">
 						<label for="discapacidades">Especifique su discapacidad (si tiene):</label>
-						<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5"  maxlength="200" placeholder="Dificultad para escuchar"></textarea>
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<div class="col-sm-5">
-						<label for="foto">Sube tu foto:</label>
-						<input accept="image/*" type="file" id="foto" name="foto" class="form-control">
-					</div>
-
-					<div class="col-sm-5">
-						<label for="pdf">CV: </label>
-						<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
-						<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
+						<textarea class="form-control" id="discapacidades" name="discapacidades" rows="5" maxlength="200" placeholder="Dificultad para escuchar"></textarea>
 					</div>
 				</div><br>
 
@@ -349,13 +335,13 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group row">
 					<div class="col-sm-5">
-						<label for="carh">Carrera hecha:</label>
+						<label for="carh">Carrera:</label>
 						<select id="carh" name="carh" value="" class="form-control">
-							<option id="c1" value=""></option>
-							<option id="c2" value="1">Analistas de Sistemas</option>
-							<option id="c3" value="2">Turismo y Gestion Hotelera</option>
-							<option id="c4" value="3">Administración de Empresas</option>
-							<option id="c5" value="4">Régimen Aduanero</option><br>
+							<option value=""></option>
+							<option id="c1" value="1">Analistas de Sistemas</option>
+							<option id="c2" value="2">Turismo y Gestion Hotelera</option>
+							<option id="c3" value="3">Administración de Empresas</option>
+							<option id="c4" value="4">Régimen Aduanero</option><br>
 						</select>
 						<p id="error_carh" class="text-danger"></p>
 					</div>
@@ -394,7 +380,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 
 				<div class="form-group">
 					<label for="habilidades">Habilidades:</label>
-					<textarea class="form-control" name="habilidades" id="habilidades" rows="4"  placeholder="Dar la vuelta cambota" maxlength="200"></textarea>
+					<textarea class="form-control" name="habilidades" id="habilidades" rows="4" placeholder="Dar la vuelta cambota" maxlength="200"></textarea>
 				</div><br>
 
 				<input type="button" id="atras3" name="previous" class="btn btn-info previous" value="Atras" />
@@ -469,7 +455,28 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 						<p id="error_dcr" class="text-danger"></p>
 					</div>
 				</div>
+
 				<input type="button" id="atras4" name="previous" class="btn btn-info previous" value="Atras" />
+				<input type="button" id="sig5" name="next" class="btn btn-info next" value="Siguiente" />
+
+			</fieldset>
+			<fieldset class="archivos form-step">
+
+				<div class="form-group row">
+					<div class="col col-md-3">
+						<img id="fotomostrar" src="" width="240" height="240" alt="">
+					</div>
+					<div class="col-sm-5">
+						<label for="foto">Sube tu foto:</label>
+						<input accept="image/*" type="file" id="foto" name="foto" class="form-control"><br>
+						<label for="pdf">Curriculum vitae: </label>
+						<input type="hidden" name="MAX_FILE_SIZE" value="512000000">
+						<input type="file" id="pdf" class="form-control" name="pdf" accept="aplicaction/pdf">
+					</div>
+				</div>
+				<br>
+
+				<input type="button" id="atras5" name="previous" class="btn btn-info previous" value="Atras" />
 				<input type="submit" name="submit" class="submit btn btn-success btn" value="Enviar" /><span id="error4" class="text-danger"></span>
 			</fieldset>
 

@@ -1,6 +1,5 @@
 $(document).ready(function () {
   var previous_form, next_form, total_forms; //fieldsets
-  total_forms = $("fieldset").length;
   var opacity;
   var current = 1;
   var total_forms = $("fieldset").length;
@@ -148,6 +147,41 @@ $(document).ready(function () {
       setProgressBar(++current);
     }
   });
+
+  $("#sig5").click(function () {
+    laborales = val_laborales();
+    if (laborales != "") {
+      current_fs = $(this).parent();
+      next_form = $(this).parent().next();
+
+      //Add Class Active
+      $("#progressbar li")
+        .eq($("fieldset").index(next_form))
+        .addClass("active");
+
+      //show the next fieldset
+      next_form.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
+
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            next_form.css({ opacity: opacity });
+          },
+          duration: 500,
+        }
+      );
+      setProgressBar(++current);
+    }
+  });
+
   $(".previous").click(function () {
     current_fs = $(this).parent();
     previous_form = $(this).parent().prev();
@@ -220,7 +254,6 @@ $(document).ready(function () {
     } else {
       error = "";
       $("#error").text(error);
-      $("#error").removeClass("has-error");
       return true;
     }
   }
@@ -229,12 +262,10 @@ $(document).ready(function () {
     if (val_carrera() != "") {
       error = " Campos faltantes o invalidos*";
       $("#error2").text(error);
-      $("#error2").addClass("has-error");
       return false;
     } else {
       error = "";
       $("#error2").text(error);
-      $("#error2").removeClass("has-error");
       return true;
     }
   }
@@ -245,12 +276,10 @@ $(document).ready(function () {
     if (!val_idiomas()) {
       error = " Campos faltantes o invalidos*";
       $("#error3").text(error);
-      $("#error3").addClass("has-error");
       return false;
     } else {
       error = "";
       $("#error3").text(error);
-      $("#error3").removeClass("has-error");
       return true;
     }
   }
@@ -284,134 +313,139 @@ $(document).ready(function () {
 
   $("#register_form").submit(function (event) {
     event.preventDefault();
-    if (val_laborales()) {
-      const usuario = $.trim($("#usuario").val());
-      const apellido = $.trim($("#apellido").val());
-      const dni = $.trim($("#dni").val());
-      const email = $.trim($("#email").val());
-      const fechanacimiento = $.trim($("#fechanacimiento").val());
-      const genero = $(".genero:checked").val();
-      const ecivil = $.trim($("#ecivil").val());
-      const contacto = $.trim($("#contacto").val());
-      const domicilio = $.trim($("#domicilio").val());
-      const localidad = $.trim($("#localidad").val());
-      const departamento = $.trim($("#departamento").val());
-      const provincia = $.trim($("#provincia").val());
-      const pais = $.trim($("#pais").val());
-      const licencia = $(".licencia:checked").val();
-      const auto = $(".auto:checked").val();
-      const discapacidades = $.trim($("#discapacidades").val());
-      const carh = $.trim($("#carh").val());
-      const cursos = $.trim($("#cursos").val());
-      const progs = $.trim($("#progs").val());
-      const habilidades = $.trim($("#habilidades").val());
-      const slaboral = $.trim($("#slaboral").val());
-      const area = $.trim($("#area").val());
-      const modalidad = $.trim($("#modalidad").val());
-      const salariomin = $.trim($("#salariomin").val());
-      const dv = $(".dv:checked").val();
-      const dcr = $(".dcr:checked").val();
 
-      var idiomas = [];
-      $(":checkbox[name=idiomas]").each(function () {
-        if (this.checked) {
-          // agregas cada elemento.
-          idiomas.push($(this).val());
-        }
-      });
+    const usuario = $.trim($("#usuario").val());
+    const apellido = $.trim($("#apellido").val());
+    const dni = $.trim($("#dni").val());
+    const email = $.trim($("#email").val());
+    const fechanacimiento = $.trim($("#fechanacimiento").val());
+    const genero = $(".genero:checked").val();
+    const ecivil = $.trim($("#ecivil").val());
+    const contacto = $.trim($("#contacto").val());
+    const domicilio = $.trim($("#domicilio").val());
+    const localidad = $.trim($("#localidad").val());
+    const departamento = $.trim($("#departamento").val());
+    const provincia = $.trim($("#provincia").val());
+    const pais = $.trim($("#pais").val());
+    const licencia = $(".licencia:checked").val();
+    const auto = $(".auto:checked").val();
+    const discapacidades = $.trim($("#discapacidades").val());
+    const carh = $.trim($("#carh").val());
+    const cursos = $.trim($("#cursos").val());
+    const progs = $.trim($("#progs").val());
+    const habilidades = $.trim($("#habilidades").val());
+    const slaboral = $.trim($("#slaboral").val());
+    const area = $.trim($("#area").val());
+    const modalidad = $.trim($("#modalidad").val());
+    const salariomin = $.trim($("#salariomin").val());
+    const dv = $(".dv:checked").val();
+    const dcr = $(".dcr:checked").val();
 
-      //----------------------FOTO
-      var fd = new FormData();
-      var files = $("#foto")[0].files;
-      // Check file selected or not
-      if (files.length > 0) {
-        fd.append("foto", files[0]);
-        console.log(fd);
+    var idiomas = [];
+    $(":checkbox[name=idiomas]").each(function () {
+      if (this.checked) {
+        // agregas cada elemento.
+        idiomas.push($(this).val());
       }
-      //----------------------------------PDF
-      var cd = new FormData();
-      var files = $("#pdf")[0].files;
-      // Check file selected or not
-      if (files.length > 0) {
-        cd.append("pdf", files[0]);
-      }
+    });
 
-      $.ajax({
-        url: "../db/archivos.php",
-        type: "POST",
-        datatype: "json",
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          //console.log(data);
-        },
-      });
-
-      $.ajax({
-        url: "../db/archivos.php",
-        type: "POST",
-        datatype: "json",
-        data: cd,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          //console.log(data);
-        },
-      });
-
-      $.ajax({
-        url: "../db/multi_form_action.php",
-        type: "POST",
-        datatype: "json",
-        data: {
-          usuario: usuario,
-          apellido: apellido,
-          dni: dni,
-          email: email,
-          fechanacimiento: fechanacimiento,
-          genero: genero,
-          ecivil: ecivil,
-          contacto: contacto,
-          domicilio: domicilio,
-          localidad: localidad,
-          departamento: departamento,
-          provincia: provincia,
-          pais: pais,
-          licencia: licencia,
-          auto: auto,
-          discapacidades: discapacidades,
-          carh: carh,
-          cursos: cursos,
-          idiomas: idiomas,
-          progs: progs,
-          habilidades: habilidades,
-          slaboral: slaboral,
-          area: area,
-          modalidad: modalidad,
-          salariomin: salariomin,
-          dv: dv,
-          dcr: dcr,
-        },
-        success: (data) => {
-          if (data === "false") {
-            Swal.fire({
-              icon: "success",
-              title: "¡Guardado correctamente!",
-              confirmButtonColor: "#ffa361",
-              confirmButtonText: "Entrar",
-            });
-            
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Ups! No se pudo guardar correctamente",
-            });
-          }
-        },
-      });
-      return true;
+    //----------------------FOTO
+    var fd = new FormData();
+    var files = $("#foto")[0].files;
+    console.log($("#foto").val());
+    // Check file selected or not
+    if (files.length > 0) {
+      fd.append("foto", files[0]);   
     }
+
+    $.ajax({
+      url: "../db/foto.php",
+      type: "POST",
+      datatype: "json",
+      data: fd,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        data = data.replace(/['"]+/g, '');
+        if(data == ""){
+          $("#fotomostrar").attr("src","../db/images/default.png");
+        } else {
+          $("#fotomostrar").attr("src","../db/images/" + data);
+        }
+      },
+    });
+
+    //----------------------------------PDF
+    var cd = new FormData();
+    var files = $("#pdf")[0].files;
+    // Check file selected or not
+    if (files.length > 0) {
+      cd.append("pdf", files[0]);
+    }    
+
+    $.ajax({
+      url: "../db/cv.php",
+      type: "POST",
+      datatype: "json",
+      data: cd,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        //console.log(data);
+      },
+    });
+
+    $.ajax({
+      url: "../db/multi_form_action.php",
+      type: "POST",
+      datatype: "json",
+      data: {
+        usuario: usuario,
+        apellido: apellido,
+        dni: dni,
+        email: email,
+        fechanacimiento: fechanacimiento,
+        genero: genero,
+        ecivil: ecivil,
+        contacto: contacto,
+        domicilio: domicilio,
+        localidad: localidad,
+        departamento: departamento,
+        provincia: provincia,
+        pais: pais,
+        licencia: licencia,
+        auto: auto,
+        discapacidades: discapacidades,
+        carh: carh,
+        cursos: cursos,
+        idiomas: idiomas,
+        progs: progs,
+        habilidades: habilidades,
+        slaboral: slaboral,
+        area: area,
+        modalidad: modalidad,
+        salariomin: salariomin,
+        dv: dv,
+        dcr: dcr,
+      },
+      success: (data) => {
+        if (data === "false") {
+          Swal.fire({
+            icon: "success",
+            title: "¡Guardado correctamente!",
+            confirmButtonColor: "#ffa361",
+            confirmButtonText: "Entrar",
+          });
+          $("#completar").remove();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Ups! No se pudo guardar correctamente",
+          });
+        }
+      },
+    });
+    return true;
   });
 
   var lic = document.getElementById("licsi").checked;
@@ -445,7 +479,7 @@ $(document).ready(function () {
       $("#error_usuario").text(error_usuario);
     } else {
       error_usuario = "";
-      $("#error_usuario").text(error_usuario);
+      $("#error_usuario").text(error_usuario);     
     }
     return error_usuario;
   }
@@ -610,7 +644,7 @@ $(document).ready(function () {
   }
   function val_auto() {
     var licencia = $("input[name='licencia']:checked").val();
-    if (licencia == 2) {
+    if (licencia == 1) {
       if (!$("input[name='auto']:radio").is(":checked")) {
         error_auto = "Complete este campo*";
         $("#error_auto").text(error_auto);
@@ -750,7 +784,7 @@ $(document).ready(function () {
   });
   $("#localidad").keyup(function () {
     val_localidad();
-  });  
+  });
   $("#departamento").keyup(function () {
     val_departamento();
   });
@@ -853,5 +887,3 @@ $("#foto").on("change", function () {
     }
   }
 });
-
-

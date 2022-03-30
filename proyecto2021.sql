@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-03-2022 a las 02:08:17
+-- Tiempo de generación: 30-03-2022 a las 01:04:14
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -39,16 +39,6 @@ CREATE TABLE `buscaempleado` (
   `disponibilidad` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `buscaempleado`
---
-
-INSERT INTO `buscaempleado` (`idbusqueda`, `idsucursal`, `edadmin`, `edadmax`, `carrera`, `genero`, `localidad`, `departamento`, `provincia`, `disponibilidad`) VALUES
-(1, 2, 16, 64, 1, 1, 1, 1, 1, 1),
-(2, 4, 23, 54, 1, 2, 2, 1, 1, 2),
-(3, 9, 32, 64, 1, 4, 1, 1, 1, 3),
-(4, 4, 16, 32, 1, 1, 1, 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -80,21 +70,20 @@ INSERT INTO `carrera` (`idcar`, `carrera`, `duracion`) VALUES
 
 CREATE TABLE `carxuser` (
   `idcar` int(3) NOT NULL,
-  `iduser` int(8) NOT NULL,
-  `añofinal` date DEFAULT NULL
+  `iduser` int(8) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `carxuser`
 --
 
-INSERT INTO `carxuser` (`idcar`, `iduser`, `añofinal`) VALUES
-(1, 1, '2022-11-17'),
-(3, 2, '2022-11-17'),
-(1, 3, '2021-11-25'),
-(2, 2, '2022-11-22'),
-(4, 6, NULL),
-(1, 7, NULL);
+INSERT INTO `carxuser` (`idcar`, `iduser`) VALUES
+(1, 1),
+(3, 2),
+(1, 3),
+(2, 2),
+(4, 6),
+(1, 7);
 
 -- --------------------------------------------------------
 
@@ -129,7 +118,9 @@ INSERT INTO `departamento` (`idep`, `departamento`, `idpro`) VALUES
 (14, 'Veinticinco de Mayo', 1),
 (15, 'Guarani', 1),
 (16, 'San Pedro', 1),
-(17, 'General Manuel Belgrano', 1);
+(17, 'General Manuel Belgrano', 1),
+(23, 'SD', 1),
+(22, 'SD', 1);
 
 -- --------------------------------------------------------
 
@@ -146,19 +137,6 @@ CREATE TABLE `empresas` (
   `correo` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empresas`
---
-
-INSERT INTO `empresas` (`idempresa`, `logo`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
-(5, '', 'Leña', 343445, 'carlos', 'asdasd', '34343'),
-(23, '', 'Cañon', 32423443, '32423443', 'sadasd@gmail.com', '123123'),
-(15, '', 'Todo ceramica', 424442, 'Pedro', 'TD', '986322'),
-(22, '', 'todo', 34344, '34344', 'TD', '123123'),
-(24, '', 'fdsfsd', 232323, '232323', 'ds', '123123'),
-(25, '', 'aaa', 333, '333', 'fggffg', '9863222332'),
-(29, '', 'todo', 3434, '3434', 'sadasd', '123123');
 
 -- --------------------------------------------------------
 
@@ -258,26 +236,28 @@ INSERT INTO `idioxuser` (`iduser`, `idi`) VALUES
 CREATE TABLE `localidad` (
   `idloc` int(3) NOT NULL,
   `localidad` varchar(50) NOT NULL,
-  `idep` int(3) NOT NULL
+  `idep` int(3) NOT NULL,
+  `idpro` int(8) NOT NULL,
+  `idpais` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `localidad`
 --
 
-INSERT INTO `localidad` (`idloc`, `localidad`, `idep`) VALUES
-(1, 'Puerto Rico', 1),
-(2, 'Garuhapé', 1),
-(3, 'Capiovi', 1),
-(4, 'El Alcazar', 1),
-(5, 'Jardin America', 3),
-(6, 'Montecarlo', 2),
-(7, 'Puerto Iguazu', 7),
-(8, 'Eldorado', 6),
-(9, 'Posadas', 5),
-(10, 'Garupa', 5),
-(11, 'Obera', 10),
-(12, 'San Ignacio', 3);
+INSERT INTO `localidad` (`idloc`, `localidad`, `idep`, `idpro`, `idpais`) VALUES
+(1, 'Puerto Rico', 1, 1, 1),
+(2, 'Garuhapé', 1, 1, 1),
+(3, 'Capiovi', 1, 1, 1),
+(4, 'El Alcazar', 1, 1, 1),
+(5, 'Jardin America', 3, 1, 1),
+(6, 'Montecarlo', 2, 1, 1),
+(7, 'Puerto Iguazu', 7, 1, 1),
+(8, 'Eldorado', 6, 1, 1),
+(9, 'Posadas', 5, 1, 1),
+(10, 'Garupa', 5, 1, 1),
+(11, 'Obera', 10, 1, 1),
+(12, 'San Ignacio', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -344,7 +324,8 @@ CREATE TABLE `pais` (
 INSERT INTO `pais` (`idpais`, `pais`) VALUES
 (1, 'Argentina'),
 (2, 'Paraguay'),
-(3, 'Brasil');
+(3, 'Brasil'),
+(4, 'Uruguay');
 
 -- --------------------------------------------------------
 
@@ -370,7 +351,9 @@ INSERT INTO `provincia` (`idpro`, `provincia`, `idpais`) VALUES
 (5, 'Entre Rios', 1),
 (6, 'Buenos Aires', 1),
 (7, 'Cordoba', 1),
-(8, 'Santa Fe', 1);
+(8, 'Santa Fe', 1),
+(9, 'Tierra del Fuego', 1),
+(10, 'hola', 1);
 
 -- --------------------------------------------------------
 
@@ -410,16 +393,6 @@ CREATE TABLE `sucursales` (
   `gerente` varchar(50) NOT NULL,
   `central` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sucursales`
---
-
-INSERT INTO `sucursales` (`idsucursal`, `empresa`, `direccion`, `localidad`, `departamento`, `provincia`, `pais`, `telefono`, `gerente`, `central`) VALUES
-(2, 5, 'Las Americas', 1, 1, 1, 1, '3442325', 'Pedro', 1),
-(4, 15, 'jghhdf', 2, 1, 1, 1, '986322', 'dgfdg', 0),
-(9, 15, '9 de julio', 1, 8, 1, 1, '123123', 'dgfdg', 0),
-(12, 15, 'as2', 2, 1, 1, 1, 'asdas', 'dgfdg', 0);
 
 -- --------------------------------------------------------
 
@@ -588,7 +561,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `buscaempleado`
 --
 ALTER TABLE `buscaempleado`
-  MODIFY `idbusqueda` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idbusqueda` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
@@ -598,7 +571,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idep` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
@@ -638,12 +611,12 @@ ALTER TABLE `modalidades`
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
-  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `provincia`
 --
 ALTER TABLE `provincia`
-  MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idpro` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
@@ -653,7 +626,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

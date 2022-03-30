@@ -14,7 +14,6 @@ $idUser = isset($_GET['id'])? $_GET['id'] : null;
         <title>Recuperar Contraseña</title>
     </head>
     <body>
-        <input style="display:none" type="hidden" id="idUser" value="<?php echo $iduser ?>">
         <div class="container">
             <div class="row my-auto justify-content-md-center">
                 <div class="col-6">
@@ -28,7 +27,11 @@ $idUser = isset($_GET['id'])? $_GET['id'] : null;
                     </form>
                 </div>
             </div>
+            
         </div>
+    <div class="row my-auto justify-content-md-center">
+     <input type="hidden" id="idUser" value="<?php echo $iduser ?>">
+    </div>   
 <script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../popper/popper.min.js"></script>

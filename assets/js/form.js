@@ -407,24 +407,22 @@ $(document).ready(function () {
      if (files.length > 0) {
        fd.append("foto", files[0]);   
      }
- 
-     $.ajax({
-       url: "../db/foto.php",
-       type: "POST",
-       datatype: "json",
-       data: fd,
-       contentType: false,
-       processData: false,
-       success: (data) => {
-         data = data.replace(/['"]+/g, '');
-         console.log(data);
-         if(data == ""){
-           $("#fotomostrar").attr("src","../db/images/default.png");
-         } else {
-           $("#fotomostrar").attr("src","../db/images/" + data);
-         }
-       },
-     });
+     if($("#foto").val() != ""){
+      $.ajax({
+        url: "../db/foto.php",
+        type: "POST",
+        datatype: "json",
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          data = data.replace(/['"]+/g, '');
+          console.log(data);          
+          $("#fotomostrar").attr("src","../db/images/" + data);
+          
+        },
+      });
+     }     
  
      //----------------------------------PDF
      var cd = new FormData();
@@ -433,7 +431,7 @@ $(document).ready(function () {
      if (files.length > 0) {
        cd.append("pdf", files[0]);
      }    
- 
+     if($("#pdf").val() != ""){
      $.ajax({
        url: "../db/cv.php",
        type: "POST",
@@ -442,13 +440,11 @@ $(document).ready(function () {
        contentType: false,
        processData: false,
        success: (data) => {
-         console.log(data);
+         //console.log(data);
        },
      });
-
-    return true;
-
-    
+    }
+    return true;    
   });
 
   var lic = document.getElementById("licsi").checked;

@@ -1,7 +1,6 @@
 <?php
 
-
-
+$idUser = isset($_GET['id'])? $_GET['id'] : null;
 
 ?>
 <!DOCTYPE html>
@@ -15,24 +14,25 @@
         <title>Recuperar Contraseña</title>
     </head>
     <body>
+        <input style="display:none" type="hidden" id="idUser" value="<?php echo $iduser ?>">
         <div class="container">
             <div class="row my-auto justify-content-md-center">
                 <div class="col-6">
                     <form id="form_forgot_pass" class="p-3 mx-6 border bg-light">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Dirección de Email</label>
-                            <input id="email_forgot" required type="email" placeholder="Ingresa el email que usaste en tu registro" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text text-muted">Tu password llegará a tu email</div>
+                            <label for="exampleInputEmail1" class="form-label">Ingrese Nueva Contraseña</label>
+                            <input id="pass_forgot" required type="text" placeholder="Ingresa la Nueva Contraseña" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text text-muted">Las Contraseña se cambiará al que hayas ingresado</div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Recuperar</button>
+                        <button type="submit" class="btn btn-primary">Cambiar</button>
                     </form>
                 </div>
             </div>
         </div>
-<script src="./jquery/jquery-3.6.0.min.js"></script>
+<script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../popper/popper.min.js"></script>
-<script src="./plugins/sweetalert/sweetalert2.all.min.js"></script>
-<script src="./assets/js/verificarEmail.js"></script>
+<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="../assets/js/recuperarPass.js"></script>
 </body>
 </html>

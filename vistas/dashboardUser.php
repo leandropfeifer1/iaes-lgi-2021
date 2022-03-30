@@ -306,15 +306,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group row">
 					<div class="col-sm-3">
 						<label for="licencia">Licencia de conducir:</label>
-						<input type="radio" class="licencia" name="licencia" value="2" id="licsi">Si
-						<input type="radio" class="licencia" name="licencia" value="1" id="licno">No
+						<input type="radio" class="licencia" name="licencia" value="1" id="licsi">Si
+						<input type="radio" class="licencia" name="licencia" value="2" id="licno">No
 						<p id="error_licencia" class="text-danger"></p>
 					</div>
 
 					<div id="auto" class="col-sm-4">
 						<label for="auto">Dispone de vehiculo propio(auto):</label>
-						<input id="vsi" type="radio" class="auto" name="auto" value="2" disabled>Si
-						<input id="vno" type="radio" class="auto" name="auto" value="1" disabled>No
+						<input id="vsi" type="radio" class="auto" name="auto" value="1" disabled>Si
+						<input id="vno" type="radio" class="auto" name="auto" value="2" disabled>No
 						<p id="error_auto" class="text-danger"></p>
 					</div>
 				</div>

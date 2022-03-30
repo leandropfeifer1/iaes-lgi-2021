@@ -29,6 +29,7 @@ require('../db/verificarCredenciales.php');
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>
+            <a class="header_link" href="ubicaciones.php">Ubicaciones</a>
             <a class="header_link" href="sucursales.php">Sucursales</a>
             <a class="header_link" href="empresas.php">Empresas</a>
             <a class="header_link" href="buscempleado.php">Busquedas de Empleados</a>

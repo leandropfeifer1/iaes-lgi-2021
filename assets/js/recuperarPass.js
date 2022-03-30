@@ -15,7 +15,7 @@ $(document).ready(() => {
         password: pass,
       },
       success: (data) => {
-        console.log('aaaaaaaaaaaaa', data);
+        console.log('Respuesta:', data);
         if (data === false || data === 'false') {
           Swal.fire({
             icon: 'error',

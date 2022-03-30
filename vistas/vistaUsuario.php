@@ -53,6 +53,17 @@ require('../db/conexionDb.php');
         color: rgba(20, 161, 20, 0.87);
         border-bottom: solid 1px rgba(168, 161, 161, 0.651);
     }
+
+    #recuperarPass{
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 2px;
+    }
+    #recuperarPass:hover{
+        text-decoration: none;
+        background-color: black;
+        color: white;
+    }
 </style>
 
 <body>
@@ -218,7 +229,7 @@ require('../db/conexionDb.php');
         <div class="container" align="center">
             <button type="button" id="imprimir">Imprimir</button>
             <button type="button" id="borrar">Borrar</button>
-            <button type="button" id="recuperarPass">Recuperar Contraseña</button>          
+            <a target="_blank" href="./recuperarContrasena.php?id=<?php echo $iduser ?>" id="recuperarPass">Cambiar Contraseña</a>          
         </div>
 
     </div>
@@ -226,7 +237,7 @@ require('../db/conexionDb.php');
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../popper/popper.min.js"></script>
 <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-<script type="text/javascript" src="../assets/js/recuperarPass.js"></script>
+<!-- <script type="text/javascript" src="../assets/js/recuperarPass.js"></script> -->
 <script type="text/javascript" src="../assets/js/borrarUser.js"></script>
 <script type="text/javascript" src="../assets/js/usuario.js"></script>
 </body>

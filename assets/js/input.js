@@ -3,6 +3,7 @@ $(document).ready(function () {
   let id = iduser.value;
   $.post("../db/mostrar_reg.php", { id }, function (response) {
     if (response) {        
+      $("#completar").remove();
       const datos = JSON.parse(response);
       $("#usuario").val(datos.usuario);
       $("#apellido").val(datos.apellido);
@@ -24,6 +25,11 @@ $(document).ready(function () {
       $("#area").val(datos.area);
       $("#salariomin").val(datos.salariomin);
       $("#discapacidades").val(datos.discapacidades);
+      if(datos.foto == null){
+        $("#fotomostrar").attr("src","../db/images/default.png");
+      } else {
+        $("#fotomostrar").attr("src","../db/images/" + datos.foto);
+      }
 
       if (datos.genero == $("#g1").val()) {
         $("#g1").prop("checked", true);
@@ -119,27 +125,29 @@ $(document).ready(function () {
       }
 
       edit = true;
+    } else {
+      $("#completar").html(
+        "Por favor, tomese unos minutos para completar el formulario. Muchas gracias."
+      );
+      $("#completar").addClass("comp");
     }
   });
 
   $.post("../db/mostrar_carrera.php", { id }, function (response) {
     if (response) {
       const datos = JSON.parse(response);
-      switch (datos.idcar) {
-        case "":
+      switch (datos.idcar) {        
+        case "1":
           $("#c1").prop("selected", true);
           break;
-        case "1":
+        case "2":
           $("#c2").prop("selected", true);
           break;
-        case "2":
+        case "3":
           $("#c3").prop("selected", true);
           break;
-        case "3":
-          $("#c4").prop("selected", true);
-          break;
         case "4":
-          $("#c5").prop("selected", true);
+          $("#c4").prop("selected", true);
           break;
       }
     }

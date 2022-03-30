@@ -35,7 +35,8 @@ if(isset($_SESSION['id_user'])){
     }
     if(isset($_POST['buscador']) && $_POST['buscador'] != ""){
         $busc = $_POST['buscador'];
-        $consulta .= '  AND (habilidades LIKE "%'.$busc.'%"';
+        $consulta .= '  AND (cursos LIKE "%'.$busc.'%"';
+        $consulta .= ' OR apellido LIKE "'.$busc.'%"'; // Este lo puse por ultimo, si hay problemas borrarlo xdd
         $consulta .= ' OR area LIKE "%'.$busc.'%")';
     }
     if(isset($_POST['genero'])&& $_POST['genero'] != 0){

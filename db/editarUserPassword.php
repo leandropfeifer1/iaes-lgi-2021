@@ -13,7 +13,7 @@ if(isset($_POST['actualPass'])
     $passwordHash = "";
     $idUser = $_SESSION['id_user']; // recupero el ID del usuario (sesion)
 
-    $query = "SELECT password FROM login WHERE idlog=".$idUser.";";
+    $query = "SELECT password FROM login WHERE idlog=$idUser;";
     $resultado =  mysqli_query($conexion, $query);
     if(!empty($resultado) && mysqli_num_rows($resultado) != 0) {
         $row = mysqli_fetch_assoc($resultado);
@@ -23,7 +23,7 @@ if(isset($_POST['actualPass'])
     }
     if($correctPassword == true){
         $passwordHash = password_hash($newPass, PASSWORD_BCRYPT);
-        $sql = "UPDATE login SET password='".$passwordHash."' WHERE idlog=".$idUser.";";
+        $sql = "UPDATE login SET password='".$passwordHash."' WHERE idlog=$idUser";
         if (mysqli_query($conexion, $sql)) {
             $data = array('usuario'=>$_SESSION['usuario'], 'verificar'=> true);
         }else{

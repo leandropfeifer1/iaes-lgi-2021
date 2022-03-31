@@ -29,7 +29,12 @@ mysqli_set_charset($conexion, "utf8");
                 $datos = $fila['idempresa'] . "||" . $fila['empresa'] . "||" . $fila['cuit'] . "||" . $fila['presidente'] . "||" . $fila['correo'] . "||" . $fila['telefono']. "||" . $fila['logo'];
             ?>            
                 <tr style="background-color: #eee;">
-                    <td><img class="img-thumbnail" src="<?php echo "../db/images/" . $fila['logo'] ?>" width="40" height="40" alt=""></td>
+                    
+                    <td><?php if($fila['logo'] != ""){
+                        $logo = $fila['logo'];
+                    }else{
+                        $logo = "default.png";
+                    }?> <img class="img-thumbnail" src="<?php echo "../db/images/" . $logo ?>" width="50" alt=""></td>
                     <td><?php echo $fila['empresa'] ?></td>
                     <td><?php echo $fila['cuit'] ?></td>
                     <td><?php echo $fila['presidente'] ?></td>

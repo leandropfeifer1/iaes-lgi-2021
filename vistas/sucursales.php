@@ -69,16 +69,16 @@ if (!isset($_SESSION['usuario'])) {
                 </div>
                 <div class="modal-body">
                     <th>Empresa</th>
-                    <select name="empresa" id="empresa" class="form-control">
-                        <option value=""></option>
+                    <select name="empresas" id="empresas" class="form-control">
+                        <option value="" disabled selected>Seleccione una Empresa</option>
                         <?php
                         $sql = "SELECT * FROM empresas";
                         $lista = mysqli_query($conexion, $sql);
                         while ($fila = $lista->fetch_assoc()) {
 
-                            $empresa = $fila['idempresa'];
-                            $nombre = $fila['empresa'];
-                            echo "<option value=$empresa>$nombre</option>";
+                            $idempresa = $fila['idempresa'];
+                            $empresa = $fila['empresa'];
+                            echo "<option value=$idempresa>$empresa</option>";
                         }
                         ?>
                     </select>
@@ -264,7 +264,7 @@ if (!isset($_SESSION['usuario'])) {
 <script type="text/javascript">
     $(document).ready(function() {
         $('#guardarN').click(function() {
-            empresa = $('#empresa').val();
+            var empresa = $('#empresas').val();
             direccion = $('#direccion').val();
             localidad = $('#localidad').val();
             departamento = $('#departamento').val();
@@ -273,6 +273,7 @@ if (!isset($_SESSION['usuario'])) {
             telefono = $('#telefono').val();
             gerente = $('#gerente').val();
             central = $('#central').val();
+            console.log(empresa)
             if (empresa === '') {
                 Swal.fire({
                     icon: 'warning',

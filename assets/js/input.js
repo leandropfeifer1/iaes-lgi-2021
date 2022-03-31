@@ -25,7 +25,8 @@ $(document).ready(function () {
       $("#area").val(datos.area);
       $("#salariomin").val(datos.salariomin);
       $("#discapacidades").val(datos.discapacidades);
-      if(datos.foto == null){
+      console.log(datos.foto);
+      if(datos.foto == null || datos.foto == ""){
         $("#fotomostrar").attr("src","../db/images/default.png");
       } else {
         $("#fotomostrar").attr("src","../db/images/" + datos.foto);

@@ -112,3 +112,7 @@ input[type='submit']:hover {
   margin-left: 20px;
   font-size: 11;
 }
+
+#idUser {
+  display: none;
+}

@@ -2,20 +2,19 @@ $(document).ready(() => {
   $('#form_forgot_pass').submit((event) => {
     event.preventDefault();
 
-    const user = $('#idUser').val();
-    const idUser = parseInt(user);
-    const pass = $('#pass_forgot').val();
+    const userString = $('#idUser').val();
+    const idUser = parseInt(userString);
+    const pass = $('#exampleInputEmail1').val();
 
     $.ajax({
       url: '../db/cambiarPassword.php',
       type: 'POST',
       datatype: 'json',
       data: {
-        user: idUser,
-        password: pass,
+        idUser: idUser,
+        pass: pass,
       },
       success: (data) => {
-        console.log('Respuesta:', data);
         if (data === false || data === 'false') {
           Swal.fire({
             icon: 'error',

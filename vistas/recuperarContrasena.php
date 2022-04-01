@@ -1,6 +1,6 @@
 <?php
 
-$idUser = isset($_GET['id'])? $_GET['id'] : null;
+$idUser = $_GET['id'];
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,8 @@ $idUser = isset($_GET['id'])? $_GET['id'] : null;
                     <form id="form_forgot_pass" class="p-3 mx-6 border bg-light">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Ingrese Nueva Contraseña</label>
-                            <input id="pass_forgot" required type="text" placeholder="Ingresa la Nueva Contraseña" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input required type="text" placeholder="Ingresa la Nueva Contraseña" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input disabled type="hidden" id="idUser" value="<?php echo $idUser ?>">
                             <div id="emailHelp" class="form-text text-muted">Las Contraseña se cambiará al que hayas ingresado</div>
                         </div>
                         <button type="submit" class="btn btn-primary">Cambiar</button>
@@ -30,7 +31,6 @@ $idUser = isset($_GET['id'])? $_GET['id'] : null;
             
         </div>
     <div class="row my-auto justify-content-md-center">
-     <input type="hidden" id="idUser" value="<?php echo $iduser ?>">
     </div>   
 <script src="../jquery/jquery-3.6.0.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>

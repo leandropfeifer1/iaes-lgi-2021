@@ -195,33 +195,33 @@ if (!isset($_SESSION['usuario'])) {
                         </div>
                         <div class="modal-body">
                             <th>Pais</th>
-                            <select name="pais" id="pais" class="form-control">
+                            <select name="paisagregar" id="paisagregar" class="form-control">
                                 <option value=""></option>
                                 <?php
-                                $sql = "SELECT * FROM pais";
-                                $lista = mysqli_query($conexion, $sql);
-                                while ($fila = $lista->fetch_assoc()) {
-                                    $pais = $fila['idpais'];
-                                    $nombre = $fila['pais'];
-                                    echo "<option value=$pais>$nombre</option>";
+                                $sql1 = "SELECT * FROM pais";
+                                $lista1 = mysqli_query($conexion, $sql1);
+                                while ($fila = $lista1->fetch_assoc()) {
+                                    $q = $fila['idpais'];
+                                    $q2 = $fila['pais'];
+                                    echo "<option value=$q>$q2</option>";
                                 }
                                 ?>
                             </select>
                             <th>Provincia</th>
-                            <select name="provincia" id="provincia" class="form-control">
+                            <select name="proagre" id="proagre" class="form-control">
                                 <option value=""></option>
                                 <?php
-                                $sql = "SELECT * FROM provincia";
-                                $lista = mysqli_query($conexion, $sql);
-                                while ($fila = $lista->fetch_assoc()) {
+                                $sql2 = "SELECT * FROM provincia";
+                                $lista2 = mysqli_query($conexion, $sql2);
+                                while ($fila = $lista2->fetch_assoc()) {
 
-                                    $provincia = $fila['idpro'];
-                                    $nombre = $fila['provincia'];
-                                    echo "<option value=$provincia>$nombre</option>";
+                                    $idproa = $fila['idpro'];
+                                    $provincias = $fila['provincia'];
+                                    echo "<option value=$idproa>$provincias</option>";
                                 }
                                 ?>
                             </select>
-                            <label>Localidad</label>  
+                            <label>Departamento</label>  
                             <select name="departamentoa" id="departamentoa" class="form-control">
                                 <option value=""></option>
                                 <?php
@@ -235,7 +235,7 @@ if (!isset($_SESSION['usuario'])) {
                                 }
                                 ?>
                             </select>
-                                                  
+                            <label>Localidad</label>                   
                             <input type="text" name="localidada" id="localidada" class="form-control input-sm">                    
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -530,8 +530,8 @@ if (!isset($_SESSION['usuario'])) {
         $('#guardarLoc').click(function () {
             localidada = $('#localidada').val();
             departamentoa = $('#departamentoa').val();
-            provincia = $('#provincia').val();
-            pais = $('#pais').val();
+            provincia = $('#proagre').val();
+            pais = $('#paisagregar').val();
             
             if (pais === '') {
                 Swal.fire({
@@ -541,10 +541,10 @@ if (!isset($_SESSION['usuario'])) {
                     confirmButtonText: 'Ok',
                 });
             } else {
-                if (provinciaa === '') {
+                if (provincia === '') {
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Falta Completar campo "Pais"',
+                        title: 'Falta Completar campo "Provincia"',
                         confirmButtonColor: '#ffa361',
                         confirmButtonText: 'Ok',
                     });
@@ -552,15 +552,15 @@ if (!isset($_SESSION['usuario'])) {
                     if (departamentoa === '') {
                         Swal.fire({
                             icon: 'warning',
-                            title: 'Falta Completar campo "Pais"',
+                            title: 'Falta Completar campo "Departamento"',
                             confirmButtonColor: '#ffa361',
                             confirmButtonText: 'Ok',
                         });
                     } else {
-                        if (paisa === '') {
+                        if (localidada === '') {
                             Swal.fire({
                                 icon: 'warning',
-                                title: 'Falta Completar campo "Pais"',
+                                title: 'Falta Completar campo "Localidad"',
                                 confirmButtonColor: '#ffa361',
                                 confirmButtonText: 'Ok',
                             });

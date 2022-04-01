@@ -7,24 +7,24 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Empresas</title>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
-    <link rel="stylesheet" href="../assets/css/register.css">
-    <link rel="stylesheet" href="../assets/css/filtro.css">
-    <script src="../jquery/jquery-3.6.0.min.js"></script>
-    <script src="../popper/popper.min.js" type="text/javascript"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="../assets/js/createUser.js"></script>
-    <script src="../assets/js/empresasjs.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Empresas</title>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
+        <link rel="stylesheet" href="../assets/css/register.css">
+        <link rel="stylesheet" href="../assets/css/filtro.css">
+        <script src="../jquery/jquery-3.6.0.min.js"></script>
+        <script src="../popper/popper.min.js" type="text/javascript"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+        <script src="../assets/js/createUser.js"></script>
+        <script src="../assets/js/empresasjs.js"></script>
+    </head>
 
-<body>
+    <body>
 
     <body>
         <div class="contenido">
@@ -32,6 +32,9 @@ if (!isset($_SESSION['usuario'])) {
                 <a href="#" class="logo__link">
                     <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
                 </a>
+            </div>
+            <div class="create">
+                <!-- <a id="botonCrear" href="./registro.php">Crear Usuario</a> -->
             </div>
             <header id="header" class="header_dasboard">
                 <?php
@@ -52,7 +55,9 @@ if (!isset($_SESSION['usuario'])) {
                     echo '<a class="header_link" href="./filtro.php">Volver</a>';
                 }
                 ?>
-                <a class="header_link" href="sucursales.php">sucursales</a>
+                <a class="header_link" href="ubicaciones.php">Ubicaciones</a>
+                <a class="header_link" href="sucursales.php">Sucursales</a>
+                <a class="header_link" href="buscempleado.php">Busquedas de Empleados</a>
                 <a class="header_link" href="../db/logout.php">Salir</a>
             </header>
         </div>
@@ -128,13 +133,13 @@ if (!isset($_SESSION['usuario'])) {
 
 </html>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tabla').load('empresastabla.php');
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#guardarN').click(function() {
+    $(document).ready(function () {
+        $('#guardarN').click(function () {
             empresa = $('#empresa').val();
             cuit = $('#cuit').val();
             presidente = $('#cuit').val();
@@ -208,7 +213,7 @@ if (!isset($_SESSION['usuario'])) {
         });
 
 
-        $('#modificar').click(function() {
+        $('#modificar').click(function () {
             modificar();
         });
     });

@@ -27,13 +27,18 @@ require('../db/verificarCredenciales.php');
         <div class="create">
             <a id="botonCrear" href="./agregarbus.php">Nueva Busqueda</a>
         </div>
-       
+        <div class="create">
+                <!-- <a id="botonCrear" href="./registro.php">Crear Usuario</a> -->
+            </div>
         <header id="header" class="header_dasboard">
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>
+            
+            <a class="header_link" href="ubicaciones.php">Ubicaciones</a>
             <a class="header_link" href="sucursales.php">Sucursales</a>
             <a class="header_link" href="empresas.php">Empresas</a>
+            <a class="header_link" href="filtro.php">Busquedas de Alumnos</a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>

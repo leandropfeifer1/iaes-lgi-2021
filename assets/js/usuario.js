@@ -3,9 +3,13 @@ $(document).ready(function () {
     console.log("asdasd");
     $("#descargarcv").hide();
     $("#imprimir").hide();
+    $("#borrar").hide();
+    $("#recuperarPass").hide();
     javascript: window.print();
     $("#descargarcv").show();
     $("#imprimir").show();
+    $("#borrar").show();
+    $("#recuperarPass").show();
   });
 
   
@@ -13,11 +17,9 @@ $(document).ready(function () {
     console.log("asdasdasdasdasd");
     $("#cv").bind("click", false);
     $("#error_cv").text("   Vacio*");
-    $("#cv").addClass("has-error");
   } else {
     console.log("33333");
     $("#cv").unbind("click", false);
     $("#error_cv").text("");
-    $("#cv").removeClass("has-error");
   }
 });

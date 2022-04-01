@@ -48,22 +48,23 @@ body {
 
 #botonCrear {
   text-decoration: none;
-  margin: auto;
-  background-color: #d9d9d9;
-  color: #006d1b;
-  border: 2px solid #006d1b;
-  padding: 4px;
-  border-radius: 3px;
+  margin-bottom: 5px;
+  background-color: #f78c40;
+  color: #0c0c0c;
+  border: 2px solid #f78c40;
+  padding: 2px;
+  border-radius: 2px;
   transition: color ease-in 0.15s, border ease-in 0.15s,
     background-color ease-in 0.15s;
-  width: 140px;
+  width: 50px;
   font-weight: 600;
 }
 
 #botonCrear:hover {
-  background-color: #006d1b;
-  color: #d9d9d9;
-  border: 2px solid #006d1b;
+  /* background-color: #006d1b; */
+  background-color: #ffffff;
+  color: #f78c40;
+  border: 2px solid #f78c40;
 }
 
 #header a {
@@ -96,6 +97,7 @@ form {
   text-align: start;
   padding: 10px;
   overflow-y: auto;
+  margin-top: 5px;
 }
 
 .separatorFilter {
@@ -267,4 +269,8 @@ form input[type='number'] {
   font-size: 18px;
   padding: 13px 0 0 0;
   margin: 50px 0 0 0;
+}
+
+#reset {
+  margin-top: 6px;
 }

@@ -22,7 +22,7 @@ require('../db/verificarCredenciales.php');
             </a>
         </div>
         <div class="create">
-            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+            <!-- <a id="botonCrear" href="./registro.php">Crear Usuario</a> -->
         </div>
        
         <header id="header" class="header_dasboard">
@@ -44,7 +44,11 @@ require('../db/verificarCredenciales.php');
     </div>
     <main>
             <form id="filterData" action="" method="post">
-                <input id="reset" type="reset" value="Limpiar">
+                <div>
+                    <a id="botonCrear" href="./registro.php">Crear Usuario</a>
+                    <input id="reset" type="reset" value="Limpiar">
+                </div>
+                
                 <label class="label-input" for="carrera">Carrera</label>
                 <select name="carrera" id="carrera">
                     <option value="0">---</option>

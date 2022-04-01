@@ -7,15 +7,15 @@ $data = "";
 $idloc = "";
 $idLogUser = "";
 
-if(isset($_POST['user']) && isset($_POST['password'])){
-  $idUser = $_POST['user'];
-  $newPassword = $_POST['password'];
+if(isset($_POST['idUser']) && isset($_POST['pass'])){
+  $idUser = $_POST['idUser'];
+  $newPassword = $_POST['pass'];
    //Encripto la pass
   $passwordHash = password_hash($newPassword, PASSWORD_BCRYPT);
 
   // recupero el IDLOC del usuario
   // $consulta = "SELECT idlog FROM login WHERE idlog IN (SELECT idloc FROM usuario WHERE iduser = $idUser)";
-  $consulta = "SELECT idloc FROM `usuario` WHERE iduser = ".$idUser;
+  $consulta = "SELECT `idloc` FROM `usuario` WHERE `iduser` = '$idUser'";
   $respuesta = mysqli_query($conexion, $consulta);
   if(!empty($respuesta) && mysqli_num_rows($respuesta) != 0){
     $row = mysqli_fetch_assoc($respuesta);

@@ -21,14 +21,8 @@ require('../db/verificarCredenciales.php');
             />
             </a>
         </div>
-        <div class="create">
-             <a id="botonCrear" href="./registro.php">Crear Usuario</a>
-        </div>
-        <div class="create">
-            <!-- <a id="botonCrear" href="./registro.php">Crear Usuario</a> -->
-        </div>
-       
         <header id="header" class="header_dasboard">
+            <a id="botonCrear" href="./registro.php">Crear Usuario</a>
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>

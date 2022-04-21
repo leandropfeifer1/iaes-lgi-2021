@@ -103,7 +103,7 @@ form {
 .separatorFilter {
   width: 79%;
   height: 100%;
-  outline: 1px solid #f69a5946;
+  /* outline: 1px solid #f69a5946; */
   background-color: #fff;
 }
 

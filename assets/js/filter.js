@@ -1,7 +1,7 @@
 $('.div-datos').append(
   `<div class="errorMessage">No se encontraron Resultados</div>`
 );
-
+getData(); //trae todos los datos desde el inicio
 $('#carrera').change(() => sendRequest());
 $('#localidad').change(() => sendRequest());
 $('#licencia').change(() => sendRequest());
@@ -27,6 +27,98 @@ $('#reset').click(() => {
   $('#buscador').val('');
   sendRequest();
 });
+
+function getData() {
+  $('.div-datos').empty();
+  $.ajax({
+    url: '../db/getDataStudents.php',
+    type: 'POST',
+    datatype: 'json',
+    data: {},
+    success: (data) => {
+      $('.div-datos').empty();
+      let disponibilidad = '';
+      let classAvailable = '';
+      let gender = '';
+      let tipoModalidad = '';
+
+      if (data['data']) {
+        data['data'].forEach((user) => {
+          if (user.situacionlab && user.situacionlab === '1') {
+            disponibilidad = 'Disponible';
+            classAvailable = 'tag-purple';
+          } else {
+            disponibilidad = 'No Disponible';
+            classNoAvailable = 'tag-red';
+          }
+
+          if (user.genero === '1') {
+            gender = 'Hombre';
+          } else if (user.genero === '2') {
+            gender = 'Mujer';
+          } else if (user.genero === '3') {
+            gender = 'No Binarix';
+          } else {
+            gender = 'Otro';
+          }
+
+          user.modalidad === '1'
+            ? (tipoModalidad = 'Full-Time')
+            : tipoModalidad;
+
+          user.modalidad === '2'
+            ? (tipoModalidad = 'Part-Time')
+            : tipoModalidad;
+
+          user.modalidad === '3' ? (tipoModalidad = 'Trainee') : tipoModalidad;
+
+          user.modalidad === '4'
+            ? (tipoModalidad = 'Pasantías')
+            : tipoModalidad;
+
+          if (user.foto) {
+            foto = '../db/images/' + user.foto;
+          } else {
+            foto = '../assets/logo.jpg';
+          }
+          $('.div-datos').append(
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
+              <div class="card-header">
+                <img src="${foto}" alt="logo" />
+              </div>
+              <div class="card-body">
+                  <span class="tag ${classAvailable}">${disponibilidad}</span>
+                  <h4 class="nombreCompleto">
+                    ${user.usuario} ${user.apellido} <small>(${user.edad} años)</small>
+                  </h4>
+                  <p class="modalidadParrafo">
+                    ${tipoModalidad}
+                  </p>
+                  <div class="user">
+                    <div class="user-info">
+                      <p>${gender}</p>
+                    </div>
+                  </div>
+                  <div class="user-info">
+                    <p>Area: ${user.area}</p>
+                  </div>
+              </div>
+          </a>`
+          );
+          classAvailable = '';
+        });
+      } else {
+        $('.div-datos').empty();
+        $('.div-datos').append(`
+          <div class="errorMessage">No se encontraron Resultados</div>
+        `);
+      }
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
 
 // Funcion para enviar Datos
 const sendRequest = () => {

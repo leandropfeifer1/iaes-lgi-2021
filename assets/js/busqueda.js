@@ -24,7 +24,114 @@ $("#reset").click(() => {
   $("#buscador").val("");
   sendRequest();
 });
+function getData() {
+  $(".div-datos").empty();
+  const empresa = parseInt($("#empresa").val());
+  const sucursal=parseInt($("#sucursal").val());
+  const carrera = parseInt($("#carrera").val()); 
+  let edad = $("#edad").val(); // Es "" si no se pone nada
+  const genero = parseInt($("#genero").val());
+  const disponibilidad = parseInt($("#disponibilidad").val());
+  const localidad = parseInt($("#localidad").val());
+  const departamento = parseInt($("#departamento").val());
+  const provincia= parseInt($("#provincia").val());
+  let buscador = $("#buscador").val(); // Es "" si no se pone nada
 
+  $.ajax({    
+    url: "../db/busf2.php",
+    type: "POST",
+    datatype: "json",
+    data: {
+        empresa: empresa,
+        sucursal: sucursal,
+        carrera: carrera,
+        localidad: localidad,
+        departamento: departamento,
+        provincia:provincia,
+        edad: edad,
+        genero: genero,
+        disponibilidad: disponibilidad,
+        buscador: buscador,
+    },
+    success: (data) => {
+      $(".div-datos").empty();
+      let disponibilidad = "";
+      let classAvailable = "";
+      let gender = "";
+      let tipoModalidad = "";
+      const busqueda = JSON.parse(data)
+      if (busqueda) {
+        busqueda.forEach((user) => {
+          if (user.situacionlab && user.situacionlab === "1") {
+            disponibilidad = "Disponible";
+            classAvailable = "tag-purple";
+          } else {
+            disponibilidad = "No Disponible";
+            classNoAvailable = "tag-red";
+          }
+
+          if (user.genero === "1") {
+            gender = "Hombre";
+          } else if (user.genero === "2") {
+            gender = "Mujer";
+          } else if (user.genero === "3") {
+            gender = "No Binarix";
+          } else {
+            gender = "Otro";
+          }
+
+          user.disponibilidad === "1"
+            ? (tipoModalidad = "Full-Time")
+            : tipoModalidad;
+
+          user.disponibilidad === "2"
+            ? (tipoModalidad = "Part-Time")
+            : tipoModalidad;
+
+          user.disponibilidad === "3" ? (tipoModalidad = "Trainee") : tipoModalidad;
+
+          user.disponibilidad === "4"
+            ? (tipoModalidad = "Pasantías")
+            : tipoModalidad;
+
+          $(".div-datos").append(
+            `<a="_blank" class="card">
+              <div class="card-header">
+                <img src="../assets/logo.jpg" alt="logo" />
+              </div>
+              <div class="card-body">
+                  <span class="tag ${classAvailable}">${user.carrera}</span>
+                  <h4 class="nombreCompleto">
+                    ${user.empresa}  ${user.idsucursal} <small>(${user.localidad}  ${user.provincia})</small>
+                  </h4>
+                  <p class="modalidadParrafo">
+                    Entre ${user.edadmin} y ${user.edadmax} años
+                  </p>
+                  <div class="user">
+                    <div class="user-info">
+                      <p>Genero: ${gender}</p>
+                    </div>
+                  </div>
+                  <div class="user-info">
+                    <p>Disponibilidad: ${tipoModalidad}</p><button class="btn" onclick="confimaciondel(${user.idbusqueda})">Eliminar</button><p></>
+                  </div>
+              </div>
+          </a>`
+          );
+          classAvailable = "";
+        });
+      } else {
+        $(".div-datos").empty();
+        $(".div-datos").append(`
+          <div class="errorMessage">No se encontraron Resultados</div>
+        `);
+      }
+    },
+    error: (err) => {
+      console.log("err");
+    },
+  });
+}
 // Funcion para enviar Datos
 const sendRequest = () => {
   $(".div-datos").empty();

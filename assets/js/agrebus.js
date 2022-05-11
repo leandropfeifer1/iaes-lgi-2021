@@ -4,10 +4,7 @@ function agregardatos(
   edadmax,
   carrera,
   genero,
-  localidad,
-  departamento,
-  provincia,
-  disponibilidad
+  requisitos,
 ) {
   datos =
     "&sucursal=" +
@@ -20,17 +17,8 @@ function agregardatos(
     carrera +
     "&genero="+
     genero +
-    "&localidad=" +
-    localidad +
-    "&localidad=" +
-    departamento +
-    "&departamento=" +
-    disponibilidad +
-    "&provincia=" +
-    provincia +
-    "&disponibilidad=" +
-    disponibilidad;
-    
+    "&requisitos=" +
+    requisitos,    
   $.ajax({
     type: "POST",
     url: "../db/signbus.php",
@@ -57,9 +45,7 @@ function agregardatos(
         $("#edadmax").val('');
         $("#carrera").val('');
         $("#genero").val('');
-        $("#localidad").val('');
-        $("#departamento").val('');
-        $("#provincia").val('');
+        $("#requisitos").val('');
         $("#disponibilidad").val('');
       }
     },

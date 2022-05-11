@@ -94,16 +94,8 @@ require('../db/conexionDb.php');
             <option value="3">No Binarix</option>
             <option value="4">Otros</option>
         </select>
-        <label class="label-input" for="provincia">Provincia</label>
-        <select name="provincia" id="provincia">
-        </select>
-        <label class="label-input" for="departamento">Departamento</label>
-        <select name="departamento" id="departamento">
-        </select> 
-        <label class="label-input" for="localidad">Localidad</label>
-        <select name="localidad" id="localidad">
-        </select>
-        <br>
+       <label class="label-input" for="reqinput">Requisitos</label>
+        <input class="reqinput" placeholder="Requisitos"type="text" name="requisitos" id="requisitos">        
         <button type="button" id="guardar" class="btn btn-primary" onclick="">Guardar</button>
     </form>
     </div>
@@ -122,9 +114,7 @@ require('../db/conexionDb.php');
             carrera = $('#carrera').val();
             disponibilidad = $('#disponibilidad').val();
             genero = $('#genero').val();
-            provincia = $('#provincia').val();
-            departamento = $('#departamento').val();
-            localidad = $('#localidad').val();
+            requisitos = $('#requisitos').val();
             if (sucursal === '') {
                 Swal.fire({
                     icon: 'warning',
@@ -173,32 +163,16 @@ require('../db/conexionDb.php');
                                         confirmButtonText: 'Ok',
                                     });
                                 } else {
-                                    if (provincia === '') {
+                                    if (requisitos === '') {
                                         Swal.fire({
                                             icon: 'warning',
-                                            title: 'Falta Completar campo "Provincia"',
+                                            title: 'Falta Completar campo "Requisitos"',
                                             confirmButtonColor: '#ffa361',
                                             confirmButtonText: 'Ok',
                                         });
-                                    } else {
-                                        if (departamento === '') {
-                                            Swal.fire({
-                                                icon: 'warning',
-                                                title: 'Falta Completar campo "Departamento"',
-                                                confirmButtonColor: '#ffa361',
-                                                confirmButtonText: 'Ok',
-                                            });
-                                        } else {
-                                            if (localidad === '') {
-                                                Swal.fire({
-                                                    icon: 'warning',
-                                                    title: 'Falta Completar campo "Localidad"',
-                                                    confirmButtonColor: '#ffa361',
-                                                    confirmButtonText: 'Ok',
-                                                });
-                                            } else {
-                                                agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero, provincia, departamento, localidad);
-                                            }
+                                    }else {                                            
+                                                agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero, requisitos);
+                                            
                                         }
                                     }
                                 }

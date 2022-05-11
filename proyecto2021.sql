@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-03-2022 a las 01:04:14
+-- Tiempo de generación: 11-05-2022 a las 02:22:13
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -33,9 +33,7 @@ CREATE TABLE `buscaempleado` (
   `edadmax` int(3) NOT NULL,
   `carrera` int(2) NOT NULL,
   `genero` int(1) NOT NULL,
-  `localidad` int(3) NOT NULL,
-  `departamento` int(5) NOT NULL,
-  `provincia` int(8) NOT NULL,
+  `requisitos` varchar(240) NOT NULL,
   `disponibilidad` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -135,7 +133,7 @@ CREATE TABLE `empresas` (
   `cuit` int(12) NOT NULL,
   `presidente` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `telefono` varchar(50) NOT NULL
+  `telefono` int(17) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -389,7 +387,7 @@ CREATE TABLE `sucursales` (
   `departamento` int(3) NOT NULL,
   `provincia` int(3) NOT NULL,
   `pais` int(11) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
+  `telefono` int(17) NOT NULL,
   `gerente` varchar(50) NOT NULL,
   `central` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

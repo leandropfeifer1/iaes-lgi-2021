@@ -1,5 +1,5 @@
 function log(lg) {
-  if(lg){
+  if (lg) {
     $.ajax({
       url: "../db/foto.php",
       type: "POST",
@@ -12,7 +12,7 @@ function log(lg) {
       },
     });
   }
-  
+
 }
 function agregardatos(empresa, cuit, presidente, correo, telefono, logo) {
   cadena =
@@ -65,7 +65,7 @@ function agregaform(datos) {
   $("#telefonoe").val(d[5]);
 }
 
-function modificar(lg, logomod) {
+function modificar(lg) {
   idempresa = $("#idempresa").val();
   empresae = $("#empresae").val();
   cuite = $("#cuite").val();
@@ -73,19 +73,56 @@ function modificar(lg, logomod) {
   correoe = $("#correoe").val();
   telefonoe = $("#telefonoe").val();
 
+
+
+  /*
+    if ($("#logomod").val()) {
+      var lg = new FormData();
+      var files = $("#logomod")[0].files;
+      var f1 = files[0];
+      var logo = f1["name"];
+      // Check file selected or not
+      if (files.length > 0) {
+        lg.append("logo", files[0]);
+      }
+      log(lg);
+    } else {
+      var logomod = 0;
+    }
+  */
   if ($("#logomod").val()) {
     var lg = new FormData();
+
     var files = $("#logomod")[0].files;
     var f1 = files[0];
     var logo = f1["name"];
+
+    cadena =
+      "&logo=" +
+      logo;
+
+    $.ajax({
+      type: "POST",
+      async: false,
+      url: "../db/cadenaAleatoria.php",
+      data: cadena,
+      success: function (response) {
+        console.log(response);
+        logomod = response;
+      },
+    });
+    logomod = logomod.replace(/['"]+/g, '');
     // Check file selected or not
     if (files.length > 0) {
       lg.append("logo", files[0]);
+      lg.append("logomod", logomod);
     }
     log(lg);
   } else {
     var logomod = 0;
   }
+
+
 
   if (empresae === "") {
     Swal.fire({

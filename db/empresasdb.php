@@ -7,16 +7,13 @@ $presidente = $_POST['presidente'];
 $correo = $_POST['correo'];
 $telefono = $_POST['telefono'];
 $logo = $_POST['logo'];
-if($logo){
+
+if($logo){      
     $sql = "INSERT INTO `empresas`(`empresa`, `cuit`, `presidente`, `correo`, `telefono`, `logo`) VALUES ('$empresa','$cuit','$presidente','$correo','$telefono','$logo')";
-} else{
+} else{    
     $sql = "INSERT INTO `empresas`(`empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES ('$empresa','$cuit','$presidente','$correo','$telefono')";
 }
 
-
-
-
 echo mysqli_query($conexion, $sql);
-
 mysqli_close($conexion);
 ?>

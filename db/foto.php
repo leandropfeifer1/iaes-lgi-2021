@@ -2,17 +2,25 @@
 session_start();
 require('./conexionDb.php');
 $idloc = $_SESSION['id_user'];
-
 //----------------------------------------------EMPRESA
+$nombre = $_POST['nombre'];
+$logomod = $_POST['logomod'];
+
 if (isset($_FILES['logo']['name'])) {    
-    $logo = $_FILES['logo']['name'];
     $temp = $_FILES['logo']['tmp_name'];
-    if (move_uploaded_file($temp, "../db/images/" . $logo)) {
+    if (move_uploaded_file($temp, "../db/images/" . $nombre)) {
         //echo "se subio la imagen";
-    }
+    }      
+} 
+if (isset($_FILES['logo']['name'])) {    
+    $temp = $_FILES['logo']['tmp_name'];
+    if (move_uploaded_file($temp, "../db/images/" . $logomod)) {
+        //echo "se subio la imagen";
+    }      
 } 
 
 //----------------------------------------------USUARIO
+/*
 if(!isset($_FILES['logo']['name'])){
     if (isset($_FILES['foto']['name'])) {
         $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
@@ -40,7 +48,7 @@ if(!isset($_FILES['logo']['name'])){
     }
     print json_encode($foto); // returned data as json
 }
-
+*/
 
 function guardarFoto($idloc, $foto){
     $error = false;
@@ -56,5 +64,5 @@ function guardarFoto($idloc, $foto){
     return $error;
 }
 
+
 mysqli_close($conexion);
-?>

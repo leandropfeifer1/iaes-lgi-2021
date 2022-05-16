@@ -11,8 +11,10 @@ $logo = $_POST['logo'];
 if ($logo != "undefined") {   
     $logobd = mysqli_query($conexion, "SELECT logo FROM empresas WHERE idempresa='$idempresa'");
     $row = mysqli_fetch_array($logobd);
+    //echo $row[0];
     if ($row[0]) {
-        if (unlink("../db/images/" . $row[0])) {         
+        if (unlink("../db/images/" . $row[0])) {    
+            //echo "se borro con exito";     
         }else{
         }
     }

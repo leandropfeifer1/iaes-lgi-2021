@@ -13,33 +13,36 @@ if (isset($_FILES['logo']['name'])) {
 } 
 
 //----------------------------------------------USUARIO
-if (isset($_FILES['foto']['name'])) {
-    $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
-    $row = mysqli_fetch_array($fotobd);
-    if ($row[0]) {
-        if (unlink('../db/images/' . $row[0])) {
-            //echo "se borro la foto guardada";
+if(!isset($_FILES['logo']['name'])){
+    if (isset($_FILES['foto']['name'])) {
+        $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
+        $row = mysqli_fetch_array($fotobd);
+        if ($row[0]) {
+            if (unlink('../db/images/' . $row[0])) {
+                //echo "se borro la foto guardada";
+            }
         }
+        $foto = $_FILES['foto']['name'];
+        $temp = $_FILES['foto']['tmp_name'];
+        if (move_uploaded_file($temp, "../db/images/" . $foto)) {
+            //echo "se subio la imagen";
+        }
+        $guardar = guardarFoto($idloc, $foto);
+        $res = $foto;
+    } else {
+        $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
+        $row = mysqli_fetch_array($fotobd);
+        if ($row[0]) {
+            $foto = $row[0];
+        } 
+        $guardar = guardarFoto($idloc, $foto);
+        $res = $foto;
     }
-    $foto = $_FILES['foto']['name'];
-    $temp = $_FILES['foto']['tmp_name'];
-    if (move_uploaded_file($temp, "../db/images/" . $foto)) {
-        //echo "se subio la imagen";
-    }
-    $guardar = guardarFoto($idloc, $foto);
-    $res = $foto;
-} else {
-    $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
-    $row = mysqli_fetch_array($fotobd);
-    if ($row[0]) {
-        $foto = $row[0];
-    } 
-    $guardar = guardarFoto($idloc, $foto);
-    $res = $foto;
+    print json_encode($foto); // returned data as json
 }
 
-function guardarFoto($idloc, $foto)
-{
+
+function guardarFoto($idloc, $foto){
     $error = false;
     require('./conexionDb.php');
     $query = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
@@ -53,6 +56,5 @@ function guardarFoto($idloc, $foto)
     return $error;
 }
 
-print json_encode($foto); // returned data as json
 mysqli_close($conexion);
 ?>

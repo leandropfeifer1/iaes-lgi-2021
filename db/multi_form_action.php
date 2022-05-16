@@ -130,7 +130,7 @@ if (isset($_FILES["foto"])) {
 		$error = 10;
 	}
 	$row = mysqli_fetch_array($fotobd);
-	if ($row[0]) {
+	if ($row) {
 		$foto = $row[0];
 	} else {
 		$foto = NULL;
@@ -162,7 +162,7 @@ if (isset($_FILES["pdf"]) && $_FILES["pdf"]['name'] != '') {
 	}
 	$rowcv = mysqli_fetch_array($cvbd);
 
-	if ($rowcv[0]) {
+	if ($rowcv) {
 		$pdf = $rowcv[0];
 	} else {
 		$pdf = NULL;

@@ -8,7 +8,7 @@ $presidente = $_POST['presidente'];
 $correo = $_POST['correo'];
 $telefono = $_POST['telefono'];
 $logo = $_POST['logo'];
-if ($logo) {    
+if ($logo != "undefined") {   
     $logobd = mysqli_query($conexion, "SELECT logo FROM empresas WHERE idempresa='$idempresa'");
     $row = mysqli_fetch_array($logobd);
     if ($row[0]) {

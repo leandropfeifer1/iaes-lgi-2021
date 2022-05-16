@@ -7,24 +7,24 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 <html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Empresas</title>
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
-        <link rel="stylesheet" href="../assets/css/register.css">
-        <link rel="stylesheet" href="../assets/css/filtro.css">
-        <script src="../jquery/jquery-3.6.0.min.js"></script>
-        <script src="../popper/popper.min.js" type="text/javascript"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-        <script src="../assets/js/createUser.js"></script>
-        <script src="../assets/js/empresasjs.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empresas</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
+    <link rel="stylesheet" href="../assets/css/register.css">
+    <link rel="stylesheet" href="../assets/css/filtro.css">
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script src="../popper/popper.min.js" type="text/javascript"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="../assets/js/createUser.js"></script>
+    <script src="../assets/js/empresasjs.js"></script>
+</head>
 
-    <body>
+<body>
 
     <body>
         <div class="contenido">
@@ -86,7 +86,7 @@ if (!isset($_SESSION['usuario'])) {
                         <label>Correo</label>
                         <input type="text" name="correo" id="correo" class="form-control input-sm">
                         <label>Telefono</label>
-                        <input type="number" name="telefono" id="telefono"  oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" class="form-control input-sm" >
+                        <input type="number" name="telefono" id="telefono" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" class="form-control input-sm">
                         <label for="logo">Sube tu logo:</label>
                         <input accept="image/*" type="file" id="logo" name="logo" class="form-control">
                     </div>
@@ -117,7 +117,7 @@ if (!isset($_SESSION['usuario'])) {
                     <label>Correo</label>
                     <input type="text" name="correoe" id="correoe" class="form-control input-sm">
                     <label>Telefono</label>
-                    <input type="number"   oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" name="telefonoe" id="telefonoe" class="form-control input-sm">
+                    <input type="number" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" name="telefonoe" id="telefonoe" class="form-control input-sm">
                     <label for="logomod">Sube tu logo:</label>
                     <input accept="image/*" type="file" id="logomod" name="logomod" class="form-control">
                 </div>
@@ -130,36 +130,21 @@ if (!isset($_SESSION['usuario'])) {
     </div>
 </body>
 
-
 </html>
+<!--------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#tabla').load('empresastabla.php');
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#guardarN').click(function () {
+    $(document).ready(function() {
+        $('#guardarN').click(function() {
             empresa = $('#empresa').val();
             cuit = $('#cuit').val();
             presidente = $('#cuit').val();
             correo = $('#correo').val();
             telefono = $('#telefono').val();
-
-            if ($("#logo").val()) {
-                var lg = new FormData();
-                var files = $("#logo")[0].files;
-                var f1 = files[0];
-                var logo = f1["name"];
-                // Check file selected or not
-                if (files.length > 0) {
-                    lg.append("logo", files[0]);
-                }
-                log(lg);
-            } else {
-                var logo = 0;
-            }
-
 
             if (empresa === '') {
                 Swal.fire({
@@ -201,9 +186,43 @@ if (!isset($_SESSION['usuario'])) {
                                     confirmButtonText: 'Ok',
                                 });
                             } else {
-                                console.log(logo);
-                                agregardatos(empresa, cuit, presidente, correo, telefono, logo);
-                                log(lg);
+
+                                if ($("#logo").val()) {
+                                    var lg = new FormData();
+
+                                    var files = $("#logo")[0].files;
+                                    var f1 = files[0];
+                                    var logo = f1["name"];
+
+                                    cadena =
+                                        "&logo=" +
+                                        logo;
+
+                                    $.ajax({
+                                        type: "POST",
+                                        async: false,
+                                        url: "../db/cadenaAleatoria.php",
+                                        data: cadena,
+                                        success: function(response) {
+                                            //alert(response);
+                                            nombre = response;
+                                        },
+                                    });
+                                    nombre = nombre.replace(/['"]+/g, '');
+                                    // Check file selected or not
+                                    if (files.length > 0) {
+                                        lg.append("logo", files[0]);
+                                        lg.append("nombre", nombre);
+                                    }
+                                    log(lg);
+
+
+                                } else {
+                                    nombre = 0;
+                                }
+                                //console.log(logo);
+                                agregardatos(empresa, cuit, presidente, correo, telefono, nombre);
+                                //log(lg);
                             }
                         }
                     }
@@ -213,7 +232,7 @@ if (!isset($_SESSION['usuario'])) {
         });
 
 
-        $('#modificar').click(function () {
+        $('#modificar').click(function() {
             modificar();
         });
     });

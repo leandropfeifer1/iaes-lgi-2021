@@ -73,23 +73,6 @@ function modificar(lg) {
   correoe = $("#correoe").val();
   telefonoe = $("#telefonoe").val();
 
-
-
-  /*
-    if ($("#logomod").val()) {
-      var lg = new FormData();
-      var files = $("#logomod")[0].files;
-      var f1 = files[0];
-      var logo = f1["name"];
-      // Check file selected or not
-      if (files.length > 0) {
-        lg.append("logo", files[0]);
-      }
-      log(lg);
-    } else {
-      var logomod = 0;
-    }
-  */
   if ($("#logomod").val()) {
     var lg = new FormData();
 

@@ -347,7 +347,7 @@ $(document).ready(function () {
         // agregas cada elemento.
         idiomas.push($(this).val());
       }
-    });   
+    });
 
     $.ajax({
       url: "../db/multi_form_action.php",
@@ -399,52 +399,104 @@ $(document).ready(function () {
         }
       },
     });
-     //----------------------FOTO
-     var fd = new FormData();
-     var files = $("#foto")[0].files;
-     console.log($("#foto").val());
-     // Check file selected or not
-     if (files.length > 0) {
-       fd.append("foto", files[0]);   
-     }
-     if($("#foto").val() != ""){
+    //----------------------FOTO
+
+    if ($("#foto").val() != "") {
+
+      var fd = new FormData();
+      var files = $("#foto")[0].files;
+      var fd = files[0];
+      var foto = fd["name"];
+
+      cadena =
+        "foto=" +
+        foto;
+      $.ajax({
+        type: "POST",
+        async: false,
+        url: "../db/cadenaAleatoria.php",
+        data: cadena,
+        success: function (response) {
+          //alert(response);
+          fotoNombre = response;
+        },
+      });
+      fotoNombre = fotoNombre.replace(/['"]+/g, '');
+
+      // Check file selected or not
+      var fotoUsuario = new FormData();
+      if (files.length > 0) {
+        fotoUsuario.append("foto", files[0]);
+        fotoUsuario.append("fotoNombre", fotoNombre);
+      }
+
       $.ajax({
         url: "../db/foto.php",
         type: "POST",
         datatype: "json",
-        data: fd,
+        data: fotoUsuario,
         contentType: false,
         processData: false,
         success: (data) => {
           data = data.replace(/['"]+/g, '');
-          console.log(data);          
-          $("#fotomostrar").attr("src","../db/images/" + data);
-          
+          //console.log(data);
+          $("#fotomostrar").attr("src", "../db/images/" + data);
+
         },
       });
-     }     
- 
-     //----------------------------------PDF
-     var cd = new FormData();
-     var files = $("#pdf")[0].files;
-     // Check file selected or not
-     if (files.length > 0) {
-       cd.append("pdf", files[0]);
-     }    
-     if($("#pdf").val() != ""){
-     $.ajax({
-       url: "../db/cv.php",
-       type: "POST",
-       datatype: "json",
-       data: cd,
-       contentType: false,
-       processData: false,
-       success: (data) => {
-         //console.log(data);
-       },
-     });
+
     }
-    return true;    
+    /*
+        if ($("#logo").val()) {
+          var lg = new FormData();
+    
+          var files = $("#logo")[0].files;
+          var f1 = files[0];
+          var logo = f1["name"];
+    
+          cadena =
+            "&logo=" +
+            logo;
+    
+          $.ajax({
+            type: "POST",
+            async: false,
+            url: "../db/cadenaAleatoria.php",
+            data: cadena,
+            success: function (response) {
+              //alert(response);
+              nombre = response;
+            },
+          });
+          nombre = nombre.replace(/['"]+/g, '');
+          // Check file selected or not
+          if (files.length > 0) {
+            lg.append("logo", files[0]);
+            lg.append("nombre", nombre);
+          }
+          log(lg);
+    */
+    //----------------------------------PDF
+    var cd = new FormData();
+    var files = $("#pdf")[0].files;
+    // Check file selected or not
+    if (files.length > 0) {
+      cd.append("pdf", files[0]);
+    }
+    if ($("#pdf").val() != "") {
+      $.ajax({
+        url: "../db/cv.php",
+        type: "POST",
+        datatype: "json",
+        data: cd,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          //console.log(data);
+        },
+      });
+    }
+    return true;
   });
 
   var lic = document.getElementById("licsi").checked;
@@ -478,7 +530,7 @@ $(document).ready(function () {
       $("#error_usuario").text(error_usuario);
     } else {
       error_usuario = "";
-      $("#error_usuario").text(error_usuario);     
+      $("#error_usuario").text(error_usuario);
     }
     return error_usuario;
   }

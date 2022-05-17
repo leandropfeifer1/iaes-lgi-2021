@@ -3,65 +3,56 @@ session_start();
 require('./conexionDb.php');
 $idloc = $_SESSION['id_user'];
 //----------------------------------------------EMPRESA
-$nombre = $_POST['nombre'];
-$logomod = $_POST['logomod'];
+if (isset($_POST['nombre'])) {
+    $nombre = $_POST['nombre'];
+}
+if (isset($_POST['logomod'])) {
+    $logomod = $_POST['logomod'];
+}
+if (isset($_POST['fotoNombre'])) {
+    $fotoNombre = $_POST['fotoNombre'];
+}
 
-if (isset($_FILES['logo']['name'])) {    
+if (isset($_FILES['logo']['name'])) {
     $temp = $_FILES['logo']['tmp_name'];
     if (move_uploaded_file($temp, "../db/images/" . $nombre)) {
         //echo "se subio la imagen";
-    }      
-} 
-if (isset($_FILES['logo']['name'])) {    
+    }
+}
+if (isset($_FILES['logomod']['name'])) {
     $temp = $_FILES['logo']['tmp_name'];
     if (move_uploaded_file($temp, "../db/images/" . $logomod)) {
         //echo "se subio la imagen";
-    }      
-} 
+    }
+}
 
 //----------------------------------------------USUARIO
-/*
-if(!isset($_FILES['logo']['name'])){
-    if (isset($_FILES['foto']['name'])) {
-        $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
-        $row = mysqli_fetch_array($fotobd);
-        if ($row[0]) {
-            if (unlink('../db/images/' . $row[0])) {
-                //echo "se borro la foto guardada";
-            }
-        }
-        $foto = $_FILES['foto']['name'];
-        $temp = $_FILES['foto']['tmp_name'];
-        if (move_uploaded_file($temp, "../db/images/" . $foto)) {
-            //echo "se subio la imagen";
-        }
-        $guardar = guardarFoto($idloc, $foto);
-        $res = $foto;
-    } else {
-        $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
-        $row = mysqli_fetch_array($fotobd);
-        if ($row[0]) {
-            $foto = $row[0];
-        } 
-        $guardar = guardarFoto($idloc, $foto);
-        $res = $foto;
-    }
-    print json_encode($foto); // returned data as json
-}
-*/
 
-function guardarFoto($idloc, $foto){
-    $error = false;
-    require('./conexionDb.php');
-    $query = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
-    if (mysqli_num_rows($query) != 0) {
-        $result = mysqli_query($conexion, "UPDATE `usuario` SET `foto`='$foto' WHERE idloc = $idloc");
-        if (!$result) {
-            $error = true;
-        } 
+if (isset($_FILES['foto']['name'])) {
+
+    //Elimina la foto anterior
+    $fotobd = mysqli_query($conexion, "SELECT foto FROM usuario WHERE idloc='$idloc'");
+    $row = mysqli_fetch_array($fotobd);
+    //echo "-----------" . mysqli_num_rows($fotobd);
+    if ($row[0] != '') {
+        //echo "entroo";
+        if (unlink('../db/images/' . $row[0])) {
+            // echo "se borro la foto guardada";
+        }
     }
-    mysqli_close($conexion);
-    return $error;
+    //actualiza el reg
+    $result = mysqli_query($conexion, "UPDATE `usuario` SET `foto`='$fotoNombre' WHERE idloc = $idloc");
+    if (!$result) {
+        $error = true;
+        //echo $error;
+    }
+
+    //sube la nueva foto        
+    $temp = $_FILES['foto']['tmp_name'];
+    if (move_uploaded_file($temp, "../db/images/" . $fotoNombre)) {
+        //echo "se subio la imagen";
+    }
+    print json_encode($fotoNombre); // returned data as json
 }
 
 

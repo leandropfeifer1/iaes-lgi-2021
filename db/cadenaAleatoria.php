@@ -59,3 +59,30 @@ if(isset($_POST['foto'])){
     print json_encode($foto); // returned data as json
 }
 
+if(isset($_POST['pdf'])){
+    $pdf = $_POST['pdf'];
+    //echo $pdf . "---";
+
+    $array = explode('.', $pdf);
+    $ext = end($array);
+    
+    $pdfNombres = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE pdf='$pdf'");
+
+    if (mysqli_num_rows($pdfNombres) > 0) {
+      // echo "eeeeeee" . "---";
+        $x = 0;
+        while ($x == 0) {
+            $nombreRandom = generate_string();
+            $nombreRandom = $nombreRandom . "." . $ext;
+            $pdfNombres = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE pdf='$nombreRandom'");
+            if (!mysqli_num_rows($pdfNombres) > 0) {
+                //echo "el nombreRandom no existe en bd" . "---";            
+                $pdf = $nombreRandom; 
+                //echo "bbbbbb---" . $pdf;
+                $x = 1;
+            } 
+        }
+    }    
+    //echo "aaaaaaaaaa";
+    print json_encode($pdf); // returned data as json
+}

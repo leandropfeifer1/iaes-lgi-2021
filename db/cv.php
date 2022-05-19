@@ -5,47 +5,38 @@ $idloc = $_SESSION['id_user'];
 
 //----------------------------------------------CV
 
+if (isset($_POST['pdfNombre'])) {
+    $pdfNombre = $_POST['pdfNombre'];
+   // echo $pdfNombre . "------";
+}
+
 if (isset($_FILES['pdf']['name'])) {
+
+    //Elimina la pdf anterior
     $pdfbd = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");
     $row = mysqli_fetch_array($pdfbd);
-    if ($row[0]) {
+    if ($row[0] != '') {
+       // echo "entroo";
         if (unlink('../db/cv/' . $row[0])) {
-            echo "se borro el pdf guardado";
+             //echo "se borro la pdf guardada";
         }
     }
-    $pdf = $_FILES['pdf']['name'];
+    //actualiza el reg
+    $result = mysqli_query($conexion, "UPDATE `usuario` SET `pdf`='$pdfNombre' WHERE idloc = $idloc");
+    if (!$result) {
+        $error = true;
+       // echo $error;
+    }
+
+    //sube la nueva pdf        
     $temp = $_FILES['pdf']['tmp_name'];
-    if (move_uploaded_file($temp, "../db/cv/" . $pdf)) {
-        echo "se subio el pdf";
-    }
-    $res = guardarPdf($idloc, $pdf);
-    echo "wwwwwwwww";
-    echo $res . "<--";
-} else {
-    $pdfbd = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");
-    $row = mysqli_fetch_array($pdfbd);
-    if ($row[0]) {
-        $pdf = $row[0];
+    if (move_uploaded_file($temp, "../db/cv/" . $pdfNombre)) {
+       // echo "se subio la pdf";
     } else {
-        $pdf = NULL;
+        //echo "no se subiooo0";
     }
-    $res = guardarPdf($idloc, $pdf);
+    print json_encode($pdfNombre); // returned data as json
 }
 
-function guardarPdf($idloc, $pdf)
-{
-    $error = false;
-    require('./conexionDb.php');
-    $query = mysqli_query($conexion, "SELECT pdf FROM usuario WHERE idloc='$idloc'");
-    if (mysqli_num_rows($query) != 0) {
-        $result = mysqli_query($conexion, "UPDATE `usuario` SET `pdf`='$pdf' WHERE idloc = $idloc");
-        if (!$result) {
-            $error = true;
-        } 
-    }
-    mysqli_close($conexion);
-    return $error;
-}
-
-print json_encode($res); // returned data as json
 mysqli_close($conexion);
+?>

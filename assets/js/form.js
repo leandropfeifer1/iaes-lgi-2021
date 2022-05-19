@@ -444,60 +444,56 @@ $(document).ready(function () {
 
         },
       });
+    }
 
-    }
-    /*
-        if ($("#logo").val()) {
-          var lg = new FormData();
-    
-          var files = $("#logo")[0].files;
-          var f1 = files[0];
-          var logo = f1["name"];
-    
-          cadena =
-            "&logo=" +
-            logo;
-    
-          $.ajax({
-            type: "POST",
-            async: false,
-            url: "../db/cadenaAleatoria.php",
-            data: cadena,
-            success: function (response) {
-              //alert(response);
-              nombre = response;
-            },
-          });
-          nombre = nombre.replace(/['"]+/g, '');
-          // Check file selected or not
-          if (files.length > 0) {
-            lg.append("logo", files[0]);
-            lg.append("nombre", nombre);
-          }
-          log(lg);
-    */
     //----------------------------------PDF
-    var cd = new FormData();
-    var files = $("#pdf")[0].files;
-    // Check file selected or not
-    if (files.length > 0) {
-      cd.append("pdf", files[0]);
-    }
     if ($("#pdf").val() != "") {
+      var cd = new FormData();
+      var files = $("#pdf")[0].files;
+      var cd = files[0];
+      var pdf = cd.name;
+
+      cadena =
+        "pdf=" +
+        pdf;
+
       $.ajax({
-        url: "../db/cv.php",
         type: "POST",
-        datatype: "json",
-        data: cd,
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          //console.log(data);
+        async: false,
+        url: "../db/cadenaAleatoria.php",
+        data: cadena,
+        success: function (response) {
+          //alert(response);
+          pdfNombre = response;
         },
       });
+      pdfNombre = pdfNombre.replace(/['"]+/g, '');
+
+      // Check file selected or not
+      var pdfUsuario = new FormData();
+      if (files.length > 0) {
+        pdfUsuario.append("pdf", files[0]);
+        pdfUsuario.append("pdfNombre", pdfNombre);
+      }
+
+      if ($("#pdf").val() != "") {
+        $.ajax({
+          url: "../db/cv.php",
+          type: "POST",
+          datatype: "json",
+          data: pdfUsuario,
+          contentType: false,
+          processData: false,
+          success: (data) => {
+            //console.log(data);
+          },
+        });
+      }
     }
+
     return true;
   });
+
 
   var lic = document.getElementById("licsi").checked;
   if (lic) {
@@ -913,19 +909,12 @@ $("#pdf").on("change", function () {
   if ($(this).val() != "") {
     if (ext == "pdf") {
       if ($(this)[0].files[0].size > 1048576) {
-        console.log("El documento excede el tamaño máximo");
-        $("#modal-title").text("¡Precaución!");
-        $("#modal-msg").html(
-          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
-        );
-        $("#modal-gral").modal();
+        alert("El documento excede el tamaño máximo! Se solicita un archivo no mayor a 1MB.");
         $(this).val("");
-      } else {
-        $("#modal-gral").hide();
       }
     } else {
-      $(this).val("");
       alert("Extensión no permitida: " + ext);
+      $(this).val("");
     }
   }
 });
@@ -935,19 +924,12 @@ $("#foto").on("change", function () {
   if ($(this).val() != "") {
     if (ext == "png" || ext == "jpeg" || ext == "jpg") {
       if ($(this)[0].files[0].size > 1048576) {
-        console.log("El documento excede el tamaño máximo");
-        $("#modal-title").text("¡Precaución!");
-        $("#modal-msg").html(
-          "Se solicita un archivo no mayor a 1MB. Por favor verifica."
-        );
-        $("#modal-gral").modal();
+        alert("El documento excede el tamaño máximo! Se solicita un archivo no mayor a 1MB.");
         $(this).val("");
-      } else {
-        $("#modal-gral").hide();
       }
     } else {
-      $(this).val("");
       alert("Extensión no permitida: " + ext);
+      $(this).val("");
     }
   }
 });

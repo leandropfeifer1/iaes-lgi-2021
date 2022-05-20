@@ -1,6 +1,9 @@
 <?php
 session_start();
 require('../db/conexionDb.php');
+if (!isset($_SESSION['usuario'])) {
+    header('location: ../db/logout.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +13,7 @@ require('../db/conexionDb.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../bootstrap/css/vistaUsuario.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/vistaUsuario.min.css">    
 </head>
 
 <style>
@@ -54,12 +57,48 @@ require('../db/conexionDb.php');
         border-bottom: solid 1px rgba(168, 161, 161, 0.651);
     }
 
-    #recuperarPass{
+    #recuperarPass {
         border: 1px solid black;
         border-radius: 3px;
         padding: 2px;
     }
-    #recuperarPass:hover{
+
+    #recuperarPass:hover {
+        text-decoration: none;
+        background-color: black;
+        color: white;
+    }
+
+    #cv {
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    #cv:hover {
+        text-decoration: none;
+        background-color: black;
+        color: white;
+    }
+
+    #eliminarUsuario {
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    #eliminarUsuario:hover {
+        text-decoration: none;
+        background-color: black;
+        color: white;
+    }
+    #salir {
+        border: 1px solid black;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    #salir:hover {
         text-decoration: none;
         background-color: black;
         color: white;
@@ -82,19 +121,23 @@ require('../db/conexionDb.php');
     $foto = foto($iduser);
     $exp = experiencia($iduser);
     $pdf = pdf($iduser);
+    $url = "../db/cv/" . $pdf;
     ?>
 
     <input type="hidden" id="pdf" value="<?php echo $pdf ?>">
     <input type="hidden" id="idUser" value="<?php echo $iduser ?>">
-    <div class="container" id="descargarcv" >
+
+    <div class="container" id="descargarcv">
         <br>
-        <a id="cv" title="Descargar Archivo" class="btn btn-info" href="../db/cv/<?php $pdf ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
-    </div> 
+        <a id="cv" title="Descargar Archivo" class="btn btn-info" href="<?php echo $url ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
+        <button id="eliminarUsuario" class="btn btn-info" >Eliminar usuario</button>
+        <a target="_blank" href="./recuperarContrasena.php?id=<?php echo $iduser ?>" id="recuperarPass" class="btn btn-info">Cambiar Contraseña</a>
+        <a id="salir" class="btn btn-danger" onclick="javascript: window.close();">Cerrar</a>
+    </div>
+
     <div class="container">
         <hr>
     </div>
-    
-    
 
     <div class="container" id="box-general">
 
@@ -228,17 +271,18 @@ require('../db/conexionDb.php');
         </div>
         <div class="container" align="center">
             <button type="button" id="imprimir">Imprimir</button>
-            <button type="button" id="borrar">Borrar</button>
-            <a target="_blank" href="./recuperarContrasena.php?id=<?php echo $iduser ?>" id="recuperarPass">Cambiar Contraseña</a>          
+            <!--<button type="button" id="borrar">Borrar</button>                -->
         </div>
+        <br>
 
     </div>
-<script src="../jquery/jquery-3.6.0.min.js"></script>
-<script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../popper/popper.min.js"></script>
-<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-<!-- <script type="text/javascript" src="../assets/js/recuperarPass.js"></script> -->
-<script type="text/javascript" src="../assets/js/borrarUser.js"></script>
-<script type="text/javascript" src="../assets/js/usuario.js"></script>
+    <script src="../jquery/jquery-3.6.0.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../popper/popper.min.js"></script>
+    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/recuperarPass.js"></script> -->
+    <script type="text/javascript" src="../assets/js/borrarUser.js"></script>
+    <script type="text/javascript" src="../assets/js/usuario.js"></script>
 </body>
+
 </html>

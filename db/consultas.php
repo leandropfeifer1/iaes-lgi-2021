@@ -1,4 +1,7 @@
 <?php
+
+//$idUser = $_SESSION['id_user'];
+//echo "--" . $idUser . "--";
 function datosUsuario($iduser)
 {
     include 'conexionDb.php';
@@ -159,4 +162,31 @@ function pdf($iduser)
     return $pdf;
 }
 
-?>
+if (isset($_POST['pdfExiste'])) {
+
+    //echo $_POST['pdfExiste'];
+   // echo $_POST['iduser'];
+    if ($_POST['pdfExiste'] == true) {
+        require('conexionDb.php');
+        $iduser = $_POST['iduser'];
+        $idloc = mysqli_query($conexion, "SELECT idloc FROM usuario WHERE usuario.iduser='$iduser'");
+        $idloc = mysqli_fetch_row($idloc);
+
+        $query = "SELECT pdf FROM usuario WHERE idloc='$idloc[0]'";
+        $result = mysqli_query($conexion, $query);
+        if (!$result) {
+            die('Query failed!' . mysqli_error($conexion));
+        }
+
+        $fila = mysqli_fetch_row($result);
+       // echo "aasdasdasd" . $fila[0];
+
+        if (mysqli_num_rows($result) == 0 || $fila[0] == "") {
+            $res = false;
+        } else {
+            $res = true;
+        }
+        print json_encode($res);
+        mysqli_close($conexion);
+    }
+}

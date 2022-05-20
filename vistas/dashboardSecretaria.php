@@ -37,15 +37,17 @@
             </a>
         </div>
         <div class="create">
-            <a id="botonCrear" href="./registro.php?tipo=1">Crear Usuario</a>
+            <!-- <a id="botonCrear" href="./registro.php">Crear Usuario</a> -->
         </div>
         <header id="header" class="header_dasboard">
+            <a id="botonCrear" href="./registro.php?tipo=1">Crear Usuario</a>
             <a class="header_link" href="./editarCredenciales.php?tipo=1">
                 <?php echo $_SESSION['usuario'];?>
             </a>
             <a class="header_link" href="../db/logout.php">Salir</a>
         </header>
     </div>
+
     <div class="divBuscador">
         <input placeholder="Buscar..." type="search" name="buscador" id="buscador">
         <label for="buscador"><svg id="lupa" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

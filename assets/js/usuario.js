@@ -1,6 +1,24 @@
 $(document).ready(function () {
+
+  var iduser = $("#idUser").val();
+  var pdfExiste = true;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: "../db/consultas.php",
+    datatype: 'json',
+    data: {
+      pdfExiste: pdfExiste,
+      iduser: iduser,
+    },
+    success: function (response) {
+      if (response === 'false') {
+        $('#cv').removeAttr('href');
+      }
+    },
+  });  
+
   $("#imprimir").click(function () {
-    console.log("asdasd");
     $("#descargarcv").hide();
     $("#imprimir").hide();
     $("#borrar").hide();
@@ -12,14 +30,4 @@ $(document).ready(function () {
     $("#recuperarPass").show();
   });
 
-  
-  if ($("#pdf").val() == "") {
-    console.log("asdasdasdasdasd");
-    $("#cv").bind("click", false);
-    $("#error_cv").text("   Vacio*");
-  } else {
-    console.log("33333");
-    $("#cv").unbind("click", false);
-    $("#error_cv").text("");
-  }
 });

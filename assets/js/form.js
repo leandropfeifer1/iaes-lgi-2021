@@ -546,10 +546,12 @@ $(document).ready(function () {
   }
   function val_dni() {
     var dni_validation = /^\d{8}$/;
-    if ($.trim($("#dni").val()).length == 0) {
+    var dni = $("#dni").val();
+    var letra = dni.charAt(0);
+    if ($.trim(dni).length == 0) {
       error_dni = "Complete este campo*";
       $("#error_dni").text(error_dni);
-    } else if (!dni_validation.test($("#dni").val())) {
+    } else if (!dni_validation.test(dni) || letra == 0) {
       error_dni = "Dni invalido!";
       $("#error_dni").text(error_dni);
     } else {
@@ -630,8 +632,7 @@ $(document).ready(function () {
     return error_domicilio;
   }
   function val_localidad() {
-    if ($.trim($("#localidad").val()).length == 0) {
-      console.log("aaaa");
+    if ($.trim($("#localidad").val()).length == 0) {      
       error_localidad = "Complete este campo*";
       $("#error_localidad").text(error_localidad);
     } else {

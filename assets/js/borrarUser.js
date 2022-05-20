@@ -20,8 +20,7 @@ $("#eliminarUsuario").click(function () {
                 data: {
                     iduser: iduser,
                 },
-                success: function (response) {
-                    console.log("uu");
+                success: function () {
                     var ventana = window.self;
                     ventana.close();
                 },

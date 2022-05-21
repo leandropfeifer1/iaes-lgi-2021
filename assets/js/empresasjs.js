@@ -8,7 +8,7 @@ function log(lg) {
       contentType: false,
       processData: false,
       success: (data) => {
-        console.log(data);
+        //console.log(data);
       },
     });
   }
@@ -89,7 +89,7 @@ function modificar(lg) {
       url: "../db/cadenaAleatoria.php",
       data: cadena,
       success: function (response) {
-        console.log(response);
+        //console.log(response);
         logomod = response;
       },
     });

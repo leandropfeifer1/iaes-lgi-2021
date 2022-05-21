@@ -89,45 +89,12 @@ if (!isset($_SESSION['usuario'])) {
                         <input type="text" name="direccion" id="direccion" class="form-control input-sm">
                         <th>Localidad</th>
                         <select name="localidad" id="localidad" class="form-control">
-                            <option value=""></option>
-                            <?php
-                            $sql = "SELECT * FROM localidad";
-                            $lista = mysqli_query($conexion, $sql);
-                            while ($fila = $lista->fetch_assoc()) {
-
-                                $localidad = $fila['idloc'];
-                                $nombre = $fila['localidad'];
-                                echo "<option value=$localidad>$nombre</option>";
-                            }
-                            ?>
                         </select>
                         <th>Departamento</th>
                         <select name="departamento" id="departamento" class="form-control">
-                            <option value=""></option>
-                            <?php
-                            $sql = "SELECT * FROM departamento";
-                            $lista = mysqli_query($conexion, $sql);
-                            while ($fila = $lista->fetch_assoc()) {
-
-                                $departamento = $fila['idep'];
-                                $nombre = $fila['departamento'];
-                                echo "<option value=$departamento>$nombre</option>";
-                            }
-                            ?>
                         </select>
                         <th>Provincia</th>
                         <select name="provincia" id="provincia" class="form-control">
-                            <option value=""></option>
-                            <?php
-                            $sql = "SELECT * FROM provincia";
-                            $lista = mysqli_query($conexion, $sql);
-                            while ($fila = $lista->fetch_assoc()) {
-
-                                $provincia = $fila['idpro'];
-                                $nombre = $fila['provincia'];
-                                echo "<option value=$provincia>$nombre</option>";
-                            }
-                            ?>
                         </select>
                         <th>Pais</th>
                         <select name="pais" id="pais" class="form-control">

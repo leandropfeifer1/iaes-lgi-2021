@@ -94,16 +94,14 @@ require('../db/conexionDb.php');
             <option value="3">No Binarix</option>
             <option value="4">Otros</option>
         </select>
-       <label class="label-input" for="reqinput">Requisitos</label>
-        <input class="reqinput" placeholder="Requisitos"type="text" name="requisitos" id="requisitos">        
+       <label class="label-input" for="requisitos">Requisitos</label>       
+        <input class="reqinput" placeholder="Requisitos"type="text" name="requisitos" id="requisitos">     
+        <label class="label-input" for="sueldo">Sueldo</label>
+        <input class="edadInput" placeholder="Sueldo" type="number" name="sueldo" id="sueldo">
         <button type="button" id="guardar" class="btn btn-primary" onclick="">Guardar</button>
     </form>
     </div>
-    <div class="container">
-        <div id="tabla"></div>
-    </div>
     </body>
-        <script src="../assets/js/busqueda.js"></script>
         <script src="../assets/js/agrebus.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -113,8 +111,10 @@ require('../db/conexionDb.php');
             edadmax = $('#edadmax').val();
             carrera = $('#carrera').val();
             disponibilidad = $('#disponibilidad').val();
-            genero = $('#genero').val();
+            genero = $('#genero').val();            
             requisitos = $('#requisitos').val();
+            sueldo = $('#sueldo').val();
+            console.log(sueldo);
             if (sucursal === '') {
                 Swal.fire({
                     icon: 'warning',
@@ -171,7 +171,7 @@ require('../db/conexionDb.php');
                                             confirmButtonText: 'Ok',
                                         });
                                     }else {                                            
-                                                agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero, requisitos);
+                                                agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero,requisitos, sueldo );
                                             
                                         }
                                     }
@@ -180,8 +180,7 @@ require('../db/conexionDb.php');
                         }
                     }
 
-                }
-            }
+                }            
         });
     });
     </script>

@@ -77,15 +77,9 @@ require('../db/verificarCredenciales.php');
                     <option value="3">No Binarix</option>
                     <option value="4">Otros</option>
                 </select>
-                <label class="label-input" for="provincia">Provincia</label>
-                <select name="provincia" id="provincia">
-                </select>
-                <label class="label-input" for="departamento">Departamento</label>
-                <select name="departamento" id="departamento">
-                </select> 
-                <label class="label-input" for="localidad">Localidad</label>
-                <select name="localidad" id="localidad">
-                </select>
+                <label>Sueldo</label>
+                <input type="number" name="sueldo" id="sueldo" oninput="if( this.value.length > 10 )  this.value = this.value.slice(0,10)" class="form-control input-sm">
+                        
             </form>
         <div class="separatorFilter">
             <div class="div-datos">

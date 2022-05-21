@@ -215,8 +215,7 @@ if (!isset($_SESSION['usuario'])) {
                                         lg.append("nombre", nombre);
                                     }
                                     log(lg);
-
-
+                                    
                                 } else {
                                     nombre = 0;
                                 }

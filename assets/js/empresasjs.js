@@ -75,7 +75,6 @@ function modificar(lg) {
 
   if ($("#logomod").val()) {
     var lg = new FormData();
-
     var files = $("#logomod")[0].files;
     var f1 = files[0];
     var logo = f1["name"];
@@ -97,15 +96,13 @@ function modificar(lg) {
     logomod = logomod.replace(/['"]+/g, '');
     // Check file selected or not
     if (files.length > 0) {
-      lg.append("logo", files[0]);
+      lg.append("logom", files[0]);
       lg.append("logomod", logomod);
     }
     log(lg);
   } else {
     var logomod = 0;
   }
-
-
 
   if (empresae === "") {
     Swal.fire({
@@ -161,7 +158,7 @@ function modificar(lg) {
               "&telefono=" +
               telefonoe +
               "&logo=" +
-              logo;
+              logomod;
             $.ajax({
               type: "POST",
               url: "../db/empresasmod.php",
@@ -187,6 +184,7 @@ function modificar(lg) {
     }
   }
 }
+
 function confirmaciondel(idempresa) {
   Swal.fire({
     title: "Confirme",

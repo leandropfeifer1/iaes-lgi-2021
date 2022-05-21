@@ -25,6 +25,7 @@ $idUser = $_GET['id'];
                             <div id="emailHelp" class="form-text text-muted">Las Contraseña se cambiará al que hayas ingresado</div>
                         </div>
                         <button type="submit" class="btn btn-primary">Cambiar</button>
+                        <button type="submit" class="btn btn-danger" onclick="javascript: window.close();">Cerrar</button>
                     </form>
                 </div>
             </div>

@@ -22,7 +22,8 @@ $("#eliminarUsuario").click(function () {
                 },
                 success: function () {
                     var ventana = window.self;
-                    ventana.close();
+                    javascript: window.history.go(-1);
+                    //ventana.close();
                 },
             });
             

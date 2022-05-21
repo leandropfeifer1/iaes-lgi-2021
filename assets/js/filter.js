@@ -82,7 +82,7 @@ function getData() {
             foto = '../assets/logo.jpg';
           }
           $('.div-datos').append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_self" class="card">
               <div class="card-header">
                 <img src="${foto}" alt="logo" />
               </div>
@@ -203,7 +203,7 @@ const sendRequest = () => {
             foto = '../assets/logo.jpg';
           }
           $('.div-datos').append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_self" class="card">
               <div class="card-header">
                 <img src="${foto}" alt="logo" />
               </div>

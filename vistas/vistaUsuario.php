@@ -132,7 +132,7 @@ if (!isset($_SESSION['usuario'])) {
         <a id="cv" title="Descargar Archivo" class="btn btn-info" href="<?php echo $url ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
         <button id="eliminarUsuario" class="btn btn-info" >Eliminar usuario</button>
         <a target="_blank" href="./recuperarContrasena.php?id=<?php echo $iduser ?>" id="recuperarPass" class="btn btn-info">Cambiar Contraseña</a>
-        <a id="salir" class="btn btn-danger" onclick="javascript: window.close();">Cerrar</a>
+        <a id="salir" class="btn btn-danger" onclick="javascript: window.history.go(-1);">Cerrar</a>
     </div>
 
     <div class="container">

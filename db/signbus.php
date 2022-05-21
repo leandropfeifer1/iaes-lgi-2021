@@ -6,10 +6,8 @@
     $emax=$_POST['edadmax'];
     $carr=$_POST['carrera'];
     $gen=$_POST['genero'];
-    $loc=$_POST['localidad'];
-    $dep=$_POST['departamento'];
-    $pro=$_POST['provincia'];
+    $suel=$_POST['sueldo'];
     $dis=$_POST['disponibilidad'];
-    $query="INSERT INTO `buscaempleado`( `idsucursal`, `edadmin`, `edadmax`, `carrera`, `genero`, `localidad`, `departamento`, `provincia`, `disponibilidad`) 
-           VALUES ($sucursal,$emin,$emax,$carr,$gen,$loc,$dep,$pro,$dis)";
-    echo $result= mysqli_query($conexion, $query);
+    $req=$_POST['requisitos'];
+    $query="INSERT INTO `buscaempleado`(`idsucursal`, `edadmin`, `edadmax`, `carrera`, `genero`, `sueldo`, `requisitos`, `disponibilidad`) VALUES ($sucursal,$emin,$emax,$carr,$gen,$suel,'$req',$dis)";
+    echo mysqli_query($conexion, $query);

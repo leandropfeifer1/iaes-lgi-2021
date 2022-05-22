@@ -19,7 +19,7 @@ require('../db/verificarAdminSecretaria.php');
 <body>
     <div class="contenido">
         <div class="logo">
-            <a href="#" class="logo__link">
+            <a href="./filtro.php" class="logo__link">
                 <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
             </a>
         </div>
@@ -51,7 +51,7 @@ require('../db/verificarAdminSecretaria.php');
 
     <div id="contenedor">
         <form id="formSignUp" action="signup.php" method="POST">
-            <input id="usuario" type="text" placeholder="Ingresa tu usuario" name="usuario">
+            <input autocomplete="off" id="usuario" type="text" placeholder="Ingresa el DNI del nuevo usuario" name="usuario">
             <div class="caja">
                 <?php
                 if (isset($_GET['tipo'])) {

@@ -12,7 +12,7 @@
 <body>
     <header id="head">
       <div class="logo">
-        <a href="#" class="logo__link">
+        <a href="./index.php" class="logo__link">
           <img
             src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
             alt="Logo del IAES"

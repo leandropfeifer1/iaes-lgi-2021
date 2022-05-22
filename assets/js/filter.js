@@ -77,7 +77,7 @@ function getData() {
             foto = '../db/images/default.png'
           }
           $('.div-datos').append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_self" class="card">
               <div class="card-header">
                 <img style="object-fit: scale-down;" src="${foto}" alt="${user.usuario} ${user.apellido}" />
               </div>
@@ -193,7 +193,7 @@ const sendRequest = () => {
             foto = '../db/images/default.png'
           }
           $('.div-datos').append(
-            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
+            `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_self" class="card">
               <div class="card-header">
                 <img style="object-fit:scale-down" src="${foto}" alt="${user.usuario} ${user.apellido}" />
               </div>

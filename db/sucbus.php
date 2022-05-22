@@ -32,8 +32,8 @@ function obtenersucursal($sendsuc){
    echo $jsonstring;
    mysqli_close($conexion);
 }
-if(isset($_POST['suc'])){
-    $sendsuc= $_POST['suc'];
+if(isset($_POST['cemp'])){
+    $sendsuc= $_POST['cemp'];
     obtenersucursal($sendsuc);
 }else{
     sucursal();

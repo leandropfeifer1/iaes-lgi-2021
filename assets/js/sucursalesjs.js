@@ -241,3 +241,131 @@ function busqueda(idsucursal) {
   });
   $("tabla").load("sucursalestabla.php");
 }
+$(document).ready(function(){
+    let $provincia = document.querySelector('#provincia')
+    let $departamento = document.querySelector('#departamento')
+    let $localidad = document.querySelector('#localidad')
+    let $pais = document.querySelector('#pais')    
+        cargarloc()
+        cargardep()
+        cargarpro()
+        
+        
+    function cargarpro(){
+        $.ajax({
+            url: "../db/probus.php",
+            type: "GET",
+            success: function(res){
+
+                const provincias = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                provincias.forEach(provincia => {
+                    template += `<option value="${provincia.idpro}">${provincia.provincia}</option>`                    
+                })
+                $provincia.innerHTML= template;                
+            }
+        });
+    }
+    function cargardep(){
+        $.ajax({
+            url: "../db/depbus.php",
+            type: "GET",
+            success: function(res){
+                
+                const deparmentos = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                deparmentos.forEach(departamento => {
+                    template += `<option value="${departamento.idep}">${departamento.departamento}</option>`                    
+                })
+                $departamento.innerHTML= template;                
+            }
+        });
+    }
+    function cargarloc(){
+        $.ajax({
+            url: "../db/busdb.php",
+            type: "GET",
+            success: function(res){
+                
+                const localidades = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                localidades.forEach(localidad => {
+                    template += `<option value="${localidad.idloc}">${localidad.localidad}</option>`                    
+                })
+                $localidad.innerHTML= template;                
+            }
+        });
+    }
+
+function cargarlocalidades(sendep){        
+        $.ajax({
+            url: "../db/busdb.php",
+            type: "POST",
+            data: sendep,
+            success: function(res){
+                
+                const localidades = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                localidades.forEach(localidad => {
+                    template += `<option value="${localidad.idloc}">${localidad.localidad}</option>`                    
+                })
+                $localidad.innerHTML= template;                 
+            }
+        });
+    }
+function cargardep(sendpro){        
+        $.ajax({
+            url: "../db/depbus.php",
+            type: "POST",
+            data: sendpro,
+            success: function(res){
+               
+                const deparmentos = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                deparmentos.forEach(departamento => {
+                    template += `<option value="${departamento.idep}">${departamento.departamento}</option>`                    
+                })
+                $departamento.innerHTML= template;                       
+            }
+        });
+    }
+function cargarprovincia(sendpais){        
+        $.ajax({
+            url: "../db/probus.php",
+            type: "POST",
+            data: sendpais,
+            success: function(res){
+               
+                const provincia = JSON.parse(res)
+                let template= '<option class="from-control" selected disabled>---</option>'
+                provincia.forEach(provincia => {
+                    template += `<option value="${provincia.idpro}">${provincia.provincia}</option>`                    
+                })
+                $provincia.innerHTML= template;                       
+            }
+        });
+    }
+$pais.addEventListener('change',function(){
+        const codpais = $pais.value
+        const sendpais={
+            'cpais':codpais
+        }
+        cargarprovincia(sendpais)
+})
+$departamento.addEventListener('change',function(){
+        const codped = $departamento.value
+        const senddep={
+            'cdep':codped
+        }
+        cargarlocalidades(senddep)
+    })
+
+$provincia.addEventListener('change',function(){
+        const codpro = $provincia.value
+        const sendpro={
+            'cpro':codpro
+        }
+        cargardep(sendpro)
+})
+
+})

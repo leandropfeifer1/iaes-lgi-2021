@@ -12,7 +12,7 @@
 <body>
     <header id="head">
       <div class="logo">
-        <a href="#" class="logo__link">
+        <a href="./index.php" class="logo__link">
           <img
             src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png"
             alt="Logo del IAES"
@@ -20,17 +20,17 @@
         </a>
       </div>
       <nav class="nav">
-        <a href="#" class="nav__link">Instituto</a>
+        <a href="https://iaes.edu.ar" class="nav__link">Instituto</a>
         <a href="#" class="nav__link">Preguntas</a>
       </nav>
     </header>
     <h1 id="title">Bolsa de Empleo IAES</h1>
     <form id="formLogin" action="" method="POST">
         <h3>Iniciar Sesión</h3>
-        <input id="usuario" type="text" placeholder="Ingresa tu usuario" name="usuario">
+        <input autocomplete="off" id="usuario" type="text" placeholder="Ingresa tu usuario" name="usuario">
         <input id="password" type="password" placeholder="Ingresa tu contraseña" name="password">
         <input name="submit" type="submit">
-        <a id="link_forgot" href="./vistas/recuperarContrasena.php">Olvidé mi contraseña</a>
+        <!-- <a id="link_forgot" href="./vistas/recuperarContrasena.php">Olvidé mi contraseña</a> -->
     </form>
 <script src="./jquery/jquery-3.6.0.min.js"></script>
 <script src="./bootstrap/js/bootstrap.min.js"></script>

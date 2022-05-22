@@ -26,7 +26,7 @@ if (!isset($_SESSION['usuario'])) {
     <body>
         <div class="contenido">
             <div id="log_img" class="logo">
-                <a href="#" class="logo__link">
+                <a href="./filtro.php" class="logo__link">
                     <img src="http://www.iaes.edu.ar/wp-content/uploads/2014/08/logo-top-1.png" alt="Logo del IAES" />
                 </a>
             </div>

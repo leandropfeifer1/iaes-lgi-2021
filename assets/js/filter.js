@@ -117,28 +117,8 @@ function getData() {
 
 // Funcion para enviar Datos
 const sendRequest = () => {
-<<<<<<< HEAD
-  $('.div-datos').empty();
-  const carrera = parseInt($('#carrera').val());
-  const localidad = parseInt($('#localidad').val());
-  const licencia = parseInt($('#licencia').val());
-  const vehiculo = parseInt($('#vehiculo').val());
-  let edadMinima = $('#edadMin').val(); // Es "" si no se pone nada
-  let edadMaxima = $('#edadMax').val();
-  const modalidad = parseInt($('#modalidad').val());
-  const genero = parseInt($('#genero').val());
-  const disponible = parseInt($('#disponible').val());
-  let buscador = $('#buscador').val(); // Es "" si no se pone nada
-
-  edadMinima === '' ? (edadMinima = '1') : edadMinima;
-  edadMaxima === '' ? (edadMaxima = '1') : edadMaxima;
-  let edadMin = parseInt(edadMinima);
-  let edadMax = parseInt(edadMaxima);
-  edadMin >= edadMax ? (edadMax = 99) : edadMax;
-=======
   $('.div-datos').empty()
   const carrera = parseInt($('#carrera').val())
-  console.log(carrera)
   const localidad = parseInt($('#localidad').val())
   const licencia = parseInt($('#licencia').val())
   const vehiculo = parseInt($('#vehiculo').val())
@@ -154,7 +134,6 @@ const sendRequest = () => {
   let edadMin = parseInt(edadMinima)
   let edadMax = parseInt(edadMaxima)
   edadMin >= edadMax ? (edadMax = 99) : edadMax
->>>>>>> dev
 
   $.ajax({
     url: '../db/filterData.php',
@@ -210,12 +189,13 @@ const sendRequest = () => {
           if (user.foto) {
             foto = '../db/images/' + user.foto
           } else {
-            foto = '../assets/logo.jpg'
+            // foto = '../assets/logo.jpg'
+            foto = '../db/images/default.png'
           }
           $('.div-datos').append(
             `<a href="../vistas/vistaUsuario.php?iduser=${user.iduser}" target="_blank" class="card">
               <div class="card-header">
-                <img src="${foto}" alt="logo" />
+                <img style="object-fit:scale-down" src="${foto}" alt="${user.usuario} ${user.apellido}" />
               </div>
               <div class="card-body">
                   <span class="tag ${classAvailable}">${disponibilidad}</span>

@@ -89,7 +89,7 @@ function modificar(lg) {
       url: "../db/cadenaAleatoria.php",
       data: cadena,
       success: function (response) {
-        //console.log(response);
+        console.log(response);
         logomod = response;
       },
     });
@@ -98,9 +98,10 @@ function modificar(lg) {
     if (files.length > 0) {
       lg.append("logom", files[0]);
       lg.append("logomod", logomod);
-    }
+    }    
     log(lg);
   } else {
+    console.log("aasss");
     var logomod = 0;
   }
 

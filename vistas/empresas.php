@@ -55,7 +55,6 @@ if (!isset($_SESSION['usuario'])) {
                     echo '<a class="header_link" href="./filtro.php">Volver</a>';
                 }
                 ?>
-                <a class="header_link" href="ubicaciones.php">Ubicaciones</a>
                 <a class="header_link" href="sucursales.php">Sucursales</a>
                 <a class="header_link" href="buscempleado.php">Busquedas de Empleados</a>
                 <a class="header_link" href="../db/logout.php">Salir</a>

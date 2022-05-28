@@ -7,6 +7,7 @@ if (isset($_POST['nombre'])) {
     $nombre = $_POST['nombre'];
 }
 if (isset($_POST['logomod'])) {
+    echo "issetlogomod";
     $logomod = $_POST['logomod'];
 }
 if (isset($_POST['fotoNombre'])) {
@@ -14,15 +15,16 @@ if (isset($_POST['fotoNombre'])) {
 }
 
 if (isset($_FILES['logo']['name'])) {
+    echo "logoname";
     $temp = $_FILES['logo']['tmp_name'];
     if (move_uploaded_file($temp, "../db/images/" . $nombre)) {
         //echo "se subio la imagen";
     }
 }
-if (isset($_FILES['logomod']['name'])) {
-    $temp = $_FILES['logo']['tmp_name'];
+if (isset($_FILES['logom']['name'])) {
+    $temp = $_FILES['logom']['tmp_name'];
     if (move_uploaded_file($temp, "../db/images/" . $logomod)) {
-        //echo "se subio la imagen";
+       // echo "se subio la imagen";
     }
 }
 

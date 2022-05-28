@@ -146,7 +146,7 @@ if (!isset($_SESSION['usuario'])) {
             <div class="row">
 
                 <div class="col col-md-3">
-                    <img class="img-thumbnail" src="<?php echo $foto ?>" width="240" height="240" alt="">
+                    <img class="img-thumbnail" src="<?php echo $foto ?>" width="240" height="240" style="object-fit:scale-down" alt="">
                 </div>
                 <div class="col col-md-9">
                     <div class="box-header">

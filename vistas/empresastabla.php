@@ -34,7 +34,7 @@ mysqli_set_charset($conexion, "utf8");
                         $logo = $fila['logo'];
                     }else{
                         $logo = "default.png";
-                    }?> <img class="img-thumbnail" src="<?php echo "../db/images/" . $logo ?>" width="50" alt=""></td>
+                    }?> <img class="img-thumbnail" style="object-fit:scale-down" src="<?php echo "../db/images/" . $logo ?>" width="50" alt=""></td>
                     <td><?php echo $fila['empresa'] ?></td>
                     <td><?php echo $fila['cuit'] ?></td>
                     <td><?php echo $fila['presidente'] ?></td>

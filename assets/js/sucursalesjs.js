@@ -246,9 +246,6 @@ $(document).ready(function(){
     let $departamento = document.querySelector('#departamento')
     let $localidad = document.querySelector('#localidad')
     let $pais = document.querySelector('#pais')    
-        cargarloc()
-        cargardep()
-        cargarpro()
         
         
     function cargarpro(){

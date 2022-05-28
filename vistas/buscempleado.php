@@ -32,8 +32,7 @@ require('../db/verificarCredenciales.php');
             <a class="header_link" href="./editarCredenciales.php">
                 <?php echo $_SESSION['usuario'];?>
             </a>
-            
-            <a class="header_link" href="ubicaciones.php">Ubicaciones</a>
+           
             <a class="header_link" href="sucursales.php">Sucursales</a>
             <a class="header_link" href="empresas.php">Empresas</a>
             <a class="header_link" href="filtro.php">Busquedas de Alumnos</a>
@@ -58,8 +57,10 @@ require('../db/verificarCredenciales.php');
                 <label class="label-input" for="carrera">Carrera</label>
                 <select name="carrera" id="carrera">
                 </select>
-                <label class="label-input" for="edad">Edad</label>
-                <input class="edadInput" placeholder="Edad desde" min=16 max=99 type="number" name="edad" id="edad">
+                <label class="label-input" for="edadmin">Edad Min.</label>
+                <input type="number" placeholder="Edad Min" name="edadmin" id="edadmin" oninput="if( this.value.length > 2 )  this.value = this.value.slice(0,2)" class="form-control input-sm">
+                <label class="label-input" for="edadmax">Edad Max. </label>
+                <input type="number" placeholder="Edad Max" name="edadmax" id="edadmax" oninput="if( this.value.length > 2 )  this.value = this.value.slice(0,2)" class="form-control input-sm">
                 <label class="label-input" for="disponibilidad">Disponibilidad</label>
                 <select name="disponibilidad" id="disponibilidad">
                     <option value="0">---</option>
@@ -77,8 +78,10 @@ require('../db/verificarCredenciales.php');
                     <option value="3">No Binarix</option>
                     <option value="4">Otros</option>
                 </select>
-                <label>Sueldo</label>
-                <input type="number" name="sueldo" id="sueldo" oninput="if( this.value.length > 10 )  this.value = this.value.slice(0,10)" class="form-control input-sm">
+                <label>Sueldo Min</label>
+                <input type="number" placeholder="Sueldo Min" name="sueldomin" id="sueldomin" oninput="if( this.value.length > 10 )  this.value = this.value.slice(0,10)" class="form-control input-sm">
+                <label>Sueldo Max</label>
+                <input type="number" placeholder="Sueldo Max" name="sueldomax" id="sueldomax" oninput="if( this.value.length > 10 )  this.value = this.value.slice(0,10)" class="form-control input-sm">
                         
             </form>
         <div class="separatorFilter">

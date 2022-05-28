@@ -4,10 +4,11 @@ $(".div-datos").append(
 $("#empresa").change(() => sendRequest());
 $("#sucursal").change(() => sendRequest());
 $("#carrera").change(() => sendRequest());
-$("#edad").keyup(() => sendRequest());
-$("#edad").click(() => sendRequest());
+$("#edadmin").keyup(() => sendRequest());
+$("#edadmax").keyup(() => sendRequest());
 $("#genero").change(() => sendRequest());
-$("#sueldo").change(() => sendRequest());
+$("#sueldomin").keyup(() => sendRequest());
+$("#sueldomax").keyup(() => sendRequest());
 $("#disponibilidad").change(() => sendRequest());
 $("#buscador").keyup(() => sendRequest());
 getData();
@@ -29,7 +30,8 @@ function getData() {
     const sucursal = parseInt($("#sucursal").val());
     const carrera = parseInt($("#carrera").val());
     const sueldo = parseInt($("#sueldo").val());
-    let edad = $("#edad").val(); // Es "" si no se pone nada
+    let edadmin = $("#edadmin").val();
+    let edadmax = $("#edadmax").val();// Es "" si no se pone nada
     const genero = parseInt($("#genero").val());
     const disponibilidad = parseInt($("#disponibilidad").val());
     let buscador = $("#buscador").val(); // Es "" si no se pone nada
@@ -42,7 +44,8 @@ function getData() {
             empresa: empresa,
             sucursal: sucursal,
             carrera: carrera,
-            edad: edad,
+            edadmin: edadmin,
+            edadmax: edadmax,
             sueldo: sueldo,
             genero: genero,
             disponibilidad: disponibilidad,
@@ -140,8 +143,10 @@ const sendRequest = () => {
     const empresa = parseInt($("#empresa").val());
     const sucursal = parseInt($("#sucursal").val());
     const carrera = parseInt($("#carrera").val());
-    const sueldo = parseInt($("#sueldo").val());
-    let edad = $("#edad").val(); // Es "" si no se pone nada
+    const sueldomin = parseInt($("#sueldomin").val());
+    const sueldomax = parseInt($("#sueldomax").val());
+    let edadmin = $("#edadmin").val();
+    let edadmax = $("#edadmax").val();
     const genero = parseInt($("#genero").val());
     const disponibilidad = parseInt($("#disponibilidad").val());
 
@@ -155,8 +160,10 @@ const sendRequest = () => {
             empresa: empresa,
             sucursal: sucursal,
             carrera: carrera,
-            sueldo: sueldo,
-            edad: edad,
+            sueldomin: sueldomin,
+            sueldomax: sueldomax,
+            edadmin: edadmin,
+            edadmax: edadmax,
             genero: genero,
             disponibilidad: disponibilidad,
             buscador: buscador,

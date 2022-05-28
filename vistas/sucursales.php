@@ -111,7 +111,7 @@ if (!isset($_SESSION['usuario'])) {
                             ?>
                         </select>
                         <label>Telefono</label>
-                        <input type="text" name="telefono" id="telefono" class="form-control input-sm">
+                        <input type="number" name="telefono" id="telefono" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" class="form-control input-sm">
                         <label>Gerente</label>
                         <input type="text" name="gerente" id="gerente" class="form-control input-sm">
                         <th>Central</th>
@@ -200,7 +200,7 @@ if (!isset($_SESSION['usuario'])) {
                         ?>
                     </select>
                     <label>Telefono</label>
-                    <input type="text" name="telefonoe" id="telefonoe" class="form-control input-sm">
+                    <input type="number" name="telefonoe" id="telefonoe" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" class="form-control input-sm">
                     <label>Gerente</label>
                     <input type="text" name="gerentee" id="gerentee" class="form-control input-sm">
                     <th>Central</th>

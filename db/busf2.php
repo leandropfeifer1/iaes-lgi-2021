@@ -24,14 +24,38 @@ if (isset($_SESSION['id_user'])) {
             $consulta .= " AND idsucursal IN (SELECT `idsucursal` FROM `sucursales` WHERE `idsucursal`=$s)";
         }
     }
-    if (isset($_POST['edad']) && $_POST['edad'] != 0) {
-        $edad = $_POST['edad'];
-        if ($b == 0) {
-            $consulta .= " WHERE idbusqueda IN (SELECT idbusqueda FROM `buscaempleado` WHERE $edad BETWEEN `edadmin` AND `edadmax`)";
-            $b = 1;
+    if (isset($_POST['edadmin']) && $_POST['edadmin'] != 0) {
+        if (isset($_POST['edadmax']) && $_POST['edadmax'] != 0) {
+            if ($b == 0) {
+                $edadmin = $_POST['edadmin'];
+                $edadmax = $_POST['edadmax'];
+                $consulta .= "WHERE `edadmin`>= $edadmin and `edadmax`<=$edadmax";
+                $b = 1;
+            } else {
+                $edadmin = $_POST['edadmin'];
+                $edadmax = $_POST['edadmax'];
+                $consulta .= " AND WHERE `edadmin`>= $edadmin and `edadmax`<=$edadmax";
+            }
         } else {
-            $s = $_POST['sucursal'];
-            $consulta .= " AND idbusqueda IN (SELECT idbusqueda FROM `buscaempleado` WHERE $edad BETWEEN `edadmin` AND `edadmax`)";
+            if ($b == 0) {
+                $edadmin = $_POST['edadmin'];
+                $consulta .= "WHERE edadmin BETWEEN $edadmin and 9999999999";
+                $b = 1;
+            } else {
+                $edadmin = $_POST['edadmin'];
+                $consulta .= "AND WHERE edadmin BETWEEN $edadmin and 9999999999";
+            }
+        }
+    } else {
+        if (isset($_POST['edadmax']) && $_POST['edadmax'] != 0) {
+            if ($b == 0) {
+                $edadmax = $_POST['edadmax'];
+                $consulta .= "WHERE edadmax BETWEEN 0 and $edadmax";
+                $b = 1;
+            } else {
+                $edadmax = $_POST['edadmax'];
+                $consulta .= "AND WHERE edadmax BETWEEN 0 and $edadmax";
+            }
         }
     }
 
@@ -55,16 +79,41 @@ if (isset($_SESSION['id_user'])) {
             $consulta .= " AND genero IN (SELECT `genero` FROM `buscaempleado` WHERE `genero`=$g)";
         }
     }
-    if (isset($_POST['sueldo']) && $_POST['sueldo'] != 0) {
-        if ($b == 0) {
-            $sueldo = $_POST['sueldo'];
-            $consulta .= " WHERE sueldo =$sueldo";
-            $b = 1;
+    if (isset($_POST['sueldomin']) && $_POST['sueldomin'] != 0) {
+        if (isset($_POST['sueldomax']) && $_POST['sueldomax'] != 0) {
+            if ($b == 0) {
+                $sueldomin = $_POST['sueldomin'];
+                $sueldomax = $_POST['sueldomax'];
+                $consulta .= " WHERE sueldo BETWEEN $sueldomin and $sueldomax";
+                $b = 1;
+            } else {
+                $sueldomin = $_POST['sueldomin'];
+                $sueldomax = $_POST['sueldomax'];
+                $consulta .= " AND WHERE sueldo BETWEEN $sueldomin and $sueldomax";
+            }
         } else {
-            $l = $_POST['sueldo'];
-            $consulta .= " AND localidad IN (SELECT `localidad` FROM `buscaempleado` WHERE `localidad`=$l";
+            if ($b == 0) {
+                $sueldo = $_POST['sueldomin'];
+                $consulta .= "WHERE sueldo BETWEEN $sueldo and 9999999999";
+                $b = 1;
+            } else {
+                $sueldo = $_POST['sueldomin'];
+                $consulta .= "AND WHERE sueldo BETWEEN $sueldo and 9999999999";
+            }
+        }
+    } else {
+        if (isset($_POST['sueldomax']) && $_POST['sueldomax'] != 0) {
+            if ($b == 0) {
+                $sueldo = $_POST['sueldomax'];
+                $consulta .= "WHERE sueldo BETWEEN 0 and $sueldo";
+                $b = 1;
+            } else {
+                $sueldo = $_POST['sueldomax'];
+                $consulta .= "AND WHERE sueldo BETWEEN 0 and $sueldo";
+            }
         }
     }
+
     if (isset($_POST['disponibilidad']) && $_POST['disponibilidad'] != 0) {
         if ($b == 0) {
             $d = $_POST['disponibilidad'];
@@ -102,13 +151,12 @@ if (isset($_SESSION['id_user'])) {
             'genero' => $row['genero'],
             'sueldo' => $row['sueldo'],
             'disponibilidad' => $row['disponibilidad'],
-            'requisitos'=>$row['requisitos'],
+            'requisitos' => $row['requisitos'],
             'logo' => $log['logo']
         );
     }
     $jsonstring = json_encode($json);
     echo $jsonstring;
-
     mysqli_close($conexion);
 } 
 

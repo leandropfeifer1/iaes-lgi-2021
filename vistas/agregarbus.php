@@ -105,7 +105,7 @@ if (!isset($_SESSION['usuario'])) {
     <script src="../assets/js/agrebus.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#guardar').click(function () {
+            $('#guardar').click(function () {                
                 sucursal = $('#sucursal').val();
                 edadmin = $('#edadmin').val();
                 edadmax = $('#edadmax').val();
@@ -171,15 +171,22 @@ if (!isset($_SESSION['usuario'])) {
                                                 confirmButtonText: 'Ok',
                                             });
                                         } else {
-                                            agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero, requisitos, sueldo);
-
+                                            if (sueldo === '') {
+                                                Swal.fire({
+                                                    icon: 'warning',
+                                                    title: 'Falta Completar campo "Sueldo"',
+                                                    confirmButtonColor: '#ffa361',
+                                                    confirmButtonText: 'Ok',
+                                                });
+                                            } else {
+                                                agregardatos(sucursal, edadmin, edadmax, carrera, disponibilidad, genero, requisitos, sueldo);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-
                 }
             });
         });

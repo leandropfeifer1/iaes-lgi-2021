@@ -152,37 +152,75 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					</div>
 				</div>
 				<div class="form-group row">
+
 					<div class="col-sm-2">
-						<td>
-							<label for="localidad">Localidad:</label>
-							<select name="localidad" id="localidad" class="form-control">
-								<option value=""></option>
-								<?php
-								include '../db/conexionDb.php';
+						<tr>
+							<td>
+								<label for="pais">Pais:</label>
+								<select name="pais" id="pais" class="form-control">
+									<option value=""></option>
+									<?php
+									include '../db/conexionDb.php';
 
-								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
-								$usloc = mysqli_query($conexion, $sql2);
-								if (mysqli_num_rows($usloc) != 0) {
-									$fila = $usloc->fetch_assoc();
-									$usloc = $fila['usloc'];
-									$locnom = $fila['locnom'];
-									echo "<option value=$usloc selected>$locnom</option>";
-								}
-
-								$sql = "SELECT * FROM localidad";
-								$lista = mysqli_query($conexion, $sql);
-								while ($fila = $lista->fetch_assoc()) {
-									if ($fila['idloc'] != $usloc) {
-										$localidad = $fila['idloc'];
-										$nombre = $fila['localidad'];
-										echo "<option value=$localidad>$nombre</option>";
+									$sql2 = "SELECT pais.pais AS paisnom, usuario.idpais AS uspais FROM usuario, pais WHERE usuario.idloc='$iduser' AND pais.idpais = usuario.idpais";
+									$uspais = mysqli_query($conexion, $sql2);
+									if (mysqli_num_rows($uspais) != 0) {
+										$fila = $uspais->fetch_assoc();
+										$uspais = $fila['uspais'];
+										$paisnom = $fila['paisnom'];
+										echo "<option value=$uspais selected>$paisnom</option>";
 									}
-								}
-								mysqli_close($conexion);
-								?>
-							</select>
-							<p id="error_localidad" class="text-danger"></p>
-						</td>
+									$sql = "SELECT * FROM pais";
+									$lista = mysqli_query($conexion, $sql);
+									while ($fila = $lista->fetch_assoc()) {
+										if ($fila['idpais'] != $uspais) {
+											$idpais = $fila['idpais'];
+											$nombre = $fila['pais'];
+											echo "<option value = $idpais >$nombre</option>";
+										}
+									}
+									mysqli_close($conexion);
+									?>
+								</select>
+								<p id="error_pais" class="text-danger"></p>
+							</td>
+						</tr>
+					</div>
+
+					<div class="col-sm-2">
+
+						<tr>
+							<td>
+								<label for="provincia">Provincia:</label>
+								<select name="provincia" id="provincia" class="form-control">
+									<option value=""></option>
+									<?php
+									include '../db/conexionDb.php';
+
+									$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
+									$usprov = mysqli_query($conexion, $sql2);
+									if (mysqli_num_rows($usprov) != 0) {
+										$fila = $usprov->fetch_assoc();
+										$usprov = $fila['usprov'];
+										$provnom = $fila['provnom'];
+										echo "<option value=$usprov selected>$provnom</option>";
+									}
+
+									$sql = "SELECT * FROM provincia";
+									$lista = mysqli_query($conexion, $sql);
+									while ($fila = $lista->fetch_assoc()) {
+										if ($fila['idpro'] != $usprov) {
+											$id = $fila['idpro'];
+											$nombre = $fila['provincia'];
+											echo "<option value=$id>$nombre</option>";
+										}
+									}
+									mysqli_close($conexion);
+									?>
+								</select>
+								<p id="error_provincia" class="text-danger"></p>
+							</td>
+						</tr>
 					</div>
 
 					<div class="col-sm-3">
@@ -224,75 +262,38 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					</div>
 
 					<div class="col-sm-2">
+						<td>
+							<label for="localidad">Localidad:</label>
+							<select name="localidad" id="localidad" class="form-control">
+								<option value=""></option>
+								<?php
+								include '../db/conexionDb.php';
 
-						<tr>
-							<td>
-								<label for="provincia">Provincia:</label>
-								<select name="provincia" id="provincia" class="form-control">
-									<option value=""></option>
-									<?php
-									include '../db/conexionDb.php';
+								$sql2 = "SELECT localidad.localidad AS locnom, usuario.localidad AS usloc FROM usuario, localidad WHERE usuario.idloc='$iduser' AND localidad.idloc = usuario.localidad";
+								$usloc = mysqli_query($conexion, $sql2);
+								if (mysqli_num_rows($usloc) != 0) {
+									$fila = $usloc->fetch_assoc();
+									$usloc = $fila['usloc'];
+									$locnom = $fila['locnom'];
+									echo "<option value=$usloc selected>$locnom</option>";
+								}
 
-
-									$sql2 = "SELECT provincia.provincia AS provnom, usuario.provincia AS usprov FROM usuario, provincia WHERE usuario.idloc='$iduser' AND provincia.idpro = usuario.provincia";
-									$usprov = mysqli_query($conexion, $sql2);
-									if (mysqli_num_rows($usprov) != 0) {
-										$fila = $usprov->fetch_assoc();
-										$usprov = $fila['usprov'];
-										$provnom = $fila['provnom'];
-										echo "<option value=$usprov selected>$provnom</option>";
+								$sql = "SELECT * FROM localidad";
+								$lista = mysqli_query($conexion, $sql);
+								while ($fila = $lista->fetch_assoc()) {
+									if ($fila['idloc'] != $usloc) {
+										$localidad = $fila['idloc'];
+										$nombre = $fila['localidad'];
+										echo "<option value=$localidad>$nombre</option>";
 									}
-
-									$sql = "SELECT * FROM provincia";
-									$lista = mysqli_query($conexion, $sql);
-									while ($fila = $lista->fetch_assoc()) {
-										if ($fila['idpro'] != $usprov) {
-											$id = $fila['idpro'];
-											$nombre = $fila['provincia'];
-											echo "<option value=$id>$nombre</option>";
-										}
-									}
-									mysqli_close($conexion);
-									?>
-								</select>
-								<p id="error_provincia" class="text-danger"></p>
-							</td>
-						</tr>
+								}
+								mysqli_close($conexion);
+								?>
+							</select>
+							<p id="error_localidad" class="text-danger"></p>
+						</td>
 					</div>
 
-					<div class="col-sm-2">
-						<tr>
-							<td>
-								<label for="pais">Pais:</label>
-								<select name="pais" id="pais" class="form-control">
-									<option value=""></option>
-									<?php
-									include '../db/conexionDb.php';
-
-									$sql2 = "SELECT pais.pais AS paisnom, usuario.idpais AS uspais FROM usuario, pais WHERE usuario.idloc='$iduser' AND pais.idpais = usuario.idpais";
-									$uspais = mysqli_query($conexion, $sql2);
-									if (mysqli_num_rows($uspais) != 0) {
-										$fila = $uspais->fetch_assoc();
-										$uspais = $fila['uspais'];
-										$paisnom = $fila['paisnom'];
-										echo "<option value=$uspais selected>$paisnom</option>";
-									}
-									$sql = "SELECT * FROM pais";
-									$lista = mysqli_query($conexion, $sql);
-									while ($fila = $lista->fetch_assoc()) {
-										if ($fila['idpais'] != $uspais) {
-											$idpais = $fila['idpais'];
-											$nombre = $fila['pais'];
-											echo "<option value = $idpais >$nombre</option>";
-										}
-									}
-									mysqli_close($conexion);
-									?>
-								</select>
-								<p id="error_pais" class="text-danger"></p>
-							</td>
-						</tr>
-					</div>
 				</div>
 
 				<div class="form-group row">
@@ -482,6 +483,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 	<script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
 	<script type="text/javascript" src="../assets/js/form.js"></script>
 	<script type="text/javascript" src="../assets/js/input.js"></script>
+	<script src="../assets/js/sucursalesjs.js"></script>
 
 </body>
 

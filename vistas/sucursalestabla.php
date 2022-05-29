@@ -77,9 +77,9 @@ mysqli_set_charset($conexion, "utf8");
                     <td><?php
                     $sql7 = "SELECT `idbusqueda` FROM `buscaempleado` WHERE `idsucursal`=" . $fila['idsucursal'];
                     $busca = mysqli_query($conexion, $sql7);
-                    $res = mysqli_fetch_array($busca);
-                    $q = $res[0];
-                    if ($q > 0) {
+
+                    $q = '';                   
+                    if(mysqli_num_rows($busca)>0){
                     ?> <button class="btn btn-success btnbuscando">Buscando</button><?php
                             $q = 0;
                         } else {
@@ -87,6 +87,7 @@ mysqli_set_charset($conexion, "utf8");
                             $q = 0;
                         }
                         ?></td>
+                        
                     <td>
                         <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modaleditarsuc" onclick="agregaform('<?php echo $datos ?>')">Editar</button>
                     </td>  

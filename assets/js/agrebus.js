@@ -37,7 +37,7 @@ console.log(sueldo);
       if (r === "1") {
         Swal.fire({
           icon: "success",
-          title: "Sucursal Guardada",
+          title: "Busqueda Guardada",
           confirmButtonColor: "#ffa361",
           confirmButtonText: "Ok",
         });        

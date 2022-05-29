@@ -33,6 +33,7 @@ function agregardatos(empresa, cuit, presidente, correo, telefono, logo) {
     url: "../db/empresasdb.php",
     data: cadena,
     success: function (r) {
+        console.log(r)
       if (r == 1) {
         Swal.fire({
           icon: "success",

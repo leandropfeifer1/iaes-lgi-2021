@@ -34,7 +34,7 @@ if (isset($_SESSION['id_user'])) {
             } else {
                 $edadmin = $_POST['edadmin'];
                 $edadmax = $_POST['edadmax'];
-                $consulta .= " AND WHERE `edadmin`>= $edadmin and `edadmax`<=$edadmax";
+                $consulta .= " AND `edadmin`>= $edadmin and `edadmax`<=$edadmax";
             }
         } else {
             if ($b == 0) {
@@ -43,7 +43,7 @@ if (isset($_SESSION['id_user'])) {
                 $b = 1;
             } else {
                 $edadmin = $_POST['edadmin'];
-                $consulta .= "AND WHERE edadmin BETWEEN $edadmin and 9999999999";
+                $consulta .= "AND edadmin BETWEEN $edadmin and 9999999999";
             }
         }
     } else {
@@ -54,7 +54,7 @@ if (isset($_SESSION['id_user'])) {
                 $b = 1;
             } else {
                 $edadmax = $_POST['edadmax'];
-                $consulta .= "AND WHERE edadmax BETWEEN 0 and $edadmax";
+                $consulta .= "AND edadmax BETWEEN 0 and $edadmax";
             }
         }
     }
@@ -89,7 +89,7 @@ if (isset($_SESSION['id_user'])) {
             } else {
                 $sueldomin = $_POST['sueldomin'];
                 $sueldomax = $_POST['sueldomax'];
-                $consulta .= " AND WHERE sueldo BETWEEN $sueldomin and $sueldomax";
+                $consulta .= " AND sueldo BETWEEN $sueldomin and $sueldomax";
             }
         } else {
             if ($b == 0) {
@@ -98,7 +98,7 @@ if (isset($_SESSION['id_user'])) {
                 $b = 1;
             } else {
                 $sueldo = $_POST['sueldomin'];
-                $consulta .= "AND WHERE sueldo BETWEEN $sueldo and 9999999999";
+                $consulta .= "AND sueldo BETWEEN $sueldo and 9999999999";
             }
         }
     } else {
@@ -109,7 +109,7 @@ if (isset($_SESSION['id_user'])) {
                 $b = 1;
             } else {
                 $sueldo = $_POST['sueldomax'];
-                $consulta .= "AND WHERE sueldo BETWEEN 0 and $sueldo";
+                $consulta .= "AND sueldo BETWEEN 0 and $sueldo";
             }
         }
     }

@@ -12,7 +12,7 @@ require('../db/verificarCredenciales.php');
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css"> 
     <link rel="stylesheet" href="../assets/css/register.css">
     <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
-    <title>Buscar Alumnos</title>
+    <title>Buscar Empleo</title>
 </head>
 <body>
     <div class="content">

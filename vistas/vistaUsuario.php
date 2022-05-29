@@ -145,8 +145,9 @@ if (!isset($_SESSION['usuario'])) {
         <div class="container box-Principal">
             <div class="row">
 
-                <div class="col col-md-3" style="width:240px; height:240px">
-                    <img style="object-fit:cover" class="img-thumbnail" src="<?php echo $foto ?>"  alt="">
+                <!-- <div style="width: 240px; height:240px;" class="col col-md-3"> -->
+                <div class="col col-md-3" style="width: 240px;height: 240px ;display: flex;">
+                    <img style="object-fit:contain; background-color: rgba(255, 255, 255, 0)" class="img-thumbnail" src="<?php echo $foto ?>"  alt="">
                 </div>
                 <div class="col col-md-9">
                     <div class="box-header">

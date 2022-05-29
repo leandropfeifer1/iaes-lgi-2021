@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2022 a las 02:22:13
+-- Tiempo de generación: 29-05-2022 a las 05:31:40
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -33,9 +33,19 @@ CREATE TABLE `buscaempleado` (
   `edadmax` int(3) NOT NULL,
   `carrera` int(2) NOT NULL,
   `genero` int(1) NOT NULL,
+  `sueldo` int(10) NOT NULL,
   `requisitos` varchar(240) NOT NULL,
   `disponibilidad` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `buscaempleado`
+--
+
+INSERT INTO `buscaempleado` (`idbusqueda`, `idsucursal`, `edadmin`, `edadmax`, `carrera`, `genero`, `sueldo`, `requisitos`, `disponibilidad`) VALUES
+(10, 16, 18, 30, 3, 1, 20000, 'Caminar', 1),
+(11, 16, 18, 45, 4, 1, 9500, 'Existir', 2),
+(12, 17, 24, 32, 4, 1, 12000, 'Ser trans', 3);
 
 -- --------------------------------------------------------
 
@@ -135,6 +145,14 @@ CREATE TABLE `empresas` (
   `correo` varchar(50) NOT NULL,
   `telefono` int(17) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `empresas`
+--
+
+INSERT INTO `empresas` (`idempresa`, `logo`, `empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES
+(34, 'descarga (1).jpg', 'Todo ceramica', 454654, '454654', 'TD@gan.om', 878787878),
+(35, 'descar0ga.png', 'Todo rocas', 454654, '454654', 'TD', 23232332);
 
 -- --------------------------------------------------------
 
@@ -392,6 +410,14 @@ CREATE TABLE `sucursales` (
   `central` int(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`idsucursal`, `empresa`, `direccion`, `localidad`, `departamento`, `provincia`, `pais`, `telefono`, `gerente`, `central`) VALUES
+(16, 35, 'Lapachos', 1, 1, 1, 1, 986322, 'dgfdg', 1),
+(17, 34, 'Americas', 1, 1, 1, 1, 986322, 'dgfdg23', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -559,7 +585,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `buscaempleado`
 --
 ALTER TABLE `buscaempleado`
-  MODIFY `idbusqueda` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idbusqueda` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
@@ -574,7 +600,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idempresa` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT de la tabla `experiencia`
 --
@@ -624,7 +650,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idsucursal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

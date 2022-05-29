@@ -62,9 +62,14 @@ require('../db/verificarAdminSecretaria.php');
                 } else {
                     echo '<select name="rol" id="select">
                             <option selected value="3">Usuario</option>
-                            <option value="2">Secretaría</option>
                             <option value="1">Administrador</option>
                         </select>';
+                        // SE BORRO ESTA OPCION HASTA QUE SE ARREGLE SECRETARIA
+                        // echo '<select name="rol" id="select">
+                        //     <option selected value="3">Usuario</option>
+                        //     <option value="2">Secretaría</option>
+                        //     <option value="1">Administrador</option>
+                        // </select>';
                 }
                 ?>
             </div>

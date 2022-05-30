@@ -18,6 +18,8 @@ $(document).ready(function () {
     }
   });
 
+  
+
   //---------------------------------------------------------------Botones
   $("#sig1").click(function () {
     val_personales = val_usuario();
@@ -708,7 +710,7 @@ $(document).ready(function () {
     return error_auto;
   }
   function val_carrera() {
-    if ($("#carh").val().length == 0) {
+    if (!$("#carh").val()) {
       error_carh = "Complete este campo*";
       $("#error_carh").text(error_carh);
     } else {
@@ -930,6 +932,11 @@ $("#foto").on("change", function () {
       }
     } else {
       alert("Extensión no permitida: " + ext);
+      $(this).val("");
+    }
+    if (this.width.toFixed(0) <= 413 && this.height.toFixed(0) >= 531) 
+    {
+      alert("La imagen debe ser de tamaño 413px por 531px.");
       $(this).val("");
     }
   }

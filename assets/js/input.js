@@ -1,8 +1,23 @@
 $(document).ready(function () {
   var iduser = document.getElementById("iduser");
   let id = iduser.value;
+  let $carh = document.querySelector('#carh');
+
+  $.ajax({
+    url: "../db/buscarh.php",
+    type: "POST",
+    success: function (res) {
+      const carh = JSON.parse(res)
+      let template = '<option class="from-control" selected disabled></option>'
+      carh.forEach(carh => {
+        template += `<option value="${carh.idcar}">${carh.carrera}</option>`
+      })
+      $carh.innerHTML = template;
+    }
+  });
+
   $.post("../db/mostrar_reg.php", { id }, function (response) {
-    if (response) {        
+    if (response) {
       $("#completar").remove();
       const datos = JSON.parse(response);
       $("#usuario").val(datos.usuario);
@@ -25,12 +40,12 @@ $(document).ready(function () {
       $("#area").val(datos.area);
       $("#salariomin").val(datos.salariomin);
       $("#discapacidades").val(datos.discapacidades);
-      
+
       //console.log(datos.foto);
-      if(datos.foto == null || datos.foto == ""){
-        $("#fotomostrar").attr("src","../db/images/default.png");
+      if (datos.foto == null || datos.foto == "") {
+        $("#fotomostrar").attr("src", "../db/images/default.png");
       } else {
-        $("#fotomostrar").attr("src","../db/images/" + datos.foto);
+        $("#fotomostrar").attr("src", "../db/images/" + datos.foto);
       }
 
       if (datos.genero == $("#g1").val()) {
@@ -41,7 +56,7 @@ $(document).ready(function () {
         $("#g3").prop("checked", true);
       } else if (datos.genero == $("#g4").val()) {
         $("#g4").prop("checked", true);
-      }      
+      }
 
       switch (datos.ecivil) {
         case "1":
@@ -55,11 +70,11 @@ $(document).ready(function () {
       switch (datos.licencia) {
         case "1":
           $("#licsi").prop("checked", true);
-          $('.auto').prop('disabled',false);
+          $('.auto').prop('disabled', false);
           break;
         case "2":
           $("#licno").prop("checked", true);
-          $('.auto').prop('disabled',true);
+          $('.auto').prop('disabled', true);
           break;
       }
 
@@ -132,27 +147,14 @@ $(document).ready(function () {
         "Por favor, tomese unos minutos para completar el formulario. Muchas gracias."
       );
       $("#completar").addClass("comp");
-      $("#fotomostrar").attr("src","../db/images/default.png");
+      $("#fotomostrar").attr("src", "../db/images/default.png");
     }
   });
 
   $.post("../db/mostrar_carrera.php", { id }, function (response) {
     if (response) {
       const datos = JSON.parse(response);
-      switch (datos.idcar) {        
-        case "1":
-          $("#c1").prop("selected", true);
-          break;
-        case "2":
-          $("#c2").prop("selected", true);
-          break;
-        case "3":
-          $("#c3").prop("selected", true);
-          break;
-        case "4":
-          $("#c4").prop("selected", true);
-          break;
-      }
+      $("#carh").val(datos.idcar);
     }
     edit = true;
   });

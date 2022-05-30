@@ -331,11 +331,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 					<div class="col-sm-5">
 						<label for="carh">Carrera:</label>
 						<select id="carh" name="carh" value="" class="form-control">
-							<option value=""></option>
-							<option id="c1" value="1">Analistas de Sistemas</option>
-							<option id="c2" value="2">Turismo y Gestion Hotelera</option>
-							<option id="c3" value="3">Administración de Empresas</option>
-							<option id="c4" value="4">Régimen Aduanero</option><br>
+							<option value=""></option><br>
 						</select>
 						<p id="error_carh" class="text-danger"></p>
 					</div>

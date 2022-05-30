@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../bootstrap/css/vistaUsuario.min.css">    
+    <link rel="stylesheet" href="../bootstrap/css/vistaUsuario.min.css">
 </head>
 
 <style>
@@ -92,6 +92,7 @@ if (!isset($_SESSION['usuario'])) {
         background-color: black;
         color: white;
     }
+
     #salir {
         border: 1px solid black;
         border-radius: 3px;
@@ -130,7 +131,7 @@ if (!isset($_SESSION['usuario'])) {
     <div class="container" id="descargarcv">
         <br>
         <a id="cv" title="Descargar Archivo" class="btn btn-info" href="<?php echo $url ?>" download="<?php echo $pdf ?>">Descargar Curriculum vitae</a><span id="error_cv" class="text-danger"></span>
-        <button id="eliminarUsuario" class="btn btn-info" >Eliminar usuario</button>
+        <button id="eliminarUsuario" class="btn btn-info">Eliminar usuario</button>
         <a target="_blank" href="./recuperarContrasena.php?id=<?php echo $iduser ?>" id="recuperarPass" class="btn btn-info">Cambiar Contraseña</a>
         <a id="salir" class="btn btn-danger" onclick="javascript: window.history.go(-1);">Cerrar</a>
     </div>
@@ -146,9 +147,16 @@ if (!isset($_SESSION['usuario'])) {
             <div class="row">
 
                 <!-- <div style="width: 240px; height:240px;" class="col col-md-3"> -->
-                <div class="col col-md-3" style="width: 240px;height: 240px ;display: flex;">
-                    <img style="object-fit:contain; background-color: rgba(255, 255, 255, 0)" class="img-thumbnail" src="<?php echo $foto ?>"  alt="">
+                <!--
+                <div style="width: 240px;height: 240px ;display: flex;">
+                    <img style="object-fit:contain; background-color: rgba(255, 255, 255, 0)" class="img-thumbnail" src="<?php echo $foto ?>" alt="">
                 </div>
+                -->
+
+                <div class="col col-md-3"">
+                    <img width="240" height="240" src="<?php echo $foto ?>" alt="">
+                </div>               
+
                 <div class="col col-md-9">
                     <div class="box-header">
                         <div id="log_img" class="logo">

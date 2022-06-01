@@ -138,10 +138,42 @@ if (!isset($_SESSION['usuario'])) {
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
+
+        function ValidateCUITCUIL(cuit) {
+            var rv = false;
+            var resultado = 0;
+            var cuit_nro = cuit.replace("-", "");
+            var codes = "6789456789";
+            var cuit_long = parseInt(cuit_nro);
+            var verificador = parseInt(cuit_nro[cuit_nro.length - 1]);
+            var x = 0;
+
+            while (x < 10) {
+                var digitoValidador = parseInt(codes.substring(x, x + 1));
+                if (isNaN(digitoValidador)) digitoValidador = 0;
+                var digito = parseInt(cuit_nro.substring(x, x + 1));
+                if (isNaN(digito)) digito = 0;
+                var digitoValidacion = digitoValidador * digito;
+                resultado += digitoValidacion;
+                x++;
+            }
+
+            resultado = resultado % 11;
+            rv = (resultado == verificador);
+            return rv;
+        }
+
+        $("#cuit").keypress(function(e) {
+            if($("#cuit").val().length > 10){
+                e.preventDefault();
+            }
+        });
+
         $('#guardarN').click(function() {
             empresa = $('#empresa').val();
             cuit = $('#cuit').val();
-            presidente = $('#cuit').val();
+            console.log(ValidateCUITCUIL(cuit));
+            presidente = $('#presidente').val();
             correo = $('#correo').val();
             telefono = $('#telefono').val();
 
@@ -214,7 +246,7 @@ if (!isset($_SESSION['usuario'])) {
                                         lg.append("nombre", nombre);
                                     }
                                     log(lg);
-                                    
+
                                 } else {
                                     nombre = 0;
                                 }

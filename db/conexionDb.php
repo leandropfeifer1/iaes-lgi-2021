@@ -1,4 +1,8 @@
 <?php
+
+// COMENTAR LOS DATOS LOCALES, Y DESCOMENTAR LOS DATOS PARA SERVIDOR IAES
+
+
 $servername = "localhost";
 // $servername = "https://iaes.edu.ar/phpmyadmin";
 $username = "root";

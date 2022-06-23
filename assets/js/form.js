@@ -617,6 +617,9 @@ $(document).ready(function () {
     if ($.trim($("#contacto").val()).length == 0) {
       error_contacto = "Complete este campo*";
       $("#error_contacto").text(error_contacto);
+    } else if($("#contacto").val().length < 8 || $("#contacto").val().length > 18){
+      error_contacto = "Contacto invalido";
+      $("#error_contacto").text(error_contacto);
     } else {
       error_contacto = "";
       $("#error_contacto").text(error_contacto);

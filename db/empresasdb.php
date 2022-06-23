@@ -14,6 +14,13 @@ if($logo){
     $sql = "INSERT INTO `empresas`(`empresa`, `cuit`, `presidente`, `correo`, `telefono`) VALUES ('$empresa','$cuit','$presidente','$correo','$telefono')";
 }
 
-echo mysqli_query($conexion, $sql);
+try{
+  $result= mysqli_query($conexion, $sql);
+}
+catch(mysqli_sql_exception $e)
+{
+    echo $e;
+}
+echo $result;
 mysqli_close($conexion);
 ?>

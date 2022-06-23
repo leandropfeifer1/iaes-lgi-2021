@@ -7,24 +7,24 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Empresas</title>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
-    <link rel="stylesheet" href="../assets/css/register.css">
-    <link rel="stylesheet" href="../assets/css/filtro.css">
-    <script src="../jquery/jquery-3.6.0.min.js"></script>
-    <script src="../popper/popper.min.js" type="text/javascript"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <script src="../assets/js/createUser.js"></script>
-    <script src="../assets/js/empresasjs.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Empresas</title>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
+        <link rel="stylesheet" href="../assets/css/register.css">
+        <link rel="stylesheet" href="../assets/css/filtro.css">
+        <script src="../jquery/jquery-3.6.0.min.js"></script>
+        <script src="../popper/popper.min.js" type="text/javascript"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+        <script src="../assets/js/createUser.js"></script>
+        <script src="../assets/js/empresasjs.js"></script>
+    </head>
 
-<body>
+    <body>
 
     <body>
         <div class="contenido">
@@ -79,11 +79,11 @@ if (!isset($_SESSION['usuario'])) {
                         <label>Empresa</label>
                         <input type="text" name="empresa" id="empresa" class="form-control input-sm">
                         <label>CUIT</label>
-                        <input type="number" name="cuit" id="cuit" class="form-control input-sm">
+                        <input type="number" name="cuit" id="cuit" oninput="if( this.value.length > 11 )  this.value = this.value.slice(0,11)" class="form-control input-sm">                       
                         <label>Presidente</label>
                         <input type="text" name="presidente" id="presidente" class="form-control input-sm">
                         <label>Correo</label>
-                        <input type="text" name="correo" id="correo" class="form-control input-sm">
+                        <input type="email" name="correo" id="correo" class="form-control input-sm">
                         <label>Telefono</label>
                         <input type="number" name="telefono" id="telefono" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" class="form-control input-sm">
                         <label for="logo">Sube tu logo:</label>
@@ -110,11 +110,11 @@ if (!isset($_SESSION['usuario'])) {
                     <label>Empresa</label>
                     <input type="text" name="empresae" id="empresae" class="form-control input-sm">
                     <label>CUIT</label>
-                    <input type="number" name="cuite" id="cuite" class="form-control input-sm">
+                    <input type="number" name="cuite" id="cuite" oninput="if( this.value.length > 11 )  this.value = this.value.slice(0,11)" class="form-control input-sm">                       
                     <label>Presidente</label>
                     <input type="text" name="presidentee" id="presidentee" class="form-control input-sm">
                     <label>Correo</label>
-                    <input type="text" name="correoe" id="correoe" class="form-control input-sm">
+                    <input type="email" name="correoe" id="correoe" class="form-control input-sm">
                     <label>Telefono</label>
                     <input type="number" oninput="if( this.value.length > 16 )  this.value = this.value.slice(0,16)" name="telefonoe" id="telefonoe" class="form-control input-sm">
                     <label for="logomod">Sube tu logo:</label>
@@ -132,13 +132,19 @@ if (!isset($_SESSION['usuario'])) {
 </html>
 <!--------------------------------------------------------------------------------------------------------------->
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tabla').load('empresastabla.php');
+                $("#correo").keyup(function () {
+            val_correo();
+        });
+        $("#correoe").keyup(function () {
+            val_correoe();
+        });
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#guardarN').click(function() {
+    $(document).ready(function () {
+        $('#guardarN').click(function () {
             empresa = $('#empresa').val();
             cuit = $('#cuit').val();
             presidente = $('#cuit').val();
@@ -194,15 +200,15 @@ if (!isset($_SESSION['usuario'])) {
                                     var logo = f1["name"];
 
                                     cadena =
-                                        "&logo=" +
-                                        logo;
+                                            "&logo=" +
+                                            logo;
 
                                     $.ajax({
                                         type: "POST",
                                         async: false,
                                         url: "../db/cadenaAleatoria.php",
                                         data: cadena,
-                                        success: function(response) {
+                                        success: function (response) {
                                             //alert(response);
                                             nombre = response;
                                         },
@@ -214,7 +220,7 @@ if (!isset($_SESSION['usuario'])) {
                                         lg.append("nombre", nombre);
                                     }
                                     log(lg);
-                                    
+
                                 } else {
                                     nombre = 0;
                                 }
@@ -230,7 +236,7 @@ if (!isset($_SESSION['usuario'])) {
         });
 
 
-        $('#modificar').click(function() {
+        $('#modificar').click(function () {
             modificar();
         });
     });

@@ -134,7 +134,7 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['id_rol'])) {
 				<div class="form-group row">
 					<div class="col-sm-5">
 						<label for="email">Email:</label>
-						<input type="text" class="form-control" id="email" name="email" maxlength="100" placeholder="john_doe@gmail.com">
+						<input type="email" class="form-control" id="email" name="email" maxlength="100" placeholder="john_doe@gmail.com">
 						<p id="error_email" class="text-danger"></p>
 
 					</div>
